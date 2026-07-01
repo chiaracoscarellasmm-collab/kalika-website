@@ -1,7 +1,6 @@
 import { isLocale, type Locale } from "@/lib/i18n";
 import { getDictionary } from "@/lib/dictionaries";
 import { PageHero } from "@/components/PageHero";
-import { Reveal } from "@/components/Reveal";
 import { TreatmentList } from "@/components/TreatmentList";
 import { SectionWhatsapp } from "@/components/SectionWhatsapp";
 import { visoGroups } from "@/lib/treatments";

@@ -1,5 +1,13 @@
 @import "tailwindcss";
 
+@font-face {
+  font-family: "Great Vibes";
+  src: url("/fonts/great-vibes.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
 :root {
   --color-wisteria: #c97bb2;
   --color-mauve: #9b5e8a;
@@ -9,6 +17,9 @@
   --color-espresso: #2c1810;
   --color-gold: #c9a96e;
   --color-line: rgba(44, 24, 16, 0.08);
+  --font-display: Georgia, "Times New Roman", serif;
+  --font-body: Jost, Avenir, Montserrat, ui-sans-serif, system-ui, sans-serif;
+  --font-script: "Great Vibes", "Brush Script MT", "Segoe Script", cursive;
 }
 
 @theme inline {
@@ -59,10 +70,10 @@ p:not([class*="uppercase"]):not([class*="text-xs"]):not([class*="text-[11px]"]) 
 @keyframes kalika-pulse {
   0%,
   100% {
-    box-shadow: 0 0 0 0 rgba(201, 123, 178, 0.55);
+    box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.55);
   }
   50% {
-    box-shadow: 0 0 0 14px rgba(201, 123, 178, 0);
+    box-shadow: 0 0 0 14px rgba(37, 211, 102, 0);
   }
 }
 
@@ -89,10 +100,31 @@ p:not([class*="uppercase"]):not([class*="text-xs"]):not([class*="text-[11px]"]) 
 .script {
   font-family: var(--font-script), cursive;
   font-weight: 400;
+  line-height: 1.05;
 }
 
 .display {
   font-family: var(--font-display), Georgia, serif;
   font-weight: 400;
   letter-spacing: 0.01em;
+}
+
+.script.text-3xl {
+  font-size: 2.8rem !important;
+}
+
+.script.text-4xl {
+  font-size: 3.325rem !important;
+}
+
+@media (min-width: 640px) {
+  .script.sm\:text-4xl {
+    font-size: 3.325rem !important;
+  }
+}
+
+@media (min-width: 1024px) {
+  .script.lg\:text-5xl {
+    font-size: 3.85rem !important;
+  }
 }

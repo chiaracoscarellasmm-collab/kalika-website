@@ -2,7 +2,7 @@ import { isLocale, type Locale } from "@/lib/i18n";
 import { getDictionary } from "@/lib/dictionaries";
 import { PageHero } from "@/components/PageHero";
 import { Reveal } from "@/components/Reveal";
-import { TreatmentList } from "@/components/TreatmentList";
+import { SpaTreatmentGroups } from "@/components/SpaTreatmentGroups";
 import { SectionWhatsapp } from "@/components/SectionWhatsapp";
 import { percorsi } from "@/lib/treatments";
 import { notFound } from "next/navigation";
@@ -38,13 +38,12 @@ export default async function PercorsiPage({
 
       <section className="bg-[#1f120c] py-20">
         <div className="mx-auto max-w-4xl px-6">
-          <TreatmentList
-            groups={percorsi}
-            locale={locale}
-            durationLabel={dict.common.duration}
-            priceLabel={dict.common.price}
-            variant="spa"
-          />
+          <SpaTreatmentGroups groups={percorsi} locale={locale} dict={dict} />
+          <Reveal>
+            <p className="mt-8 text-[17px] leading-8 text-[var(--color-cream)]/75 sm:text-lg">
+              {dict.spa.percorsi.infoWrap}
+            </p>
+          </Reveal>
           <Reveal>
             <div className="mt-4 inline-flex items-center gap-2 rounded-full border border-[var(--color-wisteria)]/40 bg-[var(--color-wisteria)]/10 px-4 py-2 text-xs uppercase tracking-[0.2em] text-[var(--color-wisteria)]">
               {dict.spa.percorsi.discount}
@@ -53,7 +52,6 @@ export default async function PercorsiPage({
         </div>
       </section>
 
-      {/* Practical info */}
       <section className="border-t border-[var(--color-cream)]/10 bg-[#1f120c] py-24">
         <div className="mx-auto max-w-4xl px-6">
           <Reveal>

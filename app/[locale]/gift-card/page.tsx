@@ -1,9 +1,8 @@
 import { isLocale, type Locale } from "@/lib/i18n";
 import { getDictionary } from "@/lib/dictionaries";
-import { PageHero } from "@/components/PageHero";
 import { Reveal } from "@/components/Reveal";
 import { GiftCardForm } from "@/components/GiftCardForm";
-import { LotusDivider } from "@/components/LotusDivider";
+import { getGiftCardUi } from "@/lib/giftcard-ui";
 import { notFound } from "next/navigation";
 
 export async function generateMetadata({
@@ -14,7 +13,8 @@ export async function generateMetadata({
   const dict = await getDictionary(raw as Locale);
   return {
     title: dict.giftcard.hero,
-    description: dict.giftcard.heroSubtitle,
+    description:
+      "Gift Card per trattamenti estetici, rituali SPA e percorsi benessere a Prata di Pordenone.",
   };
 }
 
@@ -25,62 +25,34 @@ export default async function GiftCardPage({
   if (!isLocale(raw)) notFound();
   const locale = raw as Locale;
   const dict = await getDictionary(locale);
+  const ui = getGiftCardUi(locale);
 
   return (
     <>
-      <PageHero
-        overline={dict.giftcard.heroOverline}
-        title={dict.giftcard.hero}
-        subtitle={dict.giftcard.heroSubtitle}
-        variant="cream"
-      />
-
-      <section className="bg-[var(--color-cream)] py-16">
-        <div className="mx-auto max-w-3xl px-6 text-center">
+      <section className="bg-[var(--color-cream)] pb-16 pt-28 sm:pb-20 sm:pt-32">
+        <div className="mx-auto max-w-4xl px-6 text-center">
           <Reveal>
-            <p className="text-[var(--color-espresso)]/80">
-              {dict.giftcard.intro}
+            <p className="script text-3xl text-[var(--color-mauve)] sm:text-4xl">
+              {ui.heroOverline}
+            </p>
+          </Reveal>
+          <Reveal delay={0.05}>
+            <h1 className="display mt-4 text-5xl leading-tight text-[var(--color-brown)] sm:text-6xl">
+              {ui.heroTitle}
+            </h1>
+          </Reveal>
+          <Reveal delay={0.1}>
+            <p className="mx-auto mt-7 max-w-3xl text-[17px] leading-8 text-[var(--color-espresso)]/78 sm:text-lg">
+              {ui.heroSubtitle}
             </p>
           </Reveal>
         </div>
       </section>
 
-      <section className="border-t border-[var(--color-line)] bg-[var(--color-blush)]/40 py-20">
-        <div className="mx-auto max-w-3xl px-6">
+      <section className="border-t border-[var(--color-line)] bg-[var(--color-cream)] pb-28 pt-14">
+        <div className="mx-auto max-w-7xl px-6 lg:px-10">
           <Reveal>
             <GiftCardForm locale={locale} dict={dict} />
-          </Reveal>
-        </div>
-      </section>
-
-      <section className="bg-[var(--color-cream)] py-24">
-        <div className="mx-auto max-w-3xl px-6 text-center">
-          <Reveal>
-            <h2 className="display text-3xl text-[var(--color-brown)] sm:text-4xl">
-              {dict.giftcard.howTitle}
-            </h2>
-          </Reveal>
-          <Reveal delay={0.05}>
-            <ol className="mt-10 grid gap-6 text-left sm:grid-cols-3">
-              {[dict.giftcard.how1, dict.giftcard.how2, dict.giftcard.how3].map(
-                (step, i) => (
-                  <li
-                    key={step}
-                    className="rounded-2xl border border-[var(--color-line)] bg-white p-6"
-                  >
-                    <p className="display text-3xl text-[var(--color-wisteria)]">
-                      {i + 1}
-                    </p>
-                    <p className="mt-3 text-[17px] leading-8 text-[var(--color-espresso)]/80 sm:text-lg">
-                      {step}
-                    </p>
-                  </li>
-                ),
-              )}
-            </ol>
-          </Reveal>
-          <Reveal delay={0.1}>
-            <LotusDivider className="mt-14" />
           </Reveal>
         </div>
       </section>

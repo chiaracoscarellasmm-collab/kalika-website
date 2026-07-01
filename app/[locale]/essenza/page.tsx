@@ -217,10 +217,10 @@ export default async function EssenzaPage({
               </h2>
             </Reveal>
           </div>
-          <div className="mt-14 grid gap-6 md:grid-cols-3">
+          <div className="mt-14 grid items-stretch gap-6 md:grid-cols-3">
             {spazi.map((s, i) => (
-              <Reveal key={s.title} delay={i * 0.06}>
-                <article className="group overflow-hidden rounded-2xl border border-[var(--color-line)] bg-white shadow-sm transition-all duration-500 ease-out hover:-translate-y-2 hover:border-[var(--color-wisteria)]/50 hover:shadow-2xl hover:shadow-[var(--color-mauve)]/10">
+              <Reveal key={s.title} delay={i * 0.06} className="h-full">
+                <article className="group flex h-full flex-col overflow-hidden rounded-2xl border border-[var(--color-line)] bg-white shadow-sm transition-all duration-500 ease-out hover:-translate-y-2 hover:border-[var(--color-wisteria)]/50 hover:shadow-2xl hover:shadow-[var(--color-mauve)]/10">
                   <div className="relative aspect-[4/3] overflow-hidden">
                     <Image
                       src={s.image}
@@ -234,11 +234,11 @@ export default async function EssenzaPage({
                       aria-hidden
                     />
                   </div>
-                  <div className="p-6">
+                  <div className="flex flex-1 flex-col p-6">
                     <h3 className="display text-2xl text-[var(--color-brown)] transition-transform duration-500 group-hover:translate-x-1">
                       {s.title}
                     </h3>
-                    <p className="mt-3 text-[17px] leading-8 text-[var(--color-espresso)]/70 sm:text-lg">
+                    <p className="mt-3 flex-1 text-[17px] leading-8 text-[var(--color-espresso)]/70 sm:text-lg">
                       {s.text}
                     </p>
                   </div>

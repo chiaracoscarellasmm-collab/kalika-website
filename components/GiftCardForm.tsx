@@ -1,200 +1,488 @@
 "use client";
 
-import { useState, useTransition } from "react";
+import { useEffect, useMemo, useState } from "react";
+import Image from "next/image";
 import { Lock } from "lucide-react";
-import type { Locale } from "@/lib/i18n";
 import type { Dictionary } from "@/lib/dictionaries";
-import { FORMULAS, type Formula } from "@/lib/giftcard";
-import { createGiftCardCheckout } from "@/app/[locale]/gift-card/actions";
+import type { Locale } from "@/lib/i18n";
+import {
+  amountChoices,
+  giftCardDesigns,
+  type GiftCardAmountChoice,
+  type GiftCardDesign,
+} from "@/lib/giftcard";
+import { getGiftCardUi } from "@/lib/giftcard-ui";
 
 type Props = { locale: Locale; dict: Dictionary };
 
+const inputClass =
+  "mt-2 w-full rounded-none border border-[var(--color-brown)]/25 bg-white/80 px-4 py-3 text-[var(--color-espresso)] outline-none transition-colors focus:border-[var(--color-wisteria)]";
+
+const labelClass =
+  "text-[11px] uppercase tracking-[2px] text-[var(--color-brown)]";
+
+function formatDate(date: Date, locale: Locale) {
+  return new Intl.DateTimeFormat(locale === "en" ? "en-GB" : "it-IT", {
+    day: "2-digit",
+    month: "2-digit",
+    year: "numeric",
+  }).format(date);
+}
+
+function addSixMonths(date: Date) {
+  const next = new Date(date);
+  next.setMonth(next.getMonth() + 6);
+  return next;
+}
+
+function designLabel(design: GiftCardDesign, locale: Locale) {
+  const labels = {
+    it: {
+      estetica: "Estetica",
+      spa: "SPA & Rituali",
+      coppia: "Coppia",
+    },
+    en: {
+      estetica: "Beauty",
+      spa: "SPA & Rituals",
+      coppia: "Couple",
+    },
+  } as const;
+  return labels[locale][design];
+}
+
+function GiftCardPreview({
+  locale,
+  design,
+  amount,
+  fromName,
+  toName,
+  message,
+  purchaseDate,
+  expiryDate,
+}: {
+  locale: Locale;
+  design: GiftCardDesign;
+  amount: number;
+  fromName: string;
+  toName: string;
+  message: string;
+  purchaseDate: string;
+  expiryDate: string;
+}) {
+  const ui = getGiftCardUi(locale);
+  const current = giftCardDesigns.find((item) => item.key === design) ?? giftCardDesigns[0];
+
+  return (
+    <div className="space-y-5">
+      <div className="relative aspect-[4/3] overflow-hidden rounded-xl shadow-2xl shadow-[rgba(44,24,16,0.12)] transition-all duration-500">
+        <Image
+          src={current.frontImage}
+          alt={ui.previewFrontGiftCard}
+          fill
+          priority
+          sizes="(max-width: 1024px) 100vw, 60vw"
+          className="object-cover"
+        />
+      </div>
+
+      <div className="aspect-[4/3] rounded-xl border border-[var(--color-line)] bg-white p-6 shadow-xl shadow-[rgba(44,24,16,0.08)] sm:p-8">
+        <div className="grid h-full grid-rows-[auto_minmax(0,1fr)_auto] border border-[var(--color-wisteria)]/25 p-5 text-[var(--color-espresso)] sm:p-6">
+          <div className="flex items-start justify-between gap-6">
+            <div>
+              <p className="text-[11px] uppercase tracking-[3px] text-[var(--color-mauve)]">
+                {ui.backOverline}
+              </p>
+              <h3 className="display mt-2 text-2xl text-[var(--color-brown)] sm:text-3xl">
+                {ui.backTitle}
+              </h3>
+            </div>
+            <p className="text-right text-[9px] uppercase leading-4 tracking-[1.4px] text-[var(--color-espresso)]/60">
+              <span className="block text-[9px] text-[var(--color-mauve)]">
+                {ui.codeLabel}
+              </span>
+              KLK-2026-XXXX
+            </p>
+          </div>
+
+          <dl className="my-4 grid min-h-0 content-center gap-2 text-[14px] leading-6 sm:my-5 sm:gap-3 sm:text-[15px] sm:leading-7">
+            <div>
+              <dt className="text-[10px] uppercase tracking-[2px] text-[var(--color-mauve)]">
+                {ui.summaryTo}
+              </dt>
+              <dd>{toName || (locale === "it" ? "Nome destinatario" : "Recipient name")}</dd>
+            </div>
+            <div>
+              <dt className="text-[10px] uppercase tracking-[2px] text-[var(--color-mauve)]">
+                {ui.summaryFrom}
+              </dt>
+              <dd>{fromName || (locale === "it" ? "Nome mittente" : "Sender name")}</dd>
+            </div>
+            <div>
+              <dt className="text-[10px] uppercase tracking-[2px] text-[var(--color-mauve)]">
+                {ui.summaryAmount}
+              </dt>
+              <dd>€ {amount || 0}</dd>
+            </div>
+            <div>
+              <dt className="text-[10px] uppercase tracking-[2px] text-[var(--color-mauve)]">
+                {locale === "it" ? "Messaggio" : "Message"}
+              </dt>
+              <dd className="line-clamp-2 italic text-[var(--color-espresso)]/75 sm:line-clamp-3">
+                {message || ui.frontPlaceholderMessage}
+              </dd>
+            </div>
+          </dl>
+
+          <div className="grid gap-2 border-t border-[var(--color-line)] pt-3 text-[9px] uppercase leading-4 tracking-[1.4px] text-[var(--color-espresso)]/60 sm:grid-cols-2 sm:gap-4">
+            <p className="text-[9px]">
+              <span className="block text-[9px] text-[var(--color-mauve)]">
+                {ui.summaryPurchaseDate}
+              </span>
+              {purchaseDate}
+            </p>
+            <p className="text-[9px]">
+              <span className="block text-[9px] text-[var(--color-mauve)]">
+                {ui.summaryExpiryDate}
+              </span>
+              {expiryDate}
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
 export function GiftCardForm({ locale, dict }: Props) {
-  const [formula, setFormula] = useState<Formula>("libero");
-  const [amount, setAmount] = useState<number>(80);
-  const [fromName, setFromName] = useState("");
-  const [toName, setToName] = useState("");
+  const ui = getGiftCardUi(locale);
+  const [design, setDesign] = useState<GiftCardDesign>("spa");
+  const [amountChoice, setAmountChoice] = useState<GiftCardAmountChoice>("100");
+  const [customAmount, setCustomAmount] = useState(120);
+  const [fromFirstName, setFromFirstName] = useState("");
+  const [fromLastName, setFromLastName] = useState("");
+  const [toFirstName, setToFirstName] = useState("");
+  const [toLastName, setToLastName] = useState("");
   const [message, setMessage] = useState("");
+  const [buyerEmail, setBuyerEmail] = useState("");
+  const [pending, setPending] = useState(false);
   const [error, setError] = useState<string | null>(null);
-  const [pending, startTransition] = useTransition();
 
-  const current = FORMULAS.find((f) => f.key === formula)!;
-  const showFreeAmount = formula === "libero";
+  const amount = useMemo(() => {
+    const selected = amountChoices.find((choice) => choice.key === amountChoice);
+    return selected?.amount ?? customAmount;
+  }, [amountChoice, customAmount]);
 
-  function onSubmit(e: React.FormEvent<HTMLFormElement>) {
+  const fromName = `${fromFirstName} ${fromLastName}`.trim();
+  const toName = `${toFirstName} ${toLastName}`.trim();
+  const purchaseDate = useMemo(() => new Date(), []);
+  const formattedPurchaseDate = formatDate(purchaseDate, locale);
+  const formattedExpiryDate = formatDate(addSixMonths(purchaseDate), locale);
+  const missingFields = [
+    !fromFirstName.trim() && "sender first name",
+    !fromLastName.trim() && "sender last name",
+    !toFirstName.trim() && "recipient first name",
+    !toLastName.trim() && "recipient last name",
+    !buyerEmail.trim() && "buyer email",
+    amountChoice === "custom" && customAmount < 20 && "minimum custom amount",
+  ].filter(Boolean) as string[];
+  const canProceed = missingFields.length === 0 && !pending;
+
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+    const sessionId = params.get("session_id");
+    if (sessionId && params.get("download") === "1") {
+      window.location.href = `/api/gift-card/download?session_id=${encodeURIComponent(sessionId)}`;
+    }
+  }, []);
+
+  async function onSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
+    if (missingFields.length > 0) {
+      setError(ui.validationWarning);
+      return;
+    }
+
+    setPending(true);
     setError(null);
-    startTransition(async () => {
-      const result = await createGiftCardCheckout({
+
+    const response = await fetch("/api/create-payment-intent", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
         locale,
-        formula,
+        design,
+        amountChoice,
         amount,
-        fromName,
-        toName,
+        fromFirstName,
+        fromLastName,
+        toFirstName,
+        toLastName,
         message,
-      });
-      if (result.ok) {
-        window.location.href = result.url;
-      } else if (result.error === "STRIPE_NOT_CONFIGURED" || result.error === "STRIPE_NOT_IMPLEMENTED") {
-        setError(
-          locale === "it"
-            ? "Pagamenti non ancora configurati. Scrivici su WhatsApp per finalizzare il regalo."
-            : "Payments are not yet configured. Please write to us on WhatsApp to finalize your gift.",
-        );
-      } else {
-        setError(
-          locale === "it"
-            ? "Si è verificato un errore. Riprova."
-            : "Something went wrong. Please try again.",
-        );
-      }
+        buyerEmail,
+      }),
     });
+    const data = (await response.json()) as { url?: string; error?: string };
+    setPending(false);
+
+    if (data.url) {
+      window.location.href = data.url;
+      return;
+    }
+
+    setError(
+      data.error === "STRIPE_NOT_CONFIGURED"
+        ? locale === "it"
+          ? "Pagamenti non ancora configurati. Aggiungi le variabili Stripe per attivare il checkout."
+          : "Payments are not configured yet. Add the Stripe variables to enable checkout."
+        : locale === "it"
+          ? "Non è stato possibile avviare il pagamento. Controlla i dati e riprova."
+          : "We couldn't start the payment. Check the details and try again.",
+    );
   }
 
   return (
-    <form onSubmit={onSubmit} className="space-y-12">
-      <fieldset>
-        <legend className="display text-3xl text-[var(--color-brown)]">
-          {dict.giftcard.selectTitle}
-        </legend>
-        <div className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-          {FORMULAS.map((f) => {
-            const active = formula === f.key;
-            return (
-              <button
-                type="button"
-                key={f.key}
-                onClick={() => {
-                  setFormula(f.key);
-                  if (f.amountOptions) setAmount(f.amountOptions[0]);
-                  else if (f.key === "libero" && amount < 50) setAmount(80);
-                }}
-                aria-pressed={active}
-                className={`group relative flex h-full flex-col items-start rounded-2xl border p-5 text-left transition-all ${
-                  active
-                    ? "border-[var(--color-wisteria)] bg-white shadow-md shadow-[rgba(201,123,178,0.18)]"
-                    : "border-[var(--color-line)] bg-white/70 hover:border-[var(--color-mauve)]/40"
-                }`}
-              >
-                <span className="text-2xl" aria-hidden>
-                  {f.emoji}
-                </span>
-                <p className="display mt-3 text-lg text-[var(--color-brown)]">
-                  {f.label[locale]}
-                </p>
-                <p className="mt-1 text-xs text-[var(--color-espresso)]/65">
-                  {f.text[locale]}
-                </p>
-              </button>
-            );
-          })}
-        </div>
-      </fieldset>
+    <div className="grid gap-10 lg:grid-cols-[minmax(0,3fr)_minmax(380px,2fr)] lg:gap-14">
+      <div className="lg:sticky lg:top-28 lg:self-start">
+        <GiftCardPreview
+          locale={locale}
+          design={design}
+          amount={amount}
+          fromName={fromName}
+          toName={toName}
+          message={message}
+          purchaseDate={formattedPurchaseDate}
+          expiryDate={formattedExpiryDate}
+        />
+      </div>
 
-      {/* Amount */}
-      <fieldset>
-        <legend className="display text-2xl text-[var(--color-brown)]">
-          {dict.giftcard.amount}
-        </legend>
-        {showFreeAmount ? (
-          <div className="mt-4 flex items-center gap-3">
-            <span className="text-2xl text-[var(--color-mauve)]">€</span>
-            <input
-              type="number"
-              min={50}
-              step={10}
-              value={amount}
-              onChange={(e) => setAmount(Number(e.target.value))}
-              className="w-40 rounded-full border border-[var(--color-line)] bg-white px-5 py-2.5 text-lg outline-none focus:border-[var(--color-wisteria)]"
-              required
-            />
-          </div>
-        ) : (
-          <div className="mt-4 flex flex-wrap gap-3">
-            {current.amountOptions?.map((opt) => {
-              const active = amount === opt;
+      <form onSubmit={onSubmit} className="space-y-10">
+        <section>
+          <h2 className={labelClass}>{dict.giftcard.selectTitle}</h2>
+          <div className="mt-4 grid grid-cols-3 gap-3">
+            {giftCardDesigns.map((option) => {
+              const active = option.key === design;
               return (
-                <button
+              <button
                   type="button"
-                  key={opt}
-                  onClick={() => setAmount(opt)}
-                  className={`rounded-full border px-5 py-2.5 text-sm transition-colors ${
+                  key={option.key}
+                  onClick={() => setDesign(option.key)}
+                  className={`rounded-xl border p-2 text-left transition-all hover:-translate-y-0.5 ${
                     active
-                      ? "border-[var(--color-wisteria)] bg-[var(--color-wisteria)] text-white"
-                      : "border-[var(--color-line)] bg-white text-[var(--color-espresso)] hover:border-[var(--color-mauve)]/40"
+                      ? "border-[var(--color-wisteria)] shadow-md shadow-[rgba(201,123,178,0.18)]"
+                      : "border-[var(--color-line)]"
                   }`}
                 >
-                  € {opt}
+                  <span className="relative block aspect-[4/3] overflow-hidden rounded-lg">
+                    <Image
+                      src={option.frontImage}
+                      alt={designLabel(option.key, locale)}
+                      fill
+                      sizes="(max-width: 1024px) 33vw, 20vw"
+                      className="object-cover"
+                    />
+                  </span>
                 </button>
               );
             })}
           </div>
+        </section>
+
+        <section>
+          <h2 className={labelClass}>{locale === "it" ? "Scegli l'importo" : "Choose amount"}</h2>
+          <div className="mt-4 flex flex-wrap gap-3">
+            {amountChoices.map((choice) => {
+              const active = choice.key === amountChoice;
+              const label =
+                choice.key === "custom"
+                  ? locale === "it"
+                    ? "Importo libero"
+                    : "Custom amount"
+                  : choice.label;
+              return (
+                <button
+                  type="button"
+                  key={choice.key}
+                  onClick={() => setAmountChoice(choice.key)}
+                  className={`rounded-full border px-5 py-3 text-sm uppercase tracking-[1.5px] transition-colors ${
+                    active
+                      ? "border-[var(--color-wisteria)] bg-[var(--color-wisteria)] text-[var(--color-cream)]"
+                      : "border-[var(--color-brown)]/20 bg-white text-[var(--color-espresso)] hover:border-[var(--color-wisteria)]"
+                  }`}
+                >
+                  {label}
+                </button>
+              );
+            })}
+          </div>
+          {amountChoice === "custom" && (
+            <label className="mt-5 block max-w-xs">
+              <span className={labelClass}>
+                {locale === "it" ? "Importo libero, minimo €20" : "Custom amount, minimum €20"}
+              </span>
+              <input
+                type="number"
+                min={20}
+                value={customAmount}
+                onChange={(e) => setCustomAmount(Number(e.target.value))}
+                className={inputClass}
+                required
+              />
+              {customAmount < 20 && (
+                <span className="mt-2 block text-xs text-[var(--color-mauve)]">
+                  {ui.customAmountWarning}
+                </span>
+              )}
+            </label>
+          )}
+        </section>
+
+        <section>
+          <h2 className={labelClass}>
+            {locale === "it" ? "Personalizza la tua Gift Card" : "Personalize your Gift Card"}
+          </h2>
+          <div className="mt-4 grid gap-4 sm:grid-cols-2">
+            <label>
+              <span className={labelClass}>
+                {locale === "it" ? "Nome di chi regala" : "Sender first name"}
+              </span>
+              <input
+                value={fromFirstName}
+                onChange={(e) => setFromFirstName(e.target.value)}
+                className={inputClass}
+                required
+              />
+            </label>
+            <label>
+              <span className={labelClass}>
+                {locale === "it" ? "Cognome di chi regala" : "Sender last name"}
+              </span>
+              <input
+                value={fromLastName}
+                onChange={(e) => setFromLastName(e.target.value)}
+                className={inputClass}
+                required
+              />
+            </label>
+            <label>
+              <span className={labelClass}>
+                {locale === "it" ? "Nome di chi riceve" : "Recipient first name"}
+              </span>
+              <input
+                value={toFirstName}
+                onChange={(e) => setToFirstName(e.target.value)}
+                className={inputClass}
+                required
+              />
+            </label>
+            <label>
+              <span className={labelClass}>
+                {locale === "it" ? "Cognome di chi riceve" : "Recipient last name"}
+              </span>
+              <input
+                value={toLastName}
+                onChange={(e) => setToLastName(e.target.value)}
+                className={inputClass}
+                required
+              />
+            </label>
+          </div>
+          <label className="mt-4 block">
+            <span className={labelClass}>
+              {locale === "it" ? "Messaggio personalizzato" : "Custom message"}
+            </span>
+            <textarea
+              rows={4}
+              maxLength={200}
+              value={message}
+              onChange={(e) => setMessage(e.target.value)}
+              placeholder={locale === "it" ? "Scrivi qui il tuo messaggio…" : "Write your message here…"}
+              className={inputClass}
+            />
+            <span className="mt-2 block text-right text-xs text-[var(--color-espresso)]/50">
+              {message.length}/200
+            </span>
+          </label>
+          <label className="mt-4 block">
+            <span className={labelClass}>
+              {locale === "it" ? "Email di chi acquista" : "Buyer email"}
+            </span>
+            <input
+              type="email"
+              value={buyerEmail}
+              onChange={(e) => setBuyerEmail(e.target.value)}
+              className={inputClass}
+              required
+            />
+          </label>
+        </section>
+
+        <section className="rounded-xl border border-[var(--color-line)] bg-white/70 p-5">
+          <h2 className={labelClass}>{locale === "it" ? "Riepilogo" : "Summary"}</h2>
+          <dl className="mt-4 space-y-2 text-sm text-[var(--color-espresso)]/80">
+            <div className="flex justify-between gap-4">
+              <dt>{ui.summaryDesign}</dt>
+              <dd className="text-right text-[var(--color-brown)]">
+                {designLabel(design, locale)}
+              </dd>
+            </div>
+            <div className="flex justify-between gap-4">
+              <dt>{ui.summaryAmount}</dt>
+              <dd className="text-right text-[var(--color-brown)]">€ {amount}</dd>
+            </div>
+            <div className="flex justify-between gap-4">
+              <dt>{ui.summaryFrom}</dt>
+              <dd className="text-right text-[var(--color-brown)]">{fromName || "-"}</dd>
+            </div>
+            <div className="flex justify-between gap-4">
+              <dt>{ui.summaryTo}</dt>
+              <dd className="text-right text-[var(--color-brown)]">{toName || "-"}</dd>
+            </div>
+            <div className="flex justify-between gap-4">
+              <dt>{ui.summaryPurchaseDate}</dt>
+              <dd className="text-right text-[var(--color-brown)]">
+                {formattedPurchaseDate}
+              </dd>
+            </div>
+            <div className="flex justify-between gap-4">
+              <dt>{ui.summaryExpiryDate}</dt>
+              <dd className="text-right text-[var(--color-brown)]">
+                {formattedExpiryDate}
+              </dd>
+            </div>
+          </dl>
+        </section>
+
+        {error && (
+          <p className="rounded-xl border border-[var(--color-mauve)]/30 bg-[var(--color-blush)] px-5 py-4 text-[var(--color-brown)]">
+            {error}
+          </p>
         )}
-      </fieldset>
 
-      {/* Personalize */}
-      <fieldset>
-        <legend className="display text-2xl text-[var(--color-brown)]">
-          {dict.giftcard.personalize}
-        </legend>
-        <div className="mt-6 grid gap-5 sm:grid-cols-2">
-          <label className="block">
-            <span className="text-xs uppercase tracking-[0.18em] text-[var(--color-mauve)]">
-              {dict.giftcard.fromName}
-            </span>
-            <input
-              type="text"
-              required
-              value={fromName}
-              onChange={(e) => setFromName(e.target.value)}
-              className="mt-2 w-full rounded-xl border border-[var(--color-line)] bg-white px-4 py-3 outline-none focus:border-[var(--color-wisteria)]"
-            />
-          </label>
-          <label className="block">
-            <span className="text-xs uppercase tracking-[0.18em] text-[var(--color-mauve)]">
-              {dict.giftcard.toName}
-            </span>
-            <input
-              type="text"
-              required
-              value={toName}
-              onChange={(e) => setToName(e.target.value)}
-              className="mt-2 w-full rounded-xl border border-[var(--color-line)] bg-white px-4 py-3 outline-none focus:border-[var(--color-wisteria)]"
-            />
-          </label>
-        </div>
-        <label className="mt-5 block">
-          <span className="text-xs uppercase tracking-[0.18em] text-[var(--color-mauve)]">
-            {dict.giftcard.message}
-          </span>
-          <textarea
-            rows={4}
-            value={message}
-            onChange={(e) => setMessage(e.target.value)}
-            placeholder={dict.giftcard.messagePlaceholder}
-            className="mt-2 w-full rounded-2xl border border-[var(--color-line)] bg-white px-4 py-3 outline-none focus:border-[var(--color-wisteria)]"
-          />
-        </label>
-      </fieldset>
+        {missingFields.length > 0 && !error && (
+          <p className="rounded-xl border border-[var(--color-gold)]/35 bg-white px-5 py-4 text-sm leading-6 text-[var(--color-espresso)]/75">
+            {ui.validationWarning}
+          </p>
+        )}
 
-      {error && (
-        <p className="rounded-xl border border-[var(--color-mauve)]/30 bg-[var(--color-blush)] px-5 py-4 text-[17px] leading-8 text-[var(--color-brown)] sm:text-lg">
-          {error}
-        </p>
-      )}
-
-      <div className="flex flex-col items-center gap-3">
         <button
           type="submit"
-          disabled={pending}
-          className="inline-flex items-center gap-3 rounded-full bg-[var(--color-brown)] px-8 py-4 text-sm uppercase tracking-[0.22em] text-[var(--color-cream)] transition-colors hover:bg-[var(--color-mauve)] disabled:opacity-70"
+          disabled={!canProceed}
+          className="flex w-full items-center justify-center rounded-full bg-[var(--color-wisteria)] px-8 py-4 text-sm uppercase tracking-[0.22em] text-[var(--color-cream)] transition-colors hover:bg-[var(--color-mauve)] disabled:opacity-60"
         >
-          {dict.giftcard.checkout} · € {amount}
+          {pending
+            ? locale === "it"
+              ? "Preparazione..."
+              : "Preparing..."
+            : locale === "it"
+              ? "Procedi al pagamento"
+              : "Proceed to payment"}
         </button>
-        <p className="inline-flex items-center gap-2 text-xs text-[var(--color-espresso)]/60">
-          <Lock size={12} /> {dict.giftcard.secure}
+        <p className="flex items-center justify-center gap-2 text-xs text-[var(--color-espresso)]/55">
+          <Lock size={12} />{" "}
+          {locale === "it" ? "Pagamento sicuro con Stripe" : "Secure payment with Stripe"}
         </p>
-      </div>
-    </form>
+      </form>
+    </div>
   );
 }

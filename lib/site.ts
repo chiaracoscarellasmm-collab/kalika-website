@@ -34,8 +34,8 @@ export const site = {
   email: "info@kalikanuovaestetica.it",
   social: {
     instagram: "https://instagram.com/kalikanuovaestetica",
-    facebook: "https://facebook.com/kalikanuovaestetica",
-    google: "https://g.page/kalikanuovaestetica",
+    facebook: "https://www.facebook.com/profile.php?id=100058297756455",
+    google: "https://share.google/KuT8sOCgnnhYOabPF",
   },
   baseUrl: "https://kalikanuovaestetica.it",
 } as const;

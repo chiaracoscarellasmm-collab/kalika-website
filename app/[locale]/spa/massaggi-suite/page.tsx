@@ -36,8 +36,8 @@ export default async function MassaggiSuitePage({
       />
 
       <section className="bg-[#1f120c] py-24">
-        <div className="mx-auto max-w-7xl px-6 lg:px-10">
-          <div className="grid gap-6 sm:grid-cols-2">
+        <div className="mx-auto max-w-4xl px-6 lg:px-10">
+          <div className="space-y-4">
             {massaggiSuite.map((t, i) => (
               <Reveal key={t.id} delay={i * 0.06}>
                 <RitualCard treatment={t} locale={locale} dict={dict} />

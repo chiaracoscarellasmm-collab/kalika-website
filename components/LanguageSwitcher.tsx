@@ -4,9 +4,9 @@ import { useRouter, usePathname } from "next/navigation";
 import { useTransition } from "react";
 import { locales, type Locale } from "@/lib/i18n";
 
-type Props = { locale: Locale };
+type Props = { locale: Locale; className?: string };
 
-export function LanguageSwitcher({ locale }: Props) {
+export function LanguageSwitcher({ locale, className = "text-[var(--color-espresso)]" }: Props) {
   const router = useRouter();
   const pathname = usePathname() ?? `/${locale}`;
   const [pending, startTransition] = useTransition();
@@ -29,7 +29,7 @@ export function LanguageSwitcher({ locale }: Props) {
     <button
       type="button"
       onClick={() => switchTo(alternateLocale)}
-      className={`text-[15px] uppercase tracking-[2px] text-[var(--color-espresso)] transition-colors hover:text-[var(--color-mauve)] ${
+      className={`text-[15px] uppercase tracking-[2px] transition-colors hover:text-[var(--color-mauve)] ${className} ${
         pending ? "opacity-60" : ""
       }`}
       aria-label={`Switch to ${alternateLocale.toUpperCase()}`}

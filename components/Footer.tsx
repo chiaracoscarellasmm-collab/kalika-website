@@ -25,10 +25,9 @@ function FacebookIcon({ size = 18 }: { size?: number }) {
 function GoogleIcon({ size = 18 }: { size?: number }) {
   return (
     <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
-      <path d="M12 2a8 8 0 0 1 0 16 8 8 0 0 1 0-16Z" />
-      <path d="M12 2C8 8 8 16 12 22" />
-      <path d="M12 2c4 6 4 14 0 20" />
-      <path d="M2 12h20" />
+      <path d="M20.5 12.2h-8.1" />
+      <path d="M20.5 12.2c0 5-3.4 8.3-8.2 8.3A8.5 8.5 0 1 1 18.2 5.8" />
+      <path d="M20.5 12.2v5.5" />
     </svg>
   );
 }
@@ -79,13 +78,10 @@ export function Footer({ locale, dict }: Props) {
           <Image
             src="/logo.jpg"
             alt={dict.common.brand}
-            width={88}
-            height={88}
-            className="h-16 w-16 rounded-full object-cover ring-1 ring-[var(--color-line)]"
+            width={160}
+            height={160}
+            className="h-auto w-[160px] object-contain mix-blend-multiply drop-shadow-[0_10px_22px_rgba(107,58,42,0.08)]"
           />
-          <p className="text-[10px] uppercase tracking-[0.4em] text-[var(--color-mauve)]">
-            Nuovaestetica
-          </p>
         </Link>
       </div>
 
@@ -210,6 +206,15 @@ export function Footer({ locale, dict }: Props) {
               <GoogleIcon />
             </a>
           </div>
+
+          <a
+            href="https://chiaracoscarella.com"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-[10px] uppercase tracking-[0.28em] text-[var(--color-espresso)]/50 transition-colors hover:text-[var(--color-mauve)]"
+          >
+            Designed by Social Chemistry
+          </a>
 
           <p className="text-center text-[11px] uppercase tracking-[0.3em] text-[var(--color-espresso)]/55">
             {dict.footer.credits.replace("{year}", String(year))}

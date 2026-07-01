@@ -47,8 +47,8 @@ export default async function RitualiPage({
       </section>
 
       <section className="bg-[#1f120c] pb-28">
-        <div className="mx-auto max-w-7xl px-6 lg:px-10">
-          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        <div className="mx-auto max-w-4xl px-6 lg:px-10">
+          <div className="space-y-4">
             {rituali.map((t, i) => (
               <Reveal key={t.id} delay={(i % 6) * 0.04}>
                 <RitualCard treatment={t} locale={locale} dict={dict} />

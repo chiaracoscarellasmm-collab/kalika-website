@@ -13,6 +13,7 @@
     "skipToContent": "Vai al contenuto",
     "from": "da",
     "duration": "Durata",
+    "temperature": "Temperatura",
     "price": "Prezzo",
     "watsapMessage": "Ciao Sabina, vorrei informazioni su"
   },
@@ -48,14 +49,14 @@
     "credits": "© {year} Kalika Nuovaestetica · Tutti i diritti riservati"
   },
   "home": {
-    "heroOverline": "Benvenuta nel tuo spazio",
-    "heroSubtitle": "Estetica professionale · Benessere sensoriale",
+    "heroOverline": "Benvenuti nel mondo di",
+    "heroSubtitle": "Il tuo Centro estetico e SPA a Prata di Pordenone",
     "heroCtaEstetica": "Scopri l'Estetica",
     "heroCtaSpa": "Scopri la SPA",
     "scrollCue": "Scorri",
     "introOverline": "La nostra essenza",
     "introTitle": "Un luogo che si prende cura di te.",
-    "introBody": "Kalika è uno spazio dove la precisione del gesto estetico si fonde con la dolcezza di un rituale. Ogni trattamento è pensato come un tempo dedicato a te: pelle, corpo, respiro. Lavoriamo con SICE, cosmesi eubiotica italiana dal 1993. Prodotti formulati con piante officinali, oli vegetali e vitamine naturali, senza parabeni, siliconi o oli minerali. Una cosmesi che rispetta la pelle e ne supporta il rinnovamento naturale.",
+    "introBody": "Kalika Nuovaestetica è il centro estetico e SPA di Prata di Pordenone dove la cura diventa rituale. Ogni trattamento, viso, corpo, massaggio o percorso SPA, è pensato su misura per te, perché non esistono soluzioni standard. Per i nostri trattamenti scegliamo la cosmesi eubiotica SICE: biocompatibile, priva di parabeni e siliconi, formulata per rispettare la pelle e supportarne il rinnovamento naturale.",
     "introLink": "Leggi la nostra storia",
     "worldsOverline": "Due anime, un unico luogo",
     "worldsEsteticaTitle": "Estetica",
@@ -89,8 +90,8 @@
     "waTitle": "Scrivici su WhatsApp.",
     "waBody": "Ti consigliamo il trattamento più adatto a te, con il tempo e l'attenzione che meriti.",
     "giftOverline": "Regala un momento Kalika",
-    "giftTitle": "Un dono che diventa cura.",
-    "giftBody": "Gift Card personalizzate per trattamenti, rituali e percorsi SPA. Per stupire chi ami con un'esperienza che resta.",
+    "giftTitle": "Un dono che non si dimentica.",
+    "giftBody": "Gift Card per trattamenti estetici, rituali SPA e percorsi benessere a Prata di Pordenone. Personalizzata, digitale e disponibile subito. Il regalo perfetto per chi ami.",
     "giftCta": "Scopri le Gift Card",
     "reviewsTitle": "Cosa dicono di noi",
     "reviewsSubtitle": "Le voci di chi ha scelto Kalika."
@@ -110,9 +111,9 @@
       "bio4": "Ho scelto percorsi formativi continui e selezionati, perché credo che la crescita professionale non si fermi mai. **Il mio obiettivo non è mascherare un inestetismo, ma andare alla radice**: accompagnare ogni persona verso uno stile di vita più consapevole e rispettoso di sé, ottenendo risultati concreti e duraturi.",
       "quote": "Perché la vera bellezza non si applica, si costruisce insieme."
     },
-    "eubioticaOverline": "SICE",
+    "eubioticaOverline": "Sice",
     "eubioticaTitle": "Cosmesi Eubiotica",
-    "eubioticaBody": "Lavoriamo con SICE: **la Società Italiana di Cosmesi Eubiotica nata dalla visione del Dott. Enzo Odoardi** — con una filosofia semplice e rivoluzionaria: il cosmetico deve essere un vero e proprio **bioalimento per la pelle**, pienamente compatibile con la sua fisiologia e con i suoi processi naturali.\n\nI prodotti SICE sono formulati con piante officinali selezionate, oli vegetali preziosi, vitamine naturali, oligoelementi ed enzimi vegetali. **Sono privi di parabeni, oli minerali, siliconi e coloranti sintetici.** Perché tutto ciò che entra in contatto con la pelle deve nutrirla, non aggredirla.\n\nIl risultato è una cosmesi che dialoga con la pelle invece di forzarla: rispetta il microbioma cutaneo, supporta il rinnovamento cellulare naturale e restituisce equilibrio nel tempo. Non un catalogo di prodotti: **una filosofia di cura consapevole.**",
+    "eubioticaBody": "Lavoriamo con Sice: **la Società Italiana di Cosmesi Eubiotica nata dalla visione del Dott. Enzo Odoardi** — con una filosofia semplice e rivoluzionaria: il cosmetico deve essere un vero e proprio **bioalimento per la pelle**, pienamente compatibile con la sua fisiologia e con i suoi processi naturali.\n\nI prodotti Sice sono formulati con piante officinali selezionate, oli vegetali preziosi, vitamine naturali, oligoelementi ed enzimi vegetali. **Sono privi di parabeni, oli minerali, siliconi e coloranti sintetici.** Perché tutto ciò che entra in contatto con la pelle deve nutrirla, non aggredirla.\n\nIl risultato è una cosmesi che dialoga con la pelle invece di forzarla: rispetta la microbiota cutanea, supporta il rinnovamento cellulare naturale e restituisce equilibrio nel tempo. Non un catalogo di prodotti: **una filosofia di cura consapevole.**",
     "spaziTitle": "Gli spazi",
     "spaziCabine": "Cabine estetiche",
     "spaziCabineText": "Ambienti luminosi e curati nei dettagli, pensati per accoglierti in un'atmosfera di cura e riservatezza. Il luogo dove ogni trattamento viso e corpo prende vita, con attenzione totale a te e alle tue esigenze.",
@@ -124,7 +125,7 @@
     "teamSabina": "Sabina Carretta",
     "teamSabinaRole": "Titolare & Estetista Senior",
     "teamSabinaBio": "Visione, metodo, cura. Ogni scelta, ogni trattamento, ogni dettaglio porta la sua impronta.",
-    "teamFrancesca": "Francesca",
+    "teamFrancesca": "Sabrina",
     "teamFrancescaRole": "Estetista",
     "teamFrancescaBio": "Cura, precisione e passione in ogni trattamento."
   },
@@ -175,9 +176,9 @@
     }
   },
   "spa": {
-    "hero": "SPA & Rituali",
-    "heroOverline": "Un luogo dove il tempo si ferma",
-    "heroSubtitle": "Rituali del mondo, suite private, percorsi termali.",
+    "hero": "Un luogo dove il tempo si ferma",
+    "heroOverline": "Benvenuta nel tuo santuario",
+    "heroSubtitle": "SPA & Rituali",
     "intro": "La SPA Kalika è un viaggio sensoriale. Profumi, calore, mani sapienti. Ogni rituale è una destinazione.",
     "navRituali": "Rituali",
     "navSuite": "Massaggi in Suite",
@@ -207,6 +208,7 @@
       "infoDuration": "Durata indicativa: 2 ore",
       "infoPersons": "Singolo, coppia o piccoli gruppi (fino a 6 persone)",
       "infoIncludes": "Include accappatoio, ciabattine, tisana e area relax",
+      "infoWrap": "Tutti i percorsi prevedono un ulteriore periodo di avvolgimento di 20 minuti.",
       "discount": "Risparmi acquistando il pacchetto"
     }
   },
@@ -215,7 +217,7 @@
     "heroOverline": "Regala un momento Kalika",
     "heroSubtitle": "Un dono che resta, un'esperienza che cura.",
     "intro": "Scegli la formula, personalizza il messaggio, ricevi la Gift Card via email. Validità 12 mesi.",
-    "selectTitle": "Scegli la formula",
+    "selectTitle": "Scegli il design",
     "formula": {
       "libero": "Importo libero",
       "liberoText": "Scegli tu il valore, da € 50 in su.",
@@ -241,22 +243,22 @@
   },
   "reviews": [
     {
-      "name": "Giulia M.",
-      "date": "Marzo 2026",
+      "name": "Roberta N.",
+      "date": "26.03.26",
       "rating": 5,
-      "text": "Un posto sospeso nel tempo. Il rituale di Bali è stato indimenticabile, e Sabina ha una mano e un'attenzione rare."
+      "text": "Oggi 26.03.26 sono venuta al centro estetico per fare massaggio in Sauna con le secchiate d'acqua! Ne avevo bisogno, mi sono sentita rinata, alleggerita, avevo la schiena bella dura 🙈🙈🙈... Ho riprovato quella sensazione di benessere e leggerezza che mi mancava da troppo tempo. Grazie a Sabrina per il massaggio e al team di Kalika per questa bella esperienza rigenerante."
     },
     {
-      "name": "Federica B.",
-      "date": "Febbraio 2026",
+      "name": "Fabiana C.",
+      "date": "Google",
       "rating": 5,
-      "text": "Il trattamento viso personalizzato ha cambiato il modo in cui guardo la mia pelle. Tornerò, sicuramente."
+      "text": "Centro estetico molto bello e pulito. La titolare è una persona unica e fantastica e consiglio di provare per bravura e aiuto nel cercare cosa è meglio per te, cosa non da poco. La dipendente molto brava, preparata e attenta ad ogni tua esigenza. Se volete fare un viaggio unico rilassante questo è il posto giusto."
     },
     {
-      "name": "Marco R.",
-      "date": "Gennaio 2026",
+      "name": "Chiara C.",
+      "date": "Google",
       "rating": 5,
-      "text": "Ho regalato un percorso SPA di coppia per il nostro anniversario. Atmosfera elegante, accoglienza calorosa."
+      "text": "Se potessi dare più di 5 stelle, lo farei senza la minima esitazione. Mi è stato regalato da un'amica il Rituale zenzero e cioccolato e definirlo semplicemente un trattamento sarebbe riduttivo: è stato un vero e proprio viaggio. Avendo fatto tanti massaggi in passato, posso dire con certezza che questo è stato il migliore della mia vita :) I rituali vengono svolti all'interno del Tepidarium, un ambiente magico e un'esperienza del tutto inedita per me. Sabina and Sabrina sono professioniste eccezionali, sanno perfettamente come accogliere e coccolare i clienti in ogni singolo istante. Dopo il massaggio c'è la possibilità di trattenersi nell'area relax per godersi un'ottima tisana al cioccolato. Un'esperienza 10 e lode."
     }
   ]
 }

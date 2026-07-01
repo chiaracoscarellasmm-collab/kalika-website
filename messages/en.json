@@ -13,6 +13,7 @@
     "skipToContent": "Skip to content",
     "from": "from",
     "duration": "Duration",
+    "temperature": "Temperature",
     "price": "Price",
     "watsapMessage": "Hi Sabina, I'd like to know more about"
   },
@@ -48,49 +49,49 @@
     "credits": "© {year} Kalika Nuovaestetica · All rights reserved"
   },
   "home": {
-    "heroOverline": "Welcome to your space",
-    "heroSubtitle": "Professional beauty · Sensory wellbeing",
+    "heroOverline": "Welcome to the world of",
+    "heroSubtitle": "Your beauty centre and SPA in Prata di Pordenone",
     "heroCtaEstetica": "Discover Beauty",
     "heroCtaSpa": "Discover the SPA",
     "scrollCue": "Scroll",
     "introOverline": "Our essence",
     "introTitle": "A place that takes care of you.",
-    "introBody": "Kalika is a space where the precision of beauty meets the softness of ritual. Every treatment is time devoted to you: skin, body, breath. We work with SICE, Italian eubiotic cosmetics since 1993. Products formulated with medicinal plants, vegetable oils and natural vitamins, without parabens, silicones or mineral oils. Cosmetics that respect the skin and support its natural renewal.",
+    "introBody": "Kalika Nuovaestetica is the beauty centre and SPA in Prata di Pordenone where care becomes ritual. Every treatment, face, body, massage or SPA journey, is designed around you, because there are no standard solutions. For our treatments we choose SICE eubiotic cosmetics: biocompatible, free from parabens and silicones, formulated to respect the skin and support its natural renewal.",
     "introLink": "Read our story",
     "worldsOverline": "Two souls, one place",
     "worldsEsteticaTitle": "Beauty",
-    "worldsEsteticaText": "Face and body treatments tailored to you, with the Kalika method and eubiotic cosmetics.",
+    "worldsEsteticaText": "Face and body treatments designed for you, with the Kalika method and eubiotic cosmetics.",
     "worldsSpaTitle": "SPA & Rituals",
-    "worldsSpaText": "Sensory experiences, world rituals, thermal journeys to find yourself again.",
+    "worldsSpaText": "Sensory experiences, rituals from around the world, thermal journeys to find yourself again.",
     "featuredTitle": "Our treatments",
-    "featuredSubtitle": "Four doorways into the Kalika world.",
+    "featuredSubtitle": "Four entry points into the Kalika world.",
     "featuredViso": "Face",
-    "featuredVisoText": "Cleansing, antiaging, restructuring — tailored.",
+    "featuredVisoText": "Cleansing, anti-aging, restructuring, tailored.",
     "featuredCorpo": "Body",
     "featuredCorpoText": "Drainage, reshaping, deep wellbeing.",
     "featuredMassaggi": "Massage",
-    "featuredMassaggiText": "Relaxing, releasing, special moments.",
+    "featuredMassaggiText": "Relaxing, decontracting, special moments.",
     "featuredRituali": "SPA Rituals",
     "featuredRitualiText": "Sensory journeys in a private suite.",
     "areeOverline": "Two areas, one essence",
     "areaEsteticaTitle": "Beauty Area",
-    "areaEsteticaText": "Targeted treatments to keep you at your best — care in every detail, in harmony with your body and your face.",
+    "areaEsteticaText": "Targeted treatments to help you always feel your best - cared for in every detail, in harmony with your body and face.",
     "areaEsteticaCta": "Discover the Treatments",
     "areaSpaTitle": "SPA & Rituals Area",
-    "areaSpaText": "An exclusive space where relaxation becomes a sensory journey, through rituals that go beyond a treatment.",
+    "areaSpaText": "An exclusive space where relaxation turns into a sensory journey through rituals that go beyond the treatment.",
     "areaSpaCta": "Discover the SPA",
     "checkupOverline": "Your starting point",
-    "checkupTitle": "Complimentary Check-up",
-    "checkupBody": "Every new client begins with a complimentary check-up: a moment dedicated to listening and defining your personalized path. Because there are no standard treatments — only tailored journeys, built around you and your goals.",
-    "checkupQuote": "A bespoke garment, for your skin.",
+    "checkupTitle": "Free Check-up",
+    "checkupBody": "Every new client starts with a free check-up: a moment dedicated to listening and defining your personalised path. Because there are no standard treatments - only tailored journeys, built around you and your goals.",
+    "checkupQuote": "The bespoke suit for your skin.",
     "checkupCta": "Book your check-up",
-    "checkupWaTopic": "I'd like to book the complimentary check-up",
+    "checkupWaTopic": "I'd like to book the free check-up",
     "waOverline": "Not sure what to choose?",
     "waTitle": "Write to us on WhatsApp.",
-    "waBody": "We'll guide you to the treatment that suits you best, with the time and care you deserve.",
+    "waBody": "We’ll recommend the treatment that suits you best, with the time and attention you deserve.",
     "giftOverline": "Gift a Kalika moment",
-    "giftTitle": "A gift that becomes care.",
-    "giftBody": "Personalized Gift Cards for treatments, rituals and SPA journeys. A gift that lasts.",
+    "giftTitle": "A gift that won't be forgotten.",
+    "giftBody": "Gift Cards for beauty treatments, SPA rituals and wellness journeys in Prata di Pordenone. Personalised, digital and available instantly. The perfect gift for someone you love.",
     "giftCta": "Discover the Gift Cards",
     "reviewsTitle": "What people say",
     "reviewsSubtitle": "Voices from those who chose Kalika."
@@ -110,9 +111,9 @@
       "bio4": "I've chosen continuous, selective training, because I believe professional growth never stops. **My goal is not to mask a flaw, but to reach the root**: to walk with each person toward a more aware, self-respecting lifestyle, and obtain results that last.",
       "quote": "Because true beauty isn't applied, it's built together."
     },
-    "eubioticaOverline": "SICE",
+    "eubioticaOverline": "Sice",
     "eubioticaTitle": "Eubiotic Cosmetics",
-    "eubioticaBody": "We work with SICE: **the Italian Society of Eubiotic Cosmetics, born from the vision of Dr. Enzo Odoardi** — with a simple and revolutionary philosophy: cosmetics should be a true **bio-nourishment for the skin**, fully compatible with its physiology and natural processes.\n\nSICE products are formulated with selected medicinal plants, precious vegetable oils, natural vitamins, trace elements and plant enzymes. **They are free from parabens, mineral oils, silicones and synthetic colourants.** Because everything that comes into contact with the skin should nourish it, not attack it.\n\nThe result is cosmetics that dialogue with the skin instead of forcing it: respecting the skin microbiome, supporting natural cell renewal and restoring balance over time. Not a product catalogue, but **a philosophy of conscious care.**",
+    "eubioticaBody": "We work with Sice: **the Italian Society of Eubiotic Cosmetics, born from the vision of Dr. Enzo Odoardi** — with a simple and revolutionary philosophy: cosmetics should be a true **bio-nourishment for the skin**, fully compatible with its physiology and natural processes.\n\nSice products are formulated with selected medicinal plants, precious vegetable oils, natural vitamins, trace elements and plant enzymes. **They are free from parabens, mineral oils, silicones and synthetic colourants.** Because everything that comes into contact with the skin should nourish it, not attack it.\n\nThe result is cosmetics that dialogue with the skin instead of forcing it: respecting the skin microbiota, supporting natural cell renewal and restoring balance over time. Not a product catalogue, but **a philosophy of conscious care.**",
     "spaziTitle": "The spaces",
     "spaziCabine": "Beauty cabins",
     "spaziCabineText": "Bright spaces curated in every detail, designed to welcome you in an atmosphere of care and privacy. The place where every face and body treatment comes to life, with full attention to you and your needs.",
@@ -124,7 +125,7 @@
     "teamSabina": "Sabina Carretta",
     "teamSabinaRole": "Owner & Senior Beauty Therapist",
     "teamSabinaBio": "Vision, method, care. Every choice, every treatment, every detail carries her signature.",
-    "teamFrancesca": "Francesca",
+    "teamFrancesca": "Sabrina",
     "teamFrancescaRole": "Beauty Therapist",
     "teamFrancescaBio": "Care, precision and passion in every treatment."
   },
@@ -175,9 +176,9 @@
     }
   },
   "spa": {
-    "hero": "SPA & Rituals",
-    "heroOverline": "A place where time stands still",
-    "heroSubtitle": "World rituals, private suites, thermal journeys.",
+    "hero": "A place where time stands still",
+    "heroOverline": "Welcome to your sanctuary",
+    "heroSubtitle": "SPA & Rituals",
     "intro": "The Kalika SPA is a sensory journey. Scents, warmth, knowing hands. Every ritual is a destination.",
     "navRituali": "Rituals",
     "navSuite": "Suite Massages",
@@ -207,6 +208,7 @@
       "infoDuration": "Indicative duration: 2 hours",
       "infoPersons": "Single, couple or small groups (up to 6 people)",
       "infoIncludes": "Includes bathrobe, slippers, herbal tea and relax area",
+      "infoWrap": "All journeys include an additional 20-minute wrapping period.",
       "discount": "Save when you book the package"
     }
   },
@@ -215,7 +217,7 @@
     "heroOverline": "Gift a Kalika moment",
     "heroSubtitle": "A gift that lasts, an experience that cares.",
     "intro": "Choose the formula, personalize the message, receive the Gift Card by email. Valid for 12 months.",
-    "selectTitle": "Choose the formula",
+    "selectTitle": "Choose the design",
     "formula": {
       "libero": "Free amount",
       "liberoText": "Choose the value, from € 50 up.",
@@ -241,22 +243,22 @@
   },
   "reviews": [
     {
-      "name": "Giulia M.",
-      "date": "March 2026",
+      "name": "Roberta N.",
+      "date": "26.03.26",
       "rating": 5,
-      "text": "A place suspended in time. The Bali ritual was unforgettable, and Sabina has a rare attentiveness in her hands."
+      "text": "Today, 26.03.26, I came to the beauty centre for a sauna massage with bucketfuls of water! I really needed it, I felt reborn, lighter, my back was so stiff 🙈🙈🙈... I experienced again that feeling of wellbeing and lightness I had been missing for far too long. Thank you to Sabrina for the massage and to the Kalika team for this lovely, regenerating experience."
     },
     {
-      "name": "Federica B.",
-      "date": "February 2026",
+      "name": "Fabiana C.",
+      "date": "Google",
       "rating": 5,
-      "text": "The tailored facial changed the way I look at my skin. I'll definitely be back."
+      "text": "A very beautiful and clean beauty centre. The owner is a unique and fantastic person and I recommend it for her skill and for the help she gives in finding what is best for you, which is no small thing. The employee is very good, well prepared and attentive to every need. If you want to go on a unique, relaxing journey, this is the right place."
     },
     {
-      "name": "Marco R.",
-      "date": "January 2026",
+      "name": "Chiara C.",
+      "date": "Google",
       "rating": 5,
-      "text": "I gifted a couple SPA journey for our anniversary. Elegant atmosphere, warm welcome."
+      "text": "If I could give more than 5 stars, I would without the slightest hesitation. A friend gifted me the Ginger and Chocolate Ritual and calling it simply a treatment would be reductive: it was a true journey. Having had many massages in the past, I can say with certainty that this was the best of my life :) The rituals take place inside the Tepidarium, a magical environment and a completely new experience for me, as I had never tried anything like it before. Sabina and Sabrina are exceptional professionals; they know exactly how to welcome and pamper clients at every single moment. As a finishing touch, after the massage there is the possibility of staying in the relaxation area and enjoying an excellent chocolate herbal tea. A 10/10 experience."
     }
   ]
 }
