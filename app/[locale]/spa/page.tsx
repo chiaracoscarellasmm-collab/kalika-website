@@ -49,7 +49,7 @@ export default async function SpaPage({ params }: PageProps<"/[locale]/spa">) {
         locale === "it"
           ? "Per due. Intimo, sospeso, prezioso."
           : "For two. Intimate, suspended, precious.",
-      src: "/Esperienze%20di%20coppia.png",
+      src: "/Esperienze%20di%20coppia.jpg",
       gradient: "linear-gradient(135deg, #3A1A10, #7A3A20)",
     },
     {
@@ -59,7 +59,7 @@ export default async function SpaPage({ params }: PageProps<"/[locale]/spa">) {
         locale === "it"
           ? "Sauna, biosauna, hammam, banja: il percorso termale."
           : "Sauna, biosauna, hammam, banja: the thermal journey.",
-      src: "/Percorsi%20SPA.png",
+      src: "/Percorsi%20SPA.jpg",
       gradient: "linear-gradient(135deg, #1A0F08, #4A2810)",
     },
   ];
@@ -115,9 +115,8 @@ export default async function SpaPage({ params }: PageProps<"/[locale]/spa">) {
                       src={c.src}
                       alt={c.label}
                       fill
-                      priority
-                      sizes="50vw"
-                      quality={85}
+                      sizes="(max-width: 640px) 100vw, 50vw"
+                      quality={75}
                       className="object-cover object-center transition-transform duration-[600ms] group-hover:scale-[1.05]"
                     />
                     <div className="absolute inset-0 bg-gradient-to-b from-[rgba(15,8,4,0)] via-[rgba(15,8,4,0.45)] to-[rgba(15,8,4,0.7)] transition-colors duration-[600ms] group-hover:from-[rgba(15,8,4,0)] group-hover:via-[rgba(15,8,4,0.35)] group-hover:to-[rgba(15,8,4,0.62)]" />

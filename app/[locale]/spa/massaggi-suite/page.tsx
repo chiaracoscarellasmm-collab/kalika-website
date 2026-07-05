@@ -1,10 +1,10 @@
 import { isLocale, type Locale } from "@/lib/i18n";
 import { getDictionary } from "@/lib/dictionaries";
 import { PageHero } from "@/components/PageHero";
-import { Reveal } from "@/components/Reveal";
-import { RitualCard } from "@/components/RitualCard";
+import { SpaCategorySections } from "@/components/SpaCategorySections";
+import { SpaIncludesNote } from "@/components/SpaIncludesNote";
 import { SectionWhatsapp } from "@/components/SectionWhatsapp";
-import { massaggiSuite } from "@/lib/treatments";
+import { massaggiSuiteCategory } from "@/lib/treatments";
 import { notFound } from "next/navigation";
 
 export async function generateMetadata({
@@ -30,20 +30,23 @@ export default async function MassaggiSuitePage({
   return (
     <>
       <PageHero
+        overline={dict.spa.heroOverline}
         title={dict.spa.suite.title}
         subtitle={dict.spa.suite.intro}
         variant="spa"
       />
 
-      <section className="bg-[#1f120c] py-24">
-        <div className="mx-auto max-w-4xl px-6 lg:px-10">
-          <div className="space-y-4">
-            {massaggiSuite.map((t, i) => (
-              <Reveal key={t.id} delay={i * 0.06}>
-                <RitualCard treatment={t} locale={locale} dict={dict} />
-              </Reveal>
-            ))}
-          </div>
+      {massaggiSuiteCategory.note && (
+        <SpaIncludesNote note={massaggiSuiteCategory.note} locale={locale} />
+      )}
+
+      <section className="bg-[#1f120c] pb-28 pt-10">
+        <div className="mx-auto max-w-6xl px-6 lg:px-10">
+          <SpaCategorySections
+            category={massaggiSuiteCategory}
+            locale={locale}
+            dict={dict}
+          />
         </div>
       </section>
 

@@ -80,6 +80,8 @@ export function Footer({ locale, dict }: Props) {
             alt={dict.common.brand}
             width={160}
             height={160}
+            sizes="160px"
+            quality={80}
             className="h-auto w-[160px] object-contain mix-blend-multiply drop-shadow-[0_10px_22px_rgba(107,58,42,0.08)]"
           />
         </Link>

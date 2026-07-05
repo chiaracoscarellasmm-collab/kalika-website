@@ -3,12 +3,9 @@ import { getDictionary } from "@/lib/dictionaries";
 import { PageHero } from "@/components/PageHero";
 import { Reveal } from "@/components/Reveal";
 import { TreatmentList } from "@/components/TreatmentList";
+import { LaserZones } from "@/components/LaserZones";
 import { SectionWhatsapp } from "@/components/SectionWhatsapp";
-import {
-  epilazioneGroups,
-  pick,
-  PRICE_PLACEHOLDER,
-} from "@/lib/treatments";
+import { epilazioneGroups, laserTiers, pick } from "@/lib/treatments";
 import { notFound } from "next/navigation";
 
 export async function generateMetadata({
@@ -30,8 +27,6 @@ export default async function EpilazionePage({
   if (!isLocale(raw)) notFound();
   const locale = raw as Locale;
   const dict = await getDictionary(locale);
-  const laser = epilazioneGroups.find((g) => g.id === "laser-808")!;
-  const traditional = epilazioneGroups.filter((g) => g.id !== "laser-808");
 
   return (
     <>
@@ -44,11 +39,17 @@ export default async function EpilazionePage({
       <section className="bg-[var(--color-cream)] py-20">
         <div className="mx-auto max-w-4xl px-6">
           <TreatmentList
-            groups={traditional}
+            groups={epilazioneGroups}
             locale={locale}
-            durationLabel={dict.common.duration}
             priceLabel={dict.common.price}
           />
+          <Reveal>
+            <p className="mt-8 text-sm text-[var(--color-espresso)]/70">
+              {locale === "it"
+                ? "Eseguendo la depilazione completa viene applicato uno sconto del 10% sul totale."
+                : "A 10% discount is applied to the total for a full waxing session."}
+            </p>
+          </Reveal>
         </div>
       </section>
 
@@ -87,54 +88,27 @@ export default async function EpilazionePage({
             </Reveal>
 
             <Reveal delay={0.1}>
-              <div className="flex items-center justify-center">
-                {/* simple body silhouette SVG */}
-                <svg
-                  viewBox="0 0 200 360"
-                  width="220"
-                  height="360"
-                  fill="none"
-                  stroke="var(--color-mauve)"
-                  strokeWidth="1.2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  className="opacity-80"
-                  aria-hidden
-                >
-                  <circle cx="100" cy="40" r="22" />
-                  <path d="M70 80 L130 80 L150 200 L130 220 L130 340 L110 340 L100 240 L90 340 L70 340 L70 220 L50 200 Z" />
-                  <line x1="70" y1="90" x2="35" y2="190" />
-                  <line x1="130" y1="90" x2="165" y2="190" />
-                  <circle cx="35" cy="190" r="3" fill="var(--color-wisteria)" stroke="none" />
-                  <circle cx="165" cy="190" r="3" fill="var(--color-wisteria)" stroke="none" />
-                </svg>
-              </div>
+              <LaserZones
+                src="/images/laser-bodies-v1.png"
+                alt={
+                  locale === "it"
+                    ? "Zone del corpo trattabili con laser, suddivise per fascia di prezzo"
+                    : "Body zones treatable with laser, grouped by price band"
+                }
+                zonesTitle={dict.estetica.epilazione.laserZones}
+                subtitle={
+                  locale === "it"
+                    ? "Più zone acquisti, più risparmi"
+                    : "The more zones you book, the more you save"
+                }
+                perZone={locale === "it" ? "a zona" : "per zone"}
+                tiers={laserTiers.map((t) => ({
+                  color: t.zone,
+                  price: pick(t.price, locale),
+                }))}
+              />
             </Reveal>
           </div>
-
-          {/* Zones table */}
-          <Reveal delay={0.15}>
-            <div className="mt-16">
-              <h3 className="display text-2xl text-[var(--color-brown)]">
-                {dict.estetica.epilazione.laserZones}
-              </h3>
-              <ul className="mt-6 divide-y divide-[var(--color-line)] rounded-2xl border border-[var(--color-line)] bg-white">
-                {laser.treatments.map((t) => (
-                  <li
-                    key={t.id}
-                    className="flex items-center justify-between px-5 py-4"
-                  >
-                    <span className="text-[var(--color-espresso)]">
-                      {pick(t.name, locale)}
-                    </span>
-                    <span className="text-xs uppercase tracking-[0.2em] text-[var(--color-mauve)]">
-                      {pick(PRICE_PLACEHOLDER, locale)}
-                    </span>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          </Reveal>
         </div>
       </section>
 

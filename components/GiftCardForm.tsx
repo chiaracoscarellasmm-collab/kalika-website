@@ -82,6 +82,7 @@ function GiftCardPreview({
           fill
           priority
           sizes="(max-width: 1024px) 100vw, 60vw"
+          quality={80}
           className="object-cover"
         />
       </div>
@@ -279,6 +280,7 @@ export function GiftCardForm({ locale, dict }: Props) {
                       alt={designLabel(option.key, locale)}
                       fill
                       sizes="(max-width: 1024px) 33vw, 20vw"
+                      quality={75}
                       className="object-cover"
                     />
                   </span>

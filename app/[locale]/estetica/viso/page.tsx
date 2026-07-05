@@ -38,7 +38,6 @@ export default async function VisoPage({
           <TreatmentList
             groups={visoGroups}
             locale={locale}
-            durationLabel={dict.common.duration}
             priceLabel={dict.common.price}
           />
         </div>

@@ -38,7 +38,6 @@ export default async function CorpoPage({
           <TreatmentList
             groups={corpoGroups}
             locale={locale}
-            durationLabel={dict.common.duration}
             priceLabel={dict.common.price}
           />
         </div>

@@ -39,7 +39,7 @@ export const giftCardDesigns: Array<{
     gradient:
       "linear-gradient(135deg, #faf7f2 0%, #f0e6f0 48%, #c97bb2 100%)",
     textColor: "#6b3a2a",
-    frontImage: "/Gift%20card%20desert.png",
+    frontImage: "/Gift%20card%20desert.jpg",
   },
   {
     key: "spa",
@@ -47,7 +47,7 @@ export const giftCardDesigns: Array<{
     gradient:
       "linear-gradient(135deg, #2c1810 0%, #6b3a2a 42%, #9b5e8a 100%)",
     textColor: "#faf7f2",
-    frontImage: "/Gift%20card%20mountain.png",
+    frontImage: "/Gift%20card%20mountain.jpg",
   },
   {
     key: "coppia",
@@ -55,7 +55,7 @@ export const giftCardDesigns: Array<{
     gradient:
       "linear-gradient(135deg, #f6d7dc 0%, #c97bb2 48%, #8f526f 100%)",
     textColor: "#faf7f2",
-    frontImage: "/Gift%20card%20seaside.png",
+    frontImage: "/Gift%20card%20seaside.jpg",
   },
 ];
 

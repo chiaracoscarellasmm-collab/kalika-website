@@ -131,14 +131,14 @@
   },
   "estetica": {
     "hero": "Beauty",
-    "heroSubtitle": "Face, body, hands, feet. Precise care, attentive gesture.",
+    "heroSubtitle": "Face, body, hands and feet treatments, designed to enhance your natural beauty.",
     "intro": "For us, beauty is a dialogue. Every treatment starts from a skin analysis, a question, a glance. Choose your path.",
     "catViso": "Face",
     "catCorpo": "Body",
     "catMassaggi": "Massage & Wellbeing",
     "catManiPiedi": "Hands & Feet",
     "catEpilazione": "Hair removal",
-    "catSopracciglia": "Brows, Lashes & Make-up",
+    "catSopracciglia": "Eyes & Make Up",
     "popularTitle": "Most requested treatments",
     "downloadTitle": "Full price list",
     "downloadBody": "Download the updated price list in PDF.",
@@ -150,7 +150,7 @@
     },
     "corpo": {
       "title": "Body treatments",
-      "intro": "From full treatments to targeted gestures — for the skin, the silhouette, your overall wellbeing."
+      "intro": "A body care journey where technology, skilled hands and wellbeing come together."
     },
     "massaggi": {
       "title": "Massage & wellbeing",
@@ -158,16 +158,16 @@
     },
     "maniPiedi": {
       "title": "Hands & feet",
-      "intro": "Cosmetic and curative care, manicure, pedicure, gel polish, restructuring."
+      "intro": "Small everyday beauty rituals, carried out with precision and care for hands and feet that always look flawless."
     },
     "epilazione": {
       "title": "Hair removal",
       "intro": "Traditional, Coco Cera, Diode Laser 808: three technologies for every need.",
       "laserTitle": "Diode Laser 808",
-      "laserHow": "How it works",
-      "laserHowBody": "A laser beam targets the follicle, progressively reducing regrowth. The cold-contact head keeps the treatment comfortable.",
-      "laserSuitable": "Who it's for",
-      "laserSuitableBody": "Women and men, on almost all skin phototypes. A free consultation lets us design the best plan for you.",
+      "laserHow": "How does it work?",
+      "laserHowBody": "It uses selective photothermolysis: the light is drawn to the hair's melanin and, converted into heat, deactivates the follicle, progressively reducing regrowth. The cold-contact head protects the skin, making the treatment comfortable and virtually painless.",
+      "laserSuitable": "Who is it for?",
+      "laserSuitableBody": "For women and men who want to remove unwanted hair for good and say goodbye to waxing and ingrown hairs. Effective and safe on almost all skin phototypes, even darker or tanned skin.",
       "laserZones": "Price per zone"
     },
     "sopracciglia": {
@@ -190,8 +190,7 @@
     "navPercorsiText": "Sauna, biosauna, hammam, banja — the thermal path.",
     "rituali": {
       "title": "SPA Rituals",
-      "intro": "Each ritual is a journey: scents, fabrics, gestures that tell of a distant place.",
-      "includes": "Every ritual includes herbal tea and access to the relax area."
+      "intro": "Each ritual is a journey: scents, fabrics, gestures that tell of a distant place."
     },
     "suite": {
       "title": "Special Suite Massages",
@@ -204,12 +203,14 @@
     "percorsi": {
       "title": "SPA Journeys",
       "intro": "Finnish sauna, biosauna, Turkish bath, hammam, Russian banja, Roman sauna: a complete journey for body and mind.",
-      "infoTitle": "Practical information",
-      "infoDuration": "Indicative duration: 2 hours",
-      "infoPersons": "Single, couple or small groups (up to 6 people)",
       "infoIncludes": "Includes bathrobe, slippers, herbal tea and relax area",
       "infoWrap": "All journeys include an additional 20-minute wrapping period.",
-      "discount": "Save when you book the package"
+      "discount": "Save when you book the package",
+      "tariffe": {
+        "title": "Rates",
+        "intro": "Single and group rates. Where noted, sessions with a therapist include enhanced treatments.",
+        "single": "Price"
+      }
     }
   },
   "giftcard": {

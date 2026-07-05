@@ -2,9 +2,11 @@ import { isLocale, type Locale } from "@/lib/i18n";
 import { getDictionary } from "@/lib/dictionaries";
 import { PageHero } from "@/components/PageHero";
 import { Reveal } from "@/components/Reveal";
-import { SpaTreatmentGroups } from "@/components/SpaTreatmentGroups";
+import { SpaCategorySections } from "@/components/SpaCategorySections";
+import { SpaIncludesNote } from "@/components/SpaIncludesNote";
+import { SpaPercorsiTariffe } from "@/components/SpaPercorsiTariffe";
 import { SectionWhatsapp } from "@/components/SectionWhatsapp";
-import { percorsi } from "@/lib/treatments";
+import { percorsiCategory } from "@/lib/treatments";
 import { notFound } from "next/navigation";
 
 export async function generateMetadata({
@@ -36,47 +38,27 @@ export default async function PercorsiPage({
         variant="spa"
       />
 
-      <section className="bg-[#1f120c] py-20">
-        <div className="mx-auto max-w-4xl px-6">
-          <SpaTreatmentGroups groups={percorsi} locale={locale} dict={dict} />
+      {percorsiCategory.note && (
+        <SpaIncludesNote note={percorsiCategory.note} locale={locale} />
+      )}
+
+      <section className="bg-[#1f120c] pb-20 pt-10">
+        <div className="mx-auto max-w-6xl px-6 lg:px-10">
+          <SpaCategorySections
+            category={percorsiCategory}
+            locale={locale}
+            dict={dict}
+            hideCardPricing
+          />
           <Reveal>
-            <p className="mt-8 text-[17px] leading-8 text-[var(--color-cream)]/75 sm:text-lg">
+            <p className="mt-12 text-[17px] leading-8 text-[var(--color-cream)]/75 sm:text-lg">
               {dict.spa.percorsi.infoWrap}
             </p>
-          </Reveal>
-          <Reveal>
-            <div className="mt-4 inline-flex items-center gap-2 rounded-full border border-[var(--color-wisteria)]/40 bg-[var(--color-wisteria)]/10 px-4 py-2 text-xs uppercase tracking-[0.2em] text-[var(--color-wisteria)]">
-              {dict.spa.percorsi.discount}
-            </div>
           </Reveal>
         </div>
       </section>
 
-      <section className="border-t border-[var(--color-cream)]/10 bg-[#1f120c] py-24">
-        <div className="mx-auto max-w-4xl px-6">
-          <Reveal>
-            <h2 className="display text-3xl text-[var(--color-cream)] sm:text-4xl">
-              {dict.spa.percorsi.infoTitle}
-            </h2>
-          </Reveal>
-          <Reveal delay={0.05}>
-            <ul className="mt-8 grid gap-4 sm:grid-cols-3">
-              {[
-                dict.spa.percorsi.infoDuration,
-                dict.spa.percorsi.infoPersons,
-                dict.spa.percorsi.infoIncludes,
-              ].map((line) => (
-                <li
-                  key={line}
-                  className="rounded-2xl border border-[var(--color-cream)]/10 bg-[var(--color-cream)]/[0.04] p-6 text-[17px] leading-8 text-[var(--color-cream)]/80 sm:text-lg"
-                >
-                  {line}
-                </li>
-              ))}
-            </ul>
-          </Reveal>
-        </div>
-      </section>
+      <SpaPercorsiTariffe category={percorsiCategory} locale={locale} dict={dict} />
 
       <SectionWhatsapp
         dict={dict}

@@ -131,14 +131,14 @@
   },
   "estetica": {
     "hero": "Estetica",
-    "heroSubtitle": "Trattamenti viso, corpo, mani, piedi. Cura precisa, gesto attento.",
+    "heroSubtitle": "Trattamenti viso, corpo, mani e piedi, pensati per valorizzare la tua bellezza naturale.",
     "intro": "L'estetica per noi è un dialogo. Ogni trattamento parte da un'analisi della pelle, da una domanda, da uno sguardo. Scegli il tuo percorso.",
     "catViso": "Viso",
     "catCorpo": "Corpo",
     "catMassaggi": "Massaggi e Benessere",
     "catManiPiedi": "Mani e Piedi",
     "catEpilazione": "Epilazione",
-    "catSopracciglia": "Sopracciglia, Ciglia e Make Up",
+    "catSopracciglia": "Sguardo & Make Up",
     "popularTitle": "Trattamenti più richiesti",
     "downloadTitle": "Listino completo",
     "downloadBody": "Scarica il listino prezzi aggiornato in formato PDF.",
@@ -150,7 +150,7 @@
     },
     "corpo": {
       "title": "Trattamenti corpo",
-      "intro": "Dal trattamento completo al gesto localizzato, per la pelle, la silhouette, il benessere generale."
+      "intro": "Un percorso di cura per il corpo, dove tecnologia, manualità e benessere si incontrano."
     },
     "massaggi": {
       "title": "Massaggi e benessere",
@@ -158,16 +158,16 @@
     },
     "maniPiedi": {
       "title": "Mani e piedi",
-      "intro": "Cura estetica e curativa, manicure, pedicure, semipermanente, ristrutturazione."
+      "intro": "Piccoli gesti di bellezza quotidiana, eseguiti con precisione e attenzione per mani e piedi sempre impeccabili."
     },
     "epilazione": {
       "title": "Epilazione",
       "intro": "Tradizionale, Coco Cera, Laser Diodo 808: tre tecnologie per ogni esigenza.",
       "laserTitle": "Laser Diodo 808",
-      "laserHow": "Come funziona",
-      "laserHowBody": "Un fascio laser mira al follicolo, riducendo progressivamente la ricrescita. La testina a contatto freddo rende il trattamento confortevole.",
-      "laserSuitable": "A chi è indicato",
-      "laserSuitableBody": "A donne e uomini, su quasi tutti i fototipi. Una consulenza gratuita ci permette di definire il piano migliore per te.",
+      "laserHow": "Come funziona?",
+      "laserHowBody": "Sfrutta la fototermolisi selettiva: la luce è attratta dalla melanina del pelo e, trasformata in calore, inattiva il follicolo riducendo progressivamente la ricrescita. La testina a contatto freddo protegge la pelle, rendendo il trattamento confortevole e praticamente indolore.",
+      "laserSuitable": "A chi è indicato?",
+      "laserSuitableBody": "A donne e uomini che vogliono eliminare definitivamente i peli superflui e dire addio a cerette e peli incarniti. Efficace e sicuro su quasi tutti i fototipi, anche pelli scure o abbronzate.",
       "laserZones": "Listino per zona"
     },
     "sopracciglia": {
@@ -190,8 +190,7 @@
     "navPercorsiText": "Sauna, biosauna, hammam, banja: il percorso termale.",
     "rituali": {
       "title": "Rituali SPA",
-      "intro": "Ogni rituale è un viaggio: profumi, tessuti, gesti che raccontano un luogo lontano.",
-      "includes": "Ogni rituale include tisana e area relax a tua disposizione."
+      "intro": "Ogni rituale è un viaggio: profumi, tessuti, gesti che raccontano un luogo lontano."
     },
     "suite": {
       "title": "Massaggi speciali in Suite",
@@ -204,12 +203,14 @@
     "percorsi": {
       "title": "Percorsi SPA",
       "intro": "Sauna finlandese, biosauna, bagno turco, hammam, banja russa, sauna romana: un percorso completo per il corpo e per la mente.",
-      "infoTitle": "Informazioni pratiche",
-      "infoDuration": "Durata indicativa: 2 ore",
-      "infoPersons": "Singolo, coppia o piccoli gruppi (fino a 6 persone)",
       "infoIncludes": "Include accappatoio, ciabattine, tisana e area relax",
       "infoWrap": "Tutti i percorsi prevedono un ulteriore periodo di avvolgimento di 20 minuti.",
-      "discount": "Risparmi acquistando il pacchetto"
+      "discount": "Risparmi acquistando il pacchetto",
+      "tariffe": {
+        "title": "Tariffe",
+        "intro": "Prezzi singoli e di gruppo. Dove indicato, le modalità con operatore includono trattamenti potenziati.",
+        "single": "Prezzo"
+      }
     }
   },
   "giftcard": {

@@ -21,9 +21,9 @@ async function getLogoDataUri() {
 
 async function getFrontDataUri(designKey: "estetica" | "spa" | "coppia") {
   const frontFiles: Record<typeof designKey, string> = {
-    estetica: "Gift card desert.png",
-    spa: "Gift card mountain.png",
-    coppia: "Gift card seaside.png",
+    estetica: "Gift card desert.jpg",
+    spa: "Gift card mountain.jpg",
+    coppia: "Gift card seaside.jpg",
   };
 
   const frontPath = path.join(

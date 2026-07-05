@@ -38,7 +38,6 @@ export default async function ManiPiediPage({
           <TreatmentList
             groups={maniPiediGroups}
             locale={locale}
-            durationLabel={dict.common.duration}
             priceLabel={dict.common.price}
           />
         </div>

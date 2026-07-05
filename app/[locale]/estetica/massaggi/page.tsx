@@ -38,7 +38,6 @@ export default async function MassaggiPage({
           <TreatmentList
             groups={massaggiGroups}
             locale={locale}
-            durationLabel={dict.common.duration}
             priceLabel={dict.common.price}
           />
         </div>

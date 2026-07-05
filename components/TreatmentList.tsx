@@ -3,15 +3,13 @@ import {
   type TreatmentGroup,
   pick,
   PRICE_PLACEHOLDER,
-  DURATION_PLACEHOLDER,
-  DESC_PLACEHOLDER,
 } from "@/lib/treatments";
 import { Reveal } from "./Reveal";
+import { TreatmentDurationRow } from "./TreatmentDurationRow";
 
 type Props = {
   groups: TreatmentGroup[];
   locale: Locale;
-  durationLabel: string;
   priceLabel: string;
   variant?: "estetica" | "spa";
 };
@@ -19,7 +17,6 @@ type Props = {
 export function TreatmentList({
   groups,
   locale,
-  durationLabel,
   priceLabel,
   variant = "estetica",
 }: Props) {
@@ -36,60 +33,87 @@ export function TreatmentList({
             >
               {pick(group.title, locale)}
             </h3>
+            {group.subtitle && (
+              <p
+                className={`mt-2 max-w-xl text-[17px] leading-8 sm:text-lg ${
+                  isSpa
+                    ? "text-[var(--color-cream)]/65"
+                    : "text-[var(--color-espresso)]/60"
+                }`}
+              >
+                {pick(group.subtitle, locale)}
+              </p>
+            )}
             <ul
-              className={`mt-6 divide-y ${
+              className={`${group.subtitle ? "mt-5" : "mt-6"} divide-y ${
                 isSpa
                   ? "divide-[var(--color-cream)]/15"
                   : "divide-[var(--color-line)]"
               }`}
             >
-              {group.treatments.map((t) => (
-                <li
-                  key={t.id}
-                  className="grid items-baseline gap-2 py-5 sm:grid-cols-[1fr_auto_auto] sm:gap-8"
-                >
-                  <div>
-                    <p
-                      className={`text-lg ${
+              {group.treatments.map((t) => {
+                if (t.durationOptions?.length) {
+                  return (
+                    <TreatmentDurationRow
+                      key={t.id}
+                      treatment={t}
+                      locale={locale}
+                      priceLabel={priceLabel}
+                      variant={variant}
+                    />
+                  );
+                }
+
+                const description = t.description ?? t.short;
+                return (
+                  <li
+                    key={t.id}
+                    className="grid items-center gap-2 py-5 sm:grid-cols-[1fr_auto_auto] sm:gap-8"
+                  >
+                    <div>
+                      <p
+                        className={`text-lg ${
+                          isSpa
+                            ? "text-[var(--color-cream)]"
+                            : "text-[var(--color-espresso)]"
+                        }`}
+                      >
+                        {pick(t.name, locale)}
+                      </p>
+                      {description && (
+                        <p
+                          className={`mt-1 text-[17px] leading-8 sm:text-lg ${
+                            isSpa
+                              ? "text-[var(--color-cream)]/65"
+                              : "text-[var(--color-espresso)]/60"
+                          }`}
+                        >
+                          {pick(description, locale)}
+                        </p>
+                      )}
+                    </div>
+                    <div
+                      className={`text-xs uppercase tracking-[0.18em] ${
                         isSpa
-                          ? "text-[var(--color-cream)]"
-                          : "text-[var(--color-espresso)]"
+                          ? "text-[var(--color-cream)]/55"
+                          : "text-[var(--color-mauve)]"
                       }`}
                     >
-                      {pick(t.name, locale)}
-                    </p>
-                    <p
-                      className={`mt-1 text-[17px] leading-8 sm:text-lg ${
+                      {t.duration && pick(t.duration, locale)}
+                    </div>
+                    <div
+                      className={`text-xs uppercase tracking-[0.18em] ${
                         isSpa
-                          ? "text-[var(--color-cream)]/65"
-                          : "text-[var(--color-espresso)]/60"
+                          ? "text-[var(--color-wisteria)]"
+                          : "text-[var(--color-mauve)]"
                       }`}
                     >
-                      {pick(DESC_PLACEHOLDER, locale)}
-                    </p>
-                  </div>
-                  <div
-                    className={`text-xs uppercase tracking-[0.18em] ${
-                      isSpa
-                        ? "text-[var(--color-cream)]/55"
-                        : "text-[var(--color-mauve)]"
-                    }`}
-                  >
-                    <span className="opacity-70">{durationLabel}</span>{" "}
-                    {pick(DURATION_PLACEHOLDER, locale)}
-                  </div>
-                  <div
-                    className={`text-xs uppercase tracking-[0.18em] ${
-                      isSpa
-                        ? "text-[var(--color-wisteria)]"
-                        : "text-[var(--color-mauve)]"
-                    }`}
-                  >
-                    <span className="opacity-70">{priceLabel}</span>{" "}
-                    {pick(PRICE_PLACEHOLDER, locale)}
-                  </div>
-                </li>
-              ))}
+                      <span className="opacity-70">{priceLabel}</span>{" "}
+                      {pick(t.price ?? PRICE_PLACEHOLDER, locale)}
+                    </div>
+                  </li>
+                );
+              })}
             </ul>
           </section>
         </Reveal>

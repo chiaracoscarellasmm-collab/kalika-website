@@ -38,7 +38,6 @@ export default async function SopraccigliaPage({
           <TreatmentList
             groups={sopraccigliaGroups}
             locale={locale}
-            durationLabel={dict.common.duration}
             priceLabel={dict.common.price}
           />
         </div>

@@ -1,10 +1,10 @@
 import { isLocale, type Locale } from "@/lib/i18n";
 import { getDictionary } from "@/lib/dictionaries";
 import { PageHero } from "@/components/PageHero";
-import { Reveal } from "@/components/Reveal";
-import { RitualCard } from "@/components/RitualCard";
+import { SpaCategorySections } from "@/components/SpaCategorySections";
+import { SpaIncludesNote } from "@/components/SpaIncludesNote";
 import { SectionWhatsapp } from "@/components/SectionWhatsapp";
-import { rituali } from "@/lib/treatments";
+import { ritualiCategory } from "@/lib/treatments";
 import { notFound } from "next/navigation";
 
 export async function generateMetadata({
@@ -36,25 +36,17 @@ export default async function RitualiPage({
         variant="spa"
       />
 
-      <section className="bg-[#1f120c] py-20">
-        <div className="mx-auto max-w-3xl px-6 text-center">
-          <Reveal>
-            <p className="script text-3xl text-[var(--color-wisteria)]">
-              {dict.spa.rituali.includes}
-            </p>
-          </Reveal>
-        </div>
-      </section>
+      {ritualiCategory.note && (
+        <SpaIncludesNote note={ritualiCategory.note} locale={locale} />
+      )}
 
-      <section className="bg-[#1f120c] pb-28">
-        <div className="mx-auto max-w-4xl px-6 lg:px-10">
-          <div className="space-y-4">
-            {rituali.map((t, i) => (
-              <Reveal key={t.id} delay={(i % 6) * 0.04}>
-                <RitualCard treatment={t} locale={locale} dict={dict} />
-              </Reveal>
-            ))}
-          </div>
+      <section className="bg-[#1f120c] pb-28 pt-10">
+        <div className="mx-auto max-w-6xl px-6 lg:px-10">
+          <SpaCategorySections
+            category={ritualiCategory}
+            locale={locale}
+            dict={dict}
+          />
         </div>
       </section>
 

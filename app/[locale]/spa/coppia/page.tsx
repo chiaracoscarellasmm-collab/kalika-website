@@ -4,8 +4,9 @@ import { isLocale, type Locale } from "@/lib/i18n";
 import { getDictionary } from "@/lib/dictionaries";
 import { PageHero } from "@/components/PageHero";
 import { Reveal } from "@/components/Reveal";
-import { RitualCard } from "@/components/RitualCard";
-import { coppia } from "@/lib/treatments";
+import { SpaCategorySections } from "@/components/SpaCategorySections";
+import { SpaIncludesNote } from "@/components/SpaIncludesNote";
+import { coppiaCategory } from "@/lib/treatments";
 import { localePath } from "@/lib/site";
 import { notFound } from "next/navigation";
 
@@ -32,20 +33,23 @@ export default async function CoppiaPage({
   return (
     <>
       <PageHero
+        overline={dict.spa.heroOverline}
         title={dict.spa.coppia.title}
         subtitle={dict.spa.coppia.intro}
         variant="spa"
       />
 
-      <section className="bg-[#1f120c] py-24">
-        <div className="mx-auto max-w-7xl px-6 lg:px-10">
-          <div className="grid gap-6 sm:grid-cols-2">
-            {coppia.map((t, i) => (
-              <Reveal key={t.id} delay={i * 0.06}>
-                <RitualCard treatment={t} locale={locale} dict={dict} />
-              </Reveal>
-            ))}
-          </div>
+      {coppiaCategory.note && (
+        <SpaIncludesNote note={coppiaCategory.note} locale={locale} />
+      )}
+
+      <section className="bg-[#1f120c] pb-24 pt-10">
+        <div className="mx-auto max-w-6xl px-6 lg:px-10">
+          <SpaCategorySections
+            category={coppiaCategory}
+            locale={locale}
+            dict={dict}
+          />
         </div>
       </section>
 

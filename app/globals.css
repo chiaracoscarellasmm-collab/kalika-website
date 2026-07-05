@@ -97,6 +97,26 @@ p:not([class*="uppercase"]):not([class*="text-xs"]):not([class*="text-[11px]"]) 
   animation: kalika-scroll-cue 2s ease-in-out infinite;
 }
 
+@keyframes laser-pulse {
+  0%,
+  100% {
+    transform: scale(1.12);
+    box-shadow: 0 0 0 2px var(--glow-soft), 0 0 10px 3px var(--glow);
+  }
+  50% {
+    transform: scale(1.4);
+    box-shadow: 0 0 0 3px var(--glow-soft), 0 0 24px 9px var(--glow);
+  }
+}
+
+.laser-dot-inner {
+  transition: transform 0.35s ease, box-shadow 0.35s ease;
+}
+
+.laser-dot-inner.is-active {
+  animation: laser-pulse 1.3s ease-in-out infinite;
+}
+
 .script {
   font-family: var(--font-script), cursive;
   font-weight: 400;
@@ -126,5 +146,52 @@ p:not([class*="uppercase"]):not([class*="text-xs"]):not([class*="text-[11px]"]) 
 @media (min-width: 1024px) {
   .script.lg\:text-5xl {
     font-size: 3.85rem !important;
+  }
+}
+
+.spa-experience-card {
+  transition:
+    transform 0.45s cubic-bezier(0.16, 1, 0.3, 1),
+    box-shadow 0.45s cubic-bezier(0.16, 1, 0.3, 1),
+    border-color 0.45s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.spa-experience-card:hover {
+  transform: translateY(-5px);
+  border-color: rgba(201, 123, 178, 0.38);
+  box-shadow:
+    0 22px 48px -18px rgba(0, 0, 0, 0.55),
+    0 0 0 1px rgba(201, 123, 178, 0.14),
+    0 14px 36px -14px rgba(201, 123, 178, 0.24),
+    0 10px 28px -12px rgba(201, 169, 110, 0.16);
+}
+
+.spa-experience-card--featured:hover {
+  border-color: rgba(201, 123, 178, 0.42);
+  box-shadow:
+    0 28px 64px -24px rgba(0, 0, 0, 0.65),
+    0 0 0 1px rgba(201, 123, 178, 0.18),
+    0 18px 48px -16px rgba(201, 123, 178, 0.28),
+    0 12px 32px -14px rgba(201, 169, 110, 0.2);
+}
+
+.spa-experience-card__glow {
+  opacity: 0;
+  transition: opacity 0.45s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.spa-experience-card:hover .spa-experience-card__glow {
+  opacity: 1;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .spa-experience-card {
+    transition:
+      border-color 0.45s ease,
+      box-shadow 0.45s ease;
+  }
+
+  .spa-experience-card:hover {
+    transform: none;
   }
 }

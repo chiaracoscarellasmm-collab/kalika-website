@@ -110,6 +110,7 @@ export default async function EssenzaPage({
                 height={1066}
                 className="h-auto w-full"
                 sizes="(max-width: 1024px) 100vw, 50vw"
+                quality={80}
               />
             </div>
           </Reveal>
@@ -201,6 +202,7 @@ export default async function EssenzaPage({
                 height={1200}
                 className="h-auto w-full"
                 sizes="(max-width: 1024px) 100vw, 50vw"
+                quality={80}
               />
             </div>
           </Reveal>
@@ -226,6 +228,7 @@ export default async function EssenzaPage({
                       src={s.image}
                       alt={s.imageAlt}
                       fill
+                      quality={75}
                       className="object-cover transition-transform duration-700 ease-out group-hover:scale-105"
                       sizes="(max-width: 768px) 100vw, 33vw"
                     />

@@ -6,7 +6,6 @@ import { getDictionary } from "@/lib/dictionaries";
 import { localePath, whatsappLink, site } from "@/lib/site";
 import { Reveal } from "@/components/Reveal";
 import { LotusDivider } from "@/components/LotusDivider";
-import { ImagePlaceholder } from "@/components/ImagePlaceholder";
 import { ReviewCard } from "@/components/ReviewCard";
 import { notFound } from "next/navigation";
 
@@ -130,8 +129,8 @@ export default async function HomePage({ params }: PageProps<"/[locale]">) {
                   alt={dict.home.worldsEsteticaTitle}
                   fill
                   priority
-                  sizes="50vw"
-                  quality={85}
+                  sizes="(max-width: 1024px) 100vw, 50vw"
+                  quality={80}
                   className="object-cover object-center"
                 />
                 <div className="absolute inset-0 bg-[#1A0F0A]/30" />
@@ -161,8 +160,8 @@ export default async function HomePage({ params }: PageProps<"/[locale]">) {
                   alt={dict.home.worldsSpaTitle}
                   fill
                   priority
-                  sizes="50vw"
-                  quality={85}
+                  sizes="(max-width: 1024px) 100vw, 50vw"
+                  quality={80}
                   className="object-cover object-center"
                 />
                 <div className="absolute inset-0 bg-[#1A0F0A]/30" />
@@ -251,25 +250,25 @@ export default async function HomePage({ params }: PageProps<"/[locale]">) {
                 title: dict.home.featuredViso,
                 text: dict.home.featuredVisoText,
                 href: localePath(locale, "/estetica/viso"),
-                variant: "estetica" as const,
+                src: "/Viso.jpeg",
               },
               {
                 title: dict.home.featuredCorpo,
                 text: dict.home.featuredCorpoText,
                 href: localePath(locale, "/estetica/corpo"),
-                variant: "blush" as const,
+                src: "/Corpo.jpg",
               },
               {
                 title: dict.home.featuredMassaggi,
                 text: dict.home.featuredMassaggiText,
                 href: localePath(locale, "/estetica/massaggi"),
-                variant: "warm" as const,
+                src: "/Massaggi.jpg",
               },
               {
                 title: dict.home.featuredRituali,
                 text: dict.home.featuredRitualiText,
                 href: localePath(locale, "/spa/rituali"),
-                variant: "deep" as const,
+                src: "/Ritualispa.jpg",
               },
             ].map((card, i) => (
               <Reveal key={card.title} delay={i * 0.06}>
@@ -277,12 +276,16 @@ export default async function HomePage({ params }: PageProps<"/[locale]">) {
                   href={card.href}
                   className="group block overflow-hidden rounded-2xl border border-[var(--color-line)] bg-white shadow-sm transition-all duration-500 hover:-translate-y-1 hover:shadow-lg hover:shadow-[rgba(107,58,42,0.08)]"
                 >
-                  <ImagePlaceholder
-                    variant={card.variant}
-                    aspect="aspect-[4/5]"
-                    rounded="rounded-none"
-                    className="transition-transform duration-700 group-hover:scale-105"
-                  />
+                  <div className="relative aspect-[4/5] overflow-hidden">
+                    <Image
+                      src={card.src}
+                      alt={card.title}
+                      fill
+                      sizes="(max-width: 640px) 50vw, (max-width: 1024px) 25vw, 280px"
+                      quality={75}
+                      className="object-cover object-center transition-transform duration-700 group-hover:scale-105"
+                    />
+                  </div>
                   <div className="p-6">
                     <h3 className="display text-2xl text-[var(--color-brown)]">
                       {card.title}
