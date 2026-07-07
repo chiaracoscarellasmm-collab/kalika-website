@@ -49,6 +49,7 @@ export default async function CoppiaPage({
             category={coppiaCategory}
             locale={locale}
             dict={dict}
+            giftDesign="coppia"
           />
         </div>
       </section>

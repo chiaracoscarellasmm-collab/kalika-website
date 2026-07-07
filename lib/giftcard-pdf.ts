@@ -163,6 +163,10 @@ export async function giftCardHtml(record: GiftCardRecord) {
             font-size: 14px;
             line-height: 1.45;
             color: #2c1810;
+            flex: 1;
+            min-height: 0;
+            align-content: center;
+            overflow: hidden;
           }
           .row {
             display: grid;
@@ -173,7 +177,7 @@ export async function giftCardHtml(record: GiftCardRecord) {
             font-size: 14px;
             font-style: italic;
             line-height: 1.55;
-            max-height: 30mm;
+            max-height: 22mm;
             overflow: hidden;
             color: rgba(44, 24, 16, 0.9);
           }
@@ -234,14 +238,15 @@ export async function giftCardHtml(record: GiftCardRecord) {
                   <span class="label">${escapeHtml(ui.summaryFrom)}</span>
                   <div>${escapeHtml(from)}</div>
                 </div>
-                <div class="row">
-                  <span class="label">${escapeHtml(ui.summaryAmount)}</span>
-                  <div>€ ${record.amount}</div>
-                </div>
+                ${
+                  record.treatmentName
+                    ? `<div class="row"><span class="label">${escapeHtml(ui.summaryTreatment)}</span><div>${escapeHtml(record.treatmentName)}</div></div>`
+                    : `<div class="row"><span class="label">${escapeHtml(ui.summaryValue)}</span><div>€ ${record.amount}</div></div>`
+                }
                 ${
                   record.message
                     ? `<div class="row message"><span class="label">${escapeHtml(record.locale === "it" ? "Messaggio" : "Message")}</span><div>${escapeHtml(record.message)}</div></div>`
-                    : ""
+                    : `<div class="row message"><span class="label">${escapeHtml(record.locale === "it" ? "Messaggio" : "Message")}</span><div>${escapeHtml(ui.frontPlaceholderMessage)}</div></div>`
                 }
               </div>
 

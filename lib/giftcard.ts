@@ -14,6 +14,8 @@ export type GiftCardRequest = {
   toLastName: string;
   message: string;
   buyerEmail: string;
+  /** When set, the card is linked to a specific SPA / ritual treatment. */
+  treatmentName?: string;
 };
 
 export type GiftCardRecord = GiftCardRequest & {
@@ -72,6 +74,21 @@ export const amountChoices: Array<{
 
 export function getGiftCardDesign(key: GiftCardDesign) {
   return giftCardDesigns.find((design) => design.key === key) ?? giftCardDesigns[0];
+}
+
+export function resolveGiftAmountChoice(amount: number): {
+  amountChoice: GiftCardAmountChoice;
+  customAmount: number;
+} {
+  const match = amountChoices.find((choice) => choice.amount === amount);
+  if (match) {
+    return { amountChoice: match.key, customAmount: amount };
+  }
+  return { amountChoice: "custom", customAmount: amount };
+}
+
+export function isGiftCardDesign(value: string | null | undefined): value is GiftCardDesign {
+  return value === "estetica" || value === "spa" || value === "coppia";
 }
 
 export function isValidGiftCardRequest(

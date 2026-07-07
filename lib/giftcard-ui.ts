@@ -8,10 +8,13 @@ export type GiftCardUiCopy = {
   backOverline: string;
   backTitle: string;
   codeLabel: string;
+  codePending: string;
   detailsTitle: string;
   previewFrontGiftCard: string;
   summaryDesign: string;
   summaryAmount: string;
+  summaryTreatment: string;
+  summaryValue: string;
   summaryFrom: string;
   summaryTo: string;
   summaryPurchaseDate: string;
@@ -33,10 +36,13 @@ const copy: Record<Locale, GiftCardUiCopy> = {
     backOverline: "Retro Gift Card",
     backTitle: "Dettagli del regalo",
     codeLabel: "Codice",
+    codePending: "Al pagamento",
     detailsTitle: "Anteprima",
     previewFrontGiftCard: "Gift Card",
     summaryDesign: "Design scelto",
     summaryAmount: "Importo",
+    summaryTreatment: "Trattamento",
+    summaryValue: "Valore",
     summaryFrom: "Da",
     summaryTo: "A",
     summaryPurchaseDate: "Data di acquisto",
@@ -56,10 +62,13 @@ const copy: Record<Locale, GiftCardUiCopy> = {
     backOverline: "Gift Card back",
     backTitle: "Gift details",
     codeLabel: "Code",
+    codePending: "At checkout",
     detailsTitle: "Preview",
     previewFrontGiftCard: "Gift Card",
     summaryDesign: "Selected design",
     summaryAmount: "Amount",
+    summaryTreatment: "Treatment",
+    summaryValue: "Value",
     summaryFrom: "From",
     summaryTo: "To",
     summaryPurchaseDate: "Purchase date",

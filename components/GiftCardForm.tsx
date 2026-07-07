@@ -8,10 +8,13 @@ import type { Locale } from "@/lib/i18n";
 import {
   amountChoices,
   giftCardDesigns,
+  isGiftCardDesign,
+  resolveGiftAmountChoice,
   type GiftCardAmountChoice,
   type GiftCardDesign,
 } from "@/lib/giftcard";
 import { getGiftCardUi } from "@/lib/giftcard-ui";
+import { validateGiftCardParams } from "@/lib/gift-selection";
 
 type Props = { locale: Locale; dict: Dictionary };
 
@@ -51,10 +54,20 @@ function designLabel(design: GiftCardDesign, locale: Locale) {
   return labels[locale][design];
 }
 
+function formatGiftAmount(amount: number, locale: Locale) {
+  return amount.toLocaleString(locale === "it" ? "it-IT" : "en-GB", {
+    style: "currency",
+    currency: "EUR",
+    minimumFractionDigits: Number.isInteger(amount) ? 0 : 2,
+    maximumFractionDigits: 2,
+  });
+}
+
 function GiftCardPreview({
   locale,
   design,
   amount,
+  treatmentName,
   fromName,
   toName,
   message,
@@ -64,6 +77,7 @@ function GiftCardPreview({
   locale: Locale;
   design: GiftCardDesign;
   amount: number;
+  treatmentName: string;
   fromName: string;
   toName: string;
   message: string;
@@ -72,6 +86,10 @@ function GiftCardPreview({
 }) {
   const ui = getGiftCardUi(locale);
   const current = giftCardDesigns.find((item) => item.key === design) ?? giftCardDesigns[0];
+  const detailLabel = treatmentName ? ui.summaryTreatment : ui.summaryValue;
+  const detailValue = treatmentName
+    ? treatmentName
+    : formatGiftAmount(amount, locale);
 
   return (
     <div className="space-y-5">
@@ -99,10 +117,10 @@ function GiftCardPreview({
               </h3>
             </div>
             <p className="text-right text-[9px] uppercase leading-4 tracking-[1.4px] text-[var(--color-espresso)]/60">
-              <span className="block text-[9px] text-[var(--color-mauve)]">
-                {ui.codeLabel}
+              <span className="block text-[9px] text-[var(--color-mauve)]">{ui.codeLabel}</span>
+              <span className="normal-case tracking-normal text-[var(--color-espresso)]/45">
+                {ui.codePending}
               </span>
-              KLK-2026-XXXX
             </p>
           </div>
 
@@ -121,9 +139,9 @@ function GiftCardPreview({
             </div>
             <div>
               <dt className="text-[10px] uppercase tracking-[2px] text-[var(--color-mauve)]">
-                {ui.summaryAmount}
+                {detailLabel}
               </dt>
-              <dd>€ {amount || 0}</dd>
+              <dd>{detailValue}</dd>
             </div>
             <div>
               <dt className="text-[10px] uppercase tracking-[2px] text-[var(--color-mauve)]">
@@ -142,7 +160,7 @@ function GiftCardPreview({
               </span>
               {purchaseDate}
             </p>
-            <p className="text-[9px]">
+            <p className="text-[9px] sm:text-right">
               <span className="block text-[9px] text-[var(--color-mauve)]">
                 {ui.summaryExpiryDate}
               </span>
@@ -166,6 +184,8 @@ export function GiftCardForm({ locale, dict }: Props) {
   const [toLastName, setToLastName] = useState("");
   const [message, setMessage] = useState("");
   const [buyerEmail, setBuyerEmail] = useState("");
+  const [treatmentName, setTreatmentName] = useState("");
+  const [treatmentLocked, setTreatmentLocked] = useState(false);
   const [pending, setPending] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
@@ -194,8 +214,31 @@ export function GiftCardForm({ locale, dict }: Props) {
     const sessionId = params.get("session_id");
     if (sessionId && params.get("download") === "1") {
       window.location.href = `/api/gift-card/download?session_id=${encodeURIComponent(sessionId)}`;
+      return;
     }
-  }, []);
+
+    const treatmentId = params.get("treatment");
+    if (!treatmentId) return;
+
+    const validated = validateGiftCardParams(treatmentId, locale, {
+      amount: params.get("amount"),
+      giftLabel: params.get("giftLabel"),
+      giftPerson: params.get("giftPerson"),
+      giftOperator: params.get("giftOperator"),
+    });
+    if (!validated) return;
+
+    const designParam = params.get("design");
+    if (isGiftCardDesign(designParam)) {
+      setDesign(designParam);
+    }
+
+    const resolved = resolveGiftAmountChoice(validated.amount);
+    setAmountChoice(resolved.amountChoice);
+    setCustomAmount(resolved.customAmount);
+    setTreatmentLocked(true);
+    setTreatmentName(validated.giftLabel);
+  }, [locale]);
 
   async function onSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -221,6 +264,7 @@ export function GiftCardForm({ locale, dict }: Props) {
         toLastName,
         message,
         buyerEmail,
+        treatmentName: treatmentName || undefined,
       }),
     });
     const data = (await response.json()) as { url?: string; error?: string };
@@ -249,6 +293,7 @@ export function GiftCardForm({ locale, dict }: Props) {
           locale={locale}
           design={design}
           amount={amount}
+          treatmentName={treatmentName}
           fromName={fromName}
           toName={toName}
           message={message}
@@ -291,7 +336,34 @@ export function GiftCardForm({ locale, dict }: Props) {
         </section>
 
         <section>
-          <h2 className={labelClass}>{locale === "it" ? "Scegli l'importo" : "Choose amount"}</h2>
+          <h2 className={labelClass}>
+            {treatmentLocked
+              ? locale === "it"
+                ? "Importo"
+                : "Amount"
+              : locale === "it"
+                ? "Scegli l'importo"
+                : "Choose amount"}
+          </h2>
+          {treatmentLocked && (
+            <div
+              className="mt-4 inline-block rounded-xl border border-[var(--color-wisteria)]/20 bg-white px-5 py-4"
+              aria-label={
+                treatmentName
+                  ? `${treatmentName} — € ${amount}`
+                  : `€ ${amount}`
+              }
+            >
+              <p className="display text-3xl leading-none text-[var(--color-brown)] sm:text-4xl">
+                €{" "}
+                {amount.toLocaleString(locale === "it" ? "it-IT" : "en-GB", {
+                  minimumFractionDigits: Number.isInteger(amount) ? 0 : 2,
+                  maximumFractionDigits: 2,
+                })}
+              </p>
+            </div>
+          )}
+          {!treatmentLocked && (
           <div className="mt-4 flex flex-wrap gap-3">
             {amountChoices.map((choice) => {
               const active = choice.key === amountChoice;
@@ -317,7 +389,8 @@ export function GiftCardForm({ locale, dict }: Props) {
               );
             })}
           </div>
-          {amountChoice === "custom" && (
+          )}
+          {!treatmentLocked && amountChoice === "custom" && (
             <label className="mt-5 block max-w-xs">
               <span className={labelClass}>
                 {locale === "it" ? "Importo libero, minimo €20" : "Custom amount, minimum €20"}
@@ -422,12 +495,12 @@ export function GiftCardForm({ locale, dict }: Props) {
         <section className="rounded-xl border border-[var(--color-line)] bg-white/70 p-5">
           <h2 className={labelClass}>{locale === "it" ? "Riepilogo" : "Summary"}</h2>
           <dl className="mt-4 space-y-2 text-sm text-[var(--color-espresso)]/80">
-            <div className="flex justify-between gap-4">
-              <dt>{ui.summaryDesign}</dt>
-              <dd className="text-right text-[var(--color-brown)]">
-                {designLabel(design, locale)}
-              </dd>
-            </div>
+            {treatmentName && (
+              <div className="flex justify-between gap-4">
+                <dt>{ui.summaryTreatment}</dt>
+                <dd className="text-right text-[var(--color-brown)]">{treatmentName}</dd>
+              </div>
+            )}
             <div className="flex justify-between gap-4">
               <dt>{ui.summaryAmount}</dt>
               <dd className="text-right text-[var(--color-brown)]">€ {amount}</dd>

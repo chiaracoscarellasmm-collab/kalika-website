@@ -11,6 +11,7 @@ import {
   saveGiftCardRecord,
 } from "./giftcard-store";
 import { generateGiftCardPdf } from "./giftcard-pdf";
+import { buyerGiftCardEmailHtml, ownerGiftCardEmailHtml } from "./giftcard-emails";
 import { site } from "./site";
 
 function metadataToRequest(metadata: Stripe.Metadata | null): GiftCardRequest {
@@ -27,6 +28,7 @@ function metadataToRequest(metadata: Stripe.Metadata | null): GiftCardRequest {
     toLastName: metadata?.toLastName,
     message: metadata?.message ?? "",
     buyerEmail: metadata?.buyerEmail,
+    treatmentName: metadata?.treatmentName || undefined,
   };
 
   if (!isValidGiftCardRequest(raw)) {
@@ -45,14 +47,15 @@ async function sendGiftCardEmails(record: GiftCardRecord, pdf: Buffer) {
     filename: `gift-card-${record.serial}.pdf`,
     content: pdf,
   };
-  const buyerName = `${record.fromFirstName} ${record.fromLastName}`;
-  const recipientName = `${record.toFirstName} ${record.toLastName}`;
 
   await resend.emails.send({
     from: process.env.RESEND_FROM_EMAIL ?? "Kalika <onboarding@resend.dev>",
     to: record.buyerEmail,
-    subject: "La tua Gift Card Kalika è pronta 🎁",
-    html: `<p>Ciao ${buyerName},</p><p>in allegato trovi la tua Gift Card Kalika.</p><p>Codice: <strong>${record.serial}</strong></p>`,
+    subject:
+      record.locale === "it"
+        ? `Gift Card Kalika pronta — ${record.serial}`
+        : `Your Kalika Gift Card — ${record.serial}`,
+    html: buyerGiftCardEmailHtml(record),
     attachments: [attachment],
   });
 
@@ -60,16 +63,7 @@ async function sendGiftCardEmails(record: GiftCardRecord, pdf: Buffer) {
     from: process.env.RESEND_FROM_EMAIL ?? "Kalika <onboarding@resend.dev>",
     to: site.email,
     subject: `Nuova Gift Card venduta — ${record.serial}`,
-    html: `
-      <h1>Nuova Gift Card venduta</h1>
-      <p><strong>Codice:</strong> ${record.serial}</p>
-      <p><strong>Importo:</strong> € ${record.amount}</p>
-      <p><strong>Design:</strong> ${record.design}</p>
-      <p><strong>Acquirente:</strong> ${buyerName}</p>
-      <p><strong>Email acquirente:</strong> ${record.buyerEmail}</p>
-      <p><strong>Destinatario:</strong> ${recipientName}</p>
-      <p><strong>Messaggio:</strong> ${record.message || "-"}</p>
-    `,
+    html: ownerGiftCardEmailHtml(record),
     attachments: [attachment],
   });
 }

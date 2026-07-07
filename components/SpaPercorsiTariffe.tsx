@@ -29,11 +29,12 @@ function TariffCard({
             {name}
           </h3>
         </div>
-        {duration && !treatment.sessionModes?.length && (
-          <p className="shrink-0 pt-1 text-[10px] uppercase tracking-[0.16em] text-[var(--color-cream)]/45">
-            {duration}
-          </p>
-        )}
+        {duration &&
+          !treatment.sessionModes?.length && (
+            <p className="shrink-0 pt-1 text-[10px] uppercase tracking-[0.16em] text-[var(--color-cream)]/45">
+              {duration}
+            </p>
+          )}
       </div>
 
       {treatment.sessionModes && treatment.sessionModes.length > 0 && (
@@ -57,6 +58,7 @@ function TariffCard({
         </ul>
       )}
 
+      {(tiers.length > 0 || headlinePrice) && (
       <ul className="mt-5 divide-y divide-[var(--color-cream)]/10 border-t border-[var(--color-cream)]/10 pt-1">
         {tiers.length > 0
           ? tiers.map((tier) => (
@@ -81,6 +83,7 @@ function TariffCard({
               </li>
             )}
       </ul>
+      )}
     </article>
   );
 }
@@ -88,7 +91,6 @@ function TariffCard({
 export function SpaPercorsiTariffe({ category, locale, dict }: Props) {
   const labels = dict.spa.percorsi.tariffe;
   const thermalGroup = category.groups.find((g) => g.id === "percorsi-base");
-  const packagesGroup = category.groups.find((g) => g.id === "percorsi-pacchetti");
 
   const thermalTariffs = thermalGroup
     ? [category.featured, ...thermalGroup.treatments]
@@ -113,21 +115,6 @@ export function SpaPercorsiTariffe({ category, locale, dict }: Props) {
             ))}
           </div>
         </Reveal>
-
-        {packagesGroup && (
-          <Reveal delay={0.08}>
-            <div className="mt-14">
-              <h3 className="display text-2xl text-[var(--color-cream)] sm:text-[28px]">
-                {pick(packagesGroup.title, locale)}
-              </h3>
-              <div className="mt-6 grid gap-5 sm:grid-cols-2">
-                {packagesGroup.treatments.map((treatment) => (
-                  <TariffCard key={treatment.id} treatment={treatment} locale={locale} />
-                ))}
-              </div>
-            </div>
-          </Reveal>
-        )}
       </div>
     </section>
   );

@@ -5,7 +5,13 @@ import Link from "next/link";
 import { ChevronDown, Gift, MessageCircle } from "lucide-react";
 import type { Locale } from "@/lib/i18n";
 import type { Dictionary } from "@/lib/dictionaries";
+import { GiftConfigureModal } from "./GiftConfigureModal";
 import { type Treatment, pick } from "@/lib/treatments";
+import { type GiftCardDesign } from "@/lib/giftcard";
+import {
+  buildSimpleGiftCardHref,
+  treatmentNeedsGiftConfigure,
+} from "@/lib/gift-selection";
 import { whatsappLink, localePath } from "@/lib/site";
 
 type Props = {
@@ -15,6 +21,7 @@ type Props = {
   featured?: boolean;
   className?: string;
   hideCardPricing?: boolean;
+  giftDesign?: GiftCardDesign;
 };
 
 export function SpaExperienceCard({
@@ -24,9 +31,11 @@ export function SpaExperienceCard({
   featured = false,
   className,
   hideCardPricing = false,
+  giftDesign = "spa",
 }: Props) {
   const [open, setOpen] = useState(false);
   const [tiersOpen, setTiersOpen] = useState(false);
+  const [giftModalOpen, setGiftModalOpen] = useState(false);
   const panelId = useId();
   const tiersPanelId = useId();
 
@@ -39,6 +48,44 @@ export function SpaExperienceCard({
   const temperature = treatment.temperature ? pick(treatment.temperature, locale) : null;
   const teaser = short ?? description;
   const hasDetails = Boolean(description);
+  const needsGiftConfigure = treatmentNeedsGiftConfigure(treatment, locale);
+  const simpleGiftHref = buildSimpleGiftCardHref(locale, treatment, giftDesign);
+
+  const giftButtonClass = featured
+    ? "inline-flex flex-1 items-center justify-center gap-2 rounded-full border border-[var(--color-gold)]/35 px-6 py-3 text-xs uppercase tracking-[0.18em] text-[var(--color-gold)]/90 transition-colors hover:border-[var(--color-gold)]/55 hover:bg-[var(--color-gold)]/10 sm:flex-none"
+    : "inline-flex items-center gap-1 text-[10px] uppercase tracking-[0.16em] text-[var(--color-cream)]/50 transition-colors hover:text-[var(--color-gold)]";
+
+  const giftButton = needsGiftConfigure ? (
+    <button
+      type="button"
+      onClick={() => setGiftModalOpen(true)}
+      className={giftButtonClass}
+    >
+      <Gift size={featured ? 16 : 12} strokeWidth={featured ? 1.8 : 1.75} />
+      {dict.common.gift}
+    </button>
+  ) : simpleGiftHref ? (
+    <Link href={simpleGiftHref} className={giftButtonClass}>
+      <Gift size={featured ? 16 : 12} strokeWidth={featured ? 1.8 : 1.75} />
+      {dict.common.gift}
+    </Link>
+  ) : (
+    <Link href={localePath(locale, "/gift-card")} className={giftButtonClass}>
+      <Gift size={featured ? 16 : 12} strokeWidth={featured ? 1.8 : 1.75} />
+      {dict.common.gift}
+    </Link>
+  );
+
+  const giftModal = (
+    <GiftConfigureModal
+      open={giftModalOpen}
+      onClose={() => setGiftModalOpen(false)}
+      treatment={treatment}
+      locale={locale}
+      dict={dict}
+      giftDesign={giftDesign}
+    />
+  );
 
   const toggle = () => setOpen((v) => !v);
   const onKeyDown = (e: KeyboardEvent<HTMLDivElement>) => {
@@ -65,6 +112,9 @@ export function SpaExperienceCard({
     hideCardPricing || (!duration && !price)
       ? null
       : [duration, price].filter(Boolean).join(" · ");
+
+  const cardOnlyPrice =
+    hideCardPricing && price && !(treatment.priceTiers?.length) ? price : null;
 
   const chevron = hasDetails && (
     <ChevronDown
@@ -152,13 +202,7 @@ export function SpaExperienceCard({
         <MessageCircle size={16} strokeWidth={1.8} />
         {dict.common.book}
       </a>
-      <Link
-        href={localePath(locale, "/gift-card")}
-        className="inline-flex flex-1 items-center justify-center gap-2 rounded-full border border-[var(--color-gold)]/35 px-6 py-3 text-xs uppercase tracking-[0.18em] text-[var(--color-gold)]/90 transition-colors hover:border-[var(--color-gold)]/55 hover:bg-[var(--color-gold)]/10 sm:flex-none"
-      >
-        <Gift size={16} strokeWidth={1.8} />
-        {dict.common.gift}
-      </Link>
+      {giftButton}
     </div>
   );
 
@@ -173,18 +217,13 @@ export function SpaExperienceCard({
         <MessageCircle size={13} strokeWidth={1.8} />
         {dict.common.book}
       </a>
-      <Link
-        href={localePath(locale, "/gift-card")}
-        className="inline-flex items-center gap-1 text-[10px] uppercase tracking-[0.16em] text-[var(--color-cream)]/50 transition-colors hover:text-[var(--color-gold)]"
-      >
-        <Gift size={12} strokeWidth={1.75} />
-        {dict.common.gift}
-      </Link>
+      {giftButton}
     </div>
   );
 
   if (featured) {
     return (
+      <>
       <article className="spa-experience-card spa-experience-card--featured relative overflow-hidden rounded-[22px] border border-[var(--color-gold)]/25 bg-gradient-to-br from-[#2a1710] via-[#241009] to-[#3a1d2a] p-8 shadow-[0_30px_80px_-40px_rgba(0,0,0,0.8)] sm:p-10 lg:p-12">
         <div
           className="pointer-events-none absolute -right-20 -top-28 h-72 w-72 rounded-full bg-[var(--color-wisteria)]/20 blur-3xl"
@@ -216,17 +255,20 @@ export function SpaExperienceCard({
             {detailPanel}
           </div>
           <div className="flex flex-col gap-5 lg:items-end">
-            {(priceDurationLine || temperature) && (
+            {(temperature || priceDurationLine || cardOnlyPrice) && (
               <div className="flex flex-col gap-2 lg:items-end lg:text-right">
-                {priceDurationLine && (
-                  <p className="text-[11px] uppercase tracking-[0.18em] text-[var(--color-gold)]/90">
-                    {priceDurationLine}
-                  </p>
-                )}
                 {temperature && (
                   <span className="inline-flex w-fit items-center rounded-full border border-[var(--color-cream)]/20 px-3 py-1 text-[10px] uppercase tracking-[0.16em] text-[var(--color-cream)]/70">
                     {temperature}
                   </span>
+                )}
+                {cardOnlyPrice && (
+                  <p className="text-[11px] text-[var(--color-gold)]/90">{cardOnlyPrice}</p>
+                )}
+                {priceDurationLine && (
+                  <p className="text-[11px] uppercase tracking-[0.18em] text-[var(--color-gold)]/90">
+                    {priceDurationLine}
+                  </p>
                 )}
               </div>
             )}
@@ -236,10 +278,13 @@ export function SpaExperienceCard({
           </div>
         </div>
       </article>
+      {giftModal}
+      </>
     );
   }
 
   return (
+    <>
     <article
       className={`spa-experience-card relative flex h-full flex-col overflow-hidden rounded-[18px] border border-[var(--color-cream)]/10 bg-gradient-to-br from-[var(--color-cream)]/[0.05] via-[var(--color-cream)]/[0.02] to-transparent p-6 backdrop-blur sm:p-7${className ? ` ${className}` : ""}`}
     >
@@ -258,12 +303,15 @@ export function SpaExperienceCard({
             <h3 className="display min-w-0 flex-1 text-2xl leading-snug text-[var(--color-cream)] sm:text-[26px]">
               {name}
             </h3>
-            {(temperature || priceDurationLine) && (
+            {(temperature || priceDurationLine || cardOnlyPrice) && (
               <div className="flex shrink-0 flex-col items-end gap-2">
                 {temperature && (
                   <span className="inline-flex w-fit items-center rounded-full border border-[var(--color-cream)]/15 px-2.5 py-0.5 text-[9px] uppercase tracking-[0.14em] text-[var(--color-cream)]/55">
                     {temperature}
                   </span>
+                )}
+                {cardOnlyPrice && (
+                  <p className="text-[11px] text-[var(--color-gold)]/90">{cardOnlyPrice}</p>
                 )}
                 {priceDurationLine && (
                   <p className="text-right text-[10px] uppercase leading-relaxed tracking-[0.14em] text-[var(--color-gold)]/85">
@@ -292,5 +340,7 @@ export function SpaExperienceCard({
         {compactActions}
       </div>
     </article>
+    {giftModal}
+    </>
   );
 };

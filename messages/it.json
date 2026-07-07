@@ -188,6 +188,16 @@
     "navSuiteText": "Massaggi speciali nella nostra suite privata.",
     "navCoppiaText": "Per due. Intimo, sospeso, prezioso.",
     "navPercorsiText": "Sauna, biosauna, hammam, banja: il percorso termale.",
+    "giftConfigure": {
+      "overline": "Regala un'esperienza",
+      "persons": "Quante persone?",
+      "operator": "Modalità di accesso",
+      "withoutOperator": "Senza operatore",
+      "withOperator": "Con operatore",
+      "summary": "Riepilogo",
+      "continue": "Continua alla Gift Card",
+      "close": "Chiudi"
+    },
     "rituali": {
       "title": "Rituali SPA",
       "intro": "Ogni rituale è un viaggio: profumi, tessuti, gesti che raccontano un luogo lontano."

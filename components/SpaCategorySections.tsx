@@ -9,6 +9,7 @@ type Props = {
   locale: Locale;
   dict: Dictionary;
   hideCardPricing?: boolean;
+  giftDesign?: "spa" | "coppia";
 };
 
 export function SpaCategorySections({
@@ -16,6 +17,7 @@ export function SpaCategorySections({
   locale,
   dict,
   hideCardPricing = false,
+  giftDesign = "spa",
 }: Props) {
   return (
     <div className="relative">
@@ -33,6 +35,7 @@ export function SpaCategorySections({
           dict={dict}
           featured
           hideCardPricing={hideCardPricing}
+          giftDesign={giftDesign}
         />
       </Reveal>
 
@@ -62,6 +65,7 @@ export function SpaCategorySections({
                     locale={locale}
                     dict={dict}
                     hideCardPricing={hideCardPricing}
+                    giftDesign={giftDesign}
                     className={
                       isLoneLast
                         ? "lg:col-span-2 lg:mx-auto lg:w-[calc(50%-0.75rem)]"

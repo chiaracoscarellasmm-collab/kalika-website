@@ -30,7 +30,9 @@ export async function POST(request: Request) {
           currency: "eur",
           unit_amount: Math.round(body.amount * 100),
           product_data: {
-            name: `Gift Card Kalika · ${body.design}`,
+            name: body.treatmentName
+              ? `Gift Card Kalika · ${body.treatmentName}`
+              : `Gift Card Kalika · ${body.design}`,
             description: `${body.fromFirstName} ${body.fromLastName} → ${body.toFirstName} ${body.toLastName}`,
           },
         },
@@ -48,6 +50,7 @@ export async function POST(request: Request) {
       toLastName: body.toLastName,
       message: body.message,
       buyerEmail: body.buyerEmail,
+      ...(body.treatmentName ? { treatmentName: body.treatmentName } : {}),
     },
     success_url: `${origin}/${body.locale}/gift-card?session_id={CHECKOUT_SESSION_ID}&download=1`,
     cancel_url: `${origin}/${body.locale}/gift-card`,

@@ -1048,3 +1048,55 @@ export const percorsiCategory: SpaCategory = {
     },
   ],
 };
+
+export const spaCategories = [
+  ritualiCategory,
+  massaggiSuiteCategory,
+  coppiaCategory,
+  percorsiCategory,
+] as const;
+
+/** Parses formatted euro strings such as "€ 58,00", "Da € 63,00" or "€58.00". */
+export function parseEuroAmount(value: string): number | null {
+  const normalized = value
+    .replace(/^(da|from)\s+/i, "")
+    .replace(/[^\d,.-]/g, "")
+    .replace(",", ".");
+  const amount = Number.parseFloat(normalized);
+  return Number.isFinite(amount) ? amount : null;
+}
+
+/** Resolves the gift-card amount for a treatment (headline price, else first variant). */
+export function getTreatmentGiftAmount(treatment: Treatment, locale: Locale): number | null {
+  if (treatment.price) {
+    const parsed = parseEuroAmount(pick(treatment.price, locale));
+    if (parsed !== null) return parsed;
+  }
+
+  if (treatment.durationOptions?.length) {
+    for (const option of treatment.durationOptions) {
+      const parsed = parseEuroAmount(pick(option.price, locale));
+      if (parsed !== null) return parsed;
+    }
+  }
+
+  if (treatment.priceTiers?.length) {
+    for (const tier of treatment.priceTiers) {
+      const parsed = parseEuroAmount(pick(tier.price, locale));
+      if (parsed !== null) return parsed;
+    }
+  }
+
+  return null;
+}
+
+export function findSpaTreatmentById(id: string): Treatment | null {
+  for (const category of spaCategories) {
+    if (category.featured.id === id) return category.featured;
+    for (const group of category.groups) {
+      const found = group.treatments.find((treatment) => treatment.id === id);
+      if (found) return found;
+    }
+  }
+  return null;
+}

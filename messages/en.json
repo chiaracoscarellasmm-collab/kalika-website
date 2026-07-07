@@ -188,6 +188,16 @@
     "navSuiteText": "Special massages in our private suite.",
     "navCoppiaText": "For two. Intimate, suspended, precious.",
     "navPercorsiText": "Sauna, biosauna, hammam, banja — the thermal path.",
+    "giftConfigure": {
+      "overline": "Gift an experience",
+      "persons": "How many people?",
+      "operator": "Access mode",
+      "withoutOperator": "Without therapist",
+      "withOperator": "With therapist",
+      "summary": "Summary",
+      "continue": "Continue to Gift Card",
+      "close": "Close"
+    },
     "rituali": {
       "title": "SPA Rituals",
       "intro": "Each ritual is a journey: scents, fabrics, gestures that tell of a distant place."
