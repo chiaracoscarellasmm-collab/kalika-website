@@ -99,15 +99,15 @@ function GiftCardPreview({
           alt={ui.previewFrontGiftCard}
           fill
           priority
-          sizes="(max-width: 1024px) 100vw, 60vw"
+          sizes="(max-width: 1024px) 100vw, 720px"
           quality={80}
           className="object-cover"
         />
       </div>
 
-      <div className="aspect-[4/3] rounded-xl border border-[var(--color-line)] bg-white p-6 shadow-xl shadow-[rgba(44,24,16,0.08)] sm:p-8">
-        <div className="grid h-full grid-rows-[auto_minmax(0,1fr)_auto] border border-[var(--color-wisteria)]/25 p-5 text-[var(--color-espresso)] sm:p-6">
-          <div className="flex items-start justify-between gap-6">
+      <div className="rounded-xl border border-[var(--color-line)] bg-white p-6 shadow-xl shadow-[rgba(44,24,16,0.08)] sm:p-8">
+        <div className="flex min-h-[420px] flex-col border border-[var(--color-wisteria)]/25 p-5 text-[var(--color-espresso)] sm:min-h-[460px] sm:p-6">
+          <div className="flex shrink-0 items-start justify-between gap-6">
             <div>
               <p className="text-[11px] uppercase tracking-[3px] text-[var(--color-mauve)]">
                 {ui.backOverline}
@@ -124,36 +124,42 @@ function GiftCardPreview({
             </p>
           </div>
 
-          <dl className="my-4 grid min-h-0 content-center gap-2 text-[14px] leading-6 sm:my-5 sm:gap-3 sm:text-[15px] sm:leading-7">
+          <dl className="mt-6 flex flex-1 flex-col justify-center gap-4 text-[14px] leading-6 sm:gap-5 sm:text-[15px] sm:leading-7">
             <div>
               <dt className="text-[10px] uppercase tracking-[2px] text-[var(--color-mauve)]">
                 {ui.summaryTo}
               </dt>
-              <dd>{toName || (locale === "it" ? "Nome destinatario" : "Recipient name")}</dd>
+              <dd className="mt-1">{toName || (locale === "it" ? "Nome destinatario" : "Recipient name")}</dd>
             </div>
             <div>
               <dt className="text-[10px] uppercase tracking-[2px] text-[var(--color-mauve)]">
                 {ui.summaryFrom}
               </dt>
-              <dd>{fromName || (locale === "it" ? "Nome mittente" : "Sender name")}</dd>
+              <dd className="mt-1">{fromName || (locale === "it" ? "Nome mittente" : "Sender name")}</dd>
             </div>
             <div>
               <dt className="text-[10px] uppercase tracking-[2px] text-[var(--color-mauve)]">
                 {detailLabel}
               </dt>
-              <dd>{detailValue}</dd>
+              <dd className="mt-1">{detailValue}</dd>
             </div>
             <div>
               <dt className="text-[10px] uppercase tracking-[2px] text-[var(--color-mauve)]">
                 {locale === "it" ? "Messaggio" : "Message"}
               </dt>
-              <dd className="line-clamp-2 italic text-[var(--color-espresso)]/75 sm:line-clamp-3">
+              <dd className="mt-1 line-clamp-3 italic text-[var(--color-espresso)]/75">
                 {message || ui.frontPlaceholderMessage}
               </dd>
             </div>
           </dl>
 
-          <div className="grid gap-2 border-t border-[var(--color-line)] pt-3 text-[9px] uppercase leading-4 tracking-[1.4px] text-[var(--color-espresso)]/60 sm:grid-cols-2 sm:gap-4">
+          <div className="mt-6 shrink-0 border-t border-[var(--color-line)] pt-5">
+            <p className="display mx-auto max-w-[28ch] text-center text-[13px] italic leading-7 text-[var(--color-brown)]/65 sm:text-[14px]">
+              {ui.backMotto}
+            </p>
+          </div>
+
+          <div className="mt-5 grid shrink-0 gap-2 border-t border-[var(--color-line)] pt-4 text-[9px] uppercase leading-4 tracking-[1.4px] text-[var(--color-espresso)]/60 sm:grid-cols-2 sm:gap-4">
             <p className="text-[9px]">
               <span className="block text-[9px] text-[var(--color-mauve)]">
                 {ui.summaryPurchaseDate}

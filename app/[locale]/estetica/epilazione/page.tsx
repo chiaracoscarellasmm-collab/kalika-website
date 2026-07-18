@@ -89,11 +89,11 @@ export default async function EpilazionePage({
 
             <Reveal delay={0.1}>
               <LaserZones
-                src="/images/laser-bodies-v1.png"
+                src="/images/mappa-zone-corpo-epilazione-laser.png"
                 alt={
                   locale === "it"
-                    ? "Zone del corpo trattabili con laser, suddivise per fascia di prezzo"
-                    : "Body zones treatable with laser, grouped by price band"
+                    ? "Illustrazione di figure uomo e donna, fronte e retro, per le zone di epilazione laser"
+                    : "Illustration of male and female figures, front and back, for laser hair removal zones"
                 }
                 zonesTitle={dict.estetica.epilazione.laserZones}
                 subtitle={

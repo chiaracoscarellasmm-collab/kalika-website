@@ -29,7 +29,11 @@ export default async function SpaPage({ params }: PageProps<"/[locale]/spa">) {
         locale === "it"
           ? "Viaggi sensoriali ispirati alle tradizioni del mondo."
           : "Sensory journeys inspired by world traditions.",
-      src: "/images/rituali-card.jpg",
+      src: "/images/sala-relax-area-spa-rituali.jpg",
+      alt:
+        locale === "it"
+          ? "Sala relax con lettini e lampade di sale, usata per i Rituali SPA"
+          : "Relaxation room with loungers and salt lamps for SPA rituals",
       gradient: "linear-gradient(135deg, #3D1F0F, #6B3A1F)",
     },
     {
@@ -39,7 +43,11 @@ export default async function SpaPage({ params }: PageProps<"/[locale]/spa">) {
         locale === "it"
           ? "Massaggi speciali nella nostra suite privata."
           : "Special massages in our private suite.",
-      src: "/images/massaggi-suite-card.jpg",
+      src: "/images/suite-massaggi-lettino-atmosfera.jpg",
+      alt:
+        locale === "it"
+          ? "Interno della suite per massaggi con lettino in legno e illuminazione calda"
+          : "Massage suite interior with wooden bed and warm lighting",
       gradient: "linear-gradient(135deg, #2C1810, #5C3020)",
     },
     {
@@ -49,7 +57,11 @@ export default async function SpaPage({ params }: PageProps<"/[locale]/spa">) {
         locale === "it"
           ? "Per due. Intimo, sospeso, prezioso."
           : "For two. Intimate, suspended, precious.",
-      src: "/Esperienze%20di%20coppia.jpg",
+      src: "/massaggio-di-coppia.jpg",
+      alt:
+        locale === "it"
+          ? "Massaggio di coppia: due persone trattate in parallelo in un'atmosfera intima"
+          : "Couple's massage: two people treated side by side in an intimate setting",
       gradient: "linear-gradient(135deg, #3A1A10, #7A3A20)",
     },
     {
@@ -59,7 +71,11 @@ export default async function SpaPage({ params }: PageProps<"/[locale]/spa">) {
         locale === "it"
           ? "Sauna, biosauna, hammam, banja: il percorso termale."
           : "Sauna, biosauna, hammam, banja: the thermal journey.",
-      src: "/Percorsi%20SPA.jpg",
+      src: "/sauna-in-legno-percorso-spa.jpg",
+      alt:
+        locale === "it"
+          ? "Interno di una sauna in legno con luci calde, asciugamano e secchiello"
+          : "Interior of a wooden sauna with warm lights, towel and bucket",
       gradient: "linear-gradient(135deg, #1A0F08, #4A2810)",
     },
   ];
@@ -113,7 +129,7 @@ export default async function SpaPage({ params }: PageProps<"/[locale]/spa">) {
                   >
                     <Image
                       src={c.src}
-                      alt={c.label}
+                      alt={c.alt}
                       fill
                       sizes="(max-width: 640px) 100vw, 50vw"
                       quality={75}

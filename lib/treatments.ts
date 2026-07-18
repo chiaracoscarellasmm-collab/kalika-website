@@ -1056,6 +1056,16 @@ export const spaCategories = [
   percorsiCategory,
 ] as const;
 
+/** All estetica treatment groups, used for lookups (gift card, booking…). */
+export const esteticaGroups: TreatmentGroup[] = [
+  ...visoGroups,
+  ...corpoGroups,
+  ...massaggiGroups,
+  ...maniPiediGroups,
+  ...epilazioneGroups,
+  ...sopraccigliaGroups,
+];
+
 /** Parses formatted euro strings such as "€ 58,00", "Da € 63,00" or "€58.00". */
 export function parseEuroAmount(value: string): number | null {
   const normalized = value
@@ -1099,4 +1109,17 @@ export function findSpaTreatmentById(id: string): Treatment | null {
     }
   }
   return null;
+}
+
+export function findEsteticaTreatmentById(id: string): Treatment | null {
+  for (const group of esteticaGroups) {
+    const found = group.treatments.find((treatment) => treatment.id === id);
+    if (found) return found;
+  }
+  return null;
+}
+
+/** Resolves a treatment by id across both the SPA and estetica catalogues. */
+export function findTreatmentById(id: string): Treatment | null {
+  return findSpaTreatmentById(id) ?? findEsteticaTreatmentById(id);
 }

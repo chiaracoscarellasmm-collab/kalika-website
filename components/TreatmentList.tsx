@@ -1,4 +1,5 @@
 import type { Locale } from "@/lib/i18n";
+import type { Dictionary } from "@/lib/dictionaries";
 import {
   type TreatmentGroup,
   pick,
@@ -6,12 +7,15 @@ import {
 } from "@/lib/treatments";
 import { Reveal } from "./Reveal";
 import { TreatmentDurationRow } from "./TreatmentDurationRow";
+import { EsteticaTreatmentItem } from "./EsteticaTreatmentItem";
 
 type Props = {
   groups: TreatmentGroup[];
   locale: Locale;
   priceLabel: string;
   variant?: "estetica" | "spa";
+  /** When set, each treatment gets Book (WhatsApp) and Gift actions. */
+  dict?: Dictionary;
 };
 
 export function TreatmentList({
@@ -19,8 +23,10 @@ export function TreatmentList({
   locale,
   priceLabel,
   variant = "estetica",
+  dict,
 }: Props) {
   const isSpa = variant === "spa";
+  const withActions = Boolean(dict) && !isSpa;
   return (
     <div className="space-y-16">
       {groups.map((group, gi) => (
@@ -45,13 +51,29 @@ export function TreatmentList({
               </p>
             )}
             <ul
-              className={`${group.subtitle ? "mt-5" : "mt-6"} divide-y ${
-                isSpa
-                  ? "divide-[var(--color-cream)]/15"
-                  : "divide-[var(--color-line)]"
-              }`}
+              className={
+                withActions
+                  ? `${group.subtitle ? "mt-6" : "mt-7"} space-y-4`
+                  : `${group.subtitle ? "mt-5" : "mt-6"} divide-y ${
+                      isSpa
+                        ? "divide-[var(--color-cream)]/15"
+                        : "divide-[var(--color-line)]"
+                    }`
+              }
             >
               {group.treatments.map((t) => {
+                if (withActions && dict) {
+                  return (
+                    <EsteticaTreatmentItem
+                      key={t.id}
+                      treatment={t}
+                      locale={locale}
+                      dict={dict}
+                      priceLabel={priceLabel}
+                    />
+                  );
+                }
+
                 if (t.durationOptions?.length) {
                   return (
                     <TreatmentDurationRow

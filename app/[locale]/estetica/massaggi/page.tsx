@@ -39,6 +39,7 @@ export default async function MassaggiPage({
             groups={massaggiGroups}
             locale={locale}
             priceLabel={dict.common.price}
+            dict={dict}
           />
         </div>
       </section>

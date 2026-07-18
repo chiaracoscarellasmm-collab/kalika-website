@@ -24,6 +24,8 @@ export type GiftCardUiCopy = {
   frontGiftCardLabel: string;
   backPreviewLabel: string;
   frontPlaceholderMessage: string;
+  /** Brand motto printed on the back of every gift card. */
+  backMotto: string;
 };
 
 const copy: Record<Locale, GiftCardUiCopy> = {
@@ -52,6 +54,8 @@ const copy: Record<Locale, GiftCardUiCopy> = {
     frontGiftCardLabel: "Gift Card",
     backPreviewLabel: "Anteprima",
     frontPlaceholderMessage: "Il tuo messaggio personalizzato comparirà qui.",
+    backMotto:
+      "Prenditi cura di te: è il gesto più prezioso che tu possa farti.",
   },
   en: {
     heroOverline: "Gift a Kalika moment",
@@ -78,6 +82,8 @@ const copy: Record<Locale, GiftCardUiCopy> = {
     frontGiftCardLabel: "Gift Card",
     backPreviewLabel: "Preview",
     frontPlaceholderMessage: "Your custom message will appear here.",
+    backMotto:
+      "Take care of yourself: it's the most precious thing you can do for you.",
   },
 };
 

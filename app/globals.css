@@ -67,6 +67,15 @@ p:not([class*="uppercase"]):not([class*="text-xs"]):not([class*="text-[11px]"]) 
   color: inherit;
 }
 
+/* Deter casual saving of media: no dragging, no long-press save on iOS. */
+img,
+video {
+  -webkit-user-drag: none;
+  user-select: none;
+  -webkit-user-select: none;
+  -webkit-touch-callout: none;
+}
+
 @keyframes kalika-pulse {
   0%,
   100% {

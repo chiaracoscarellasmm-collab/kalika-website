@@ -1,58 +1,134 @@
 [
   {
-    "from": "/Corpo.png",
-    "to": "/Corpo.jpg"
+    "from": "/estetica-card.jpg",
+    "to": "/primo-piano-viso-donna-pelle-naturale.jpg"
   },
   {
-    "from": "/Epilazione.png",
-    "to": "/Epilazione.jpg"
+    "from": "/spa-card.jpg",
+    "to": "/massaggio-olio-sulla-schiena.jpg"
   },
   {
-    "from": "/Esperienze di coppia.png",
-    "to": "/Esperienze di coppia.jpg"
+    "from": "/Viso.jpeg",
+    "to": "/dettaglio-pelle-spalla-luminosa.jpg"
   },
   {
-    "from": "/Gift card desert.png",
-    "to": "/Gift card desert.jpg"
+    "from": "/Corpo.jpg",
+    "to": "/massaggio-gambe-trattamento-corpo.jpg"
   },
   {
-    "from": "/Gift card mountain.png",
-    "to": "/Gift card mountain.jpg"
+    "from": "/Massaggi home.png",
+    "to": "/massaggio-schiena-mani-olio.png"
   },
   {
-    "from": "/Gift card seaside.png",
-    "to": "/Gift card seaside.jpg"
+    "from": "/Rituali SPA home.jpeg",
+    "to": "/massaggio-pietre-calde-schiena.jpeg"
   },
   {
-    "from": "/Mani e Piedi.png",
-    "to": "/Mani e Piedi.jpg"
+    "from": "/Viso estetica.jpeg",
+    "to": "/trattamento-viso-maschera-pennello.jpeg"
   },
   {
-    "from": "/Massaggi e benessere.png",
-    "to": "/Massaggi e benessere.jpg"
+    "from": "/kalika_estetica_prata_pordenone_massaggicorpo_4.jpg",
+    "to": "/massaggio-coscia-trattamento-corpo.jpg"
   },
   {
-    "from": "/Massaggi.png",
-    "to": "/Massaggi.jpg"
+    "from": "/Massaggi e benessere.jpg",
+    "to": "/massaggio-olio-dal-flacone.jpg"
   },
   {
-    "from": "/Percorsi SPA.png",
-    "to": "/Percorsi SPA.jpg"
+    "from": "/Mani e piedi estetica.jpg",
+    "to": "/manicure-cura-unghie.jpg"
   },
   {
-    "from": "/Ritualispa.png",
-    "to": "/Ritualispa.jpg"
+    "from": "/Epilazione.jpg",
+    "to": "/cera-epilazione-spatola.jpg"
   },
   {
-    "from": "/Sguardo & Make up.png",
-    "to": "/Sguardo & Make up.jpg"
+    "from": "/Sguardo & Make up.jpg",
+    "to": "/modellamento-sopracciglia-pinzette.jpg"
   },
   {
-    "from": "/Trattamenti corpo.png",
-    "to": "/Trattamenti corpo.jpg"
+    "from": "/sfondo_headspa_2560x1700.jpg",
+    "to": "/sfondo-ombra-foglia-su-sabbia.jpg"
   },
   {
-    "from": "/Viso.png",
-    "to": "/Viso.jpg"
+    "from": "/Massaggio kalika centro estetico prata di pordenone.jpg",
+    "to": "/massaggio-olio-ciotola-sulla-schiena.jpg"
+  },
+  {
+    "from": "/Sabina Carretta foto profilo.jpg",
+    "to": "/sabina-carretta-ritratto.jpg"
+  },
+  {
+    "from": "/Sabina Carretta foto.jpg",
+    "to": "/sabina-carretta-team.jpg"
+  },
+  {
+    "from": "/Sabrina foto.jpg",
+    "to": "/sabrina-team.jpg"
+  },
+  {
+    "from": "/AreaSPA kalika prata di pordenone.jpg",
+    "to": "/area-spa-sala-relax-lettini.jpg"
+  },
+  {
+    "from": "/Linea prodotti alkemica.jpg",
+    "to": "/linea-prodotti-alkemilla.jpg"
+  },
+  {
+    "from": "/Foto prodotti sice.jpg",
+    "to": "/linea-prodotti-sice.jpg"
+  },
+  {
+    "from": "/Gocce di sice foto.jpg",
+    "to": "/gocce-di-sice-gel-rughe.jpg"
+  },
+  {
+    "from": "/Linea Sice solari.jpg",
+    "to": "/linea-solari-sice-elios.jpg"
+  },
+  {
+    "from": "/Esperienze di coppia.jpg",
+    "to": "/massaggio-di-coppia.jpg"
+  },
+  {
+    "from": "/Percorsi SPA.jpg",
+    "to": "/sauna-in-legno-percorso-spa.jpg"
+  },
+  {
+    "from": "/Gift card desert.jpg",
+    "to": "/gift-card-deserto-kalika.jpg"
+  },
+  {
+    "from": "/Gift card mountain.jpg",
+    "to": "/gift-card-montagna-kalika.jpg"
+  },
+  {
+    "from": "/Gift card seaside.jpg",
+    "to": "/gift-card-mare-kalika.jpg"
+  },
+  {
+    "from": "/logo.jpg",
+    "to": "/logo-kalika-nuovaestetica.jpg"
+  },
+  {
+    "from": "/images/cabina-trattamenti.jpg",
+    "to": "/images/cabina-trattamenti-lettino.jpg"
+  },
+  {
+    "from": "/images/suite-privata.jpg",
+    "to": "/images/suite-privata-lettino-legno.jpg"
+  },
+  {
+    "from": "/images/rituali-card.jpg",
+    "to": "/images/sala-relax-area-spa-rituali.jpg"
+  },
+  {
+    "from": "/images/massaggi-suite-card.jpg",
+    "to": "/images/suite-massaggi-lettino-atmosfera.jpg"
+  },
+  {
+    "from": "/images/laser-bodies-v1.png",
+    "to": "/images/mappa-zone-corpo-epilazione-laser.png"
   }
 ]

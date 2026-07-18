@@ -7,6 +7,7 @@ import { site } from "@/lib/site";
 import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
 import { WhatsappButton } from "@/components/WhatsappButton";
+import { MediaProtection } from "@/components/MediaProtection";
 
 export async function generateStaticParams() {
   return locales.map((locale) => ({ locale }));
@@ -68,6 +69,7 @@ export default async function LocaleLayout({
         >
           {dict.common.skipToContent}
         </a>
+        <MediaProtection />
         <Navbar locale={locale} dict={dict} />
         <main id="main" className="flex-1">
           {children}

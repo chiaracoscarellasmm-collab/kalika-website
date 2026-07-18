@@ -1,9 +1,9 @@
 import Image from "next/image";
 import { isLocale, type Locale } from "@/lib/i18n";
 import { getDictionary } from "@/lib/dictionaries";
+import ImageDotsSlider from "@/components/ImageDotsSlider";
 import { PageHero } from "@/components/PageHero";
 import { Reveal } from "@/components/Reveal";
-import { ImagePlaceholder } from "@/components/ImagePlaceholder";
 import { richText } from "@/lib/richText";
 import { notFound } from "next/navigation";
 
@@ -32,31 +32,31 @@ export default async function EssenzaPage({
       title: dict.essenza.spaziCabine,
       text: dict.essenza.spaziCabineText,
       variant: "estetica" as const,
-      image: "/images/cabina-trattamenti.jpg",
+      image: "/images/cabina-trattamenti-lettino.jpg",
       imageAlt:
         locale === "it"
-          ? "Cabina trattamenti Kalika con lettino e dettagli floreali"
-          : "Kalika treatment room with massage bed and floral details",
+          ? "Cabina trattamenti con lettino bianco, asciugamano arrotolato e dettagli floreali"
+          : "Treatment cabin with white massage bed, rolled towel and floral details",
     },
     {
       title: dict.essenza.spaziSpa,
       text: dict.essenza.spaziSpaText,
       variant: "deep" as const,
-      image: "/images/area-spa.jpg",
+      image: "/area-spa-sala-relax-lettini.jpg",
       imageAlt:
         locale === "it"
-          ? "Area SPA Kalika con lettini relax e luci soffuse"
-          : "Kalika SPA area with relaxation loungers and soft lighting",
+          ? "Sala relax dell'area SPA con lettini ergonomici, lampade di sale e luce blu soffusa"
+          : "SPA relaxation room with ergonomic loungers, salt lamps and soft blue light",
     },
     {
       title: dict.essenza.spaziSuite,
       text: dict.essenza.spaziSuiteText,
       variant: "warm" as const,
-      image: "/images/suite-privata.jpg",
+      image: "/images/suite-privata-lettino-legno.jpg",
       imageAlt:
         locale === "it"
-          ? "Suite privata Kalika con dettagli in legno e luci calde"
-          : "Kalika private suite with wood details and warm lighting",
+          ? "Suite privata con lettino in legno, luci calde e dettagli decorativi"
+          : "Private suite with wooden massage bed, warm lights and decorative details",
     },
   ];
 
@@ -65,13 +65,16 @@ export default async function EssenzaPage({
       name: dict.essenza.teamSabina,
       role: dict.essenza.teamSabinaRole,
       bio: dict.essenza.teamSabinaBio,
-      variant: "warm" as const,
+      src: "/sabina-carretta-team.jpg",
+      // Slightly higher crop so the full head stays inside the circle.
+      objectPosition: "center 8%",
     },
     {
       name: dict.essenza.teamFrancesca,
       role: dict.essenza.teamFrancescaRole,
       bio: dict.essenza.teamFrancescaBio,
-      variant: "blush" as const,
+      src: "/sabrina-team.jpg",
+      objectPosition: "center 16%",
     },
   ];
 
@@ -100,17 +103,17 @@ export default async function EssenzaPage({
           <Reveal delay={0.1}>
             <div className="mx-auto w-full max-w-xl overflow-hidden rounded-2xl border border-[var(--color-line)] bg-[var(--color-blush)]/30 shadow-sm lg:max-w-2xl">
               <Image
-                src="/images/chi-e-kalika-spa.jpg"
+                src="/massaggio-olio-ciotola-sulla-schiena.jpg"
                 alt={
                   locale === "it"
-                    ? "Trattamento benessere Kalika con asciugamano e orchidea"
-                    : "Kalika wellness treatment with towel and orchid"
+                    ? "Operatrice che versa olio da una ciotola sulle mani, sopra la schiena di una cliente"
+                    : "Therapist pouring massage oil from a bowl onto her hands above a client's back"
                 }
-                width={1600}
-                height={1066}
+                width={1800}
+                height={1200}
                 className="h-auto w-full"
                 sizes="(max-width: 1024px) 100vw, 50vw"
-                quality={80}
+                quality={90}
               />
             </div>
           </Reveal>
@@ -121,7 +124,22 @@ export default async function EssenzaPage({
       <section className="border-y border-[var(--color-line)] bg-[var(--color-blush)]/40 py-24">
         <div className="mx-auto grid max-w-6xl gap-12 px-6 lg:grid-cols-2 lg:items-center lg:gap-20">
           <Reveal>
-            <ImagePlaceholder variant="warm" aspect="aspect-[4/5]" />
+            <div className="overflow-hidden rounded-2xl border border-[var(--color-line)] shadow-sm">
+              <div className="relative aspect-[4/5]">
+                <Image
+                  src="/sabina-carretta-ritratto.jpg"
+                  alt={
+                    locale === "it"
+                      ? "Ritratto di Sabina Carretta, fondatrice di Kalika Nuovaestetica"
+                      : "Portrait of Sabina Carretta, founder of Kalika Nuovaestetica"
+                  }
+                  fill
+                  sizes="(max-width: 1024px) 100vw, 900px"
+                  quality={92}
+                  className="object-cover object-center"
+                />
+              </div>
+            </div>
           </Reveal>
           <Reveal delay={0.1}>
             <div>
@@ -190,19 +208,40 @@ export default async function EssenzaPage({
             </div>
           </Reveal>
           <Reveal delay={0.1}>
-            <div className="mx-auto w-full max-w-xl overflow-hidden rounded-2xl border border-[var(--color-line)] bg-[var(--color-blush)]/30 shadow-sm lg:max-w-lg">
-              <Image
-                src="/images/cosmesi-eubiotica-sice.jpg"
-                alt={
-                  locale === "it"
-                    ? "Prodotti SICE Cosmesi Eubiotica usati nei trattamenti Kalika"
-                    : "SICE eubiotic skincare products used in Kalika treatments"
-                }
-                width={1800}
-                height={1200}
-                className="h-auto w-full"
+            <div className="mx-auto w-full max-w-[50.9rem] overflow-hidden rounded-2xl border border-[var(--color-line)] bg-[var(--color-blush)]/30 shadow-sm lg:max-w-[45.3rem]">
+              <ImageDotsSlider
                 sizes="(max-width: 1024px) 100vw, 50vw"
-                quality={80}
+                quality={90}
+                slides={[
+                  {
+                    src: "/linea-prodotti-alkemilla.jpg",
+                    alt:
+                      locale === "it"
+                        ? "Linea di prodotti cosmetici Alkemilla esposti su mensola"
+                        : "Alkemilla skincare products displayed on a shelf",
+                  },
+                  {
+                    src: "/linea-prodotti-sice.jpg",
+                    alt:
+                      locale === "it"
+                        ? "Prodotti SICE Cosmesi Eubiotica disposti su mensola"
+                        : "SICE eubiotic skincare products arranged on a shelf",
+                  },
+                  {
+                    src: "/gocce-di-sice-gel-rughe.jpg",
+                    alt:
+                      locale === "it"
+                        ? "Flacone e confezione Gocce di SICE, gel intensivo per le rughe"
+                        : "Bottle and box of Gocce di SICE intensive wrinkle gel",
+                  },
+                  {
+                    src: "/linea-solari-sice-elios.jpg",
+                    alt:
+                      locale === "it"
+                        ? "Linea solare Elios di SICE con spray, creme e doposole"
+                        : "SICE Elios sun care line with spray, creams and after-sun",
+                  },
+                ]}
               />
             </div>
           </Reveal>
@@ -268,11 +307,18 @@ export default async function EssenzaPage({
               <Reveal key={m.name} delay={i * 0.08}>
                 <article className="flex flex-col items-center text-center">
                   <div className="relative h-40 w-40 overflow-hidden rounded-full ring-1 ring-[var(--color-line)]">
-                    <ImagePlaceholder
-                      variant={m.variant}
-                      aspect="h-full w-full"
-                      rounded="rounded-full"
-                      className="!aspect-auto h-full w-full"
+                    <Image
+                      src={m.src}
+                      alt={
+                        locale === "it"
+                          ? `Foto di ${m.name} del team Kalika`
+                          : `Photo of ${m.name} from the Kalika team`
+                      }
+                      fill
+                      sizes="160px"
+                      quality={80}
+                      className="object-cover"
+                      style={{ objectPosition: m.objectPosition }}
                     />
                   </div>
                   <p className="display mt-6 text-2xl text-[var(--color-brown)]">

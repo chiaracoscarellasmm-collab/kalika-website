@@ -3,7 +3,7 @@ import type { GiftCardDesign } from "./giftcard";
 import {
   type Bilingual,
   type Treatment,
-  findSpaTreatmentById,
+  findTreatmentById,
   getTreatmentGiftAmount,
   parseEuroAmount,
   pick,
@@ -147,7 +147,7 @@ export function validateGiftCardParams(
     giftOperator?: string | null;
   },
 ): { amount: number; giftLabel: string } | null {
-  const treatment = findSpaTreatmentById(treatmentId);
+  const treatment = findTreatmentById(treatmentId);
   if (!treatment) return null;
 
   if (params.giftPerson) {
@@ -160,6 +160,21 @@ export function validateGiftCardParams(
     if (params.amount && Number(params.amount) !== resolved.amount) return null;
     if (params.giftLabel && params.giftLabel !== resolved.giftLabel) return null;
     return resolved;
+  }
+
+  // Treatments with selectable durations: accept any variant's price.
+  if (treatment.durationOptions?.length && params.amount) {
+    const requested = Number(params.amount);
+    const option = treatment.durationOptions.find(
+      (o) => parseEuroAmount(pick(o.price, locale)) === requested,
+    );
+    if (option) {
+      if (!Number.isFinite(requested) || requested < 20) return null;
+      const giftLabel =
+        params.giftLabel ??
+        `${pick(treatment.name, locale)} · ${pick(option.duration, locale)}`;
+      return { amount: requested, giftLabel };
+    }
   }
 
   const amount = getTreatmentGiftAmount(treatment, locale);

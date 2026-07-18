@@ -15,15 +15,17 @@ function escapeHtml(value: string) {
 }
 
 async function getLogoDataUri() {
-  const file = await readFile(path.join(process.cwd(), "public", "logo.jpg"));
+  const file = await readFile(
+    path.join(process.cwd(), "public", "logo-kalika-nuovaestetica.jpg"),
+  );
   return `data:image/jpeg;base64,${file.toString("base64")}`;
 }
 
 async function getFrontDataUri(designKey: "estetica" | "spa" | "coppia") {
   const frontFiles: Record<typeof designKey, string> = {
-    estetica: "Gift card desert.jpg",
-    spa: "Gift card mountain.jpg",
-    coppia: "Gift card seaside.jpg",
+    estetica: "gift-card-deserto-kalika.jpg",
+    spa: "gift-card-montagna-kalika.jpg",
+    coppia: "gift-card-mare-kalika.jpg",
   };
 
   const frontPath = path.join(
@@ -158,26 +160,27 @@ export async function giftCardHtml(record: GiftCardRecord) {
           }
           .content {
             display: grid;
-            gap: 4mm;
+            gap: 4.5mm;
             margin-top: 5mm;
+            margin-bottom: 0;
             font-size: 14px;
             line-height: 1.45;
             color: #2c1810;
             flex: 1;
             min-height: 0;
-            align-content: center;
+            align-content: start;
             overflow: hidden;
           }
           .row {
             display: grid;
-            gap: 1mm;
+            gap: 1.2mm;
           }
           .message {
             font-family: Georgia, serif;
             font-size: 14px;
             font-style: italic;
             line-height: 1.55;
-            max-height: 22mm;
+            max-height: 18mm;
             overflow: hidden;
             color: rgba(44, 24, 16, 0.9);
           }
@@ -191,11 +194,23 @@ export async function giftCardHtml(record: GiftCardRecord) {
             text-transform: uppercase;
             color: #9b5e8a;
           }
+          .motto {
+            margin-top: 5mm;
+            padding-top: 4mm;
+            border-top: 1px solid rgba(44, 24, 16, 0.08);
+            text-align: center;
+            font-family: Georgia, serif;
+            font-size: 12px;
+            font-style: italic;
+            line-height: 1.55;
+            color: rgba(107, 58, 42, 0.68);
+          }
           .meta {
             display: flex;
             justify-content: space-between;
             gap: 10mm;
-            padding-top: 4mm;
+            margin-top: 4mm;
+            padding-top: 3.5mm;
             border-top: 1px solid rgba(44, 24, 16, 0.08);
             font-size: 9px;
             letter-spacing: 1.4px;
@@ -249,6 +264,8 @@ export async function giftCardHtml(record: GiftCardRecord) {
                     : `<div class="row message"><span class="label">${escapeHtml(record.locale === "it" ? "Messaggio" : "Message")}</span><div>${escapeHtml(ui.frontPlaceholderMessage)}</div></div>`
                 }
               </div>
+
+              <p class="motto">${escapeHtml(ui.backMotto)}</p>
 
             <div class="meta">
               <div>

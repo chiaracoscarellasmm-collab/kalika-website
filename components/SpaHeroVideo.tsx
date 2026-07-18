@@ -38,6 +38,8 @@ export function SpaHeroVideo({
             loop
             playsInline
             preload="metadata"
+            controlsList="nodownload noremoteplayback"
+            disablePictureInPicture
             aria-hidden
           >
             <source src={videoSrc} type="video/mp4" />

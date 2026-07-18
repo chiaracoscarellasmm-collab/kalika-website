@@ -39,6 +39,7 @@ export default async function CorpoPage({
             groups={corpoGroups}
             locale={locale}
             priceLabel={dict.common.price}
+            dict={dict}
           />
         </div>
       </section>

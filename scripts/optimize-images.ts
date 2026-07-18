@@ -10,23 +10,36 @@ type RenameEntry = { from: string; to: string };
 function maxWidthFor(relativePath: string): number {
   const p = relativePath.toLowerCase().replace(/\\/g, "/");
 
-  if (p.includes("2560") || p.includes("headspa") || p.includes("areaspa.jpg")) {
+  if (
+    p.includes("2560") ||
+    p.includes("headspa") ||
+    p.includes("sfondo-ombra-foglia") ||
+    p.includes("areaspa.jpg") ||
+    p.includes("area-spa-sala-relax")
+  ) {
     return 2560;
   }
   if (p.includes("logo")) return 512;
-  if (p.includes("laser-bodies")) return 960;
+  if (p.includes("laser-bodies") || p.includes("mappa-zone-corpo-epilazione")) {
+    return 960;
+  }
   if (
     p.includes("card") ||
     p.includes("/viso") ||
     p.includes("corpo") ||
     p.includes("massaggi") ||
+    p.includes("massaggio") ||
     p.includes("ritual") ||
     p.includes("epilazione") ||
     p.includes("mani") ||
+    p.includes("manicure") ||
     p.includes("sguardo") ||
+    p.includes("sopracciglia") ||
     p.includes("coppia") ||
     p.includes("percorsi") ||
-    p.includes("gift card")
+    p.includes("sauna") ||
+    p.includes("gift card") ||
+    p.includes("gift-card")
   ) {
     return 1200;
   }

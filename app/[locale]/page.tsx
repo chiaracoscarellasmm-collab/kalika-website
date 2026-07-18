@@ -125,8 +125,12 @@ export default async function HomePage({ params }: PageProps<"/[locale]">) {
             >
               <div className="relative aspect-[4/5] w-full overflow-hidden lg:aspect-auto lg:h-[640px]">
                 <Image
-                  src="/estetica-card.jpg"
-                  alt={dict.home.worldsEsteticaTitle}
+                  src="/primo-piano-viso-donna-pelle-naturale.jpg"
+                  alt={
+                    locale === "it"
+                      ? "Primo piano di un viso femminile con pelle luminosa, evocativo dei trattamenti estetica"
+                      : "Close-up of a woman's face with luminous skin, evocative of aesthetic treatments"
+                  }
                   fill
                   priority
                   sizes="(max-width: 1024px) 100vw, 50vw"
@@ -156,8 +160,12 @@ export default async function HomePage({ params }: PageProps<"/[locale]">) {
             >
               <div className="relative aspect-[4/5] w-full lg:aspect-auto lg:h-[640px]">
                 <Image
-                  src="/spa-card.jpg"
-                  alt={dict.home.worldsSpaTitle}
+                  src="/massaggio-olio-sulla-schiena.jpg"
+                  alt={
+                    locale === "it"
+                      ? "Operatrice che versa olio da massaggio sulle mani, sopra la schiena di una cliente"
+                      : "Therapist pouring massage oil onto her hands above a client's back"
+                  }
                   fill
                   priority
                   sizes="(max-width: 1024px) 100vw, 50vw"
@@ -250,25 +258,41 @@ export default async function HomePage({ params }: PageProps<"/[locale]">) {
                 title: dict.home.featuredViso,
                 text: dict.home.featuredVisoText,
                 href: localePath(locale, "/estetica/viso"),
-                src: "/Viso.jpeg",
+                src: "/dettaglio-pelle-spalla-luminosa.jpg",
+                alt:
+                  locale === "it"
+                    ? "Dettaglio di una spalla e del volto con pelle idratata e freckles, alla luce naturale"
+                    : "Detail of a shoulder and face with hydrated freckled skin in natural light",
               },
               {
                 title: dict.home.featuredCorpo,
                 text: dict.home.featuredCorpoText,
                 href: localePath(locale, "/estetica/corpo"),
-                src: "/Corpo.jpg",
+                src: "/massaggio-gambe-trattamento-corpo.jpg",
+                alt:
+                  locale === "it"
+                    ? "Mani che eseguono un massaggio intenso sulla gamba durante un trattamento corpo"
+                    : "Hands performing an intense leg massage during a body treatment",
               },
               {
                 title: dict.home.featuredMassaggi,
                 text: dict.home.featuredMassaggiText,
                 href: localePath(locale, "/estetica/massaggi"),
-                src: "/Massaggi.jpg",
+                src: "/massaggio-schiena-mani-olio.png",
+                alt:
+                  locale === "it"
+                    ? "Mani che massaggiano la schiena con olio in un'atmosfera rilassante"
+                    : "Hands massaging a back with oil in a relaxing atmosphere",
               },
               {
                 title: dict.home.featuredRituali,
                 text: dict.home.featuredRitualiText,
                 href: localePath(locale, "/spa/rituali"),
-                src: "/Ritualispa.jpg",
+                src: "/massaggio-pietre-calde-schiena.jpeg",
+                alt:
+                  locale === "it"
+                    ? "Massaggio con pietre calde posate sulla schiena"
+                    : "Hot stone massage with stones placed on the back",
               },
             ].map((card, i) => (
               <Reveal key={card.title} delay={i * 0.06}>
@@ -279,7 +303,7 @@ export default async function HomePage({ params }: PageProps<"/[locale]">) {
                   <div className="relative aspect-[4/5] overflow-hidden">
                     <Image
                       src={card.src}
-                      alt={card.title}
+                      alt={card.alt}
                       fill
                       sizes="(max-width: 640px) 50vw, (max-width: 1024px) 25vw, 280px"
                       quality={75}

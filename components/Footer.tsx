@@ -76,8 +76,12 @@ export function Footer({ locale, dict }: Props) {
       <div className="flex justify-center pt-16">
         <Link href={localePath(locale)} aria-label={dict.common.brand} className="flex flex-col items-center gap-2">
           <Image
-            src="/logo.jpg"
-            alt={dict.common.brand}
+            src="/logo-kalika-nuovaestetica.jpg"
+            alt={
+              locale === "it"
+                ? "Logo di Kalika Nuovaestetica di Sabina Carretta"
+                : "Kalika Nuovaestetica logo by Sabina Carretta"
+            }
             width={160}
             height={160}
             sizes="160px"

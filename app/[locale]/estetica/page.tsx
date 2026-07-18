@@ -35,37 +35,61 @@ export default async function EsteticaPage({ params }: PageProps<"/[locale]/este
       key: "viso",
       label: dict.estetica.catViso,
       variant: "estetica" as const,
-      src: "/Viso.jpeg",
+      src: "/trattamento-viso-maschera-pennello.jpeg",
+      alt:
+        locale === "it"
+          ? "Applicazione di una maschera cremosa sul viso con pennello a ventaglio"
+          : "Creamy face mask being applied with a fan brush",
     },
     {
       key: "corpo",
       label: dict.estetica.catCorpo,
       variant: "blush" as const,
-      src: "/Corpo.jpg",
+      src: "/massaggio-coscia-trattamento-corpo.jpg",
+      alt:
+        locale === "it"
+          ? "Dettaglio di un massaggio professionale sulla coscia con olio"
+          : "Detail of a professional thigh massage with oil",
     },
     {
       key: "massaggi",
       label: dict.estetica.catMassaggi,
       variant: "warm" as const,
-      src: "/Massaggi.jpg",
+      src: "/massaggio-olio-dal-flacone.jpg",
+      alt:
+        locale === "it"
+          ? "Operatrice in uniforme che versa olio da un flacone per un massaggio sulla schiena"
+          : "Therapist in uniform pouring oil from a bottle for a back massage",
     },
     {
       key: "mani-piedi",
       label: dict.estetica.catManiPiedi,
       variant: "estetica" as const,
-      src: "/Mani%20e%20Piedi.jpg",
+      src: "/manicure-cura-unghie.jpg",
+      alt:
+        locale === "it"
+          ? "Mani durante una manicure professionale, con guanto rosa e cura delle unghie"
+          : "Hands during a professional manicure with a pink glove",
     },
     {
       key: "epilazione",
       label: dict.estetica.catEpilazione,
       variant: "blush" as const,
-      src: "/Epilazione.jpg",
+      src: "/cera-epilazione-spatola.jpg",
+      alt:
+        locale === "it"
+          ? "Spatola in legno da cui cola cera densa e trasparente per l'epilazione"
+          : "Wooden spatula with thick transparent wax dripping for hair removal",
     },
     {
       key: "sopracciglia",
       label: dict.estetica.catSopracciglia,
       variant: "warm" as const,
-      src: "/Sguardo%20%26%20Make%20up.jpg",
+      src: "/modellamento-sopracciglia-pinzette.jpg",
+      alt:
+        locale === "it"
+          ? "Primo piano di un trattamento di modellamento sopracciglia con pinzette e scovolino"
+          : "Close-up of an eyebrow shaping treatment with tweezers and spoolie",
     },
   ];
 
@@ -109,7 +133,7 @@ export default async function EsteticaPage({ params }: PageProps<"/[locale]/este
                     <div className="relative aspect-[5/4] overflow-hidden">
                       <Image
                         src={c.src}
-                        alt={c.label}
+                        alt={c.alt}
                         fill
                         sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
                         quality={75}
@@ -143,7 +167,7 @@ export default async function EsteticaPage({ params }: PageProps<"/[locale]/este
       {/* Popular */}
       <section className="relative overflow-hidden border-y border-[var(--color-line)] py-24">
         <Image
-          src="/sfondo_headspa_2560x1700.jpg"
+          src="/sfondo-ombra-foglia-su-sabbia.jpg"
           alt=""
           fill
           quality={80}

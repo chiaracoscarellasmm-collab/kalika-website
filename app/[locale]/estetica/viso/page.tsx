@@ -39,6 +39,7 @@ export default async function VisoPage({
             groups={visoGroups}
             locale={locale}
             priceLabel={dict.common.price}
+            dict={dict}
           />
         </div>
       </section>
