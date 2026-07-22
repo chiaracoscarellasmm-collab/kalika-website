@@ -52,11 +52,11 @@ export default async function EssenzaPage({
       title: dict.essenza.spaziSuite,
       text: dict.essenza.spaziSuiteText,
       variant: "warm" as const,
-      image: "/images/suite-privata-lettino-legno.jpg",
+      image: "/spa-pratadipordenone-estetica.jpg",
       imageAlt:
         locale === "it"
-          ? "Suite privata con lettino in legno, luci calde e dettagli decorativi"
-          : "Private suite with wooden massage bed, warm lights and decorative details",
+          ? "Suite privata con lettino in legno, luci calde e silhouette illuminata sulla parete"
+          : "Private suite with wooden massage bed, warm lights and illuminated wall silhouette",
     },
   ];
 

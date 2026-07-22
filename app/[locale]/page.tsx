@@ -27,6 +27,22 @@ export default async function HomePage({ params }: PageProps<"/[locale]">) {
           }}
           aria-hidden
         />
+        <video
+          className="absolute inset-0 h-full w-full object-cover object-center"
+          autoPlay
+          muted
+          loop
+          playsInline
+          preload="metadata"
+          controlsList="nodownload noremoteplayback"
+          disablePictureInPicture
+          aria-hidden
+        >
+          <source
+            src={`${process.env.NEXT_PUBLIC_R2_URL}/hero-home.mp4?v=2`}
+            type="video/mp4"
+          />
+        </video>
         <div
           className="absolute inset-0 opacity-40"
           style={{
@@ -35,7 +51,14 @@ export default async function HomePage({ params }: PageProps<"/[locale]">) {
           }}
           aria-hidden
         />
-        <div className="absolute inset-0 bg-black/25" aria-hidden />
+        <div
+          className="absolute inset-0"
+          style={{
+            background:
+              "linear-gradient(to bottom, rgba(44,24,16,0.61) 0%, rgba(44,24,16,0.68) 45%, rgba(44,24,16,0.77) 100%)",
+          }}
+          aria-hidden
+        />
 
         <div className="relative z-10 mx-auto flex max-w-4xl flex-col items-center px-6 text-center text-[var(--color-cream)]">
           <Reveal delay={0.05}>

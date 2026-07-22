@@ -71,11 +71,11 @@ export default async function SpaPage({ params }: PageProps<"/[locale]/spa">) {
         locale === "it"
           ? "Sauna, biosauna, hammam, banja: il percorso termale."
           : "Sauna, biosauna, hammam, banja: the thermal journey.",
-      src: "/sauna-in-legno-percorso-spa.jpg",
+      src: "/sauna-in-legno-percorso-spa.png",
       alt:
         locale === "it"
-          ? "Interno di una sauna in legno con luci calde, asciugamano e secchiello"
-          : "Interior of a wooden sauna with warm lights, towel and bucket",
+          ? "Sala vapore del percorso SPA con lettino, luci soffuse e atmosfera immersiva"
+          : "SPA journey steam room with treatment bed, soft lights and immersive atmosphere",
       gradient: "linear-gradient(135deg, #1A0F08, #4A2810)",
     },
   ];
@@ -85,6 +85,7 @@ export default async function SpaPage({ params }: PageProps<"/[locale]/spa">) {
       <SpaHeroVideo
         title={dict.spa.hero}
         subtitle={dict.spa.heroSubtitle}
+        videoSrc={`${process.env.NEXT_PUBLIC_R2_URL}/hero-spa.mp4?v=2`}
         navItems={[
           { href: "#rituali", label: dict.spa.navRituali },
           { href: "#massaggi-suite", label: dict.spa.navSuite },

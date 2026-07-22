@@ -4,7 +4,7 @@ import { ArrowRight, Download } from "lucide-react";
 import { isLocale, type Locale } from "@/lib/i18n";
 import { getDictionary } from "@/lib/dictionaries";
 import { localePath } from "@/lib/site";
-import { PageHero } from "@/components/PageHero";
+import { SpaHeroVideo } from "@/components/SpaHeroVideo";
 import { Reveal } from "@/components/Reveal";
 import { ImagePlaceholder } from "@/components/ImagePlaceholder";
 import { PopularTreatmentCards } from "@/components/PopularTreatmentCards";
@@ -101,11 +101,16 @@ export default async function EsteticaPage({ params }: PageProps<"/[locale]/este
 
   return (
     <>
-      <PageHero
-        overline={dict.home.introOverline}
+      <SpaHeroVideo
         title={dict.estetica.hero}
         subtitle={dict.estetica.heroSubtitle}
-        variant="estetica"
+        subtitleVariant="text"
+        scrollHref="#categorie"
+        navAriaLabel={locale === "it" ? "Sezioni estetica" : "Beauty sections"}
+        navItems={categories.map((c) => ({
+          href: `#${c.key}`,
+          label: c.label,
+        }))}
       />
 
       {/* Intro */}
@@ -120,14 +125,15 @@ export default async function EsteticaPage({ params }: PageProps<"/[locale]/este
       </section>
 
       {/* Categories grid */}
-      <section className="bg-[var(--color-cream)] pb-24">
+      <section id="categorie" className="scroll-mt-28 bg-[var(--color-cream)] pb-24">
         <div className="mx-auto max-w-7xl px-6 lg:px-10">
           <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3 lg:gap-7">
             {categories.map((c, i) => (
               <Reveal key={c.key} delay={i * 0.05}>
                 <Link
                   href={localePath(locale, `/estetica/${c.key}`)}
-                  className="group block overflow-hidden rounded-2xl border border-[var(--color-line)] bg-white transition-all duration-500 hover:-translate-y-1 hover:shadow-lg hover:shadow-[rgba(107,58,42,0.08)]"
+                  id={c.key}
+                  className="group block scroll-mt-28 overflow-hidden rounded-2xl border border-[var(--color-line)] bg-white transition-all duration-500 hover:-translate-y-1 hover:shadow-lg hover:shadow-[rgba(107,58,42,0.08)]"
                 >
                   {"src" in c && c.src ? (
                     <div className="relative aspect-[5/4] overflow-hidden">
