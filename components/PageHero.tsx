@@ -6,6 +6,8 @@ type Props = {
   title: string;
   subtitle?: string;
   variant?: "estetica" | "spa" | "cream";
+  /** Tighter bottom spacing under the lotus divider. */
+  compact?: boolean;
 };
 
 const bgByVariant: Record<NonNullable<Props["variant"]>, string> = {
@@ -22,9 +24,19 @@ const textByVariant: Record<NonNullable<Props["variant"]>, string> = {
   cream: "text-[var(--color-brown)]",
 };
 
-export function PageHero({ overline, title, subtitle, variant = "cream" }: Props) {
+export function PageHero({
+  overline,
+  title,
+  subtitle,
+  variant = "cream",
+  compact = false,
+}: Props) {
   return (
-    <section className={`relative isolate -mt-20 pt-32 pb-20 ${bgByVariant[variant]}`}>
+    <section
+      className={`relative isolate -mt-20 pt-32 ${
+        compact ? "pb-8 sm:pb-10" : "pb-20"
+      } ${bgByVariant[variant]}`}
+    >
       <div className="mx-auto flex max-w-5xl flex-col items-center px-6 text-center">
         {overline && (
           <Reveal>
@@ -49,7 +61,7 @@ export function PageHero({ overline, title, subtitle, variant = "cream" }: Props
         )}
         <Reveal delay={0.15}>
           <LotusDivider
-            className="mt-10"
+            className={compact ? "mt-6" : "mt-10"}
             color={variant === "spa" ? "var(--color-wisteria)" : undefined}
           />
         </Reveal>

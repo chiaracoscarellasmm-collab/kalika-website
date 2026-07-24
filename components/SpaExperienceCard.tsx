@@ -34,6 +34,7 @@ export function SpaExperienceCard({
   giftDesign = "spa",
 }: Props) {
   const [open, setOpen] = useState(false);
+  const [active, setActive] = useState(false);
   const [tiersOpen, setTiersOpen] = useState(false);
   const [giftModalOpen, setGiftModalOpen] = useState(false);
   const panelId = useId();
@@ -43,9 +44,13 @@ export function SpaExperienceCard({
   const price = treatment.price ? pick(treatment.price, locale) : null;
   const tiers = hideCardPricing ? null : (treatment.priceTiers ?? null);
   const short = treatment.short ? pick(treatment.short, locale) : null;
-  const description = treatment.description ? pick(treatment.description, locale) : null;
+  const description = treatment.description
+    ? pick(treatment.description, locale)
+    : null;
   const duration = treatment.duration ? pick(treatment.duration, locale) : null;
-  const temperature = treatment.temperature ? pick(treatment.temperature, locale) : null;
+  const temperature = treatment.temperature
+    ? pick(treatment.temperature, locale)
+    : null;
   const teaser = short ?? description;
   const hasDetails = Boolean(description);
   const needsGiftConfigure = treatmentNeedsGiftConfigure(treatment, locale);
@@ -66,12 +71,12 @@ export function SpaExperienceCard({
     </button>
   ) : simpleGiftHref ? (
     <Link href={simpleGiftHref} className={giftButtonClass}>
-      <Gift size={featured ? 16 : 12} strokeWidth={featured ? 1.8 : 1.75} />
+      <Gift size={featured ? 16 : 12} strokeWidth={1.75} />
       {dict.common.gift}
     </Link>
   ) : (
     <Link href={localePath(locale, "/gift-card")} className={giftButtonClass}>
-      <Gift size={featured ? 16 : 12} strokeWidth={featured ? 1.8 : 1.75} />
+      <Gift size={featured ? 16 : 12} strokeWidth={1.75} />
       {dict.common.gift}
     </Link>
   );
@@ -87,26 +92,31 @@ export function SpaExperienceCard({
     />
   );
 
-  const toggle = () => setOpen((v) => !v);
+  const toggleActive = () =>
+    setActive((v) => {
+      const next = !v;
+      if (hasDetails) setOpen(next);
+      if (!next) setTiersOpen(false);
+      return next;
+    });
+
   const onKeyDown = (e: KeyboardEvent<HTMLDivElement>) => {
     if (e.key === "Enter" || e.key === " ") {
       e.preventDefault();
-      toggle();
+      toggleActive();
     }
   };
 
-  const clickableProps = hasDetails
-    ? {
-        role: "button" as const,
-        tabIndex: 0,
-        "aria-expanded": open,
-        "aria-controls": panelId,
-        "aria-label": name,
-        onClick: toggle,
-        onKeyDown,
-        className: "group/acc cursor-pointer",
-      }
-    : {};
+  const clickableProps = {
+    role: "button" as const,
+    tabIndex: 0,
+    "aria-expanded": active,
+    "aria-controls": hasDetails ? panelId : undefined,
+    "aria-label": name,
+    onClick: toggleActive,
+    onKeyDown,
+    className: "group/acc cursor-pointer outline-none",
+  };
 
   const priceDurationLine =
     hideCardPricing || (!duration && !price)
@@ -116,12 +126,12 @@ export function SpaExperienceCard({
   const cardOnlyPrice =
     hideCardPricing && price && !(treatment.priceTiers?.length) ? price : null;
 
-  const chevron = hasDetails && (
+  const chevron = (
     <ChevronDown
       size={featured ? 22 : 18}
       strokeWidth={1.75}
       className={`shrink-0 text-[var(--color-wisteria)] transition-transform duration-300 group-hover/acc:text-[var(--color-gold)] ${
-        open ? "rotate-180" : ""
+        active ? "rotate-180" : ""
       }`}
       aria-hidden
     />
@@ -131,7 +141,9 @@ export function SpaExperienceCard({
     <div
       id={panelId}
       className={`grid transition-all duration-500 ease-out ${
-        open ? "mt-4 grid-rows-[1fr] opacity-100" : "grid-rows-[0fr] opacity-0"
+        active && open
+          ? "mt-4 grid-rows-[1fr] opacity-100"
+          : "grid-rows-[0fr] opacity-0"
       }`}
     >
       <div className="overflow-hidden">
@@ -146,10 +158,13 @@ export function SpaExperienceCard({
     </div>
   );
 
-  const tiersToggle = tiers && (
+  const tiersToggle = tiers && active && (
     <button
       type="button"
-      onClick={() => setTiersOpen((v) => !v)}
+      onClick={(e) => {
+        e.stopPropagation();
+        setTiersOpen((v) => !v);
+      }}
       aria-expanded={tiersOpen}
       aria-controls={tiersPanelId}
       className="inline-flex items-center gap-1.5 text-[10px] uppercase tracking-[0.14em] text-[var(--color-wisteria)]/90 transition-colors hover:text-[var(--color-gold)]"
@@ -224,123 +239,157 @@ export function SpaExperienceCard({
   if (featured) {
     return (
       <>
-      <article className="spa-experience-card spa-experience-card--featured relative overflow-hidden rounded-[22px] border border-[var(--color-gold)]/25 bg-gradient-to-br from-[#2a1710] via-[#241009] to-[#3a1d2a] p-8 shadow-[0_30px_80px_-40px_rgba(0,0,0,0.8)] sm:p-10 lg:p-12">
-        <div
-          className="pointer-events-none absolute -right-20 -top-28 h-72 w-72 rounded-full bg-[var(--color-wisteria)]/20 blur-3xl"
-          aria-hidden
-        />
-        <div
-          className="pointer-events-none absolute -bottom-24 -left-16 h-64 w-64 rounded-full bg-[var(--color-gold)]/10 blur-3xl"
-          aria-hidden
-        />
-        <div
-          className="spa-experience-card__glow pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_85%_15%,rgba(201,123,178,0.16),transparent_52%),radial-gradient(circle_at_15%_85%,rgba(201,169,110,0.1),transparent_48%)]"
-          aria-hidden
-        />
-        <div className="relative grid gap-8 lg:grid-cols-[1.15fr_0.85fr] lg:items-start lg:gap-12">
-          <div>
-            <div {...clickableProps}>
-              <h3 className="display text-4xl leading-tight text-[var(--color-cream)] sm:text-5xl">
-                {name}
-              </h3>
-              {teaser && (
-                <div className="mt-5 flex items-end justify-between gap-4">
-                  <p className="max-w-xl text-[18px] leading-8 text-[var(--color-cream)]/80">
-                    {teaser}
-                  </p>
-                  {chevron}
-                </div>
-              )}
-            </div>
-            {detailPanel}
-          </div>
-          <div className="flex flex-col gap-5 lg:items-end">
-            {(temperature || priceDurationLine || cardOnlyPrice) && (
-              <div className="flex flex-col gap-2 lg:items-end lg:text-right">
-                {temperature && (
-                  <span className="inline-flex w-fit items-center rounded-full border border-[var(--color-cream)]/20 px-3 py-1 text-[10px] uppercase tracking-[0.16em] text-[var(--color-cream)]/70">
-                    {temperature}
-                  </span>
-                )}
-                {cardOnlyPrice && (
-                  <p className="text-[11px] text-[var(--color-gold)]/90">{cardOnlyPrice}</p>
-                )}
-                {priceDurationLine && (
-                  <p className="text-[11px] uppercase tracking-[0.18em] text-[var(--color-gold)]/90">
-                    {priceDurationLine}
-                  </p>
+        <article
+          className={`spa-experience-card spa-experience-card--featured relative overflow-hidden rounded-[22px] border border-[var(--color-gold)]/25 bg-gradient-to-br from-[#2a1710] via-[#241009] to-[#3a1d2a] p-8 shadow-[0_30px_80px_-40px_rgba(0,0,0,0.8)] sm:p-10 lg:p-12${
+            active ? " spa-experience-card--active" : ""
+          }`}
+        >
+          <div
+            className="pointer-events-none absolute -right-20 -top-28 h-72 w-72 rounded-full bg-[var(--color-wisteria)]/20 blur-3xl"
+            aria-hidden
+          />
+          <div
+            className="pointer-events-none absolute -bottom-24 -left-16 h-64 w-64 rounded-full bg-[var(--color-gold)]/10 blur-3xl"
+            aria-hidden
+          />
+          <div
+            className="spa-experience-card__glow pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_85%_15%,rgba(201,123,178,0.16),transparent_52%),radial-gradient(circle_at_15%_85%,rgba(201,169,110,0.1),transparent_48%)]"
+            aria-hidden
+          />
+          <div className="relative grid gap-8 lg:grid-cols-[1.15fr_0.85fr] lg:items-start lg:gap-12">
+            <div>
+              <div {...clickableProps}>
+                <h3 className="display text-4xl leading-tight text-[var(--color-cream)] sm:text-5xl">
+                  {name}
+                </h3>
+                {teaser ? (
+                  <div className="mt-5 flex items-end justify-between gap-4">
+                    <p className="max-w-xl text-[18px] leading-8 text-[var(--color-cream)]/80">
+                      {teaser}
+                    </p>
+                    {chevron}
+                  </div>
+                ) : (
+                  <div className="mt-3 flex justify-end">{chevron}</div>
                 )}
               </div>
-            )}
-            {tiersToggle}
-            {tiersPanel}
-            {featuredActions}
+              {detailPanel}
+            </div>
+            <div className="flex flex-col gap-5 lg:items-end">
+              {(temperature || priceDurationLine || cardOnlyPrice) && (
+                <div className="flex flex-col gap-2 lg:items-end lg:text-right">
+                  {temperature && (
+                    <span className="inline-flex w-fit items-center rounded-full border border-[var(--color-cream)]/20 px-3 py-1 text-[10px] uppercase tracking-[0.16em] text-[var(--color-cream)]/70">
+                      {temperature}
+                    </span>
+                  )}
+                  {cardOnlyPrice && (
+                    <p className="text-[11px] text-[var(--color-gold)]/90">
+                      {cardOnlyPrice}
+                    </p>
+                  )}
+                  {priceDurationLine && (
+                    <p className="text-[11px] uppercase tracking-[0.18em] text-[var(--color-gold)]/90">
+                      {priceDurationLine}
+                    </p>
+                  )}
+                </div>
+              )}
+              {tiersToggle}
+              {tiersPanel}
+              <div
+                className={`grid w-full transition-all duration-500 ease-out ${
+                  active
+                    ? "grid-rows-[1fr] opacity-100"
+                    : "grid-rows-[0fr] opacity-0"
+                }`}
+              >
+                <div className="overflow-hidden">{featuredActions}</div>
+              </div>
+            </div>
           </div>
-        </div>
-      </article>
-      {giftModal}
+        </article>
+        {giftModal}
       </>
     );
   }
 
   return (
     <>
-    <article
-      className={`spa-experience-card relative flex h-full flex-col overflow-hidden rounded-[18px] border border-[var(--color-cream)]/10 bg-gradient-to-br from-[var(--color-cream)]/[0.05] via-[var(--color-cream)]/[0.02] to-transparent p-6 backdrop-blur sm:p-7${className ? ` ${className}` : ""}`}
-    >
-      <div
-        className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_100%_0%,rgba(201,123,178,0.06),transparent_55%)]"
-        aria-hidden
-      />
-      <div
-        className="spa-experience-card__glow pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_85%_15%,rgba(201,123,178,0.14),transparent_52%),radial-gradient(circle_at_20%_90%,rgba(201,169,110,0.08),transparent_45%)]"
-        aria-hidden
-      />
+      <article
+        className={`spa-experience-card relative flex h-full flex-col overflow-hidden rounded-[18px] border border-[var(--color-cream)]/10 bg-gradient-to-br from-[var(--color-cream)]/[0.05] via-[var(--color-cream)]/[0.02] to-transparent p-6 backdrop-blur sm:p-7${
+          active ? " spa-experience-card--active" : ""
+        }${className ? ` ${className}` : ""}`}
+      >
+        <div
+          className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_100%_0%,rgba(201,123,178,0.06),transparent_55%)]"
+          aria-hidden
+        />
+        <div
+          className="spa-experience-card__glow pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_85%_15%,rgba(201,123,178,0.14),transparent_52%),radial-gradient(circle_at_20%_90%,rgba(201,169,110,0.08),transparent_45%)]"
+          aria-hidden
+        />
 
-      <div className="relative flex flex-1 flex-col">
-        <div {...clickableProps}>
-          <div className="flex items-start justify-between gap-4">
-            <h3 className="display min-w-0 flex-1 text-2xl leading-snug text-[var(--color-cream)] sm:text-[26px]">
-              {name}
-            </h3>
-            {(temperature || priceDurationLine || cardOnlyPrice) && (
+        <div className="relative flex flex-1 flex-col">
+          <div {...clickableProps}>
+            <div className="flex items-start justify-between gap-4">
+              <h3 className="display min-w-0 flex-1 text-2xl leading-snug text-[var(--color-cream)] sm:text-[26px]">
+                {name}
+              </h3>
               <div className="flex shrink-0 flex-col items-end gap-2">
-                {temperature && (
-                  <span className="inline-flex w-fit items-center rounded-full border border-[var(--color-cream)]/15 px-2.5 py-0.5 text-[9px] uppercase tracking-[0.14em] text-[var(--color-cream)]/55">
-                    {temperature}
-                  </span>
+                {(temperature || priceDurationLine || cardOnlyPrice) && (
+                  <>
+                    {temperature && (
+                      <span className="inline-flex w-fit items-center rounded-full border border-[var(--color-cream)]/15 px-2.5 py-0.5 text-[9px] uppercase tracking-[0.14em] text-[var(--color-cream)]/55">
+                        {temperature}
+                      </span>
+                    )}
+                    {cardOnlyPrice && (
+                      <p className="text-[11px] text-[var(--color-gold)]/90">
+                        {cardOnlyPrice}
+                      </p>
+                    )}
+                    {priceDurationLine && (
+                      <p className="text-right text-[10px] uppercase leading-relaxed tracking-[0.14em] text-[var(--color-gold)]/85">
+                        {priceDurationLine}
+                      </p>
+                    )}
+                  </>
                 )}
-                {cardOnlyPrice && (
-                  <p className="text-[11px] text-[var(--color-gold)]/90">{cardOnlyPrice}</p>
-                )}
-                {priceDurationLine && (
-                  <p className="text-right text-[10px] uppercase leading-relaxed tracking-[0.14em] text-[var(--color-gold)]/85">
-                    {priceDurationLine}
-                  </p>
-                )}
+                {chevron}
+              </div>
+            </div>
+
+            {teaser && (
+              <div className="mt-4">
+                <p className="text-[16px] leading-7 text-[var(--color-cream)]/72">
+                  {teaser}
+                </p>
               </div>
             )}
+
+            {detailPanel}
           </div>
 
-          {teaser && (
-            <div className="mt-4 flex items-end justify-between gap-3">
-              <p className="text-[16px] leading-7 text-[var(--color-cream)]/72">{teaser}</p>
-              {chevron}
-            </div>
-          )}
-
-          {detailPanel}
+          {tiersToggle && <div className="relative mt-4">{tiersToggle}</div>}
+          {tiersPanel}
         </div>
 
-        {tiersToggle && <div className="relative mt-4">{tiersToggle}</div>}
-        {tiersPanel}
-      </div>
-
-      <div className="relative mt-5 border-t border-[var(--color-cream)]/[0.06] pt-4 sm:mt-6">
-        {compactActions}
-      </div>
-    </article>
-    {giftModal}
+        <div
+          className={`relative grid transition-all duration-500 ease-out ${
+            active
+              ? "mt-5 grid-rows-[1fr] opacity-100 sm:mt-6"
+              : "grid-rows-[0fr] opacity-0"
+          }`}
+        >
+          <div className="overflow-hidden">
+            <div className="border-t border-[var(--color-cream)]/[0.06] pt-4">
+              {compactActions}
+            </div>
+          </div>
+        </div>
+      </article>
+      {giftModal}
     </>
   );
-};
+}

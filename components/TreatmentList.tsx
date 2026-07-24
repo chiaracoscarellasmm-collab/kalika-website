@@ -32,14 +32,16 @@ export function TreatmentList({
       {groups.map((group, gi) => (
         <Reveal key={group.id} delay={gi * 0.04}>
           <section>
-            <h3
-              className={`display text-2xl sm:text-3xl ${
-                isSpa ? "text-[var(--color-cream)]" : "text-[var(--color-brown)]"
-              }`}
-            >
-              {pick(group.title, locale)}
-            </h3>
-            {group.subtitle && (
+            {!group.hideTitle && (
+              <h2
+                className={`display text-2xl sm:text-3xl ${
+                  isSpa ? "text-[var(--color-cream)]" : "text-[var(--color-brown)]"
+                }`}
+              >
+                {pick(group.title, locale)}
+              </h2>
+            )}
+            {group.subtitle && !group.hideTitle && (
               <p
                 className={`mt-2 max-w-xl text-[17px] leading-8 sm:text-lg ${
                   isSpa
@@ -53,8 +55,8 @@ export function TreatmentList({
             <ul
               className={
                 withActions
-                  ? `${group.subtitle ? "mt-6" : "mt-7"} space-y-4`
-                  : `${group.subtitle ? "mt-5" : "mt-6"} divide-y ${
+                  ? `${group.hideTitle ? "mt-0" : group.subtitle ? "mt-6" : "mt-7"} space-y-4`
+                  : `${group.hideTitle ? "mt-0" : group.subtitle ? "mt-5" : "mt-6"} divide-y ${
                       isSpa
                         ? "divide-[var(--color-cream)]/15"
                         : "divide-[var(--color-line)]"

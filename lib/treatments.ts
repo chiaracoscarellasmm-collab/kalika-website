@@ -58,6 +58,11 @@ export type Treatment = {
   description?: Bilingual;
   temperature?: Bilingual;
   tags?: BenefitTag[];
+  /**
+   * Advanced eubiotic protocol treatments: no direct book/gift —
+   * show an info popup instead.
+   */
+  requiresProtocol?: boolean;
 };
 
 export type TreatmentGroup = {
@@ -65,6 +70,8 @@ export type TreatmentGroup = {
   title: Bilingual;
   /** Optional short intro line under the section title. */
   subtitle?: Bilingual;
+  /** When true, the group title is not rendered (e.g. it duplicates the page H1). */
+  hideTitle?: boolean;
   treatments: Treatment[];
 };
 
@@ -155,14 +162,32 @@ export const visoGroups: TreatmentGroup[] = [
   {
     id: "viso-tutti",
     title: { it: "Trattamenti viso", en: "Facial treatments" },
+    hideTitle: true,
     treatments: [
       { id: "pulizia-viso", name: { it: "Pulizia del viso", en: "Facial cleansing" }, duration: DUR_60, price: eur(58) },
       { id: "trattamento-personalizzato", name: { it: "Trattamento personalizzato", en: "Tailored treatment" }, duration: DUR_60, price: eurFrom(63) },
       { id: "ristrutturazione", name: { it: "Trattamento ristrutturazione", en: "Restructuring treatment" }, duration: DUR_60, price: eur(88) },
-      { id: "talaterm-fangogel", name: { it: "Talaterm fangogel depurante", en: "Talaterm purifying mud-gel" }, duration: DUR_60, price: eur(73) },
-      { id: "talaterm-antirughe", name: { it: "Talaterm decontratturante antirughe", en: "Talaterm anti-wrinkle relaxing" }, duration: DUR_60, price: eur(83) },
-      { id: "sinerplus", name: { it: "Trattamento Sinerplus", en: "Sinerplus treatment" }, duration: DUR_60, price: eur(88) },
-      { id: "antiaging-viso", name: { it: "Antiaging viso", en: "Facial antiaging" }, duration: DUR_45, price: eur(53) },
+      {
+        id: "talaterm-fangogel",
+        name: { it: "Talaterm fangogel depurante", en: "Talaterm purifying mud-gel" },
+        duration: DUR_60,
+        price: eur(73),
+        requiresProtocol: true,
+      },
+      {
+        id: "talaterm-antirughe",
+        name: { it: "Talaterm decontratturante antirughe", en: "Talaterm anti-wrinkle relaxing" },
+        duration: DUR_60,
+        price: eur(83),
+        requiresProtocol: true,
+      },
+      {
+        id: "sinerplus",
+        name: { it: "Trattamento Sinerplus", en: "Sinerplus treatment" },
+        duration: DUR_60,
+        price: eur(88),
+        requiresProtocol: true,
+      },
     ],
   },
 ];
@@ -171,37 +196,49 @@ export const corpoGroups: TreatmentGroup[] = [
   {
     id: "corpo-completi",
     title: { it: "Trattamenti completi", en: "Full body treatments" },
-    subtitle: {
-      it: "Trattamenti con cosmesi eubiotica SICE.",
-      en: "Treatments with SICE eubiotic cosmeceuticals.",
-    },
     treatments: [
       { id: "pulizia-profonda-corpo", name: { it: "Pulizia profonda corpo", en: "Deep body cleansing" }, duration: DUR_55, price: eur(70) },
       { id: "pulizia-profonda-biosauna", name: { it: "Pulizia profonda in biosauna", en: "Deep cleansing in biosauna" }, duration: DUR_60, price: eur(95) },
       { id: "talaterm-fango-depurativo", name: { it: "Talaterm fango gel depurativo", en: "Talaterm purifying mud-gel" }, duration: DUR_60, price: eurFrom(80) },
-      { id: "talaterm-caldo-freddo", name: { it: "Talaterm fango gel caldo / freddo", en: "Talaterm hot / cold mud-gel" }, duration: DUR_75, price: eur(105) },
-      { id: "ristrutturazione-barriera", name: { it: "Ristrutturazione della barriera di permeabilità", en: "Permeability barrier restructuring" }, duration: DUR_60, price: eur(110) },
-      { id: "talaplus", name: { it: "Talaplus", en: "Talaplus" }, duration: DUR_75, price: eur(130) },
-      { id: "body-reset", name: { it: "Body reset", en: "Body reset" }, duration: DUR_75, price: eur(140) },
-      { id: "olistico", name: { it: "Trattamento olistico", en: "Holistic treatment" }, duration: DUR_60, price: eur(65) },
+      { id: "talaterm-caldo-freddo", name: { it: "Talaterm fango gel caldo / freddo", en: "Talaterm hot / cold mud-gel" }, duration: DUR_75, price: eur(105), requiresProtocol: true },
+      { id: "ristrutturazione-barriera", name: { it: "Ristrutturazione della barriera di permeabilità", en: "Permeability barrier restructuring" }, duration: DUR_60, price: eur(110), requiresProtocol: true },
+      { id: "talaplus", name: { it: "Talaplus", en: "Talaplus" }, duration: DUR_75, price: eur(130), requiresProtocol: true },
+      { id: "body-reset", name: { it: "Body reset", en: "Body reset" }, duration: DUR_75, price: eur(140), requiresProtocol: true },
+      { id: "olistico", name: { it: "Trattamento olistico", en: "Holistic treatment" }, duration: DUR_60, price: eur(65), requiresProtocol: true },
     ],
   },
   {
     id: "corpo-localizzati",
     title: { it: "Trattamenti localizzati", en: "Targeted treatments" },
-    subtitle: {
-      it: "Trattamenti con cosmesi eubiotica SICE.",
-      en: "Treatments with SICE eubiotic cosmeceuticals.",
-    },
     treatments: [
       { id: "cuoio-capelluto-spa", name: { it: "Cuoio capelluto in SPA", en: "Scalp treatment in SPA" }, duration: DUR_60, price: eurFrom(65) },
       { id: "pulizia-schiena", name: { it: "Pulizia schiena", en: "Back cleansing" }, duration: DUR_55, price: eur(53) },
       { id: "gambe", name: { it: "Gambe", en: "Legs" }, duration: DUR_45, price: eurFrom(45) },
       { id: "seno", name: { it: "Seno", en: "Bust" }, duration: DUR_45, price: eurFrom(50) },
-      { id: "pancia-piatta", name: { it: "Metodo Pancia Piatta", en: "Flat-belly method" }, duration: DUR_40, price: eur(45) },
-      { id: "gambe-leggere", name: { it: "Gambe leggere", en: "Light legs" }, duration: DUR_30, price: eur(40) },
     ],
   },
+];
+
+/** Featured method blocks on the Massaggi page (highlighted, outside the main list). */
+export const panciaPiattaTreatment: Treatment = {
+  id: "pancia-piatta",
+  name: { it: "Metodo Pancia Piatta", en: "Flat-belly method" },
+  duration: DUR_40,
+  price: eur(45),
+};
+
+export const riflessologiaCorporeaTreatment: Treatment = {
+  id: "riflessologia-corporea",
+  name: { it: "Riflessologia corporea", en: "Body reflexology" },
+  durationOptions: [
+    { duration: DUR_55, price: eur(65) },
+    { duration: DUR_85, price: eur(90) },
+  ],
+};
+
+export const massaggiFeaturedMethods: Treatment[] = [
+  panciaPiattaTreatment,
+  riflessologiaCorporeaTreatment,
 ];
 
 export const massaggiGroups: TreatmentGroup[] = [
@@ -211,15 +248,15 @@ export const massaggiGroups: TreatmentGroup[] = [
     treatments: [
       { id: "rilassante", name: { it: "Rilassante", en: "Relaxing" }, duration: DUR_55, price: eur(65) },
       { id: "drenante", name: { it: "Drenante", en: "Lymphatic drainage" }, duration: DUR_55, price: eur(65) },
-      { id: "sinergico", name: { it: "Sinergico", en: "Synergic" }, duration: DUR_55, price: eur(80) },
-      { id: "riflessologia-plantare", name: { it: "Riflessologia plantare", en: "Foot reflexology" }, duration: DUR_40, price: eur(45) },
       {
-        id: "riflessologia-corporea",
-        name: { it: "Riflessologia corporea", en: "Body reflexology" },
-        durationOptions: [
-          { duration: DUR_55, price: eur(65) },
-          { duration: DUR_85, price: eur(90) },
-        ],
+        id: "sinergico",
+        name: { it: "Sinergico", en: "Synergic" },
+        short: {
+          it: "Unisce la potenza dei prodotti eubiotici a manualità personalizzate.",
+          en: "Combines the power of eubiotic products with tailored hands-on techniques.",
+        },
+        duration: DUR_55,
+        price: eur(80),
       },
     ],
   },
@@ -254,6 +291,8 @@ export const massaggiGroups: TreatmentGroup[] = [
     title: { it: "Massaggi localizzati", en: "Targeted massages" },
     treatments: [
       { id: "decontratturante-schiena", name: { it: "Decontratturante schiena", en: "Back relaxing" }, duration: DUR_40, price: eur(45) },
+      { id: "gambe-leggere", name: { it: "Gambe leggere", en: "Light legs" }, duration: DUR_30, price: eur(40) },
+      { id: "antiaging-viso", name: { it: "Antiaging viso", en: "Facial antiaging" }, duration: DUR_45, price: eur(53) },
       { id: "relax-mani", name: { it: "Relax mani", en: "Hand relax" }, duration: DUR_30, price: eur(40) },
       { id: "relax-piedi", name: { it: "Relax piedi", en: "Foot relax" }, duration: DUR_30, price: eur(40) },
       { id: "testa-cuoio-capelluto", name: { it: "Testa e cuoio capelluto", en: "Head & scalp" }, duration: DUR_45, price: eur(53) },
@@ -1060,6 +1099,11 @@ export const spaCategories = [
 export const esteticaGroups: TreatmentGroup[] = [
   ...visoGroups,
   ...corpoGroups,
+  {
+    id: "massaggi-metodi",
+    title: { it: "Metodi in evidenza", en: "Featured methods" },
+    treatments: massaggiFeaturedMethods,
+  },
   ...massaggiGroups,
   ...maniPiediGroups,
   ...epilazioneGroups,

@@ -183,7 +183,7 @@ export function GiftCardForm({ locale, dict }: Props) {
   const ui = getGiftCardUi(locale);
   const [design, setDesign] = useState<GiftCardDesign>("spa");
   const [amountChoice, setAmountChoice] = useState<GiftCardAmountChoice>("100");
-  const [customAmount, setCustomAmount] = useState(120);
+  const [customAmount, setCustomAmount] = useState<number | "">(120);
   const [fromFirstName, setFromFirstName] = useState("");
   const [fromLastName, setFromLastName] = useState("");
   const [toFirstName, setToFirstName] = useState("");
@@ -197,7 +197,8 @@ export function GiftCardForm({ locale, dict }: Props) {
 
   const amount = useMemo(() => {
     const selected = amountChoices.find((choice) => choice.key === amountChoice);
-    return selected?.amount ?? customAmount;
+    if (selected?.amount != null) return selected.amount;
+    return typeof customAmount === "number" ? customAmount : 0;
   }, [amountChoice, customAmount]);
 
   const fromName = `${fromFirstName} ${fromLastName}`.trim();
@@ -211,7 +212,9 @@ export function GiftCardForm({ locale, dict }: Props) {
     !toFirstName.trim() && "recipient first name",
     !toLastName.trim() && "recipient last name",
     !buyerEmail.trim() && "buyer email",
-    amountChoice === "custom" && customAmount < 20 && "minimum custom amount",
+    amountChoice === "custom" &&
+      (customAmount === "" || customAmount < 20) &&
+      "minimum custom amount",
   ].filter(Boolean) as string[];
   const canProceed = missingFields.length === 0 && !pending;
 
@@ -404,12 +407,21 @@ export function GiftCardForm({ locale, dict }: Props) {
               <input
                 type="number"
                 min={20}
+                inputMode="numeric"
                 value={customAmount}
-                onChange={(e) => setCustomAmount(Number(e.target.value))}
+                onChange={(e) => {
+                  const raw = e.target.value;
+                  if (raw === "") {
+                    setCustomAmount("");
+                    return;
+                  }
+                  const next = Number(raw);
+                  if (Number.isFinite(next)) setCustomAmount(next);
+                }}
                 className={inputClass}
                 required
               />
-              {customAmount < 20 && (
+              {(customAmount === "" || customAmount < 20) && (
                 <span className="mt-2 block text-xs text-[var(--color-mauve)]">
                   {ui.customAmountWarning}
                 </span>

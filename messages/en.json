@@ -144,9 +144,20 @@
     "downloadBody": "Download the updated price list in PDF.",
     "chooseHelpTitle": "How to choose the right treatment?",
     "chooseHelpBody": "Write to us on WhatsApp: we'll guide you.",
+    "sice": {
+      "incipit": "We care for the skin with eubiotic cosmetics: formulations that work with its physiology instead of forcing it. Every treatment on this page starts with SICE products.",
+      "continueTitle": "Continue at home",
+      "continueBody": "The same cosmetics we use in the treatment room can accompany you, every day, at home. SICE products are available at our centre: our team will help you choose the right routine for your skin.",
+      "visoImageAlt": "SICE anti-wrinkle gel drops, eubiotic cosmetics used in Kalika facial treatments",
+      "corpoImageAlt": "SICE eubiotic cosmetics line available at the centre for body care"
+    },
+    "evaluationBadge": "On assessment",
+    "protocolInlineBody": "Advanced treatment available only after an eubiotic programme or a tailored eubiotic treatment.",
+    "requestEvaluationCta": "Request assessment",
+    "evaluationWhatsappPrefix": "I would like to request an assessment for the treatment",
     "viso": {
       "title": "Facial treatments",
-      "intro": "Skin analysis, protocol selection, tailored gesture. SICE eubiotic cosmetics accompany every step."
+      "intro": "Skin analysis, protocol selection, tailored gesture."
     },
     "corpo": {
       "title": "Body treatments",
@@ -154,7 +165,13 @@
     },
     "massaggi": {
       "title": "Massage & wellbeing",
-      "intro": "Classic techniques and special rituals — to release tension and find balance."
+      "intro": "Classic techniques and special rituals — to release tension and find balance.",
+      "panciaPiattaEyebrow": "Method",
+      "panciaPiattaBody": "A targeted abdominal journey: copy and photo coming soon — contact us to learn more.",
+      "panciaPiattaImageAlt": "Flat-belly method at Kalika Nuovaestetica in Prata di Pordenone",
+      "riflessologiaEyebrow": "Featured",
+      "riflessologiaBody": "Balance through the body's reflex points: copy and photo coming soon — contact us to learn more.",
+      "riflessologiaImageAlt": "Body reflexology treatment at Kalika Nuovaestetica in Prata di Pordenone"
     },
     "maniPiedi": {
       "title": "Hands & feet",

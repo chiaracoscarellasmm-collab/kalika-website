@@ -144,9 +144,20 @@
     "downloadBody": "Scarica il listino prezzi aggiornato in formato PDF.",
     "chooseHelpTitle": "Come scegliere il trattamento giusto?",
     "chooseHelpBody": "Scrivici su WhatsApp: ti guidiamo nella scelta.",
+    "sice": {
+      "incipit": "Trattiamo la pelle con cosmesi eubiotica: formulazioni che dialogano con la sua fisiologia invece di forzarla. Ogni trattamento in questa pagina nasce dai prodotti SICE.",
+      "continueTitle": "Continua a casa",
+      "continueBody": "La stessa cosmesi che usiamo in cabina può accompagnarti, ogni giorno, a casa tua. I prodotti SICE sono disponibili nel nostro centro: il nostro team ti aiuterà a scegliere la routine giusta per la tua pelle.",
+      "visoImageAlt": "Gocce di SICE gel antirughe, cosmesi eubiotica usata nei trattamenti viso Kalika",
+      "corpoImageAlt": "Linea di prodotti SICE Cosmesi Eubiotica disponibili in centro per la cura del corpo"
+    },
+    "evaluationBadge": "Su valutazione",
+    "protocolInlineBody": "Trattamento avanzato eseguibile solo a seguito di un percorso eubiotico o di un trattamento personalizzato eubiotico.",
+    "requestEvaluationCta": "Richiedi valutazione",
+    "evaluationWhatsappPrefix": "Vorrei richiedere una valutazione per il trattamento",
     "viso": {
       "title": "Trattamenti viso",
-      "intro": "Analisi della pelle, scelta del protocollo, gesto su misura. La cosmesi eubiotica SICE accompagna ogni passaggio."
+      "intro": "Analisi della pelle, scelta del protocollo, gesto su misura."
     },
     "corpo": {
       "title": "Trattamenti corpo",
@@ -154,7 +165,13 @@
     },
     "massaggi": {
       "title": "Massaggi e benessere",
-      "intro": "Tecniche classiche e rituali speciali, per allentare la tensione e ritrovare equilibrio."
+      "intro": "Tecniche classiche e rituali speciali, per allentare la tensione e ritrovare equilibrio.",
+      "panciaPiattaEyebrow": "Metodo",
+      "panciaPiattaBody": "Un percorso mirato sull'addome: testo e foto in aggiornamento — contattaci per saperne di più.",
+      "panciaPiattaImageAlt": "Metodo Pancia Piatta da Kalika Nuovaestetica a Prata di Pordenone",
+      "riflessologiaEyebrow": "In evidenza",
+      "riflessologiaBody": "Equilibrio attraverso i punti riflessi del corpo: testo e foto in aggiornamento — contattaci per saperne di più.",
+      "riflessologiaImageAlt": "Trattamento di riflessologia corporea da Kalika Nuovaestetica a Prata di Pordenone"
     },
     "maniPiedi": {
       "title": "Mani e piedi",

@@ -5,6 +5,7 @@ import puppeteer, { type Browser } from "puppeteer-core";
 import {
   corpoGroups,
   maniPiediGroups,
+  massaggiFeaturedMethods,
   massaggiGroups,
   sopraccigliaGroups,
   visoGroups,
@@ -62,17 +63,14 @@ function itemFromTreatment(t: Parameters<typeof itemsFromTreatment>[0]): Listino
   return itemsFromTreatment(t)[0]!;
 }
 
+const massaggiMetodi: ListinoSection = {
+  title: "Metodi in evidenza",
+  items: massaggiFeaturedMethods.map(itemFromTreatment),
+};
+
 const massaggiSpecificiLocalizzati: ListinoSection = {
   title: "Massaggi specifici localizzati",
-  items: [
-    { name: "Decontratturante schiena", duration: "40 min", price: "€ 45,00" },
-    { name: "Metodo Pancia Piatta", duration: "40 min", price: "€ 45,00" },
-    { name: "Gambe leggere", duration: "30 min", price: "€ 40,00" },
-    { name: "Antiaging viso", duration: "45 min", price: "€ 53,00" },
-    { name: "Relax mani", duration: "30 min", price: "€ 40,00" },
-    { name: "Relax piedi", duration: "30 min", price: "€ 40,00" },
-    { name: "Testa e cuoio capelluto", duration: "45 min", price: "€ 53,00" },
-  ],
+  items: massaggiGroups[2].treatments.flatMap(itemsFromTreatment),
 };
 
 const corpoTotaliSice: ListinoSection = {
@@ -84,9 +82,7 @@ const corpoTotaliSice: ListinoSection = {
 
 const corpoLocaliSice: ListinoSection = {
   title: "Trattamenti corpo locali con cosmesi eubiotica SICE",
-  items: corpoGroups[1].treatments
-    .filter((t) => !["pancia-piatta", "gambe-leggere"].includes(t.id))
-    .map(itemFromTreatment),
+  items: corpoGroups[1].treatments.map(itemFromTreatment),
 };
 
 const trattamentoOlistico: ListinoSection = {
@@ -100,9 +96,7 @@ const trattamentoOlistico: ListinoSection = {
 
 const visoSice: ListinoSection = {
   title: "Trattamenti viso con cosmesi eubiotica SICE",
-  items: visoGroups[0].treatments
-    .filter((t) => t.id !== "antiaging-viso")
-    .map(itemFromTreatment),
+  items: visoGroups[0].treatments.map(itemFromTreatment),
 };
 
 const makeUp: ListinoSection = {
@@ -195,6 +189,7 @@ const pageOneLeft: ListinoSection[] = [
     title: "Massaggi e trattamenti rilassanti",
     items: massaggiGroups[0].treatments.flatMap(itemsFromTreatment),
   },
+  massaggiMetodi,
   {
     title: "Momenti speciali",
     items: massaggiGroups[1].treatments.flatMap(itemsFromTreatment),
