@@ -14,6 +14,7 @@ import {
 } from "@/lib/treatments";
 import { buildSimpleGiftCardHref } from "@/lib/gift-selection";
 import { whatsappLink, localePath } from "@/lib/site";
+import { formatEmphasis } from "@/lib/format-emphasis";
 import { Reveal } from "./Reveal";
 
 type Props = {
@@ -84,7 +85,7 @@ export function FeaturedMethodBlock({
 
         <div className="flex flex-1 flex-col p-6 sm:p-7">
           <div className="flex items-start justify-between gap-3">
-            <p className="text-[11px] font-medium uppercase tracking-[0.28em] text-[#C97BB2] transition-colors duration-500 group-hover:text-[#b86aa0]">
+            <p className="text-[11px] font-medium tracking-[0.14em] text-[#C97BB2] transition-colors duration-500 group-hover:text-[#b86aa0] sm:text-xs">
               {eyebrow}
             </p>
             <div className="flex shrink-0 flex-col items-end gap-1.5 text-right">
@@ -133,7 +134,7 @@ export function FeaturedMethodBlock({
           </h3>
 
           <p className="mt-4 flex-1 text-[16px] leading-7 text-[var(--color-espresso)]/75 sm:text-[17px] sm:leading-8">
-            {body}
+            {formatEmphasis(body)}
           </p>
 
           <div className="mt-6 flex items-center gap-3">

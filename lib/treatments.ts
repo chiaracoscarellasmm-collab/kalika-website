@@ -165,13 +165,35 @@ export const visoGroups: TreatmentGroup[] = [
     hideTitle: true,
     treatments: [
       { id: "pulizia-viso", name: { it: "Pulizia del viso", en: "Facial cleansing" }, duration: DUR_60, price: eur(58) },
-      { id: "trattamento-personalizzato", name: { it: "Trattamento personalizzato", en: "Tailored treatment" }, duration: DUR_60, price: eurFrom(63) },
-      { id: "ristrutturazione", name: { it: "Trattamento ristrutturazione", en: "Restructuring treatment" }, duration: DUR_60, price: eur(88) },
+      {
+        id: "trattamento-personalizzato",
+        name: { it: "Trattamento personalizzato", en: "Tailored treatment" },
+        duration: DUR_60,
+        price: eurFrom(63),
+        description: {
+          it: "Un trattamento viso costruito su misura, studiato sui bisogni specifici della tua pelle nel momento presente.",
+          en: "A made-to-measure facial treatment, designed around the specific needs of your skin in the present moment.",
+        },
+      },
+      {
+        id: "ristrutturazione",
+        name: { it: "Ristrutturazione della barriera di permeabilità", en: "Permeability barrier restructuring" },
+        duration: DUR_60,
+        price: eur(88),
+        description: {
+          it: "Ristabilisce la compattezza dello strato corneo e ne sostiene le funzioni naturali, rinforzando il Fattore di Idratazione Naturale. Ideale per una pelle più forte e protetta.",
+          en: "Restores the compactness of the stratum corneum and supports its natural functions, strengthening the Natural Moisturising Factor. Ideal for stronger, more protected skin.",
+        },
+      },
       {
         id: "talaterm-fangogel",
-        name: { it: "Talaterm fangogel depurante", en: "Talaterm purifying mud-gel" },
+        name: { it: "Depurazione con Talaterm Fangogel", en: "Purifying Talaterm Mud-gel" },
         duration: DUR_60,
         price: eur(73),
+        description: {
+            it: "Azione depurante e osmotica per le pelli intossicate, disidratate o segnate dalle prime rughe. Riequilibra il tono cutaneo, dona minerali e oligoelementi e lascia la pelle drenata e luminosa.",
+            en: "Purifying, osmotic action for intoxicated, dehydrated skin or skin marked by the first wrinkles. It rebalances skin tone, provides minerals and trace elements and leaves the skin drained and radiant.",
+          },
         requiresProtocol: true,
       },
       {
@@ -183,9 +205,13 @@ export const visoGroups: TreatmentGroup[] = [
       },
       {
         id: "sinerplus",
-        name: { it: "Trattamento Sinerplus", en: "Sinerplus treatment" },
+        name: { it: "Sinerplus", en: "Sinerplus" },
         duration: DUR_60,
         price: eur(88),
+        description: {
+            it: "Deposita nella pelle principi attivi che vengono rilasciati nei giorni successivi, ogni volta che la pelle ne ha bisogno. Un trattamento che continua ad agire nel tempo, compensando squilibri temporanei o costituzionali.",
+            en: "It deposits active ingredients in the skin that are released in the following days, whenever the skin needs them. A treatment that keeps working over time, balancing temporary or constitutional imbalances.",
+          },
         requiresProtocol: true,
       },
     ],
@@ -199,14 +225,26 @@ export const corpoGroups: TreatmentGroup[] = [
     treatments: [
       { id: "pulizia-profonda-corpo", name: { it: "Pulizia profonda corpo", en: "Deep body cleansing" }, duration: DUR_55, price: eur(70) },
       { id: "pulizia-profonda-biosauna", name: { it: "Pulizia profonda in biosauna", en: "Deep cleansing in biosauna" }, duration: DUR_60, price: eur(95) },
-      { id: "talaterm-fango-depurativo", name: { it: "Talaterm fango gel depurativo", en: "Talaterm purifying mud-gel" }, duration: DUR_60, price: eurFrom(80) },
+      { id: "talaterm-fango-depurativo", name: { it: "Depurazione con Talaterm Fangogel", en: "Purifying Talaterm Mud-gel" }, duration: DUR_60, price: eurFrom(80), description: {
+            it: "Un trattamento depurante che riattiva lo scambio dei fluidi nelle pelli spente o disidratate. Minerali e oligoelementi restituiscono alla pelle tono, luminosità ed elasticità.",
+            en: "A purifying treatment that reactivates fluid exchange in dull or dehydrated skin. Minerals and trace elements restore tone, radiance and elasticity.",
+      } },
       { id: "talaterm-caldo-freddo", name: { it: "Talaterm fango gel caldo / freddo", en: "Talaterm hot / cold mud-gel" }, duration: DUR_75, price: eur(105), requiresProtocol: true },
-      { id: "ristrutturazione-barriera", name: { it: "Ristrutturazione della barriera di permeabilità", en: "Permeability barrier restructuring" }, duration: DUR_60, price: eur(110), requiresProtocol: true },
-      { id: "talaplus", name: { it: "Talaplus", en: "Talaplus" }, duration: DUR_75, price: eur(130), requiresProtocol: true },
-      { id: "body-reset", name: { it: "Body reset", en: "Body reset" }, duration: DUR_75, price: eur(140), requiresProtocol: true },
+      { id: "ristrutturazione-barriera", name: { it: "Ristrutturazione della barriera di permeabilità", en: "Permeability barrier restructuring" }, duration: DUR_60, price: eur(110), requiresProtocol: true, description: {
+            it: "Ripristina la compattezza dello strato più superficiale della pelle, sostenendone le funzioni naturali. Rinforza il Fattore di Idratazione Naturale (NMF) per una pelle più protetta ed equilibrata nel tempo.",
+            en: "Restores the compactness of the skin's outermost layer and supports its natural functions. Strengthens the Natural Moisturising Factor (NMF) for skin that stays more protected and balanced over time.",
+      } },
+      { id: "talaplus", name: { it: "Talaplus — Trattamento eubiotico riducente", en: "Talaplus — Reducing eubiotic treatment" }, duration: DUR_75, price: eur(130), requiresProtocol: true, description: {
+            it: "Un trattamento modellante e drenante che agisce sulle adiposità localizzate e sugli inestetismi della cellulite, mentre idrata e tonifica. Rimodella la silhouette con azione mirata.",
+            en: "A sculpting, draining treatment that targets localised adiposity and cellulite while hydrating and toning. It reshapes the silhouette with focused action.",
+      } },
+      { id: "body-reset", name: { it: "Body Reset — Trattamento eubiotico rassodante", en: "Body Reset — Firming eubiotic treatment" }, duration: DUR_75, price: eur(140), requiresProtocol: true, description: {
+            it: "Pensato per rassodare e tonificare, ridona compattezza alle zone più delicate e restituisce alla pelle il suo naturale turgore.",
+            en: "Designed to firm and tone, it restores compactness to the most delicate areas and returns the skin's natural plumpness.",
+      } },
       { id: "olistico", name: { it: "Trattamento olistico", en: "Holistic treatment" }, duration: DUR_60, price: eur(65), requiresProtocol: true },
     ],
-  },
+          },
   {
     id: "corpo-localizzati",
     title: { it: "Trattamenti localizzati", en: "Targeted treatments" },
@@ -246,8 +284,14 @@ export const massaggiGroups: TreatmentGroup[] = [
     id: "massaggi-rilassanti",
     title: { it: "Massaggi rilassanti", en: "Relaxing massages" },
     treatments: [
-      { id: "rilassante", name: { it: "Rilassante", en: "Relaxing" }, duration: DUR_55, price: eur(65) },
-      { id: "drenante", name: { it: "Drenante", en: "Lymphatic drainage" }, duration: DUR_55, price: eur(65) },
+      { id: "rilassante", name: { it: "Rilassante", en: "Relaxing" }, duration: DUR_55, price: eur(65), description: {
+            it: "Un massaggio avvolgente che scioglie le tensioni accumulate e riporta il corpo a uno stato di calma profonda. Movimenti lenti e fluidi che allentano lo stress e restituiscono equilibrio, a corpo e mente.",
+            en: "An enveloping massage that melts built-up tension and brings the body back to deep calm. Slow, fluid movements that ease stress and restore balance to body and mind.",
+      } },
+      { id: "drenante", name: { it: "Drenante", en: "Lymphatic drainage" }, duration: DUR_55, price: eur(65), description: {
+            it: "Un massaggio dai movimenti mirati che stimola la circolazione e favorisce il drenaggio dei liquidi in eccesso.",
+            en: "A massage with targeted movements that stimulates circulation and supports the drainage of excess fluids.",
+      } },
       {
         id: "sinergico",
         name: { it: "Sinergico", en: "Synergic" },
@@ -267,6 +311,10 @@ export const massaggiGroups: TreatmentGroup[] = [
       {
         id: "massaggio-kalika",
         name: { it: "Massaggio Kalika", en: "Kalika massage" },
+        description: {
+            it: "Il nostro massaggio firma: la tecnica manuale si adatta all'esigenza che il corpo esprime in quel preciso momento. Personale, mai uguale.",
+            en: "Our signature massage: the hands-on technique adapts to what the body needs in that precise moment. Personal, never the same twice.",
+          },
         durationOptions: [
           { duration: DUR_55, price: eur(70) },
           { duration: DUR_85, price: eur(95) },
@@ -275,15 +323,55 @@ export const massaggiGroups: TreatmentGroup[] = [
       {
         id: "hot-stone",
         name: { it: "Hot Stone", en: "Hot Stone" },
+        description: {
+          it: "Il massaggio con pietre laviche calde, un calore che affonda nei muscoli e scioglie le tensioni. **Migliora la circolazione, allevia la rigidità** e lascia il corpo in uno stato di relax profondo.",
+          en: "A massage with warm lava stones — heat that sinks into the muscles and melts tension. **It improves circulation, eases stiffness** and leaves the body in deep relaxation.",
+        },
         durationOptions: [
           { duration: DUR_55, price: eur(80) },
           { duration: DUR_85, price: eur(100) },
         ],
       },
-      { id: "gravidanza", name: { it: "Massaggio in gravidanza", en: "Pregnancy massage" }, price: eur(75) },
-      { id: "mamma-bambino", name: { it: "Massaggio mamma e bambino", en: "Mother & child massage" }, short: { it: "Per bambini fino ai 12 anni", en: "For children up to 12 years" }, price: eur(100) },
-      { id: "bambini-ragazzi", name: { it: "Massaggio bambini e ragazzi", en: "Children & teens massage" }, short: { it: "Fino ai 14 anni", en: "Up to 14 years" }, price: eurFrom(45) },
-      { id: "due-spa", name: { it: "Massaggio per due in SPA", en: "Massage for two in SPA" }, price: eur(155) },
+      {
+        id: "gravidanza",
+        name: { it: "Massaggio in gravidanza", en: "Pregnancy massage" },
+        short: { it: "Dal terzo mese", en: "From the third month" },
+        description: {
+            it: "In un momento ricco di emozioni e attese, concediti la coccola di un massaggio dedicato.",
+            en: "In a time full of emotion and anticipation, treat yourself to a dedicated massage.",
+          },
+        duration: DUR_60,
+        price: eur(65),
+      },
+      {
+        id: "massaggio-in-armonia",
+        name: { it: "Massaggio in armonia (di coppia)", en: "Harmony massage (for two)" },
+        short: { it: "Di coppia", en: "For two" },
+        description: {
+            it: "Un momento da condividere. Due lettini affiancati, lo stesso istante di quiete: il massaggio in armonia è pensato per chi vuole rilassarsi insieme, in una coccola che resta.",
+            en: "A moment to share. Two beds side by side, the same quiet instant: the harmony massage is for those who want to relax together, in a lasting embrace of care.",
+          },
+        price: eur(155),
+      },
+      {
+        id: "mamma-bambino",
+        name: { it: "Massaggio mamma e bambino", en: "Mother & child massage" },
+        description: {
+            it: "Un gesto delicato pensato per due, mamma e piccolo insieme, nello stesso spazio e nello stesso tempo. Una coccola condivisa, dolce e rassicurante.",
+            en: "A gentle gesture for two — mother and little one together, in the same space and the same time. A shared cuddle, soft and reassuring.",
+          },
+        price: eur(100),
+      },
+      {
+        id: "bambini-ragazzi",
+        name: { it: "Massaggio bambini e ragazzi", en: "Children & teens massage" },
+        short: { it: "Fino ai 12 anni", en: "Up to 12 years" },
+        description: {
+          it: "Un massaggio leggero e giocoso, pensato per i più piccoli fino ai 12 anni. Un momento di calma e di coccole, tutto per loro.",
+          en: "A light, playful massage for little ones up to 12 years old. A moment of calm and comfort, just for them.",
+        },
+        price: eurFrom(45),
+      },
     ],
   },
   {
@@ -291,6 +379,20 @@ export const massaggiGroups: TreatmentGroup[] = [
     title: { it: "Massaggi localizzati", en: "Targeted massages" },
     treatments: [
       { id: "decontratturante-schiena", name: { it: "Decontratturante schiena", en: "Back relaxing" }, duration: DUR_40, price: eur(45) },
+      {
+        id: "riflessologia-plantare",
+        name: { it: "Riflessologia plantare", en: "Foot reflexology" },
+        short: {
+          it: "Metodo Lucia Torri Cianci",
+          en: "Lucia Torri Cianci Method",
+        },
+        description: {
+          it: "Il piede come chiave di lettura di tutto il corpo. Attraverso la **stimolazione dei punti riflessi plantari**, secondo il **Metodo Lucia Torri Cianci**, si riporta equilibrio agli organi e ai tessuti, sciogliendo tensioni e restituendo una sensazione di benessere profondo.",
+          en: "The foot as a key to reading the whole body. Through the **stimulation of the plantar reflex points**, according to the **Lucia Torri Cianci Method**, balance is restored to organs and tissues, releasing tension and returning a deep sense of wellbeing.",
+        },
+        duration: DUR_40,
+        price: eur(45),
+      },
       { id: "gambe-leggere", name: { it: "Gambe leggere", en: "Light legs" }, duration: DUR_30, price: eur(40) },
       { id: "antiaging-viso", name: { it: "Antiaging viso", en: "Facial antiaging" }, duration: DUR_45, price: eur(53) },
       { id: "relax-mani", name: { it: "Relax mani", en: "Hand relax" }, duration: DUR_30, price: eur(40) },
@@ -396,15 +498,15 @@ export const ritualiCategory: SpaCategory = {
     id: "mille-e-una-notte",
     name: { it: "Le Mille e Una Notte", en: "One Thousand and One Nights" },
     duration: { it: "1h e 50min", en: "1h 50min" },
-    price: eur(159),
+    price: eur(169),
     short: {
       it: "Tessuti preziosi e fragranze avvolgenti in cui il corpo diventa perfezione.",
       en: "Sumptuous fabrics and enveloping fragrances in which the body becomes perfection.",
     },
     description: {
-      it: "Rituale in cui tessuti e fragranze deliziosi evocano un mondo meraviglioso nel quale il corpo diventa perfezione. Per idratare, nutrire e rilassare, eliminare le cellule morte ed ossigenare la pelle.",
-      en: "A ritual where sumptuous fabrics and delightful fragrances evoke a wondrous world in which the body becomes perfection. To hydrate, nourish and relax, remove dead cells and oxygenate the skin.",
-    },
+            it: "Rituale in cui tessuti e fragranze deliziosi evocano un mondo meraviglioso nel quale il corpo diventa perfezione. Per idratare, nutrire e rilassare, eliminare le cellule morte ed ossigenare la pelle.",
+            en: "A ritual where sumptuous fabrics and delightful fragrances evoke a wondrous world in which the body becomes perfection. To hydrate, nourish and relax, remove dead cells and oxygenate the skin.",
+          },
     tags: ["nutriente", "sensoriale", "purificante"],
   },
   groups: [
@@ -420,14 +522,14 @@ export const ritualiCategory: SpaCategory = {
           id: "dolcezza-orientale",
           name: { it: "Dolcezza Orientale", en: "Oriental Sweetness" },
           duration: { it: "25min", en: "25 min" },
-          price: eur(58),
+          price: eur(68),
           short: {
             it: "Un letto morbido scaldato dal sole e i profumi dei campi di primavera.",
             en: "A soft bed warmed by the sun and the scents of spring fields.",
           },
           description: {
-            it: "Rituale che conduce ad un magnifico e soffice letto scaldato dal sole e deliziato dai profumi dei campi di primavera.",
-            en: "A ritual that leads to a magnificent, soft bed warmed by the sun and scented with the fragrances of spring fields.",
+            it: "Un rituale che conduce a un soffice letto scaldato dal sole, tra i profumi dei campi in primavera.",
+            en: "A ritual that leads to a soft bed warmed by the sun, among the scents of spring fields.",
           },
           tags: ["nutriente", "sensoriale"],
         },
@@ -435,7 +537,7 @@ export const ritualiCategory: SpaCategory = {
           id: "rio-de-janeiro",
           name: { it: "Viaggio a Rio de Janeiro", en: "Journey to Rio de Janeiro" },
           duration: { it: "1h", en: "1h" },
-          price: eur(70),
+          price: eur(80),
           short: {
             it: "Ritmo, energia e calore verso le spiagge brasiliane.",
             en: "Rhythm, energy and warmth towards Brazilian shores.",
@@ -446,7 +548,7 @@ export const ritualiCategory: SpaCategory = {
           id: "cancun",
           name: { it: "Viaggio a Cancun", en: "Journey to Cancun" },
           duration: { it: "1h", en: "1h" },
-          price: eur(70),
+          price: eur(80),
           short: {
             it: "Brezza caraibica e profumi tropicali per una fuga luminosa.",
             en: "Caribbean breeze and tropical scents for a bright escape.",
@@ -457,7 +559,7 @@ export const ritualiCategory: SpaCategory = {
           id: "bali",
           name: { it: "Viaggio a Bali", en: "Journey to Bali" },
           duration: { it: "1h e 30min", en: "1h 30min" },
-          price: eur(90),
+          price: eur(100),
           short: {
             it: "Gesti lenti e aromi d'Oriente per ritrovare l'equilibrio.",
             en: "Slow gestures and oriental aromas to rediscover balance.",
@@ -468,7 +570,7 @@ export const ritualiCategory: SpaCategory = {
           id: "marrakech",
           name: { it: "Viaggio a Marrakech", en: "Journey to Marrakech" },
           duration: { it: "1h e 30min", en: "1h 30min" },
-          price: eur(90),
+          price: eur(100),
           short: {
             it: "Spezie, argan e atmosfere del deserto in un rituale avvolgente.",
             en: "Spices, argan and desert atmospheres in an enveloping ritual.",
@@ -489,7 +591,7 @@ export const ritualiCategory: SpaCategory = {
           id: "savonage",
           name: { it: "Savonage Profumato", en: "Scented Savonage" },
           duration: { it: "1h", en: "1h" },
-          price: eur(95),
+          price: eur(105),
           short: {
             it: "Pulizia berbera al sapone per una pelle morbida e profumata.",
             en: "A Berber soap cleansing for soft, fragrant skin.",
@@ -504,7 +606,7 @@ export const ritualiCategory: SpaCategory = {
           id: "hammam",
           name: { it: "Hammam", en: "Hammam" },
           duration: { it: "1h", en: "1h" },
-          price: eur(95),
+          price: eur(105),
           short: {
             it: "Il rituale della purificazione con sapone nero esfoliante.",
             en: "The purification ritual with exfoliating black soap.",
@@ -519,12 +621,27 @@ export const ritualiCategory: SpaCategory = {
           id: "hammam-cuoio",
           name: { it: "Hammam con cuoio capelluto", en: "Hammam with scalp" },
           duration: { it: "1h e 20min", en: "1h 20min" },
-          price: eur(115),
+          price: eur(125),
           short: {
             it: "L'hammam classico arricchito dalla cura del cuoio capelluto.",
             en: "The classic hammam enriched with scalp care.",
           },
           tags: ["purificante", "relax"],
+        },
+        {
+          id: "via-della-verbena",
+          name: { it: "La Via della Verbena", en: "The Path of Verbena" },
+          duration: { it: "1h e 40min", en: "1h 40min" },
+          price: eur(169),
+          short: {
+            it: "Purificazione in biosauna e note fresche di verbena per un relax che favorisce il sonno.",
+            en: "Biosauna purification and fresh verbena notes for deep calm that supports better sleep.",
+          },
+          description: {
+            it: "Un viaggio sensoriale che unisce la purificazione profonda della biosauna alle note fresche, agrumate e rilassanti della verbena, pianta amata anche nelle antiche tradizioni orientali per le sue proprietà antinfiammatorie e calmanti, le quali favoriscono positivamente la qualità del sonno.",
+            en: "A sensory journey that joins the deep purification of the biosauna with the fresh, citrusy and relaxing notes of verbena — a plant cherished in ancient Eastern traditions for its anti-inflammatory and calming properties, which gently support better sleep.",
+          },
+          tags: ["purificante", "relax", "sensoriale"],
         },
       ],
     },
@@ -540,14 +657,14 @@ export const ritualiCategory: SpaCategory = {
           id: "oud",
           name: { it: "Oud", en: "Oud" },
           duration: { it: "1h", en: "1h" },
-          price: eur(100),
+          price: eur(110),
           short: {
             it: "Una nuvola orientale dolce e speziata che profuma di Marocco.",
             en: "A sweet, spicy oriental cloud that smells of Morocco.",
           },
           description: {
-            it: "Rituale caratterizzato da una nuvola orientale accattivante ed un profumo innovativo, dolce e speziato, che fa volare nei piccoli paesi del Marocco, dove la magia invade la mente e dona spensieratezza. Per idratare, nutrire e rilassare, eliminare le cellule morte ed ossigenare la pelle.",
-            en: "A ritual characterised by an enchanting oriental atmosphere and an innovative, sweet and spicy fragrance that transports you to the small villages of Morocco, where magic fills the mind and brings lightness. To hydrate, nourish and relax, remove dead cells and oxygenate the skin.",
+            it: "Una nuvola orientale, dolce e speziata, che trasporta nei paesi del Marocco. Nutre e rilassa, elimina le cellule morte e ossigena la pelle, lasciando spensieratezza e leggerezza.",
+            en: "An oriental cloud, sweet and spicy, that carries you to the lands of Morocco. It nourishes and relaxes, removes dead cells and oxygenates the skin, leaving lightness and ease.",
           },
           tags: ["sensoriale", "nutriente"],
         },
@@ -555,7 +672,7 @@ export const ritualiCategory: SpaCategory = {
           id: "oud-ambra",
           name: { it: "Oud e Ambra", en: "Oud & Amber" },
           duration: { it: "1h e 20min", en: "1h 20min" },
-          price: eur(215),
+          price: eur(225),
           short: {
             it: "Oud energico e ambra imperiale per un viaggio indimenticabile.",
             en: "Bold oud and imperial amber for an unforgettable journey.",
@@ -567,32 +684,17 @@ export const ritualiCategory: SpaCategory = {
           tags: ["sensoriale", "nutriente"],
         },
         {
-          id: "cannella-arancia",
-          name: { it: "Speziato Cannella e Arancia", en: "Spiced Cinnamon & Orange" },
-          duration: { it: "1h e 25min", en: "1h 25min" },
-          price: eur(170),
-          short: {
-            it: "Fiori d'arancio e cannella in un giardino illuminato dal sole.",
-            en: "Orange blossom and cinnamon in a sunlit garden.",
-          },
-          description: {
-            it: "Rituale dalle proprietà stimolanti e tonificanti, dove il profumo dei deliziosi fiori d'arancio e delle cannella conducono ad un magnifico giardino illuminato dal sole. Per eliminare le cellule morte e le impurità, tonificare e stimolare la pelle, nutrire e rilassare.",
-            en: "A stimulating and toning ritual where the scent of orange blossom and cinnamon leads to a magnificent sunlit garden. To remove dead cells and impurities, tone and stimulate the skin, nourish and relax.",
-          },
-          tags: ["tonificante", "nutriente"],
-        },
-        {
           id: "prezioso-oud",
           name: { it: "Prezioso all'Oud", en: "Precious Oud" },
           duration: { it: "1h e 35min", en: "1h 35min" },
-          price: eur(181),
+          price: eur(191),
           short: {
             it: "Karité e argan per nutrire la pelle e inebriare l'anima.",
             en: "Shea and argan to nourish the skin and intoxicate the soul.",
           },
           description: {
-            it: "Per viaggiare in luoghi lontani e inebriare l'anima, nutrendo la pelle con il burro di karitè e l'argan e rendervi ancora più affascinanti. Per eliminare le cellule morte e le impurità, nutrire e riparare la pelle.",
-            en: "To travel to distant places and intoxicate the soul, nourishing the skin with shea and argan butter and making you even more captivating. To remove dead cells and impurities, nourish and repair the skin.",
+            it: "Un viaggio in luoghi lontani: il burro di karité e l'argan nutrono la pelle in profondità, eliminano le impurità e la lasciano luminosa e affascinante.",
+            en: "A journey to distant places: shea butter and argan nourish the skin in depth, remove impurities and leave it luminous and captivating.",
           },
           tags: ["nutriente", "sensoriale"],
         },
@@ -610,7 +712,7 @@ export const ritualiCategory: SpaCategory = {
           id: "seta-sahara",
           name: { it: "La Seta del Sahara", en: "The Silk of the Sahara" },
           duration: { it: "1h", en: "1h" },
-          price: eur(101),
+          price: eur(111),
           short: {
             it: "Pelle fine e setosa come la sabbia che scorre tra le dita.",
             en: "Skin as fine and silky as sand flowing between your fingers.",
@@ -625,14 +727,14 @@ export const ritualiCategory: SpaCategory = {
           id: "vichy",
           name: { it: "Vichy", en: "Vichy" },
           duration: { it: "30min", en: "30 min" },
-          price: eur(140),
+          price: eur(150),
           short: {
             it: "Una calda pioggia, burro di karité e quattro mani avvolgenti.",
             en: "Warm rainfall, shea butter and four enveloping hands.",
           },
           description: {
-            it: "Altamente rilassante e unico nel suo genere, grazie all'azione di una calda pioggia che, scendendo, si sposa al burro nutriente di karité ed incontra quattro mani avvolgenti che massaggiano tutto il corpo.",
-            en: "Highly relaxing and unique, thanks to warm rainfall that blends with nourishing shea butter while four enveloping hands massage the entire body.",
+            it: "Unico nel suo genere: una calda pioggia che scende sul corpo si unisce al burro di karité nutriente e a quattro mani avvolgenti che massaggiano tutto il corpo.",
+            en: "Unique of its kind: warm rainfall on the body joins nourishing shea butter and four enveloping hands that massage the whole body.",
           },
           tags: ["relax", "nutriente"],
         },
@@ -640,7 +742,7 @@ export const ritualiCategory: SpaCategory = {
           id: "cioccolato-zenzero",
           name: { it: "Cioccolato e Zenzero", en: "Chocolate & Ginger" },
           duration: { it: "1h e 40min", en: "1h 40min" },
-          price: eur(159),
+          price: eur(169),
           short: {
             it: "La dolcezza del cacao e il calore dello zenzero in un abbraccio goloso.",
             en: "The sweetness of cocoa and the warmth of ginger in an indulgent embrace.",
@@ -650,15 +752,15 @@ export const ritualiCategory: SpaCategory = {
         {
           id: "arancia-miele",
           name: { it: "Dolce Arancia e Miele", en: "Sweet Orange & Honey" },
-          duration: { it: "1h e 25min", en: "1h 25min" },
-          price: eur(181),
+          duration: { it: "1h e 35min", en: "1h 35min" },
+          price: eur(191),
           short: {
             it: "Miele prezioso e arancia energizzante per un piacere senza tempo.",
             en: "Precious honey and energising orange for a timeless pleasure.",
           },
           description: {
-            it: "Rituale che va oltre la coccola e fa vivere il fascino di un incantesimo dove il miele, dolce e prezioso nettare, e l'arancio, energizzante e tonificante, avvolgeranno tutto il corpo per un piacere senza tempo. Per eliminare le cellule morte e le impurità, nutrire e riparare la pelle, tonificare e stimolare.",
-            en: "A ritual that goes beyond pampering and evokes the charm of a spell where honey, a sweet and precious nectar, and orange, energising and toning, envelop the whole body in timeless pleasure. To remove dead cells and impurities, nourish and repair the skin, tone and stimulate.",
+            it: "Il miele, nettare prezioso, e l'arancia tonificante avvolgono il corpo in un piacere senza tempo. Elimina le impurità, nutre e ripara la pelle, tonifica e rivitalizza.",
+            en: "Precious honey and toning orange wrap the body in timeless pleasure. It removes impurities, nourishes and repairs the skin, tones and revitalises.",
           },
           tags: ["nutriente", "tonificante"],
         },
@@ -666,7 +768,7 @@ export const ritualiCategory: SpaCategory = {
           id: "delizia-oriente",
           name: { it: "Delizia d'Oriente", en: "Delight of the Orient" },
           duration: { it: "1h e 35min", en: "1h 35min" },
-          price: eur(162),
+          price: eur(172),
           short: {
             it: "Rilassamento profondo per una pelle nuova, morbida come quella di un bambino.",
             en: "Deep relaxation for new skin, as soft as a child's.",
@@ -681,7 +783,7 @@ export const ritualiCategory: SpaCategory = {
           id: "prezioso-ambra",
           name: { it: "Prezioso all'Ambra", en: "Precious Amber" },
           duration: { it: "1h e 30min", en: "1h 30min" },
-          price: eur(190),
+          price: eur(200),
           short: {
             it: "Un palazzo orientale di ambra e spezie per una pelle di seta.",
             en: "An oriental palace of amber and spices for silk-like skin.",
@@ -706,15 +808,15 @@ export const massaggiSuiteCategory: SpaCategory = {
     id: "lomi-lomi",
     name: { it: "Hawaiano Lomi Lomi Nui", en: "Hawaiian Lomi Lomi Nui" },
     duration: { it: "1h", en: "1h" },
-    price: eur(90),
+    price: eur(100),
     short: {
       it: "L'antico massaggio polinesiano per un benessere assoluto e un senso di rinnovamento.",
       en: "The ancient Polynesian massage for absolute wellbeing and a sense of renewal.",
     },
     description: {
-      it: "Rituale antico con massaggio polinesiano in grado di regalare benessere quasi assoluto e una fantastica sensazione di rinnovamento.",
-      en: "An ancient ritual with Polynesian massage able to deliver near-absolute wellbeing and a wonderful sense of renewal.",
-    },
+            it: "Un rituale antico con massaggio polinesiano che regala un benessere quasi assoluto e una profonda sensazione di rinnovamento.",
+            en: "An ancient ritual with Polynesian massage that brings near-absolute wellbeing and a deep sense of renewal.",
+          },
     tags: ["relax", "sensoriale"],
   },
   groups: [
@@ -729,15 +831,15 @@ export const massaggiSuiteCategory: SpaCategory = {
         {
           id: "goloso",
           name: { it: "Goloso", en: "Goloso" },
-          duration: { it: "1h", en: "1h" },
-          price: eur(90),
+          duration: { it: "1h e 10min", en: "1h 10min" },
+          price: eur(100),
           short: {
             it: "Profumi golosi che addolciscono delicatamente tutto il corpo.",
             en: "Indulgent fragrances that gently soften the whole body.",
           },
           description: {
-            it: "Rituale rilassante e distensivo con profumi golosi che addolciscono delicatamente tutto il corpo. Per idratare, nutrire, rilassare.",
-            en: "A relaxing and unwinding ritual with indulgent fragrances that gently soften the whole body. To hydrate, nourish and relax.",
+            it: "Un rituale rilassante e distensivo dai profumi golosi che addolciscono il corpo. Idrata, nutre e rilassa.",
+            en: "A relaxing, soothing ritual with indulgent fragrances that soften the body. It hydrates, nourishes and relaxes.",
           },
           tags: ["nutriente", "relax"],
         },
@@ -745,14 +847,14 @@ export const massaggiSuiteCategory: SpaCategory = {
           id: "candle",
           name: { it: "Candle Massage", en: "Candle Massage" },
           duration: { it: "1h", en: "1h" },
-          price: eur(90),
+          price: eur(100),
           short: {
             it: "Burro di karité 100% e il calore avvolgente della candela.",
             en: "100% shea butter and the enveloping warmth of the candle.",
           },
           description: {
-            it: "Rituale con burro di karitè al 100% per una piacevole sensazione di protezione e di avvolgente calore donato dalla candela.",
-            en: "A ritual with 100% shea butter for a pleasant feeling of protection and enveloping warmth from the candle.",
+            it: "Un rituale con burro di karité al 100%: il calore avvolgente della candela si scioglie sulla pelle in una sensazione di protezione e nutrimento profondo.",
+            en: "A ritual with 100% shea butter: the enveloping warmth of the candle melts onto the skin in a feeling of protection and deep nourishment.",
           },
           tags: ["nutriente", "relax"],
         },
@@ -760,7 +862,7 @@ export const massaggiSuiteCategory: SpaCategory = {
           id: "bioemozionale",
           name: { it: "Bioemozionale", en: "Bioemotional" },
           duration: { it: "1h", en: "1h" },
-          price: eur(90),
+          price: eur(100),
           short: {
             it: "Riscopri il piacere del tocco e il tuo sé corporeo.",
             en: "Rediscover the pleasure of touch and your bodily self.",
@@ -782,61 +884,166 @@ export const coppiaCategory: SpaCategory = {
     items: [INCLUSION_TISANA, INCLUSION_RELAX],
   },
   featured: {
-    id: "dolcezza-coppia",
-    name: { it: "Rituale Dolcezza Orientale di coppia", en: "Oriental Sweetness ritual for two" },
-    duration: { it: "25min", en: "25 min" },
-    price: eur(116),
+    id: "massaggio-di-coppia",
+    name: { it: "Massaggio di Coppia", en: "Couple Massage" },
+    duration: { it: "1h", en: "1h" },
+    price: eur(135),
     short: {
-      it: "Il rituale Dolcezza Orientale vissuto insieme, nello stesso respiro.",
-      en: "The Oriental Sweetness ritual experienced together, in the same breath.",
+      it: "Condividi il piacere di un massaggio con chi ami.",
+      en: "Share the pleasure of a massage with someone you love.",
     },
     description: {
-      it: "Il nostro rituale più amato, vissuto in due: un letto morbido scaldato dal sole, profumi dei campi di primavera e gesti lenti che avvolgono entrambi nello stesso momento di abbandono.",
-      en: "Our most beloved ritual, shared by two: a soft bed warmed by the sun, the scents of spring fields and slow gestures that wrap you both in the same moment of surrender.",
+      it: "Condividi il piacere di un massaggio con la persona che ami, un'amica o un familiare. Le nostre cabine sono pensate anche per questo.",
+      en: "Share the pleasure of a massage with the person you love, a friend or a family member. Our cabins are designed for this too.",
     },
-    tags: ["coppia", "sensoriale", "nutriente"],
+    tags: ["coppia", "relax"],
   },
   groups: [
     {
+      id: "coppia-percorsi",
+      title: { it: "Percorsi per due", en: "Journeys for two" },
+      subtitle: {
+        it: "Purificazione e calore condivisi, seguiti da un massaggio dedicato.",
+        en: "Shared purification and warmth, followed by a dedicated massage.",
+      },
+      treatments: [
+        {
+          id: "hammam-plantare-coppia",
+          name: {
+            it: "Percorso Hammam per due con Massaggio Plantare",
+            en: "Hammam journey for two with Foot Reflexology",
+          },
+          temperature: { it: "43°", en: "43°C" },
+          price: eur(220),
+          short: {
+            it: "Purificazione ai vapori e massaggio plantare, insieme.",
+            en: "Vapour purification and foot reflexology, together.",
+          },
+          description: {
+            it: "Antico rituale di purificazione condiviso: i vapori a varie temperature liberano il corpo, seguiti da un massaggio plantare.",
+            en: "An ancient shared purification ritual: vapours at various temperatures release the body, followed by a foot reflexology massage.",
+          },
+          tags: ["coppia", "purificante", "relax"],
+        },
+        {
+          id: "termale-romano-miele-coppia",
+          name: {
+            it: "Percorso Termale Romano con Massaggio al Miele Fondente",
+            en: "Roman Thermal journey with Melting Honey Massage",
+          },
+          short: {
+            it: "Pacchetto coppia: percorso termale e massaggio al miele.",
+            en: "Couple package: thermal journey and honey massage.",
+          },
+          description: {
+            it: "L'esperienza completa: il percorso termale romano seguito dal massaggio al miele fondente, per un momento di benessere assoluto da vivere in due.",
+            en: "The complete experience: the Roman thermal journey followed by the melting honey massage, for a moment of absolute wellbeing to share.",
+          },
+          price: eur(295),
+          tags: ["coppia", "relax", "nutriente"],
+        },
+      ],
+    },
+    {
       id: "coppia-massaggi",
-      title: { it: "Massaggi per due", en: "Massages for two" },
+      title: { it: "Rituali e massaggi per due", en: "Rituals & massages for two" },
       subtitle: {
         it: "Fianco a fianco, nello stesso profumo e nello stesso tempo.",
         en: "Side by side, in the same scent and the same time.",
       },
       treatments: [
         {
+          id: "dolcezza-coppia",
+          name: { it: "Rituale Dolcezza per due", en: "Sweetness ritual for two" },
+          price: eur(106),
+          short: {
+            it: "Un letto soffice e i profumi dei campi di primavera, in due.",
+            en: "A soft bed and the scents of spring fields, for two.",
+          },
+          description: {
+            it: "Un rituale che conduce a un soffice letto scaldato dal sole, tra i profumi dei campi in primavera. Da vivere in due.",
+            en: "A ritual that leads to a soft bed warmed by the sun, among the scents of spring fields. To be shared by two.",
+          },
+          tags: ["coppia", "sensoriale", "nutriente"],
+        },
+        {
           id: "morjana",
-          name: { it: "Massaggio aromatico Morjana", en: "Morjana aromatic massage" },
-          duration: { it: "55min", en: "55 min" },
+          name: {
+            it: "Massaggio Aromatico Morjana per due",
+            en: "Morjana aromatic massage for two",
+          },
           price: eur(150),
           short: {
-            it: "Un massaggio aromatico per due, tra oli caldi e profumi d'Oriente.",
-            en: "An aromatic massage for two, among warm oils and oriental scents.",
+            it: "Fragranze avvolgenti e un viaggio sensoriale nell'Oriente.",
+            en: "Enveloping fragrances and a sensory journey into the Orient.",
           },
-          tags: ["coppia", "relax"],
+          description: {
+            it: "Per gli appassionati di fragranze avvolgenti: un vero viaggio sensoriale nel cuore dell'Oriente, condiviso.",
+            en: "For lovers of enveloping fragrances: a true sensory journey into the heart of the Orient, shared.",
+          },
+          tags: ["coppia", "relax", "sensoriale"],
         },
         {
           id: "candle-coppia",
-          name: { it: "Candle massage", en: "Candle massage" },
-          duration: { it: "55min", en: "55 min" },
-          price: eur(170),
+          name: { it: "Candle Massage per due", en: "Candle Massage for two" },
+          price: eur(165),
           short: {
-            it: "La candela di karité che si scioglie in un calore condiviso.",
-            en: "The shea candle melting into a shared warmth.",
+            it: "Burro di karité e il calore della candela, condivisi.",
+            en: "Shea butter and candle warmth, shared.",
           },
-          tags: ["coppia", "nutriente"],
+          description: {
+            it: "Il massaggio rituale con burro di karité al 100%: il calore della candela avvolge entrambi in una sensazione di protezione.",
+            en: "The ritual massage with 100% shea butter: the warmth of the candle wraps you both in a feeling of protection.",
+          },
+          tags: ["coppia", "nutriente", "relax"],
         },
         {
-          id: "aromatico-schiena",
-          name: { it: "Massaggio aromatico alla schiena", en: "Aromatic back massage" },
-          duration: { it: "40min", en: "40 min" },
-          price: eur(105),
+          id: "miele-fondente-coppia",
+          name: {
+            it: "Massaggio al Miele Fondente per due",
+            en: "Melting Honey Massage for two",
+          },
+          price: eur(165),
           short: {
-            it: "Un massaggio alla schiena fianco a fianco, per sciogliere ogni tensione.",
-            en: "A side-by-side back massage to release every tension.",
+            it: "Profumi golosi che addolciscono il corpo, insieme.",
+            en: "Indulgent scents that soften the body, together.",
+          },
+          description: {
+            it: "Un rituale rilassante e distensivo dai profumi golosi che addolciscono il corpo. Idrata, nutre e rilassa.",
+            en: "A relaxing, soothing ritual with indulgent fragrances that soften the body. It hydrates, nourishes and relaxes.",
+          },
+          tags: ["coppia", "nutriente", "relax"],
+        },
+        {
+          id: "schiena-verbena-coppia",
+          name: {
+            it: "Massaggio Schiena per due all'Olio di Verbena",
+            en: "Back Massage for two with Verbena Oil",
+          },
+          price: eur(100),
+          short: {
+            it: "Olio essenziale di verbena, calmante e riequilibrante.",
+            en: "Calming, balancing verbena essential oil.",
+          },
+          description: {
+            it: "Un olio essenziale dall'azione calmante e riequilibrante, che dona una piacevole sensazione di serenità. Da condividere.",
+            en: "An essential oil with a calming, rebalancing action that brings a pleasant sense of serenity. To be shared.",
           },
           tags: ["coppia", "relax"],
+        },
+        {
+          id: "due-spa",
+          name: { it: "Massaggio per due in SPA", en: "Massage for two in SPA" },
+          price: eur(165),
+          short: {
+            it: "Un momento magico da condividere nello spazio SPA.",
+            en: "A magical moment to share in the SPA space.",
+          },
+          description: {
+            it: "Un'esperienza esclusiva da vivere insieme, nello spazio riservato della SPA. Il massaggio si intreccia all'atmosfera del rituale: un momento magico da condividere, lontano da tutto.",
+            en: "An exclusive experience to share, in the private space of the SPA. The massage intertwines with the ritual atmosphere: a magical moment together, far from everything.",
+          },
+          tags: ["coppia", "relax", "sensoriale"],
         },
       ],
     },
@@ -869,9 +1076,9 @@ export const percorsiCategory: SpaCategory = {
       en: "Four phases of heat and humidity: the complete purification journey.",
     },
     description: {
-      it: "Suddiviso in quattro fasi a diverse temperatura e umidità. Indicato per la purificazione, è suggerito per gli amanti del relax e per chi si avvicina alla sauna e al bagno turco per la prima volta.",
-      en: "Divided into four phases at different temperatures and humidity levels. Recommended for purification, ideal for relaxation lovers and those new to sauna and Turkish bath.",
-    },
+            it: "Suddiviso in quattro fasi a diverse temperatura e umidità. Indicato per la purificazione, è suggerito per gli amanti del relax e per chi si avvicina alla sauna e al bagno turco per la prima volta.",
+            en: "Divided into four phases at different temperatures and humidity levels. Recommended for purification, ideal for relaxation lovers and those new to sauna and Turkish bath.",
+          },
     tags: ["purificante", "relax"],
   },
   groups: [
@@ -1063,7 +1270,46 @@ export const percorsiCategory: SpaCategory = {
         en: "The thermal journey followed by a dedicated massage.",
       },
       treatments: [
+                {
+          id: "percorso-hammam-candle",
+          name: {
+            it: "Percorso Hammam con Candle Massage",
+            en: "Hammam journey with Candle Massage",
+          },
+          temperature: { it: "43°", en: "43°C" },
+          price: eur(295),
+          short: {
+            it: "Purificazione ai vapori e massaggio rituale al burro di karité.",
+            en: "Vapour purification and a ritual shea-butter candle massage.",
+          },
+          description: {
+            it: "Antico rituale di purificazione: i vapori a diverse temperature liberano dolcemente il corpo. A seguire, un massaggio rituale con burro di karité al 100%, per l'avvolgente calore della candela.",
+            en: "An ancient purification ritual: vapours at different temperatures gently release the body. Followed by a ritual massage with 100% shea butter and the enveloping warmth of the candle.",
+          },
+          tags: ["purificante", "relax", "nutriente"],
+        },
         {
+          id: "percorso-sauna-morjana",
+          name: {
+            it: "Percorso Sauna / Sauna Romana / Bagno Turco con Massaggio Aromatico Morjana",
+            en: "Sauna / Roman Sauna / Turkish Bath journey with Morjana aromatic massage",
+          },
+          temperature: {
+            it: "Sauna 70° / Sauna Romana 48° / Bagno Turco 46°",
+            en: "Sauna 70°C / Roman Sauna 48°C / Turkish Bath 46°C",
+          },
+          price: eur(280),
+          short: {
+            it: "Sudorazione profonda e massaggio aromatico nel cuore dell'Oriente.",
+            en: "Deep sweating and an aromatic massage at the heart of the Orient.",
+          },
+          description: {
+            it: "Favorisce un'abbondante sudorazione con benefici sulla muscolatura e una profonda sensazione di relax. A seguire, un massaggio con fragranze avvolgenti, per un viaggio sensoriale nel cuore dell'Oriente.",
+            en: "It encourages abundant sweating with benefits for the muscles and a deep sense of relaxation. Followed by a massage with enveloping fragrances, for a sensory journey into the heart of the Orient.",
+          },
+          tags: ["relax", "detox", "sensoriale"],
+        },
+{
           id: "pacchetto-rilassante",
           name: { it: "Percorso + massaggio rilassante", en: "Journey + relaxing massage" },
           price: eur(130),

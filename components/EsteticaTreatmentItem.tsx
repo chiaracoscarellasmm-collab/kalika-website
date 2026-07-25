@@ -13,6 +13,7 @@ import {
 } from "@/lib/treatments";
 import { buildSimpleGiftCardHref } from "@/lib/gift-selection";
 import { whatsappLink, localePath } from "@/lib/site";
+import { formatEmphasis } from "@/lib/format-emphasis";
 
 type Props = {
   treatment: Treatment;
@@ -182,7 +183,7 @@ export function EsteticaTreatmentItem({
               <div className="min-w-0 flex-1 space-y-3">
                 {(description || note) && (
                   <p className="text-[16px] leading-8 text-[var(--color-espresso)]/70">
-                    {description ?? note}
+                    {formatEmphasis(description ?? note ?? "")}
                   </p>
                 )}
                 <p className="text-[15px] leading-7 text-[var(--color-espresso)]/75 sm:text-base sm:leading-8">
@@ -208,7 +209,7 @@ export function EsteticaTreatmentItem({
             >
               {(description || note) && (
                 <p className="min-w-0 flex-1 text-[16px] leading-8 text-[var(--color-espresso)]/70">
-                  {description ?? note}
+                  {formatEmphasis(description ?? note ?? "")}
                 </p>
               )}
               <div className="flex w-full flex-col gap-2 sm:flex-row sm:gap-3 lg:w-auto lg:shrink-0">
