@@ -220,12 +220,6 @@ export function GiftCardForm({ locale, dict }: Props) {
 
   useEffect(() => {
     const params = new URLSearchParams(window.location.search);
-    const sessionId = params.get("session_id");
-    if (sessionId && params.get("download") === "1") {
-      window.location.href = `/api/gift-card/download?session_id=${encodeURIComponent(sessionId)}`;
-      return;
-    }
-
     const treatmentId = params.get("treatment");
     if (!treatmentId) return;
 

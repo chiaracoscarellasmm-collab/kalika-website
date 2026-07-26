@@ -81,11 +81,44 @@ export default async function EssenzaPage({
   return (
     <>
       <PageHero
-        overline={dict.home.introOverline}
+        overline={dict.essenza.heroOverline}
         title={dict.essenza.hero}
-        subtitle={dict.essenza.heroSubtitle}
-        variant="cream"
+        variant="glicine"
+        compact
+        divider={false}
       />
+
+      {/* Il nome / Nuovaestetica — continua la fascia glicine, due colonne */}
+      <section className="w-full bg-[#F3E8F0] pb-16 pt-2 sm:pb-20 sm:pt-4">
+        <div className="mx-auto grid max-w-6xl gap-10 px-6 md:grid-cols-2 md:gap-12 lg:gap-16">
+          <Reveal>
+            <div>
+              <h3 className="display text-2xl text-[var(--color-brown)] sm:text-3xl">
+                {dict.essenza.nomeLogo.nomeTitle}
+              </h3>
+              <p className="mt-4 text-base leading-8 text-[var(--color-espresso)]/80">
+                {richText(
+                  dict.essenza.nomeLogo.nomeBody,
+                  "font-semibold text-[var(--color-wisteria)]",
+                )}
+              </p>
+            </div>
+          </Reveal>
+          <Reveal delay={0.06}>
+            <div>
+              <h3 className="display text-2xl text-[var(--color-brown)] sm:text-3xl">
+                {dict.essenza.nomeLogo.nuovaesteticaTitle}
+              </h3>
+              <p className="mt-4 text-base leading-8 text-[var(--color-espresso)]/80">
+                {richText(
+                  dict.essenza.nomeLogo.nuovaesteticaBody,
+                  "font-semibold text-[var(--color-wisteria)]",
+                )}
+              </p>
+            </div>
+          </Reveal>
+        </div>
+      </section>
 
       {/* 1. Chi è Kalika — text left, photo right */}
       <section className="bg-[var(--color-cream)] py-24">

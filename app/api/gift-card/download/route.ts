@@ -1,6 +1,4 @@
-import Stripe from "stripe";
-import { findGiftCardByStripeSession } from "@/lib/giftcard-store";
-import { fulfillGiftCardFromSession } from "@/lib/giftcard-fulfillment";
+import { resolveGiftCardFromCheckoutSession } from "@/lib/giftcard-resolve";
 import { generateGiftCardPdf } from "@/lib/giftcard-pdf";
 
 export const runtime = "nodejs";
@@ -13,16 +11,9 @@ export async function GET(request: Request) {
     return Response.json({ error: "MISSING_SESSION_ID" }, { status: 400 });
   }
 
-  let record = await findGiftCardByStripeSession(sessionId);
-
+  const record = await resolveGiftCardFromCheckoutSession(sessionId);
   if (!record) {
-    const secret = process.env.STRIPE_SECRET_KEY;
-    if (!secret) {
-      return Response.json({ error: "STRIPE_NOT_CONFIGURED" }, { status: 500 });
-    }
-    const stripe = new Stripe(secret);
-    const session = await stripe.checkout.sessions.retrieve(sessionId);
-    record = await fulfillGiftCardFromSession(session);
+    return Response.json({ error: "GIFT_CARD_NOT_FOUND" }, { status: 404 });
   }
 
   const pdf = await generateGiftCardPdf(record);

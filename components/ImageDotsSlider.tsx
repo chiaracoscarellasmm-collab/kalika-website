@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import { ChevronLeft, ChevronRight } from "lucide-react";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 type Slide = {
   src: string;
@@ -17,6 +17,8 @@ type ImageDotsSliderProps = {
   autoPlayMs?: number;
 };
 
+const SWIPE_THRESHOLD_PX = 40;
+
 export default function ImageDotsSlider({
   slides,
   className = "",
@@ -25,6 +27,8 @@ export default function ImageDotsSlider({
   autoPlayMs = 4500,
 }: ImageDotsSliderProps) {
   const [index, setIndex] = useState(0);
+  const pointerStartX = useRef<number | null>(null);
+  const pointerId = useRef<number | null>(null);
 
   useEffect(() => {
     if (slides.length <= 1 || autoPlayMs <= 0) return;
@@ -32,7 +36,7 @@ export default function ImageDotsSlider({
       setIndex((current) => (current + 1) % slides.length);
     }, autoPlayMs);
     return () => window.clearInterval(id);
-  }, [slides.length, autoPlayMs]);
+  }, [slides.length, autoPlayMs, index]);
 
   if (slides.length === 0) return null;
 
@@ -40,9 +44,43 @@ export default function ImageDotsSlider({
     setIndex((current) => (current - 1 + slides.length) % slides.length);
   const goNext = () => setIndex((current) => (current + 1) % slides.length);
 
+  const onPointerDown = (event: React.PointerEvent<HTMLDivElement>) => {
+    if (slides.length <= 1) return;
+    pointerStartX.current = event.clientX;
+    pointerId.current = event.pointerId;
+    event.currentTarget.setPointerCapture(event.pointerId);
+  };
+
+  const onPointerUp = (event: React.PointerEvent<HTMLDivElement>) => {
+    if (pointerStartX.current == null || pointerId.current !== event.pointerId) {
+      return;
+    }
+    const deltaX = event.clientX - pointerStartX.current;
+    pointerStartX.current = null;
+    pointerId.current = null;
+    try {
+      event.currentTarget.releasePointerCapture(event.pointerId);
+    } catch {
+      // already released
+    }
+    if (Math.abs(deltaX) < SWIPE_THRESHOLD_PX) return;
+    if (deltaX < 0) goNext();
+    else goPrev();
+  };
+
+  const onPointerCancel = () => {
+    pointerStartX.current = null;
+    pointerId.current = null;
+  };
+
   return (
-    <div className={`relative overflow-hidden ${className}`}>
-      <div className="relative aspect-[16/10] w-full">
+    <div
+      className={`relative touch-pan-y overflow-hidden ${className}`}
+      onPointerDown={onPointerDown}
+      onPointerUp={onPointerUp}
+      onPointerCancel={onPointerCancel}
+    >
+      <div className="relative aspect-[16/10] w-full cursor-grab active:cursor-grabbing">
         {slides.map((slide, i) => (
           <Image
             key={slide.src}
@@ -51,7 +89,8 @@ export default function ImageDotsSlider({
             fill
             sizes={sizes}
             quality={quality}
-            className={`object-cover transition-opacity duration-700 ease-out ${
+            draggable={false}
+            className={`pointer-events-none select-none object-cover transition-opacity duration-700 ease-out ${
               i === index ? "opacity-100" : "opacity-0"
             }`}
             priority={i === 0}

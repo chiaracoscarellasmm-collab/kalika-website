@@ -52,7 +52,7 @@ export async function POST(request: Request) {
       buyerEmail: body.buyerEmail,
       ...(body.treatmentName ? { treatmentName: body.treatmentName } : {}),
     },
-    success_url: `${origin}/${body.locale}/gift-card?session_id={CHECKOUT_SESSION_ID}&download=1`,
+    success_url: `${origin}/${body.locale}/gift-card/grazie?session_id={CHECKOUT_SESSION_ID}`,
     cancel_url: `${origin}/${body.locale}/gift-card`,
   });
 

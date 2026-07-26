@@ -98,7 +98,14 @@
   },
   "essenza": {
     "hero": "The Kalika Essence",
+    "heroOverline": "Our Philosophy",
     "heroSubtitle": "Where every detail is a choice, and every choice is care.",
+    "nomeLogo": {
+      "nomeTitle": "The name",
+      "nomeBody": "Kalika comes from Sanskrit and means \"**flower bud**\". An image that holds everything we are: something that opens, transforms, never stays the same.",
+      "nuovaesteticaTitle": "Nuovaestetica",
+      "nuovaesteticaBody": "From the bud comes the flower and from here, nuovaestetica: a way of understanding care that is never still, but **always evolving**. An aesthetic that opens to new things and grows with those who live it."
+    },
     "chiTitle": "Who is Kalika",
     "chiBody": "**Kalika is much more than a beauty centre**: it's the place where you feel welcomed, listened to and looked after with the right attention. Our clients call it a **happy island**: a space where every treatment is chosen together, applied with care for every detail, and designed to deliver real, lasting results.",
     "sabina": {

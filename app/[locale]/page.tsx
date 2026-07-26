@@ -69,7 +69,7 @@ export default async function HomePage({ params }: PageProps<"/[locale]">) {
           <Reveal delay={0.15}>
             <h1 className="display mt-5 text-5xl tracking-wide sm:text-7xl">
               KALIKA
-              <span className="block text-3xl tracking-[0.4em] mt-2 sm:text-4xl sm:tracking-[0.5em] opacity-95">
+              <span className="mt-2 block text-3xl tracking-[0.18em] opacity-95 sm:text-4xl sm:tracking-[0.22em]">
                 NUOVAESTETICA
               </span>
             </h1>
@@ -275,7 +275,7 @@ export default async function HomePage({ params }: PageProps<"/[locale]">) {
             </Reveal>
           </div>
 
-          <div className="mt-14 grid grid-cols-2 gap-5 lg:grid-cols-4 lg:gap-7">
+          <div className="-mx-6 mt-14 flex snap-x snap-mandatory gap-4 overflow-x-auto px-6 pb-2 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden lg:mx-0 lg:grid lg:snap-none lg:grid-cols-4 lg:gap-7 lg:overflow-visible lg:px-0 lg:pb-0">
             {[
               {
                 title: dict.home.featuredViso,
@@ -318,17 +318,21 @@ export default async function HomePage({ params }: PageProps<"/[locale]">) {
                     : "Hot stone massage with stones placed on the back",
               },
             ].map((card, i) => (
-              <Reveal key={card.title} delay={i * 0.06}>
+              <Reveal
+                key={card.title}
+                delay={i * 0.06}
+                className="w-[72vw] max-w-[280px] shrink-0 snap-start lg:w-auto lg:max-w-none"
+              >
                 <Link
                   href={card.href}
-                  className="group block overflow-hidden rounded-2xl border border-[var(--color-line)] bg-white shadow-sm transition-all duration-500 hover:-translate-y-1 hover:shadow-lg hover:shadow-[rgba(107,58,42,0.08)]"
+                  className="group block h-full overflow-hidden rounded-2xl border border-[var(--color-line)] bg-white shadow-sm transition-all duration-500 hover:-translate-y-1 hover:shadow-lg hover:shadow-[rgba(107,58,42,0.08)]"
                 >
                   <div className="relative aspect-[4/5] overflow-hidden">
                     <Image
                       src={card.src}
                       alt={card.alt}
                       fill
-                      sizes="(max-width: 640px) 50vw, (max-width: 1024px) 25vw, 280px"
+                      sizes="(max-width: 1023px) 72vw, 25vw"
                       quality={75}
                       className="object-cover object-center transition-transform duration-700 group-hover:scale-105"
                     />

@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { usePathname } from "next/navigation";
@@ -33,18 +34,20 @@ export function Navbar({ locale, dict }: Props) {
   return (
     <>
       <header className="fixed inset-x-0 top-0 z-40 border-b border-[var(--color-line)] bg-[var(--color-cream)]/95 backdrop-blur">
-        <div className="mx-auto flex max-w-7xl items-center justify-between gap-6 pl-2 pr-4 py-4 lg:pl-3 lg:pr-6">
+        <div className="flex w-full items-center justify-between gap-6 px-4 py-3 lg:px-6">
           <Link
             href={localePath(locale)}
-            className="flex flex-col leading-none transition-colors"
+            className="relative flex h-11 w-11 shrink-0 items-center justify-start sm:h-12 sm:w-12"
             aria-label={dict.common.brand}
           >
-            <span className="display text-[22px] italic text-[var(--color-brown)]">
-              Kalika
-            </span>
-            <span className="mt-1 text-[11px] font-normal uppercase tracking-[3px] text-[var(--color-wisteria)]">
-              Nuovaestetica
-            </span>
+            <Image
+              src="/logo-fiore-kalika.png"
+              alt=""
+              width={932}
+              height={893}
+              className="h-full w-full object-contain"
+              priority
+            />
           </Link>
 
           <nav className="hidden lg:flex items-center gap-8 text-[15px] tracking-[2px]">

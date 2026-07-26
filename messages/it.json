@@ -98,7 +98,14 @@
   },
   "essenza": {
     "hero": "L'Essenza Kalika",
+    "heroOverline": "La nostra Filosofia",
     "heroSubtitle": "Dove ogni dettaglio è una scelta, ogni scelta è cura.",
+    "nomeLogo": {
+      "nomeTitle": "Il nome",
+      "nomeBody": "Kalika nasce dal sanscrito e significa \"**bocciolo di fiore**\". Un'immagine che racchiude tutto ciò che siamo: qualcosa che si apre, si trasforma, non resta mai uguale a sé.",
+      "nuovaesteticaTitle": "Nuovaestetica",
+      "nuovaesteticaBody": "Dal bocciolo nasce il fiore e da qui nuovaestetica: un modo di intendere la cura che non è mai fermo, ma **in continua evoluzione**. Un'estetica che si apre alle cose nuove e cresce con chi la vive."
+    },
     "chiTitle": "Chi è Kalika",
     "chiBody": "**Kalika è molto più di un centro estetico**: è il luogo dove ti senti accolta, ascoltata e seguita con la giusta attenzione. I nostri clienti la descrivono come un'**isola felice**: uno spazio dove ogni trattamento viene scelto insieme, applicato con cura nei dettagli e pensato per ottenere risultati concreti e duraturi.",
     "sabina": {

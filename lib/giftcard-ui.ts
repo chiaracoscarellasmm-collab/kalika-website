@@ -26,6 +26,26 @@ export type GiftCardUiCopy = {
   frontPlaceholderMessage: string;
   /** Brand motto printed on the back of every gift card. */
   backMotto: string;
+  thanks: {
+    title: string;
+    subtitle: string;
+    body: string;
+    codeLabel: string;
+    copyCode: string;
+    copied: string;
+    toLabel: string;
+    valueLabel: string;
+    treatmentLabel: string;
+    validUntilLabel: string;
+    downloadNote: string;
+    downloadAgain: string;
+    emailNote: string;
+    bookingNote: string;
+    backHome: string;
+    errorTitle: string;
+    errorBody: string;
+    errorContact: string;
+  };
 };
 
 const copy: Record<Locale, GiftCardUiCopy> = {
@@ -56,6 +76,30 @@ const copy: Record<Locale, GiftCardUiCopy> = {
     frontPlaceholderMessage: "Il tuo messaggio personalizzato comparirà qui.",
     backMotto:
       "Prenditi cura di te: è il gesto più prezioso che tu possa farti.",
+    thanks: {
+      title: "Grazie!",
+      subtitle: "Il tuo regalo è pronto.",
+      body: "L'acquisto è andato a buon fine e la Gift Card è stata generata.",
+      codeLabel: "Codice gift card",
+      copyCode: "Copia codice",
+      copied: "Copiato!",
+      toLabel: "Destinatario",
+      valueLabel: "Valore",
+      treatmentLabel: "Trattamento",
+      validUntilLabel: "Valida fino al",
+      downloadNote:
+        "Il PDF è stato scaricato automaticamente e si trova nella cartella Download.",
+      downloadAgain: "Scarica di nuovo il PDF",
+      emailNote:
+        "Una copia della Gift Card è stata inviata anche via email a {email}.",
+      bookingNote:
+        "Presenta questo codice in centro per prenotare il trattamento. La Gift Card è valida 6 mesi dalla data di acquisto.",
+      backHome: "Torna alla home",
+      errorTitle: "Qualcosa non è andato come previsto",
+      errorBody:
+        "Non siamo riusciti a trovare la Gift Card associata a questo pagamento. Se hai appena completato l'acquisto, riprova tra qualche istante oppure contattaci: ti aiuteremo subito.",
+      errorContact: "Contattaci su WhatsApp",
+    },
   },
   en: {
     heroOverline: "Gift a Kalika moment",
@@ -83,7 +127,31 @@ const copy: Record<Locale, GiftCardUiCopy> = {
     backPreviewLabel: "Preview",
     frontPlaceholderMessage: "Your custom message will appear here.",
     backMotto:
-      "Take care of yourself: it's the most precious thing you can do for you.",
+      "Take care of yourself — it's the most precious gift you can give.",
+    thanks: {
+      title: "Thank you!",
+      subtitle: "Your gift is ready.",
+      body: "Your payment was successful and the Gift Card has been created.",
+      codeLabel: "Gift card code",
+      copyCode: "Copy code",
+      copied: "Copied!",
+      toLabel: "Recipient",
+      valueLabel: "Value",
+      treatmentLabel: "Treatment",
+      validUntilLabel: "Valid until",
+      downloadNote:
+        "The PDF was downloaded automatically and is in your Downloads folder.",
+      downloadAgain: "Download the PDF again",
+      emailNote:
+        "A copy of the Gift Card has also been sent by email to {email}.",
+      bookingNote:
+        "Present this code at the centre to book the treatment. The Gift Card is valid for 6 months from the purchase date.",
+      backHome: "Back to home",
+      errorTitle: "Something didn't go as planned",
+      errorBody:
+        "We couldn't find the Gift Card for this payment. If you just completed the purchase, please try again in a moment or contact us — we'll help you right away.",
+      errorContact: "Contact us on WhatsApp",
+    },
   },
 };
 

@@ -332,29 +332,25 @@ export function SpaExperienceCard({
 
         <div className="relative flex flex-1 flex-col">
           <div {...clickableProps}>
-            <div className="flex items-start justify-between gap-4">
-              <h3 className="display min-w-0 flex-1 text-2xl leading-snug text-[var(--color-cream)] sm:text-[26px]">
+            {temperature && (
+              <span className="mb-3 inline-block max-w-full rounded-xl border border-[var(--color-cream)]/15 px-2.5 py-1.5 text-left text-[9px] uppercase leading-relaxed tracking-[0.12em] text-[var(--color-cream)]/55">
+                {temperature}
+              </span>
+            )}
+            <div className="flex items-start justify-between gap-3 sm:gap-4">
+              <h3 className="display min-w-0 flex-1 text-[22px] leading-snug text-[var(--color-cream)] sm:text-[26px]">
                 {name}
               </h3>
-              <div className="flex shrink-0 flex-col items-end gap-2">
-                {(temperature || priceDurationLine || cardOnlyPrice) && (
-                  <>
-                    {temperature && (
-                      <span className="inline-flex w-fit items-center rounded-full border border-[var(--color-cream)]/15 px-2.5 py-0.5 text-[9px] uppercase tracking-[0.14em] text-[var(--color-cream)]/55">
-                        {temperature}
-                      </span>
-                    )}
-                    {cardOnlyPrice && (
-                      <p className="text-[11px] text-[var(--color-gold)]/90">
-                        {cardOnlyPrice}
-                      </p>
-                    )}
-                    {priceDurationLine && (
-                      <p className="text-right text-[10px] uppercase leading-relaxed tracking-[0.14em] text-[var(--color-gold)]/85">
-                        {priceDurationLine}
-                      </p>
-                    )}
-                  </>
+              <div className="flex shrink-0 flex-col items-end gap-2 pt-0.5">
+                {cardOnlyPrice && (
+                  <p className="text-[11px] text-[var(--color-gold)]/90">
+                    {cardOnlyPrice}
+                  </p>
+                )}
+                {priceDurationLine && (
+                  <p className="text-right text-[10px] uppercase leading-relaxed tracking-[0.14em] text-[var(--color-gold)]/85">
+                    {priceDurationLine}
+                  </p>
                 )}
                 {chevron}
               </div>

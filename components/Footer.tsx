@@ -91,21 +91,21 @@ export function Footer({ locale, dict }: Props) {
         </Link>
       </div>
 
-      {/* 5-column link grid */}
+      {/* Link grid: 2 centered cols on mobile, 5 left-aligned on desktop */}
       <div className="mx-auto max-w-7xl px-6 pt-16 pb-14 lg:px-10">
-        <div className="grid gap-x-8 gap-y-12 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5">
+        <div className="grid grid-cols-2 gap-x-5 gap-y-12 text-center md:grid-cols-3 md:gap-x-8 lg:grid-cols-5 lg:gap-x-8 lg:text-left">
           {cols.map((col) => (
-            <div key={col.title}>
+            <div key={col.title} className="min-w-0">
               <p className="text-[11px] uppercase tracking-[0.3em] text-[var(--color-brown)]">
                 {col.title}
               </p>
-              <div className="mt-2 h-px w-12 bg-[var(--color-mauve)]/40" />
+              <div className="mx-auto mt-2 h-px w-12 bg-[var(--color-mauve)]/40 lg:mx-0" />
               <ul className="mt-6 space-y-3 text-sm">
                 {col.items.map((it) => (
                   <li key={it.href}>
                     <Link
                       href={it.href}
-                      className="text-[var(--color-espresso)]/80 hover:text-[var(--color-mauve)] transition-colors"
+                      className="text-[var(--color-espresso)]/80 transition-colors hover:text-[var(--color-mauve)]"
                     >
                       {it.label}
                     </Link>
@@ -116,18 +116,18 @@ export function Footer({ locale, dict }: Props) {
           ))}
 
           {/* Contact column */}
-          <div>
+          <div className="min-w-0">
             <p className="text-[11px] uppercase tracking-[0.3em] text-[var(--color-brown)]">
               {dict.footer.contact}
             </p>
-            <div className="mt-2 h-px w-12 bg-[var(--color-mauve)]/40" />
+            <div className="mx-auto mt-2 h-px w-12 bg-[var(--color-mauve)]/40 lg:mx-0" />
             <ul className="mt-6 space-y-3 text-sm">
               <li>
                 <a
                   href={mapsHref}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-[var(--color-espresso)]/80 hover:text-[var(--color-mauve)] transition-colors"
+                  className="text-[var(--color-espresso)]/80 transition-colors hover:text-[var(--color-mauve)]"
                 >
                   {site.address.street}
                   <span className="block">{site.address.city}</span>
@@ -136,7 +136,7 @@ export function Footer({ locale, dict }: Props) {
               <li>
                 <a
                   href={`mailto:${site.email}`}
-                  className="break-words text-[var(--color-espresso)]/80 hover:text-[var(--color-mauve)] transition-colors"
+                  className="break-words text-[var(--color-espresso)]/80 transition-colors hover:text-[var(--color-mauve)]"
                 >
                   {site.email}
                 </a>
@@ -144,7 +144,7 @@ export function Footer({ locale, dict }: Props) {
               <li>
                 <a
                   href={`tel:${site.whatsapp.number}`}
-                  className="text-[var(--color-espresso)]/80 hover:text-[var(--color-mauve)] transition-colors tabular-nums"
+                  className="tabular-nums text-[var(--color-espresso)]/80 transition-colors hover:text-[var(--color-mauve)]"
                 >
                   {site.whatsapp.display}
                 </a>
@@ -152,20 +152,20 @@ export function Footer({ locale, dict }: Props) {
             </ul>
           </div>
 
-          {/* Hours column */}
-          <div>
+          {/* Hours column — full-width & centered on mobile (odd last row) */}
+          <div className="col-span-2 min-w-0 md:col-span-1">
             <p className="text-[11px] uppercase tracking-[0.3em] text-[var(--color-brown)]">
               {dict.footer.hours}
             </p>
-            <div className="mt-2 h-px w-12 bg-[var(--color-mauve)]/40" />
-            <dl className="mt-6 grid grid-cols-[auto_auto] gap-x-5 gap-y-1.5 text-sm">
+            <div className="mx-auto mt-2 h-px w-12 bg-[var(--color-mauve)]/40 lg:mx-0" />
+            <dl className="mx-auto mt-6 grid w-max grid-cols-[auto_auto] justify-items-start gap-x-4 gap-y-1.5 text-sm lg:mx-0 lg:gap-x-5">
               {site.schedule.map(({ day, hours }) => (
                 <div key={day} className="contents">
                   <dt className="text-[var(--color-espresso)]/85">
                     {dict.footer.days[day]}
                   </dt>
                   {hours ? (
-                    <dd className="tabular-nums leading-6 text-[var(--color-espresso)] whitespace-pre-line">
+                    <dd className="whitespace-pre-line tabular-nums leading-6 text-[var(--color-espresso)]">
                       {hours.replace(" · ", "\n")}
                     </dd>
                   ) : (
