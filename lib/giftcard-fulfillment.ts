@@ -11,8 +11,12 @@ import {
   saveGiftCardRecord,
 } from "./giftcard-store";
 import { generateGiftCardPdf } from "./giftcard-pdf";
-import { buyerGiftCardEmailHtml, ownerGiftCardEmailHtml } from "./giftcard-emails";
-import { site } from "./site";
+import {
+  buyerGiftCardEmailHtml,
+  buyerGiftCardEmailSubject,
+  ownerGiftCardEmailHtml,
+  ownerGiftCardEmailSubject,
+} from "./giftcard-emails";
 
 function metadataToRequest(metadata: Stripe.Metadata | null): GiftCardRequest {
   const raw: Partial<GiftCardRequest> = {
@@ -38,37 +42,109 @@ function metadataToRequest(metadata: Stripe.Metadata | null): GiftCardRequest {
   return raw;
 }
 
-async function sendGiftCardEmails(record: GiftCardRecord, pdf: Buffer) {
-  const apiKey = process.env.RESEND_API_KEY;
-  if (!apiKey) return;
+function getResendFrom(): string | null {
+  const from = process.env.RESEND_FROM_EMAIL?.trim();
+  return from || null;
+}
+
+function getKalikaNotificationEmail(): string | null {
+  const email = process.env.KALIKA_NOTIFICATION_EMAIL?.trim();
+  return email || null;
+}
+
+async function sendOneEmail(options: {
+  resend: Resend;
+  from: string;
+  to: string;
+  subject: string;
+  html: string;
+  pdf: Buffer;
+  serial: string;
+  kind: "buyer" | "owner";
+}) {
+  try {
+    const result = await options.resend.emails.send({
+      from: options.from,
+      to: options.to,
+      subject: options.subject,
+      html: options.html,
+      attachments: [
+        {
+          filename: `gift-card-${options.serial}.pdf`,
+          content: options.pdf,
+        },
+      ],
+    });
+
+    if (result.error) {
+      console.error(
+        `[giftcard-email] ${options.kind} send error for ${options.serial}:`,
+        result.error,
+      );
+      return;
+    }
+  } catch (error) {
+    console.error(
+      `[giftcard-email] ${options.kind} send failed for ${options.serial}:`,
+      error,
+    );
+  }
+}
+
+/**
+ * Sends buyer + Kalika notification emails. Failures are logged only —
+ * they must never block gift-card fulfillment / PDF download.
+ */
+export async function sendGiftCardEmails(
+  record: GiftCardRecord,
+  pdf: Buffer,
+): Promise<void> {
+  const apiKey = process.env.RESEND_API_KEY?.trim();
+  const from = getResendFrom();
+
+  if (!apiKey || !from) {
+    console.warn(
+      "[giftcard-email] Skipping email send: RESEND_API_KEY or RESEND_FROM_EMAIL is not configured.",
+    );
+    return;
+  }
 
   const resend = new Resend(apiKey);
-  const attachment = {
-    filename: `gift-card-${record.serial}.pdf`,
-    content: pdf,
-  };
 
-  await resend.emails.send({
-    from: process.env.RESEND_FROM_EMAIL ?? "Kalika <onboarding@resend.dev>",
+  await sendOneEmail({
+    resend,
+    from,
     to: record.buyerEmail,
-    subject:
-      record.locale === "it"
-        ? `Gift Card Kalika pronta — ${record.serial}`
-        : `Your Kalika Gift Card — ${record.serial}`,
+    subject: buyerGiftCardEmailSubject(record),
     html: buyerGiftCardEmailHtml(record),
-    attachments: [attachment],
+    pdf,
+    serial: record.serial,
+    kind: "buyer",
   });
 
-  await resend.emails.send({
-    from: process.env.RESEND_FROM_EMAIL ?? "Kalika <onboarding@resend.dev>",
-    to: site.email,
-    subject: `Nuova Gift Card venduta — ${record.serial}`,
+  const ownerTo = getKalikaNotificationEmail();
+  if (!ownerTo) {
+    console.warn(
+      "[giftcard-email] Skipping Kalika notification: KALIKA_NOTIFICATION_EMAIL is not configured.",
+    );
+    return;
+  }
+
+  await sendOneEmail({
+    resend,
+    from,
+    to: ownerTo,
+    subject: ownerGiftCardEmailSubject(record),
     html: ownerGiftCardEmailHtml(record),
-    attachments: [attachment],
+    pdf,
+    serial: record.serial,
+    kind: "owner",
   });
 }
 
-export async function fulfillGiftCardFromSession(session: Stripe.Checkout.Session) {
+export async function fulfillGiftCardFromSession(
+  session: Stripe.Checkout.Session,
+) {
   const existing = await findGiftCardByStripeSession(session.id);
   if (existing) return existing;
 
@@ -85,8 +161,12 @@ export async function fulfillGiftCardFromSession(session: Stripe.Checkout.Sessio
         ? session.payment_intent
         : session.payment_intent?.id,
   });
+
   const pdf = await generateGiftCardPdf(record);
+
+  // Emails must not block fulfillment if Resend fails.
   await sendGiftCardEmails(record, pdf);
+
   await markGiftCardFulfilled(record.serial);
 
   return record;
