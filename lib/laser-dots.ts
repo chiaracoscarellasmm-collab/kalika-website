@@ -12,8 +12,10 @@ export const LASER_COLORS: Record<ZoneColor, string> = {
 export const LASER_DOTS: { c: ZoneColor; x: number; y: number; r: number }[] = [
   { c: "blue", x: 235, y: 282, r: 7 },
   { c: "blue", x: 390, y: 282, r: 7 },
+  { c: "blue", x: 312, y: 187, r: 7 },
   { c: "blue", x: 858, y: 275, r: 7 },
   { c: "blue", x: 1042, y: 274, r: 7 },
+  { c: "blue", x: 950, y: 152, r: 7 },
   { c: "green", x: 226, y: 350, r: 12 },
   { c: "green", x: 311, y: 402, r: 11 },
   { c: "green", x: 397, y: 350, r: 12 },

@@ -6,6 +6,7 @@ import { SiceHomeCareSection } from "@/components/SiceHomeCareSection";
 import { SectionWhatsapp } from "@/components/SectionWhatsapp";
 import { Reveal } from "@/components/Reveal";
 import { corpoGroups } from "@/lib/treatments";
+import { formatEmphasis } from "@/lib/format-emphasis";
 import { notFound } from "next/navigation";
 
 export async function generateMetadata({
@@ -40,7 +41,7 @@ export default async function CorpoPage({
         <div className="mx-auto max-w-4xl px-6">
           <Reveal>
             <p className="mx-auto mb-8 max-w-[65ch] text-center text-[19px] leading-8 text-[var(--color-espresso)]/80 sm:mb-10 sm:text-[21px] sm:leading-9">
-              {dict.estetica.sice.incipit}
+              {formatEmphasis(dict.estetica.sice.incipit)}
             </p>
           </Reveal>
           <TreatmentList

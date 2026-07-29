@@ -180,6 +180,7 @@ export const visoGroups: TreatmentGroup[] = [
         name: { it: "Ristrutturazione della barriera di permeabilità", en: "Permeability barrier restructuring" },
         duration: DUR_60,
         price: eur(88),
+        requiresProtocol: true,
         description: {
           it: "Ristabilisce la compattezza dello strato corneo e ne sostiene le funzioni naturali, rinforzando il Fattore di Idratazione Naturale. Ideale per una pelle più forte e protetta.",
           en: "Restores the compactness of the stratum corneum and supports its natural functions, strengthening the Natural Moisturising Factor. Ideal for stronger, more protected skin.",
@@ -202,6 +203,10 @@ export const visoGroups: TreatmentGroup[] = [
         duration: DUR_60,
         price: eur(83),
         requiresProtocol: true,
+        description: {
+          it: "Consiste nell'applicazione di tre tipi di fanghi di derivazione marina — caldo, freddo ed equilibrante — distribuiti in aree ben distinte per attivare il lavoro dei muscoli facciali e riattivare la circolazione sanguigna. Una ginnastica passiva che restituisce un viso disteso, ossigenato e turgido.",
+          en: "It consists in applying three types of marine-derived muds — hot, cold and balancing — across distinct areas to activate the facial muscles and reactivate blood circulation. A passive gymnastics that leaves the face relaxed, oxygenated and plump.",
+        },
       },
       {
         id: "sinerplus",
@@ -223,13 +228,41 @@ export const corpoGroups: TreatmentGroup[] = [
     id: "corpo-completi",
     title: { it: "Trattamenti completi", en: "Full body treatments" },
     treatments: [
-      { id: "pulizia-profonda-corpo", name: { it: "Pulizia profonda corpo", en: "Deep body cleansing" }, duration: DUR_55, price: eur(70) },
-      { id: "pulizia-profonda-biosauna", name: { it: "Pulizia profonda in biosauna", en: "Deep cleansing in biosauna" }, duration: DUR_60, price: eur(95) },
+      {
+        id: "pulizia-profonda-corpo",
+        name: { it: "Pulizia profonda corpo", en: "Deep body cleansing" },
+        duration: DUR_55,
+        price: eur(70),
+        description: {
+          it: "Eseguita in maniera unica nel suo genere, con un olio idrofilo che pulisce in profondità senza mai impoverire la pelle.",
+          en: "Performed in a uniquely distinctive way, with a hydrophilic oil that cleanses deeply without ever depleting the skin.",
+        },
+      },
+      {
+        id: "pulizia-profonda-biosauna",
+        name: { it: "Pulizia profonda in biosauna", en: "Deep cleansing in biosauna" },
+        duration: DUR_60,
+        price: eur(95),
+        description: {
+          it: "La pulizia del corpo potenziata da un ambiente riscaldato, con la stufa a 40 gradi.",
+          en: "Body cleansing enhanced by a warmed environment, with the stove at 40 degrees.",
+        },
+      },
       { id: "talaterm-fango-depurativo", name: { it: "Depurazione con Talaterm Fangogel", en: "Purifying Talaterm Mud-gel" }, duration: DUR_60, price: eurFrom(80), description: {
             it: "Un trattamento depurante che riattiva lo scambio dei fluidi nelle pelli spente o disidratate. Minerali e oligoelementi restituiscono alla pelle tono, luminosità ed elasticità.",
             en: "A purifying treatment that reactivates fluid exchange in dull or dehydrated skin. Minerals and trace elements restore tone, radiance and elasticity.",
       } },
-      { id: "talaterm-caldo-freddo", name: { it: "Talaterm fango gel caldo / freddo", en: "Talaterm hot / cold mud-gel" }, duration: DUR_75, price: eur(105), requiresProtocol: true },
+      {
+        id: "talaterm-caldo-freddo",
+        name: { it: "Talaterm fango gel caldo / freddo", en: "Talaterm hot / cold mud-gel" },
+        duration: DUR_75,
+        price: eur(105),
+        requiresProtocol: true,
+        description: {
+          it: "Trattamento eseguito con fanghi che riscaldano e raffreddano, creando una vera ginnastica vasale, seguito da un bendaggio modellante dai risultati sorprendenti sul corpo.",
+          en: "A treatment with muds that heat and cool, creating true vascular gymnastics, followed by a sculpting wrap with surprising results on the body.",
+        },
+      },
       { id: "ristrutturazione-barriera", name: { it: "Ristrutturazione della barriera di permeabilità", en: "Permeability barrier restructuring" }, duration: DUR_60, price: eur(110), requiresProtocol: true, description: {
             it: "Ripristina la compattezza dello strato più superficiale della pelle, sostenendone le funzioni naturali. Rinforza il Fattore di Idratazione Naturale (NMF) per una pelle più protetta ed equilibrata nel tempo.",
             en: "Restores the compactness of the skin's outermost layer and supports its natural functions. Strengthens the Natural Moisturising Factor (NMF) for skin that stays more protected and balanced over time.",
@@ -242,17 +275,63 @@ export const corpoGroups: TreatmentGroup[] = [
             it: "Pensato per rassodare e tonificare, ridona compattezza alle zone più delicate e restituisce alla pelle il suo naturale turgore.",
             en: "Designed to firm and tone, it restores compactness to the most delicate areas and returns the skin's natural plumpness.",
       } },
-      { id: "olistico", name: { it: "Trattamento olistico", en: "Holistic treatment" }, duration: DUR_60, price: eur(65), requiresProtocol: true },
+      {
+        id: "olistico",
+        name: { it: "Trattamento olistico", en: "Holistic treatment" },
+        duration: DUR_60,
+        price: eur(65),
+        requiresProtocol: true,
+        description: {
+          it: "Un trattamento localizzato con tripla azione: drenante, lipolitico e tonificante. Lavora sulla zona che ne ha più bisogno.",
+          en: "A localised treatment with a triple action: draining, lipolytic and toning. It works on the area that needs it most.",
+        },
+      },
     ],
           },
   {
     id: "corpo-localizzati",
     title: { it: "Trattamenti localizzati", en: "Targeted treatments" },
     treatments: [
-      { id: "cuoio-capelluto-spa", name: { it: "Cuoio capelluto in SPA", en: "Scalp treatment in SPA" }, duration: DUR_60, price: eurFrom(65) },
-      { id: "pulizia-schiena", name: { it: "Pulizia schiena", en: "Back cleansing" }, duration: DUR_55, price: eur(53) },
-      { id: "gambe", name: { it: "Gambe", en: "Legs" }, duration: DUR_45, price: eurFrom(45) },
-      { id: "seno", name: { it: "Seno", en: "Bust" }, duration: DUR_45, price: eurFrom(50) },
+      {
+        id: "cuoio-capelluto-spa",
+        name: { it: "Cuoio capelluto in SPA", en: "Scalp treatment in SPA" },
+        duration: DUR_60,
+        price: eurFrom(65),
+        description: {
+          it: "Un percorso eubiotico dedicato al cuoio capelluto e ai capelli, per ritrovare equilibrio e vitalità partendo dalla radice.",
+          en: "An eubiotic pathway dedicated to the scalp and hair, to restore balance and vitality starting from the root.",
+        },
+      },
+      {
+        id: "pulizia-schiena",
+        name: { it: "Pulizia schiena", en: "Back cleansing" },
+        duration: DUR_55,
+        price: eur(53),
+        description: {
+          it: "Una pulizia profonda della schiena che rimuove impurità e ripristina l'equilibrio cutaneo, restituendo alla pelle freschezza e leggerezza.",
+          en: "A deep back cleanse that removes impurities and restores skin balance, returning freshness and lightness to the skin.",
+        },
+      },
+      {
+        id: "gambe",
+        name: { it: "Gambe", en: "Legs" },
+        duration: DUR_45,
+        price: eurFrom(45),
+        description: {
+          it: "Un trattamento dedicato alle gambe, costruito su misura in base alle esigenze e agli inestetismi da trattare.",
+          en: "A treatment dedicated to the legs, tailored to the needs and concerns to be addressed.",
+        },
+      },
+      {
+        id: "seno",
+        name: { it: "Seno", en: "Bust" },
+        duration: DUR_45,
+        price: eurFrom(50),
+        description: {
+          it: "Un trattamento tonificante e rassodante, pensato per migliorare compattezza e aspetto del décolleté.",
+          en: "A toning and firming treatment, designed to improve the compactness and appearance of the décolleté.",
+        },
+      },
     ],
   },
 ];
@@ -378,7 +457,16 @@ export const massaggiGroups: TreatmentGroup[] = [
     id: "massaggi-localizzati",
     title: { it: "Massaggi localizzati", en: "Targeted massages" },
     treatments: [
-      { id: "decontratturante-schiena", name: { it: "Decontratturante schiena", en: "Back relaxing" }, duration: DUR_40, price: eur(45) },
+      {
+        id: "decontratturante-schiena",
+        name: { it: "Decontratturante schiena", en: "Back relaxing" },
+        duration: DUR_40,
+        price: eur(45),
+        description: {
+          it: "Un massaggio mirato che scioglie le contratture e restituisce mobilità. Le rigidità si allentano, le tensioni si sciolgono e la schiena ritrova libertà di movimento.",
+          en: "A targeted massage that releases muscle knots and restores mobility. Stiffness eases, tension melts away and the back finds freedom of movement again.",
+        },
+      },
       {
         id: "riflessologia-plantare",
         name: { it: "Riflessologia plantare", en: "Foot reflexology" },
@@ -387,17 +475,62 @@ export const massaggiGroups: TreatmentGroup[] = [
           en: "Lucia Torri Cianci Method",
         },
         description: {
-          it: "Il piede come chiave di lettura di tutto il corpo. Attraverso la **stimolazione dei punti riflessi plantari**, secondo il **Metodo Lucia Torri Cianci**, si riporta equilibrio agli organi e ai tessuti, sciogliendo tensioni e restituendo una sensazione di benessere profondo.",
-          en: "The foot as a key to reading the whole body. Through the **stimulation of the plantar reflex points**, according to the **Lucia Torri Cianci Method**, balance is restored to organs and tissues, releasing tension and returning a deep sense of wellbeing.",
+          it: "Il piede come mappa dell'intero organismo: ogni punto corrisponde a un'area del corpo. Attraverso la stimolazione dei punti riflessi si riporta equilibrio e una sensazione di benessere diffuso.",
+          en: "The foot as a map of the whole body: every point corresponds to an area of the organism. By stimulating the reflex points, balance is restored along with a diffuse sense of wellbeing.",
         },
         duration: DUR_40,
         price: eur(45),
       },
-      { id: "gambe-leggere", name: { it: "Gambe leggere", en: "Light legs" }, duration: DUR_30, price: eur(40) },
-      { id: "antiaging-viso", name: { it: "Antiaging viso", en: "Facial antiaging" }, duration: DUR_45, price: eur(53) },
-      { id: "relax-mani", name: { it: "Relax mani", en: "Hand relax" }, duration: DUR_30, price: eur(40) },
-      { id: "relax-piedi", name: { it: "Relax piedi", en: "Foot relax" }, duration: DUR_30, price: eur(40) },
-      { id: "testa-cuoio-capelluto", name: { it: "Testa e cuoio capelluto", en: "Head & scalp" }, duration: DUR_45, price: eur(53) },
+      {
+        id: "gambe-leggere",
+        name: { it: "Gambe leggere", en: "Light legs" },
+        duration: DUR_30,
+        price: eur(40),
+        description: {
+          it: "Un massaggio drenante e distensivo che lavora sui punti riflessi. Alleggerisce le gambe stanche e restituisce una piacevole sensazione di sollievo.",
+          en: "A draining, soothing massage that works on the reflex points. It lightens tired legs and returns a pleasant feeling of relief.",
+        },
+      },
+      {
+        id: "antiaging-viso",
+        name: { it: "Antiaging viso", en: "Facial antiaging" },
+        duration: DUR_45,
+        price: eur(53),
+        description: {
+          it: "Manualità che attivano la circolazione e distendono i muscoli in tensione, migliorando il turgore della pelle. Un trattamento che coinvolge viso, testa, collo e spalle.",
+          en: "Hands-on work that activates circulation and releases tense muscles, improving skin plumpness. A treatment that involves face, head, neck and shoulders.",
+        },
+      },
+      {
+        id: "relax-mani",
+        name: { it: "Relax mani", en: "Hand relax" },
+        duration: DUR_30,
+        price: eur(40),
+        description: {
+          it: "Un gesto semplice dai benefici sorprendenti: rilassamento profondo, circolazione riattivata e sollievo per le articolazioni. Per mani che lavorano tutto il giorno.",
+          en: "A simple gesture with surprising benefits: deep relaxation, reactivated circulation and joint relief. For hands that work all day.",
+        },
+      },
+      {
+        id: "relax-piedi",
+        name: { it: "Relax piedi", en: "Foot relax" },
+        duration: DUR_30,
+        price: eur(40),
+        description: {
+          it: "Il rituale che scioglie la stanchezza accumulata. Riduce lo stress della giornata e riattiva la circolazione, restituendo leggerezza da terra in su.",
+          en: "The ritual that melts accumulated tiredness. It reduces the stress of the day and reactivates circulation, restoring lightness from the ground up.",
+        },
+      },
+      {
+        id: "testa-cuoio-capelluto",
+        name: { it: "Testa e cuoio capelluto", en: "Head & scalp" },
+        duration: DUR_45,
+        price: eur(53),
+        description: {
+          it: "Stimola la microcircolazione e favorisce l'ossigenazione, sciogliendo tensioni che spesso non sappiamo di avere. Eseguito su testa, collo e spalle con sfioramenti sui punti riflessi.",
+          en: "Stimulates microcirculation and supports oxygenation, releasing tensions we often don't know we carry. Performed on head, neck and shoulders with light strokes on the reflex points.",
+        },
+      },
     ],
   },
 ];
@@ -408,8 +541,8 @@ export const maniPiediGroups: TreatmentGroup[] = [
     title: { it: "Servizi mani", en: "Hand services" },
     treatments: [
       { id: "manicure", name: { it: "Manicure", en: "Manicure" }, price: eur(28) },
-      { id: "manicure-semi", name: { it: "Manicure con semipermanente", en: "Manicure with gel polish" }, price: eur(43) },
-      { id: "semipermanente", name: { it: "Semipermanente", en: "Gel polish" }, price: eur(30) },
+      { id: "manicure-semi", name: { it: "Manicure con semipermanente Estrosa", en: "Manicure with gel polish Estrosa" }, price: eur(43) },
+      { id: "semipermanente", name: { it: "Semipermanente Estrosa", en: "Gel polish Estrosa" }, price: eur(30) },
       { id: "french", name: { it: "French", en: "French" }, price: eur(5) },
       { id: "rimozione-semi", name: { it: "Rimozione singola semipermanente", en: "Gel polish removal" }, price: eur(15) },
       { id: "ristrutturazione-mani", name: { it: "Ristrutturazione mani", en: "Hand restructuring" }, price: eur(25) },
@@ -421,8 +554,8 @@ export const maniPiediGroups: TreatmentGroup[] = [
     treatments: [
       { id: "pedicure-estetico", name: { it: "Pedicure estetico", en: "Cosmetic pedicure" }, price: eur(41) },
       { id: "pedicure-curativo", name: { it: "Pedicure curativo", en: "Curative pedicure" }, price: eur(43) },
-      { id: "pedicure-estetico-semi", name: { it: "Pedicure estetico con semipermanente", en: "Cosmetic pedicure with gel polish" }, price: eur(50) },
-      { id: "pedicure-curativo-semi", name: { it: "Pedicure curativo con semipermanente", en: "Curative pedicure with gel polish" }, price: eur(53) },
+      { id: "pedicure-estetico-semi", name: { it: "Pedicure estetico con semipermanente Estrosa", en: "Cosmetic pedicure with gel polish Estrosa" }, price: eur(50) },
+      { id: "pedicure-curativo-semi", name: { it: "Pedicure curativo con semipermanente Estrosa", en: "Curative pedicure with gel polish Estrosa" }, price: eur(53) },
       { id: "ristrutturazione-piedi", name: { it: "Ristrutturazione piedi", en: "Foot restructuring" }, price: eur(25) },
       { id: "ristrutturazione-abbinata", name: { it: "Ristrutturazione abbinata a manicure/pedicure", en: "Restructuring combined with manicure/pedicure" }, price: eur(20) },
     ],

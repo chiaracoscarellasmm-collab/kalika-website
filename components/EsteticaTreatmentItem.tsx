@@ -186,7 +186,7 @@ export function EsteticaTreatmentItem({
                     {formatEmphasis(description ?? note ?? "")}
                   </p>
                 )}
-                <p className="text-[15px] leading-7 text-[var(--color-espresso)]/75 sm:text-base sm:leading-8">
+                <p className="text-[12px] italic leading-5 text-[#8F526F]">
                   {dict.estetica.protocolInlineBody}
                 </p>
               </div>

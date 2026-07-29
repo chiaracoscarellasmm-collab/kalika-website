@@ -12,9 +12,8 @@ import { SectionWhatsapp } from "@/components/SectionWhatsapp";
 import { notFound } from "next/navigation";
 import {
   visoGroups,
-  corpoGroups,
-  massaggiGroups,
-  pick,
+  riflessologiaCorporeaTreatment,
+  type Treatment,
 } from "@/lib/treatments";
 
 export async function generateMetadata({ params }: PageProps<"/[locale]/estetica">) {
@@ -93,10 +92,22 @@ export default async function EsteticaPage({ params }: PageProps<"/[locale]/este
     },
   ];
 
-  const popular = [
+  const popular: Treatment[] = [
     visoGroups[0].treatments[0],
-    corpoGroups[0].treatments[1],
-    massaggiGroups[1].treatments[0],
+    {
+      ...riflessologiaCorporeaTreatment,
+      name: {
+        it: "Massaggio di Riflessologia",
+        en: "Reflexology Massage",
+      },
+    },
+    {
+      id: "rituali-spa-suite",
+      name: {
+        it: "Rituali in SPA SUITE",
+        en: "Rituals in SPA SUITE",
+      },
+    },
   ];
 
   return (
