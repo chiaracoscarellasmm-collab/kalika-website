@@ -86,6 +86,7 @@ export default async function SpaPage({ params }: PageProps<"/[locale]/spa">) {
         title={dict.spa.hero}
         subtitle={dict.spa.heroSubtitle}
         videoSrc={`${process.env.NEXT_PUBLIC_R2_URL}/hero-spa.mp4?v=2`}
+        poster="/hero-spa-poster.jpg"
         navItems={[
           { href: "#rituali", label: dict.spa.navRituali },
           { href: "#massaggi-suite", label: dict.spa.navSuite },

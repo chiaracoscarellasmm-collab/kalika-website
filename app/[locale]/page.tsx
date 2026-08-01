@@ -34,6 +34,7 @@ export default async function HomePage({ params }: PageProps<"/[locale]">) {
           loop
           playsInline
           preload="metadata"
+          poster="/hero-home-poster.jpg"
           controlsList="nodownload noremoteplayback"
           disablePictureInPicture
           aria-hidden

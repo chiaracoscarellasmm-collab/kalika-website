@@ -12,6 +12,7 @@ type Props = {
   subtitle: string;
   navItems: NavItem[];
   videoSrc?: string;
+  poster?: string;
   streamEmbedHtml?: string;
   scrollHref?: string;
   navAriaLabel?: string;
@@ -24,6 +25,7 @@ export function SpaHeroVideo({
   subtitle,
   navItems,
   videoSrc = `${process.env.NEXT_PUBLIC_R2_URL}/flower.mp4`,
+  poster,
   streamEmbedHtml,
   scrollHref = "#rituali",
   navAriaLabel = "SPA sections",
@@ -45,6 +47,7 @@ export function SpaHeroVideo({
             loop
             playsInline
             preload="metadata"
+            poster={poster}
             controlsList="nodownload noremoteplayback"
             disablePictureInPicture
             aria-hidden
