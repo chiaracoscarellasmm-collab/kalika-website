@@ -48,7 +48,7 @@ export default async function MassaggiPage({
             priceLabel={dict.common.price}
             eyebrow={m.panciaPiattaEyebrow}
             body={m.panciaPiattaBody}
-            imageSrc="/kalika_estetica_prata_pordenone_massaggi_metodopanciapiatta.png"
+            imageSrc="/kalika_estetica_prata_pordenone_massaggi_metodopanciapiatta.jpg"
             imageAlt={m.panciaPiattaImageAlt}
           />
           <FeaturedMethodBlock

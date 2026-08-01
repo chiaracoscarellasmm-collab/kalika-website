@@ -71,7 +71,7 @@ export default async function SpaPage({ params }: PageProps<"/[locale]/spa">) {
         locale === "it"
           ? "Sauna, biosauna, hammam, banja: il percorso termale."
           : "Sauna, biosauna, hammam, banja: the thermal journey.",
-      src: "/sauna-in-legno-percorso-spa.png",
+      src: "/sauna-in-legno-percorso-spa.jpg",
       alt:
         locale === "it"
           ? "Sala vapore del percorso SPA con lettino, luci soffuse e atmosfera immersiva"
