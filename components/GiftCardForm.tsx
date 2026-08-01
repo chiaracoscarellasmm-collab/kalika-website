@@ -2,7 +2,9 @@
 
 import { useEffect, useMemo, useState } from "react";
 import Image from "next/image";
+import Link from "next/link";
 import { Lock } from "lucide-react";
+import { localePath } from "@/lib/site";
 import type { Dictionary } from "@/lib/dictionaries";
 import type { Locale } from "@/lib/i18n";
 import {
@@ -15,6 +17,7 @@ import {
 } from "@/lib/giftcard";
 import { getGiftCardUi } from "@/lib/giftcard-ui";
 import { validateGiftCardParams } from "@/lib/gift-selection";
+import { checkoutAcceptance, giftCardRules, termsPath } from "@/lib/legal";
 
 type Props = { locale: Locale; dict: Dictionary };
 
@@ -23,6 +26,9 @@ const inputClass =
 
 const labelClass =
   "text-[11px] uppercase tracking-[2px] text-[var(--color-brown)]";
+
+const legalLinkClass =
+  "text-[var(--color-mauve)] underline underline-offset-2 transition-colors hover:text-[var(--color-brown)]";
 
 function formatDate(date: Date, locale: Locale) {
   return new Intl.DateTimeFormat(locale === "en" ? "en-GB" : "it-IT", {
@@ -181,6 +187,7 @@ function GiftCardPreview({
 
 export function GiftCardForm({ locale, dict }: Props) {
   const ui = getGiftCardUi(locale);
+  const acceptance = checkoutAcceptance[locale];
   const [design, setDesign] = useState<GiftCardDesign>("spa");
   const [amountChoice, setAmountChoice] = useState<GiftCardAmountChoice>("100");
   const [customAmount, setCustomAmount] = useState<number | "">(120);
@@ -253,25 +260,33 @@ export function GiftCardForm({ locale, dict }: Props) {
     setPending(true);
     setError(null);
 
-    const response = await fetch("/api/create-payment-intent", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        locale,
-        design,
-        amountChoice,
-        amount,
-        fromFirstName,
-        fromLastName,
-        toFirstName,
-        toLastName,
-        message,
-        buyerEmail,
-        treatmentName: treatmentName || undefined,
-      }),
-    });
-    const data = (await response.json()) as { url?: string; error?: string };
-    setPending(false);
+    let data: { url?: string; error?: string } = {};
+    try {
+      const response = await fetch("/api/create-payment-intent", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          locale,
+          design,
+          amountChoice,
+          amount,
+          fromFirstName,
+          fromLastName,
+          toFirstName,
+          toLastName,
+          message,
+          buyerEmail,
+          treatmentName: treatmentName || undefined,
+        }),
+      });
+      data = await response.json();
+    } catch {
+      // Network failure or a non-JSON response (e.g. a 500 HTML page):
+      // fall through to the generic error below instead of leaving the
+      // button stuck on "pending" forever.
+    } finally {
+      setPending(false);
+    }
 
     if (data.url) {
       window.location.href = data.url;
@@ -538,6 +553,14 @@ export function GiftCardForm({ locale, dict }: Props) {
               </dd>
             </div>
           </dl>
+
+          <ul className="mt-5 space-y-1.5 border-t border-[var(--color-line)] pt-4 text-xs leading-5 text-[var(--color-espresso)]/55">
+            {giftCardRules[locale].map((rule) => (
+              <li key={rule} className="relative pl-4 before:absolute before:left-0 before:top-[0.62em] before:h-1 before:w-1 before:rounded-full before:bg-[var(--color-wisteria)]">
+                {rule}
+              </li>
+            ))}
+          </ul>
         </section>
 
         {error && (
@@ -568,6 +591,17 @@ export function GiftCardForm({ locale, dict }: Props) {
         <p className="flex items-center justify-center gap-2 text-xs text-[var(--color-espresso)]/55">
           <Lock size={12} />{" "}
           {locale === "it" ? "Pagamento sicuro con Stripe" : "Secure payment with Stripe"}
+        </p>
+        <p className="text-center text-xs leading-6 text-[var(--color-espresso)]/55">
+          {acceptance.before}
+          <Link href={localePath(locale, termsPath)} className={legalLinkClass}>
+            {acceptance.termsLabel}
+          </Link>
+          {acceptance.between}
+          <Link href={localePath(locale, "/privacy")} className={legalLinkClass}>
+            {acceptance.privacyLabel}
+          </Link>
+          {acceptance.after}
         </p>
       </form>
     </div>

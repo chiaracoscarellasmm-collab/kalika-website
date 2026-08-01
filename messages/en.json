@@ -46,7 +46,8 @@
     },
     "privacy": "Privacy Policy",
     "cookie": "Cookie Policy",
-    "credits": "© {year} Kalika Nuovaestetica · All rights reserved"
+    "credits": "© {year} Kalika Nuovaestetica · All rights reserved",
+    "terms": "Terms of Sale"
   },
   "home": {
     "heroOverline": "Welcome to the world of",
@@ -88,7 +89,7 @@
     "checkupWaTopic": "I'd like to book the free check-up",
     "waOverline": "Not sure what to choose?",
     "waTitle": "Write to us on WhatsApp.",
-    "waBody": "We’ll recommend the treatment that suits you best, with the time and attention you deserve.",
+    "waBody": "We'll recommend the treatment that suits you best, with the time and attention you deserve.",
     "giftOverline": "Gift a Kalika moment",
     "giftTitle": "A gift that won't be forgotten.",
     "giftBody": "Gift Cards for beauty treatments, SPA rituals and wellness journeys in Prata di Pordenone. Personalised, digital and available instantly. The perfect gift for someone you love.",
@@ -150,7 +151,7 @@
     "downloadTitle": "Full price list",
     "downloadBody": "Download the updated price list in PDF.",
     "chooseHelpTitle": "How to choose the right treatment?",
-    "chooseHelpBody": "Write to us on WhatsApp: we'll guide you.",
+    "chooseHelpBody": "Send us a message on WhatsApp: we'll guide you.",
     "sice": {
       "incipit": "We care for the skin with **eubiotic cosmetics**: formulations that work with its physiology instead of forcing it. Every treatment on this page starts with **SICE products**.",
       "continueTitle": "Continue at home",
@@ -176,7 +177,7 @@
       "panciaPiattaEyebrow": "Method",
       "panciaPiattaBody": "This method works on the deep causes of abdominal bloating, releasing tension built up at both psycho-emotional and postural levels. **The body rediscovers lightness and gastric, digestive and intestinal wellbeing**, while lower-back pain eases and respiratory function improves.",
       "panciaPiattaImageAlt": "Flat-belly method at Kalika Nuovaestetica in Prata di Pordenone",
-      "riflessologiaEyebrow": "Metodo Lucia Torri Cianci",
+      "riflessologiaEyebrow": "Lucia Torri Cianci Method",
       "riflessologiaBody": "Much more than a massage: **a method that reads the body through its reflex maps**, from the foot to the face. Combining reflexology, psychosomatics and targeted hands-on work, it addresses tension, postural imbalances and stagnation, helping restore balance between body and mind. Every signal from the body — a tension, a pain, an imperfection — is listened to and interpreted at its origin.",
       "riflessologiaImageAlt": "Body reflexology treatment at Kalika Nuovaestetica in Prata di Pordenone"
     },

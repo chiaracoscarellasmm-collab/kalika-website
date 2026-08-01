@@ -2,17 +2,19 @@
 
 import { Star } from "lucide-react";
 import { useState } from "react";
+import type { Locale } from "@/lib/i18n";
 
 type Props = {
   name: string;
   date?: string;
   rating: number;
   text: string;
+  locale: Locale;
 };
 
 const PREVIEW_LIMIT = 230;
 
-export function ReviewCard({ name, rating, text }: Props) {
+export function ReviewCard({ name, rating, text, locale }: Props) {
   const [expanded, setExpanded] = useState(false);
   const canExpand = text.length > PREVIEW_LIMIT;
   const visibleText =
@@ -40,7 +42,13 @@ export function ReviewCard({ name, rating, text }: Props) {
             onClick={() => setExpanded((value) => !value)}
             className="mt-4 text-xs uppercase tracking-[0.18em] text-[var(--color-mauve)] transition-colors hover:text-[var(--color-brown)]"
           >
-            {expanded ? "Mostra meno" : "Mostra di più"}
+            {locale === "it"
+              ? expanded
+                ? "Mostra meno"
+                : "Mostra di più"
+              : expanded
+                ? "Show less"
+                : "Show more"}
           </button>
         )}
       </div>

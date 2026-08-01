@@ -1,15 +1,13 @@
 import { Resend } from "resend";
 import Stripe from "stripe";
 import {
+  addMonths,
+  deriveGiftCardSerial,
+  giftCardValidityMonths,
   isValidGiftCardRequest,
   type GiftCardRecord,
   type GiftCardRequest,
 } from "./giftcard";
-import {
-  findGiftCardByStripeSession,
-  markGiftCardFulfilled,
-  saveGiftCardRecord,
-} from "./giftcard-store";
 import { generateGiftCardPdf } from "./giftcard-pdf";
 import {
   buyerGiftCardEmailHtml,
@@ -40,6 +38,12 @@ function metadataToRequest(metadata: Stripe.Metadata | null): GiftCardRequest {
   }
 
   return raw;
+}
+
+function getStripe(): Stripe {
+  const secret = process.env.STRIPE_SECRET_KEY;
+  if (!secret) throw new Error("STRIPE_NOT_CONFIGURED");
+  return new Stripe(secret);
 }
 
 function getResendFrom(): string | null {
@@ -142,32 +146,73 @@ export async function sendGiftCardEmails(
   });
 }
 
+/**
+ * Builds the gift card record straight from the Stripe Checkout Session and
+ * its Payment Intent. Stripe is the only source of truth: there is nothing
+ * persisted locally that could drift out of sync with it (or, on a
+ * serverless deploy, silently fail to persist at all).
+ */
+async function buildRecord(
+  session: Stripe.Checkout.Session,
+  paymentIntent: Stripe.PaymentIntent,
+): Promise<GiftCardRecord> {
+  const request = metadataToRequest(session.metadata);
+  const issuedAt = new Date(session.created * 1000);
+  const serial =
+    paymentIntent.metadata.giftCardSerial ||
+    deriveGiftCardSerial(paymentIntent.id, issuedAt);
+
+  return {
+    ...request,
+    id: paymentIntent.id,
+    serial,
+    stripeSessionId: session.id,
+    paymentIntentId: paymentIntent.id,
+    issuedAt: issuedAt.toISOString(),
+    validUntil: addMonths(issuedAt, giftCardValidityMonths).toISOString(),
+    status: paymentIntent.metadata.giftCardFulfilled === "true" ? "fulfilled" : "paid",
+  };
+}
+
 export async function fulfillGiftCardFromSession(
   session: Stripe.Checkout.Session,
-) {
-  const existing = await findGiftCardByStripeSession(session.id);
-  if (existing) return existing;
-
+): Promise<GiftCardRecord> {
   if (session.payment_status !== "paid") {
     throw new Error("Checkout session is not paid");
   }
 
-  const request = metadataToRequest(session.metadata);
-  const record = await saveGiftCardRecord({
-    ...request,
-    stripeSessionId: session.id,
-    paymentIntentId:
-      typeof session.payment_intent === "string"
-        ? session.payment_intent
-        : session.payment_intent?.id,
-  });
+  const paymentIntentId =
+    typeof session.payment_intent === "string"
+      ? session.payment_intent
+      : session.payment_intent?.id;
+  if (!paymentIntentId) {
+    throw new Error("Checkout session has no payment intent");
+  }
+
+  const stripe = getStripe();
+  const paymentIntent = await stripe.paymentIntents.retrieve(paymentIntentId);
+  const record = await buildRecord(session, paymentIntent);
+
+  // Idempotent: Stripe can retry the webhook, and the thank-you page can
+  // also trigger fulfillment if the webhook hasn't landed yet. The flag
+  // lives on the payment intent itself — not in a file — so it survives
+  // exactly as long as the payment does.
+  if (paymentIntent.metadata.giftCardFulfilled === "true") {
+    return record;
+  }
 
   const pdf = await generateGiftCardPdf(record);
 
   // Emails must not block fulfillment if Resend fails.
   await sendGiftCardEmails(record, pdf);
 
-  await markGiftCardFulfilled(record.serial);
+  await stripe.paymentIntents.update(paymentIntentId, {
+    metadata: {
+      ...paymentIntent.metadata,
+      giftCardFulfilled: "true",
+      giftCardSerial: record.serial,
+    },
+  });
 
-  return record;
+  return { ...record, status: "fulfilled" };
 }

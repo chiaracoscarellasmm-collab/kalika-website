@@ -117,6 +117,7 @@ export default async function EsteticaPage({ params }: PageProps<"/[locale]/este
         subtitle={dict.estetica.heroSubtitle}
         subtitleVariant="text"
         scrollHref="#categorie"
+        videoSrc={`${process.env.NEXT_PUBLIC_R2_URL}/flower.mp4`}
         navAriaLabel={locale === "it" ? "Sezioni estetica" : "Beauty sections"}
         navItems={categories.map((c) => ({
           href: `#${c.key}`,

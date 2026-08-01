@@ -243,6 +243,7 @@ export default async function EssenzaPage({
           <Reveal delay={0.1}>
             <div className="mx-auto w-full max-w-[50.9rem] overflow-hidden rounded-2xl border border-[var(--color-line)] bg-[var(--color-blush)]/30 shadow-sm lg:max-w-[45.3rem]">
               <ImageDotsSlider
+                locale={locale}
                 sizes="(max-width: 1024px) 100vw, 50vw"
                 quality={90}
                 slides={[

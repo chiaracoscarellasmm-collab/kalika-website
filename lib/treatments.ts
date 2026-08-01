@@ -205,7 +205,7 @@ export const visoGroups: TreatmentGroup[] = [
         requiresProtocol: true,
         description: {
           it: "Consiste nell'applicazione di tre tipi di fanghi di derivazione marina — caldo, freddo ed equilibrante — distribuiti in aree ben distinte per attivare il lavoro dei muscoli facciali e riattivare la circolazione sanguigna. Una ginnastica passiva che restituisce un viso disteso, ossigenato e turgido.",
-          en: "It consists in applying three types of marine-derived muds — hot, cold and balancing — across distinct areas to activate the facial muscles and reactivate blood circulation. A passive gymnastics that leaves the face relaxed, oxygenated and plump.",
+          en: "It involves applying three types of marine-derived muds — hot, cold and balancing — across distinct areas to activate the facial muscles and reactivate blood circulation. A passive gymnastics that leaves the face relaxed, oxygenated and plump.",
         },
       },
       {
@@ -852,7 +852,7 @@ export const ritualiCategory: SpaCategory = {
           },
           description: {
             it: "Rituale che rende la pelle fine e setosa come la sabbia che scorre tra le dita. Varie profumazioni evocheranno emozioni e ricordi e renderanno questa esperienza indimenticabile. Per un risultato addolcente, setificante e nutriente.",
-            en: "A ritual that leaves the skin fine and silky, like sand flowing between your fingers. Various fragrances evoke emotions and memories, making this experience unforgettable. For a softening, silkifying and nourishing result.",
+            en: "A ritual that leaves the skin fine and silky, like sand flowing between your fingers. Various fragrances evoke emotions and memories, making this experience unforgettable. For a softening, smoothing and nourishing result.",
           },
           tags: ["nutriente", "sensoriale"],
         },
@@ -867,7 +867,7 @@ export const ritualiCategory: SpaCategory = {
           },
           description: {
             it: "Unico nel suo genere: una calda pioggia che scende sul corpo si unisce al burro di karité nutriente e a quattro mani avvolgenti che massaggiano tutto il corpo.",
-            en: "Unique of its kind: warm rainfall on the body joins nourishing shea butter and four enveloping hands that massage the whole body.",
+            en: "One of a kind: warm rainfall on the body joins nourishing shea butter and four enveloping hands that massage the whole body.",
           },
           tags: ["relax", "nutriente"],
         },

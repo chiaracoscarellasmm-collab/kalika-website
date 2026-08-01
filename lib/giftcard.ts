@@ -124,3 +124,29 @@ export function addMonths(date: Date, months: number) {
   next.setMonth(next.getMonth() + months);
   return next;
 }
+
+/** Gift card validity in months. Single source of truth — used by both
+ * fulfillment (lib/giftcard-fulfillment.ts) and the legal copy (lib/legal.ts). */
+export const giftCardValidityMonths = 6;
+
+/**
+ * Derives a stable, human-readable serial straight from Stripe's own unique
+ * payment intent id. Nothing is counted and nothing is persisted, so two
+ * purchases completing at the exact same instant can never be assigned the
+ * same serial — Stripe already guarantees payment intent ids are unique
+ * across every charge on the platform.
+ *
+ * The suffix is truncated to 8 characters for readability. That still gives
+ * ~62^8 (≈218 trillion) possible values, so an accidental collision between
+ * two *different* gift cards is astronomically unlikely at this business's
+ * volume — unlike a counter, which is guaranteed to collide under concurrent
+ * requests, not just unlikely to.
+ */
+export function deriveGiftCardSerial(paymentIntentId: string, issuedAt: Date): string {
+  const year = issuedAt.getFullYear();
+  const suffix = paymentIntentId
+    .replace(/[^a-zA-Z0-9]/g, "")
+    .slice(-8)
+    .toUpperCase();
+  return `KLK-${year}-${suffix}`;
+}

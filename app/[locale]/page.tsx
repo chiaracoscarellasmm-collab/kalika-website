@@ -301,7 +301,7 @@ export default async function HomePage({ params }: PageProps<"/[locale]">) {
                 title: dict.home.featuredMassaggi,
                 text: dict.home.featuredMassaggiText,
                 href: localePath(locale, "/estetica/massaggi"),
-                src: "/massaggio-schiena-mani-olio.png",
+                src: "/massaggio-schiena-mani-olio.jpg",
                 alt:
                   locale === "it"
                     ? "Mani che massaggiano la schiena con olio in un'atmosfera rilassante"
@@ -412,7 +412,7 @@ export default async function HomePage({ params }: PageProps<"/[locale]">) {
           <div className="mt-14 grid gap-6 md:grid-cols-3">
             {dict.reviews.map((r, i) => (
               <Reveal key={`${r.name}-${i}`} delay={i * 0.07}>
-                <ReviewCard {...r} />
+                <ReviewCard {...r} locale={locale} />
               </Reveal>
             ))}
           </div>
@@ -432,7 +432,7 @@ export default async function HomePage({ params }: PageProps<"/[locale]">) {
                 Google Reviews · 4.9/5
               </span>
               <span className="inline-flex items-center gap-2 text-xs uppercase tracking-[0.22em] text-[var(--color-mauve)]">
-                Mostra altre recensioni
+                {locale === "it" ? "Mostra altre recensioni" : "See more reviews"}
                 <ArrowRight
                   size={15}
                   strokeWidth={1.7}

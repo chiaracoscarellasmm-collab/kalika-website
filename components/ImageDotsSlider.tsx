@@ -3,6 +3,7 @@
 import Image from "next/image";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
+import type { Locale } from "@/lib/i18n";
 
 type Slide = {
   src: string;
@@ -11,6 +12,7 @@ type Slide = {
 
 type ImageDotsSliderProps = {
   slides: Slide[];
+  locale: Locale;
   className?: string;
   sizes?: string;
   quality?: number;
@@ -21,6 +23,7 @@ const SWIPE_THRESHOLD_PX = 40;
 
 export default function ImageDotsSlider({
   slides,
+  locale,
   className = "",
   sizes = "(max-width: 1024px) 100vw, 50vw",
   quality = 90,
@@ -103,7 +106,7 @@ export default function ImageDotsSlider({
           <button
             type="button"
             onClick={goPrev}
-            aria-label="Foto precedente"
+            aria-label={locale === "it" ? "Foto precedente" : "Previous photo"}
             className="absolute left-3 top-1/2 z-10 hidden h-9 w-9 -translate-y-1/2 items-center justify-center rounded-full bg-white/35 text-[var(--color-brown)] backdrop-blur-[2px] transition hover:bg-white/55 lg:flex"
           >
             <ChevronLeft size={20} strokeWidth={1.75} />
@@ -111,7 +114,7 @@ export default function ImageDotsSlider({
           <button
             type="button"
             onClick={goNext}
-            aria-label="Foto successiva"
+            aria-label={locale === "it" ? "Foto successiva" : "Next photo"}
             className="absolute right-3 top-1/2 z-10 hidden h-9 w-9 -translate-y-1/2 items-center justify-center rounded-full bg-white/35 text-[var(--color-brown)] backdrop-blur-[2px] transition hover:bg-white/55 lg:flex"
           >
             <ChevronRight size={20} strokeWidth={1.75} />
@@ -120,7 +123,7 @@ export default function ImageDotsSlider({
           <div
             className="pointer-events-none absolute inset-x-0 bottom-3 flex justify-center gap-2"
             role="tablist"
-            aria-label="Galleria prodotti"
+            aria-label={locale === "it" ? "Galleria prodotti" : "Product gallery"}
           >
             {slides.map((slide, i) => (
               <button
@@ -128,7 +131,7 @@ export default function ImageDotsSlider({
                 type="button"
                 role="tab"
                 aria-selected={i === index}
-                aria-label={`Foto ${i + 1}`}
+                aria-label={locale === "it" ? `Foto ${i + 1}` : `Photo ${i + 1}`}
                 onClick={() => setIndex(i)}
                 className={`pointer-events-auto h-2 w-2 rounded-full transition-all duration-300 ${
                   i === index

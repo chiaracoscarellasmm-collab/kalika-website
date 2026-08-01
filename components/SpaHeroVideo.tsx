@@ -23,7 +23,7 @@ export function SpaHeroVideo({
   title,
   subtitle,
   navItems,
-  videoSrc = "https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4",
+  videoSrc = `${process.env.NEXT_PUBLIC_R2_URL}/flower.mp4`,
   streamEmbedHtml,
   scrollHref = "#rituali",
   navAriaLabel = "SPA sections",

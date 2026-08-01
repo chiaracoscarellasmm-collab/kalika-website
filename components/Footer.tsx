@@ -3,6 +3,7 @@ import Image from "next/image";
 import type { Locale } from "@/lib/i18n";
 import type { Dictionary } from "@/lib/dictionaries";
 import { site, localePath } from "@/lib/site";
+import { legalEntity, termsPath } from "@/lib/legal";
 
 function InstagramIcon({ size = 18 }: { size?: number }) {
   return (
@@ -74,21 +75,19 @@ export function Footer({ locale, dict }: Props) {
     <footer className="mt-32 bg-[var(--color-cream)] border-t border-[var(--color-line)]">
       {/* Centered logo */}
       <div className="flex justify-center pt-16">
-        <Link href={localePath(locale)} aria-label={dict.common.brand} className="flex flex-col items-center gap-2">
-          <Image
-            src="/logo-kalika-nuovaestetica.jpg"
-            alt={
-              locale === "it"
-                ? "Logo di Kalika Nuovaestetica di Sabina Carretta"
-                : "Kalika Nuovaestetica logo by Sabina Carretta"
-            }
-            width={160}
-            height={160}
-            sizes="160px"
-            quality={80}
-            className="h-auto w-[160px] object-contain mix-blend-multiply drop-shadow-[0_10px_22px_rgba(107,58,42,0.08)]"
-          />
-        </Link>
+        <Image
+          src="/logo-kalika-nuovaestetica.jpg"
+          alt={
+            locale === "it"
+              ? "Logo di Kalika Nuovaestetica di Sabina Carretta"
+              : "Kalika Nuovaestetica logo by Sabina Carretta"
+          }
+          width={160}
+          height={160}
+          sizes="160px"
+          quality={80}
+          className="h-auto w-[160px] object-contain mix-blend-multiply drop-shadow-[0_10px_22px_rgba(107,58,42,0.08)]"
+        />
       </div>
 
       {/* Link grid: 2 centered cols on mobile, 5 left-aligned on desktop */}
@@ -226,14 +225,31 @@ export function Footer({ locale, dict }: Props) {
             {dict.footer.credits.replace("{year}", String(year))}
           </p>
 
-          <div className="flex gap-6 text-[11px] uppercase tracking-[0.25em] text-[var(--color-espresso)]/55">
+          <div className="flex flex-wrap justify-center gap-x-6 gap-y-3 text-[11px] uppercase tracking-[0.25em] text-[var(--color-espresso)]/55">
             <Link href={localePath(locale, "/privacy")} className="hover:text-[var(--color-mauve)]">
               {dict.footer.privacy}
             </Link>
             <Link href={localePath(locale, "/cookie")} className="hover:text-[var(--color-mauve)]">
               {dict.footer.cookie}
             </Link>
+            <Link href={localePath(locale, termsPath)} className="hover:text-[var(--color-mauve)]">
+              {dict.footer.terms}
+            </Link>
           </div>
+
+          {/* Company identification — art. 12 D.Lgs. 70/2003 */}
+          <p className="max-w-xl text-center text-[11px] leading-6 text-[var(--color-espresso)]/45">
+            {legalEntity.name} · {legalEntity.address}
+            <span className="block">
+              P.IVA {legalEntity.vat} · C.F. {legalEntity.taxCode} · PEC{" "}
+              <a
+                href={`mailto:${legalEntity.pec}`}
+                className="transition-colors hover:text-[var(--color-mauve)]"
+              >
+                {legalEntity.pec}
+              </a>
+            </span>
+          </p>
         </div>
       </div>
     </footer>

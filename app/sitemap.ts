@@ -18,6 +18,9 @@ const paths = [
   "/spa/coppia",
   "/spa/percorsi",
   "/gift-card",
+  "/privacy",
+  "/cookie",
+  "/condizioni-vendita",
 ];
 
 export default function sitemap(): MetadataRoute.Sitemap {
