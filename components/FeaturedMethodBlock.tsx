@@ -67,7 +67,10 @@ export function FeaturedMethodBlock({
 
   return (
     <Reveal className="h-full">
-      <article className="group relative flex h-full flex-col overflow-hidden rounded-3xl border-2 border-[#C97BB2]/45 bg-white shadow-[0_14px_36px_-18px_rgba(107,58,42,0.2)] transition-[transform,box-shadow,border-color] duration-500 ease-out motion-safe:hover:-translate-y-1.5 hover:border-[#C97BB2] hover:shadow-[0_22px_44px_-16px_rgba(201,123,178,0.45)]">
+      <article
+        id={treatment.id}
+        className="group relative flex h-full scroll-mt-24 flex-col overflow-hidden rounded-3xl border-2 border-[#C97BB2]/45 bg-white shadow-[0_14px_36px_-18px_rgba(107,58,42,0.2)] transition-[transform,box-shadow,border-color] duration-500 ease-out motion-safe:hover:-translate-y-1.5 hover:border-[#C97BB2] hover:shadow-[0_22px_44px_-16px_rgba(201,123,178,0.45)]"
+      >
         {imageSrc && (
           <div className="px-3 pt-3 sm:px-4 sm:pt-4">
             <div className="relative aspect-[16/10] overflow-hidden rounded-2xl">

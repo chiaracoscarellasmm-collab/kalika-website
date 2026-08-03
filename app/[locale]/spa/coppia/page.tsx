@@ -50,6 +50,7 @@ export default async function CoppiaPage({
             locale={locale}
             dict={dict}
             giftDesign="coppia"
+            alwaysShowFeaturedActions
           />
         </div>
       </section>

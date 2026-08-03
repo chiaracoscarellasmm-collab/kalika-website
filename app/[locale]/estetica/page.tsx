@@ -92,21 +92,30 @@ export default async function EsteticaPage({ params }: PageProps<"/[locale]/este
     },
   ];
 
-  const popular: Treatment[] = [
-    visoGroups[0].treatments[0],
+  const popular: { treatment: Treatment; href: string }[] = [
     {
-      ...riflessologiaCorporeaTreatment,
-      name: {
-        it: "Massaggio di Riflessologia",
-        en: "Reflexology Massage",
-      },
+      treatment: visoGroups[0].treatments[0],
+      href: localePath(locale, "/estetica/viso#pulizia-viso"),
     },
     {
-      id: "rituali-spa-suite",
-      name: {
-        it: "Rituali in SPA SUITE",
-        en: "Rituals in SPA SUITE",
+      treatment: {
+        ...riflessologiaCorporeaTreatment,
+        name: {
+          it: "Massaggio di Riflessologia",
+          en: "Reflexology Massage",
+        },
       },
+      href: localePath(locale, "/estetica/massaggi#riflessologia-corporea"),
+    },
+    {
+      treatment: {
+        id: "rituali-spa-suite",
+        name: {
+          it: "Rituali in SPA SUITE",
+          en: "Rituals in SPA SUITE",
+        },
+      },
+      href: localePath(locale, "/spa/rituali"),
     },
   ];
 

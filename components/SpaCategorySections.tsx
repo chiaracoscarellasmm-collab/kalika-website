@@ -10,6 +10,7 @@ type Props = {
   dict: Dictionary;
   hideCardPricing?: boolean;
   giftDesign?: "spa" | "coppia";
+  alwaysShowFeaturedActions?: boolean;
 };
 
 export function SpaCategorySections({
@@ -18,6 +19,7 @@ export function SpaCategorySections({
   dict,
   hideCardPricing = false,
   giftDesign = "spa",
+  alwaysShowFeaturedActions = false,
 }: Props) {
   return (
     <div className="relative">
@@ -28,16 +30,19 @@ export function SpaCategorySections({
       </div>
 
       <div className="relative space-y-20">
-      <Reveal>
-        <SpaExperienceCard
-          treatment={category.featured}
-          locale={locale}
-          dict={dict}
-          featured
-          hideCardPricing={hideCardPricing}
-          giftDesign={giftDesign}
-        />
-      </Reveal>
+      {category.featured && (
+        <Reveal>
+          <SpaExperienceCard
+            treatment={category.featured}
+            locale={locale}
+            dict={dict}
+            featured
+            hideCardPricing={hideCardPricing}
+            giftDesign={giftDesign}
+            alwaysShowFeaturedActions={alwaysShowFeaturedActions}
+          />
+        </Reveal>
+      )}
 
       {category.groups.map((group) => (
         <Reveal key={group.id} delay={0.05}>
@@ -68,7 +73,7 @@ export function SpaCategorySections({
                     giftDesign={giftDesign}
                     className={
                       isLoneLast
-                        ? "lg:col-span-2 lg:mx-auto lg:w-[calc(50%-0.75rem)]"
+                        ? "lg:col-span-2 lg:w-[calc(50%-0.75rem)]"
                         : undefined
                     }
                   />

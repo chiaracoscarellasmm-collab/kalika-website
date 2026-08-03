@@ -75,7 +75,8 @@ export function EsteticaTreatmentItem({
 
   return (
     <li
-      className={`rounded-2xl border bg-white p-5 transition-all duration-500 sm:p-6 ${
+      id={treatment.id}
+      className={`scroll-mt-24 rounded-2xl border bg-white p-5 transition-all duration-500 sm:p-6 ${
         active
           ? "border-[#C97BB2] shadow-[0_10px_28px_-14px_rgba(107,58,42,0.18)]"
           : "border-[var(--color-line)] hover:border-[var(--color-mauve)]/35"

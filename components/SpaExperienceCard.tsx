@@ -22,6 +22,7 @@ type Props = {
   className?: string;
   hideCardPricing?: boolean;
   giftDesign?: GiftCardDesign;
+  alwaysShowFeaturedActions?: boolean;
 };
 
 export function SpaExperienceCard({
@@ -32,6 +33,7 @@ export function SpaExperienceCard({
   className,
   hideCardPricing = false,
   giftDesign = "spa",
+  alwaysShowFeaturedActions = false,
 }: Props) {
   const [open, setOpen] = useState(false);
   const [active, setActive] = useState(false);
@@ -51,6 +53,7 @@ export function SpaExperienceCard({
   const temperature = treatment.temperature
     ? pick(treatment.temperature, locale)
     : null;
+  const relatedLink = treatment.relatedLink;
   const teaser = short ?? description;
   const hasDetails = Boolean(description);
   const needsGiftConfigure = treatmentNeedsGiftConfigure(treatment, locale);
@@ -147,13 +150,23 @@ export function SpaExperienceCard({
       }`}
     >
       <div className="overflow-hidden">
-        <p
-          className={`border-t border-[var(--color-cream)]/10 pt-4 leading-8 text-[var(--color-cream)]/80 ${
-            featured ? "text-[17px]" : "text-[16px]"
-          }`}
-        >
-          {description}
-        </p>
+        <div className="border-t border-[var(--color-cream)]/10 pt-4">
+          <p
+            className={`leading-8 text-[var(--color-cream)]/80 ${
+              featured ? "text-[17px]" : "text-[16px]"
+            }`}
+          >
+            {description}
+          </p>
+          {relatedLink && (
+            <Link
+              href={localePath(locale, relatedLink.path)}
+              className="mt-4 inline-flex text-xs uppercase tracking-[0.16em] text-[var(--color-wisteria)] transition-colors hover:text-[var(--color-gold)]"
+            >
+              {pick(relatedLink.label, locale)} →
+            </Link>
+          )}
+        </div>
       </div>
     </div>
   );
@@ -299,7 +312,7 @@ export function SpaExperienceCard({
               {tiersPanel}
               <div
                 className={`grid w-full transition-all duration-500 ease-out ${
-                  active
+                  active || alwaysShowFeaturedActions
                     ? "grid-rows-[1fr] opacity-100"
                     : "grid-rows-[0fr] opacity-0"
                 }`}
@@ -363,10 +376,9 @@ export function SpaExperienceCard({
                 </p>
               </div>
             )}
-
-            {detailPanel}
           </div>
 
+          {detailPanel}
           {tiersToggle && <div className="relative mt-4">{tiersToggle}</div>}
           {tiersPanel}
         </div>

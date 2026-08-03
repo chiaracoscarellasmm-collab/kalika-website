@@ -92,9 +92,11 @@ export function SpaPercorsiTariffe({ category, locale, dict }: Props) {
   const labels = dict.spa.percorsi.tariffe;
   const thermalGroup = category.groups.find((g) => g.id === "percorsi-base");
 
-  const thermalTariffs = thermalGroup
-    ? [category.featured, ...thermalGroup.treatments]
-    : [category.featured];
+  const thermalTariffs = (
+    thermalGroup
+      ? [category.featured, ...thermalGroup.treatments]
+      : [category.featured]
+  ).filter((t): t is Treatment => t !== undefined);
 
   return (
     <section className="border-t border-[var(--color-cream)]/10 bg-[#1f120c] py-24">
