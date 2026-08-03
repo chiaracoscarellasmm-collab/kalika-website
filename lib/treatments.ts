@@ -644,75 +644,6 @@ export const ritualiCategory: SpaCategory = {
   },
   groups: [
     {
-      id: "rituali-viaggi",
-      title: { it: "Viaggi sensoriali", en: "Sensory journeys" },
-      subtitle: {
-        it: "Rituali brevi ispirati a destinazioni lontane.",
-        en: "Short rituals inspired by distant destinations.",
-      },
-      treatments: [
-        {
-          id: "dolcezza-orientale",
-          name: { it: "Dolcezza Orientale", en: "Oriental Sweetness" },
-          duration: { it: "25min", en: "25 min" },
-          price: eur(68),
-          short: {
-            it: "Un letto morbido scaldato dal sole e i profumi dei campi di primavera.",
-            en: "A soft bed warmed by the sun and the scents of spring fields.",
-          },
-          description: {
-            it: "Un rituale che conduce a un soffice letto scaldato dal sole, tra i profumi dei campi in primavera.",
-            en: "A ritual that leads to a soft bed warmed by the sun, among the scents of spring fields.",
-          },
-          tags: ["nutriente", "sensoriale"],
-        },
-        {
-          id: "rio-de-janeiro",
-          name: { it: "Viaggio a Rio de Janeiro", en: "Journey to Rio de Janeiro" },
-          duration: { it: "1h", en: "1h" },
-          price: eur(80),
-          short: {
-            it: "Ritmo, energia e calore verso le spiagge brasiliane.",
-            en: "Rhythm, energy and warmth towards Brazilian shores.",
-          },
-          tags: ["sensoriale", "tonificante"],
-        },
-        {
-          id: "cancun",
-          name: { it: "Viaggio a Cancun", en: "Journey to Cancun" },
-          duration: { it: "1h", en: "1h" },
-          price: eur(80),
-          short: {
-            it: "Brezza caraibica e profumi tropicali per una fuga luminosa.",
-            en: "Caribbean breeze and tropical scents for a bright escape.",
-          },
-          tags: ["sensoriale"],
-        },
-        {
-          id: "bali",
-          name: { it: "Viaggio a Bali", en: "Journey to Bali" },
-          duration: { it: "1h e 30min", en: "1h 30min" },
-          price: eur(100),
-          short: {
-            it: "Gesti lenti e aromi d'Oriente per ritrovare l'equilibrio.",
-            en: "Slow gestures and oriental aromas to rediscover balance.",
-          },
-          tags: ["relax", "sensoriale"],
-        },
-        {
-          id: "marrakech",
-          name: { it: "Viaggio a Marrakech", en: "Journey to Marrakech" },
-          duration: { it: "1h e 30min", en: "1h 30min" },
-          price: eur(100),
-          short: {
-            it: "Spezie, argan e atmosfere del deserto in un rituale avvolgente.",
-            en: "Spices, argan and desert atmospheres in an enveloping ritual.",
-          },
-          tags: ["sensoriale", "nutriente"],
-        },
-      ],
-    },
-    {
       id: "rituali-purificanti",
       title: { it: "Rituali purificanti", en: "Purifying rituals" },
       subtitle: {
@@ -786,6 +717,21 @@ export const ritualiCategory: SpaCategory = {
         en: "Oud, amber and spices for a distant journey.",
       },
       treatments: [
+        {
+          id: "dolcezza-orientale",
+          name: { it: "Dolcezza Orientale", en: "Oriental Sweetness" },
+          duration: { it: "25min", en: "25 min" },
+          price: eur(68),
+          short: {
+            it: "Un letto morbido scaldato dal sole e i profumi dei campi di primavera.",
+            en: "A soft bed warmed by the sun and the scents of spring fields.",
+          },
+          description: {
+            it: "Un rituale che conduce a un soffice letto scaldato dal sole, tra i profumi dei campi in primavera.",
+            en: "A ritual that leads to a soft bed warmed by the sun, among the scents of spring fields.",
+          },
+          tags: ["nutriente", "sensoriale"],
+        },
         {
           id: "oud",
           name: { it: "Oud", en: "Oud" },
