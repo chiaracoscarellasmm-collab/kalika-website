@@ -65,7 +65,7 @@ function itemFromTreatment(t: Parameters<typeof itemsFromTreatment>[0]): Listino
 
 const massaggiMetodi: ListinoSection = {
   title: "Metodi in evidenza",
-  items: massaggiFeaturedMethods.map(itemFromTreatment),
+  items: massaggiFeaturedMethods.flatMap(itemsFromTreatment),
 };
 
 const massaggiSpecificiLocalizzati: ListinoSection = {
@@ -192,7 +192,9 @@ const pageOneLeft: ListinoSection[] = [
   massaggiMetodi,
   {
     title: "Momenti speciali",
-    items: massaggiGroups[1].treatments.flatMap(itemsFromTreatment),
+    items: massaggiGroups[1].treatments
+      .filter((t) => t.id !== "massaggio-in-armonia")
+      .flatMap(itemsFromTreatment),
   },
   massaggiSpecificiLocalizzati,
   corpoTotaliSice,
