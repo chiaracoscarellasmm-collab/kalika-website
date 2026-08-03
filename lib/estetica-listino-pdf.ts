@@ -4,12 +4,19 @@ import { PDFDocument } from "pdf-lib";
 import puppeteer, { type Browser } from "puppeteer-core";
 import {
   corpoGroups,
+  laserTiers,
   maniPiediGroups,
   massaggiFeaturedMethods,
   massaggiGroups,
   sopraccigliaGroups,
   visoGroups,
 } from "./treatments";
+
+const LASER_ZONE_LABELS: Record<(typeof laserTiers)[number]["zone"], string> = {
+  blue: "Zona blu",
+  green: "Zona verde",
+  red: "Zona rossa",
+};
 
 type ListinoItem = {
   name: string;
@@ -132,6 +139,15 @@ const epilazioneTradizionale: ListinoSection = {
   ],
 };
 
+const laserDiodo: ListinoSection = {
+  title: "Epilazione Laser Diodo 808",
+  subtitle: "Prezzo per zona · più zone acquisti, più risparmi",
+  items: laserTiers.map((tier) => ({
+    name: LASER_ZONE_LABELS[tier.zone],
+    price: `${tier.price.it} a zona`,
+  })),
+};
+
 const cocoCeraDonna: ListinoSection = {
   title: "Epilazione Coco Cera · Donna",
   subtitle: "Originale cera brasiliana",
@@ -184,6 +200,8 @@ const cocoCeraUomo: ListinoSection = {
   ],
 };
 
+// Rows carrying a duration wrap onto a second line, so the columns are balanced by
+// rendered height rather than by item count: massaggi run tall, mani e piedi run short.
 const pageOneLeft: ListinoSection[] = [
   {
     title: "Massaggi e trattamenti rilassanti",
@@ -192,19 +210,17 @@ const pageOneLeft: ListinoSection[] = [
   massaggiMetodi,
   {
     title: "Momenti speciali",
-    items: massaggiGroups[1].treatments
-      .filter((t) => t.id !== "massaggio-in-armonia")
-      .flatMap(itemsFromTreatment),
+    items: massaggiGroups[1].treatments.flatMap(itemsFromTreatment),
   },
   massaggiSpecificiLocalizzati,
-  corpoTotaliSice,
+  makeUp,
 ];
 
 const pageOneRight: ListinoSection[] = [
+  corpoTotaliSice,
   corpoLocaliSice,
   trattamentoOlistico,
   visoSice,
-  makeUp,
   maniPiedi,
 ];
 
@@ -314,6 +330,18 @@ const LISTINO_STYLES = `
   }
 `;
 
+/** The aesthetics listing is the densest sheet: tighten it so it stays on a single page. */
+const COMPACT_STYLES = `
+  @page { margin: 9mm 11mm; }
+  .header { margin-bottom: 3.5mm; }
+  .columns { gap: 6mm; }
+  .column { gap: 2.5mm; }
+  .block h2 { margin-bottom: 2mm; padding-top: 0; }
+  .row { padding: 0.4mm 0; line-height: 1.3; }
+  .meta { margin-top: 0.2mm; }
+  .footer-note { margin-top: 3mm; padding-top: 2mm; }
+`;
+
 function renderSection(section: ListinoSection) {
   const rows = section.items
     .map((item) => {
@@ -346,12 +374,12 @@ function renderHeader(subtitle: string) {
   </header>`;
 }
 
-function wrapListinoHtml(body: string) {
+function wrapListinoHtml(body: string, extraStyles = "") {
   return `<!doctype html>
 <html lang="it">
   <head>
     <meta charset="utf-8" />
-    <style>${LISTINO_STYLES}</style>
+    <style>${LISTINO_STYLES}${extraStyles}</style>
   </head>
   <body>${body}</body>
 </html>`;
@@ -386,10 +414,11 @@ function buildSectionHtml() {
       <p class="footer-note">
         Il trattamento eubiotico corpo e viso nella stessa seduta viene scontato del 15% sul totale.
       </p>
-    `),
+    `, COMPACT_STYLES),
     wrapListinoHtml(`
       ${renderHeader("Epilazione")}
       ${renderSection(epilazioneTradizionale)}
+      ${renderSection(laserDiodo)}
     `),
     wrapListinoHtml(`
       ${renderHeader("Epilazione · Coco Cera")}

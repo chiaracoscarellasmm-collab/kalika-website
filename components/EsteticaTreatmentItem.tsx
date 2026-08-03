@@ -135,11 +135,8 @@ export function EsteticaTreatmentItem({
                       key={index}
                       type="button"
                       aria-pressed={isActive}
-                      onClick={() => {
-                        setDurationIndex(index);
-                        setActive(true);
-                      }}
-                      className={`rounded-full px-3 py-1.5 text-[10px] uppercase tracking-[0.14em] transition-colors ${
+                      onClick={() => setDurationIndex(index)}
+                      className={`rounded-full px-2.5 py-1 text-[9px] uppercase tracking-[0.12em] transition-colors ${
                         isActive
                           ? "bg-[var(--color-mauve)] text-white"
                           : "text-[var(--color-mauve)] hover:bg-[var(--color-blush)]"

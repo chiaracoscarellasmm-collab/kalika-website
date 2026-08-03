@@ -27,7 +27,7 @@ export type PriceTier = {
   price: Bilingual;
 };
 
-/** Duration variant with its own price (e.g. 55 min / 85 min). */
+/** Duration variant with its own price (e.g. 55 min / 1 h 25 min). */
 export type DurationOption = {
   duration: Bilingual;
   price: Bilingual;
@@ -163,8 +163,8 @@ const DUR_55: Bilingual = { it: "55min", en: "55 min" };
 const DUR_45: Bilingual = { it: "45min", en: "45 min" };
 const DUR_40: Bilingual = { it: "40min", en: "40 min" };
 const DUR_30: Bilingual = { it: "30min", en: "30 min" };
-const DUR_75: Bilingual = { it: "75min", en: "75 min" };
-const DUR_85: Bilingual = { it: "85min", en: "85 min" };
+const DUR_75: Bilingual = { it: "1h e 15min", en: "1h 15min" };
+const DUR_85: Bilingual = { it: "1h e 25min", en: "1h 25min" };
 
 export const visoGroups: TreatmentGroup[] = [
   {
@@ -264,7 +264,7 @@ export const corpoGroups: TreatmentGroup[] = [
         id: "talaterm-caldo-freddo",
         name: { it: "Talaterm fango gel caldo / freddo", en: "Talaterm hot / cold mud-gel" },
         duration: DUR_75,
-        price: eur(105),
+        price: eur(110),
         requiresProtocol: true,
         description: {
           it: "Trattamento eseguito con fanghi che riscaldano e raffreddano, creando una vera ginnastica vasale, seguito da un bendaggio modellante dai risultati sorprendenti sul corpo.",
@@ -275,11 +275,11 @@ export const corpoGroups: TreatmentGroup[] = [
             it: "Ripristina la compattezza dello strato più superficiale della pelle, sostenendone le funzioni naturali. Rinforza il Fattore di Idratazione Naturale (NMF) per una pelle più protetta ed equilibrata nel tempo.",
             en: "Restores the compactness of the skin's outermost layer and supports its natural functions. Strengthens the Natural Moisturising Factor (NMF) for skin that stays more protected and balanced over time.",
       } },
-      { id: "talaplus", name: { it: "Talaplus — Trattamento eubiotico riducente", en: "Talaplus — Reducing eubiotic treatment" }, duration: DUR_75, price: eur(130), requiresProtocol: true, description: {
+      { id: "talaplus", name: { it: "Talaplus: Trattamento eubiotico riducente", en: "Talaplus: Reducing eubiotic treatment" }, duration: DUR_75, price: eur(130), requiresProtocol: true, description: {
             it: "Un trattamento modellante e drenante che agisce sulle adiposità localizzate e sugli inestetismi della cellulite, mentre idrata e tonifica. Rimodella la silhouette con azione mirata.",
             en: "A sculpting, draining treatment that targets localised adiposity and cellulite while hydrating and toning. It reshapes the silhouette with focused action.",
       } },
-      { id: "body-reset", name: { it: "Body Reset — Trattamento eubiotico rassodante", en: "Body Reset — Firming eubiotic treatment" }, duration: DUR_75, price: eur(140), requiresProtocol: true, description: {
+      { id: "body-reset", name: { it: "Body Reset: Trattamento eubiotico rassodante", en: "Body Reset: Firming eubiotic treatment" }, duration: DUR_75, price: eur(140), requiresProtocol: true, description: {
             it: "Pensato per rassodare e tonificare, ridona compattezza alle zone più delicate e restituisce alla pelle il suo naturale turgore.",
             en: "Designed to firm and tone, it restores compactness to the most delicate areas and returns the skin's natural plumpness.",
       } },
@@ -416,7 +416,10 @@ export const massaggiGroups: TreatmentGroup[] = [
         },
         durationOptions: [
           { duration: DUR_55, price: eur(80) },
-          { duration: DUR_85, price: eur(100) },
+          {
+            duration: { it: "1h e 30min", en: "1h 30min" },
+            price: eur(110),
+          },
         ],
       },
       {
@@ -429,16 +432,6 @@ export const massaggiGroups: TreatmentGroup[] = [
           },
         duration: DUR_60,
         price: eur(65),
-      },
-      {
-        id: "massaggio-in-armonia",
-        name: { it: "Massaggio in armonia (di coppia)", en: "Harmony massage (for two)" },
-        short: { it: "Di coppia", en: "For two" },
-        description: {
-            it: "Un momento da condividere. Due lettini affiancati, lo stesso istante di quiete: il massaggio in armonia è pensato per chi vuole rilassarsi insieme, in una coccola che resta.",
-            en: "A moment to share. Two beds side by side, the same quiet instant: the harmony massage is for those who want to relax together, in a lasting embrace of care.",
-          },
-        price: eur(155),
       },
       {
         id: "mamma-bambino",
@@ -634,6 +627,21 @@ export const ritualiCategory: SpaCategory = {
   note: {
     intro: { it: "In ogni rituale, per te", en: "In every ritual, for you" },
     items: [INCLUSION_TISANA, INCLUSION_RELAX],
+  },
+  featured: {
+    id: "cioccolato-zenzero",
+    name: { it: "Rituale Cioccolato e Zenzero", en: "Chocolate & Ginger Ritual" },
+    duration: { it: "1h e 40min", en: "1h 40min" },
+    price: eur(170),
+    short: {
+      it: "La dolcezza del cacao e il calore dello zenzero in un abbraccio goloso.",
+      en: "The sweetness of cocoa and the warmth of ginger in an indulgent embrace.",
+    },
+    description: {
+      it: "Un viaggio dei sensi dove la pelle sarà trattata con prodotti di diversa consistenza: dalle mandorle e cioccolato sminuzzati, a colate di cioccolato caldo e burri morbidi allo zenzero, tutto arricchito da minerali preziosi, vitamine e omega 3. Godurioso e indimenticabile.",
+      en: "A journey for the senses where the skin is treated with textures of every kind: crushed almonds and chocolate, warm melted chocolate and soft ginger butters, all enriched with precious minerals, vitamins and omega 3. Indulgent and unforgettable.",
+    },
+    tags: ["nutriente", "sensoriale"],
   },
   groups: [
     {
@@ -882,31 +890,6 @@ export const ritualiCategory: SpaCategory = {
         },
       ],
     },
-    {
-      id: "rituali-gourmet",
-      title: { it: "Rituali Gourmet", en: "Gourmet Rituals" },
-      subtitle: {
-        it: "Ingredienti golosi per una coccola che si assapora.",
-        en: "Indulgent ingredients for a treat you can almost taste.",
-      },
-      treatments: [
-        {
-          id: "cioccolato-zenzero",
-          name: { it: "Rituale Cioccolato e Zenzero", en: "Chocolate & Ginger Ritual" },
-          duration: { it: "1h e 40min", en: "1h 40min" },
-          price: eur(170),
-          short: {
-            it: "La dolcezza del cacao e il calore dello zenzero in un abbraccio goloso.",
-            en: "The sweetness of cocoa and the warmth of ginger in an indulgent embrace.",
-          },
-          description: {
-            it: "Un viaggio dei sensi dove la pelle sarà trattata con prodotti di diversa consistenza: dalle mandorle e cioccolato sminuzzati, a colate di cioccolato caldo e burri morbidi allo zenzero, tutto arricchito da minerali preziosi, vitamine e omega 3. Godurioso e indimenticabile.",
-            en: "A journey for the senses where the skin is treated with textures of every kind: crushed almonds and chocolate, warm melted chocolate and soft ginger butters, all enriched with precious minerals, vitamins and omega 3. Indulgent and unforgettable.",
-          },
-          tags: ["nutriente", "sensoriale"],
-        },
-      ],
-    },
   ],
 };
 
@@ -1149,7 +1132,7 @@ export const percorsiCategory: SpaCategory = {
   featured: {
     id: "termale-romano",
     name: { it: "Termale Romano", en: "Roman Thermal" },
-    duration: { it: "65min", en: "65 min" },
+    duration: { it: "1h e 5min", en: "1h 5min" },
     price: eur(110),
     priceTiers: [
       { label: TIER_SINGLE, price: eur(110) },
@@ -1271,7 +1254,7 @@ export const percorsiCategory: SpaCategory = {
               it: "Scopri il Talaterm Fangogel",
               en: "Discover Talaterm Mud-gel",
             },
-            path: "/estetica/corpo#talaterm-fangogel",
+            path: "/estetica/corpo#talaterm-fango-depurativo",
           },
           tags: ["relax", "detox"],
         },
@@ -1314,7 +1297,7 @@ export const percorsiCategory: SpaCategory = {
               it: "Scopri il Talaterm Fangogel",
               en: "Discover Talaterm Mud-gel",
             },
-            path: "/estetica/corpo#talaterm-fangogel",
+            path: "/estetica/corpo#talaterm-fango-depurativo",
           },
           tags: ["detox", "purificante", "relax"],
         },

@@ -55,14 +55,21 @@ export default async function CoppiaPage({
         </div>
       </section>
 
-      <section className="bg-gradient-to-b from-[#1f120c] to-[var(--color-brown)] py-20">
-        <div className="mx-auto max-w-3xl px-6 text-center text-[var(--color-cream)]">
+      <section className="border-t border-[var(--color-line)] bg-[var(--color-blush)] py-20">
+        <div className="mx-auto max-w-3xl px-6 text-center">
           <Reveal>
-            <p className="script text-4xl text-[var(--color-wisteria)]">
+            <p className="script text-4xl text-[var(--color-mauve)]">
               {dict.home.giftOverline}
             </p>
           </Reveal>
           <Reveal delay={0.05}>
+            <p className="mx-auto mt-4 max-w-xl text-[17px] leading-8 text-[var(--color-espresso)]/75">
+              {locale === "it"
+                ? "Un'esperienza da condividere, una coccola da ricordare."
+                : "An experience to share, a moment of care to remember."}
+            </p>
+          </Reveal>
+          <Reveal delay={0.1}>
             <Link
               href={localePath(locale, "/gift-card")}
               className="mt-8 inline-flex items-center gap-3 rounded-full bg-[var(--color-wisteria)] px-7 py-3.5 text-sm uppercase tracking-[0.2em] text-white transition-colors hover:bg-[var(--color-mauve)]"

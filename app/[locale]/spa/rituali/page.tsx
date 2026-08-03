@@ -46,6 +46,7 @@ export default async function RitualiPage({
             category={ritualiCategory}
             locale={locale}
             dict={dict}
+            alwaysShowFeaturedActions
           />
         </div>
       </section>
