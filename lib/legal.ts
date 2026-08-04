@@ -126,16 +126,16 @@ const privacyIt: LegalDoc = {
               "Massimo 30 giorni, salvo necessità di accertamento di illeciti",
             ],
             [
-              "Preferenza di lingua",
-              "Mostrare il sito nella lingua scelta",
-              "Legittimo interesse a fornire un servizio funzionante (art. 6.1.f GDPR)",
-              "12 mesi (cookie tecnico)",
+              "Numero di telefono e contenuto dei messaggi inviati tramite WhatsApp, telefono o email",
+              "Rispondere a richieste di assistenza o di informazioni sui trattamenti",
+              "Esecuzione di misure precontrattuali su tua richiesta, o legittimo interesse a fornire assistenza (art. 6.1.b e 6.1.f GDPR)",
+              "Per il tempo necessario a gestire la richiesta",
             ],
           ],
         },
         {
           kind: "p",
-          text: "Se ci contatti via email, telefono o WhatsApp, trattiamo i dati che ci comunichi al solo fine di rispondere alla tua richiesta, per il tempo necessario a gestirla.",
+          text: "Il pulsante WhatsApp presente sul sito apre una conversazione diretta con il nostro numero: il servizio è fornito da **WhatsApp Ireland Limited (Meta)**, che tratta i messaggi come titolare autonomo secondo la propria informativa, consultabile su [whatsapp.com/legal/privacy-policy](https://www.whatsapp.com/legal/privacy-policy). Noi trattiamo il contenuto dei messaggi che ci invii al solo fine di risponderti.",
         },
       ],
     },
@@ -157,28 +157,7 @@ const privacyIt: LegalDoc = {
       blocks: [
         {
           kind: "p",
-          text: "I dati non sono mai diffusi né ceduti o venduti a terzi per finalità di marketing. Sono accessibili unicamente alla titolare e ai fornitori tecnici che ci consentono di erogare il servizio, nominati responsabili del trattamento ai sensi dell'art. 28 GDPR:",
-        },
-        {
-          kind: "dl",
-          items: [
-            {
-              term: "Vercel Inc. (USA)",
-              desc: "Hosting del sito e log tecnici. Informativa: [vercel.com/legal/privacy-policy](https://vercel.com/legal/privacy-policy)",
-            },
-            {
-              term: "Stripe Payments Europe Ltd. (Irlanda)",
-              desc: "Elaborazione dei pagamenti. Informativa: [stripe.com/it/privacy](https://stripe.com/it/privacy)",
-            },
-            {
-              term: "Resend Inc. (USA)",
-              desc: "Invio delle email transazionali contenenti la Gift Card in PDF. Informativa: [resend.com/legal/privacy-policy](https://resend.com/legal/privacy-policy)",
-            },
-            {
-              term: "Cloudflare Inc. (USA)",
-              desc: "Distribuzione dei contenuti video del sito. Informativa: [cloudflare.com/privacypolicy](https://www.cloudflare.com/privacypolicy/)",
-            },
-          ],
+          text: "I dati non sono mai diffusi né ceduti o venduti a terzi per finalità di marketing. Sono accessibili unicamente alla titolare e ai fornitori tecnici che ci consentono di erogare il servizio — hosting del sito, elaborazione dei pagamenti, invio delle email transazionali e distribuzione dei contenuti — nei limiti necessari a fornire tali servizi.",
         },
         {
           kind: "p",
@@ -200,7 +179,7 @@ const privacyIt: LegalDoc = {
       blocks: [
         {
           kind: "p",
-          text: "Il conferimento dei dati richiesti per l'acquisto di una Gift Card è facoltativo, ma necessario: senza di essi non è possibile emettere la Gift Card né inviartela. La navigazione del sito non richiede invece alcun conferimento di dati.",
+          text: "Il conferimento dei dati richiesti per l'acquisto di una Gift Card è facoltativo, ma necessario: senza di essi non è possibile emettere la Gift Card né inviartela.",
         },
       ],
     },
@@ -303,16 +282,16 @@ const privacyEn: LegalDoc = {
               "Maximum 30 days, unless needed to investigate unlawful activity",
             ],
             [
-              "Language preference",
-              "Displaying the website in your chosen language",
-              "Legitimate interest in providing a working service (Art. 6.1.f GDPR)",
-              "12 months (technical cookie)",
+              "Phone number and the content of messages sent via WhatsApp, phone or email",
+              "Responding to support or treatment information requests",
+              "Performance of pre-contractual measures at your request, or legitimate interest in providing assistance (Art. 6.1.b and 6.1.f GDPR)",
+              "For as long as needed to handle the request",
             ],
           ],
         },
         {
           kind: "p",
-          text: "If you contact us by email, phone or WhatsApp, we process the data you send us solely to answer your enquiry, for as long as is needed to handle it.",
+          text: "The WhatsApp button on the website opens a direct conversation with our number: the service is provided by **WhatsApp Ireland Limited (Meta)**, which processes messages as an independent controller under its own notice, available at [whatsapp.com/legal/privacy-policy](https://www.whatsapp.com/legal/privacy-policy). We process the content of the messages you send us solely to reply to you.",
         },
       ],
     },
@@ -334,28 +313,7 @@ const privacyEn: LegalDoc = {
       blocks: [
         {
           kind: "p",
-          text: "Data is never disclosed publicly, sold or transferred to third parties for marketing purposes. It is accessible only to the controller and to the technical providers that enable the service, appointed as data processors under Art. 28 GDPR:",
-        },
-        {
-          kind: "dl",
-          items: [
-            {
-              term: "Vercel Inc. (USA)",
-              desc: "Website hosting and technical logs. Notice: [vercel.com/legal/privacy-policy](https://vercel.com/legal/privacy-policy)",
-            },
-            {
-              term: "Stripe Payments Europe Ltd. (Ireland)",
-              desc: "Payment processing. Notice: [stripe.com/privacy](https://stripe.com/privacy)",
-            },
-            {
-              term: "Resend Inc. (USA)",
-              desc: "Delivery of transactional emails containing the Gift Card PDF. Notice: [resend.com/legal/privacy-policy](https://resend.com/legal/privacy-policy)",
-            },
-            {
-              term: "Cloudflare Inc. (USA)",
-              desc: "Delivery of the website's video content. Notice: [cloudflare.com/privacypolicy](https://www.cloudflare.com/privacypolicy/)",
-            },
-          ],
+          text: "Data is never disclosed publicly, sold or transferred to third parties for marketing purposes. It is accessible only to the controller and to the technical providers that enable the service — website hosting, payment processing, transactional email delivery and content distribution — to the extent necessary to provide those services.",
         },
         {
           kind: "p",
@@ -377,7 +335,7 @@ const privacyEn: LegalDoc = {
       blocks: [
         {
           kind: "p",
-          text: "Providing the data required to purchase a Gift Card is optional but necessary: without it we cannot issue or send the Gift Card. Browsing the website requires no data at all.",
+          text: "Providing the data required to purchase a Gift Card is optional but necessary: without it we cannot issue or send the Gift Card.",
         },
       ],
     },
@@ -723,7 +681,7 @@ const termsIt: LegalDoc = {
           kind: "ul",
           items: [
             "non è convertibile in denaro;",
-            "non dà diritto a resto in caso di utilizzo parziale, salvo diverso accordo con il centro;",
+            "non dà diritto a resto in caso di utilizzo parziale;",
             "può essere utilizzata in un'unica soluzione o secondo le modalità concordate con il centro;",
             "è trasferibile: può essere utilizzata da persona diversa dall'intestatario.",
           ],
