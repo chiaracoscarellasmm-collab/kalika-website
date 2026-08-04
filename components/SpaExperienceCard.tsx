@@ -23,6 +23,7 @@ type Props = {
   hideCardPricing?: boolean;
   giftDesign?: GiftCardDesign;
   alwaysShowFeaturedActions?: boolean;
+  reserveTemperatureSpace?: boolean;
 };
 
 export function SpaExperienceCard({
@@ -34,6 +35,7 @@ export function SpaExperienceCard({
   hideCardPricing = false,
   giftDesign = "spa",
   alwaysShowFeaturedActions = false,
+  reserveTemperatureSpace = false,
 }: Props) {
   const [open, setOpen] = useState(false);
   const [active, setActive] = useState(false);
@@ -345,10 +347,14 @@ export function SpaExperienceCard({
 
         <div className="relative flex flex-1 flex-col">
           <div {...clickableProps}>
-            {temperature && (
-              <span className="mb-3 inline-block max-w-full rounded-xl border border-[var(--color-cream)]/15 px-2.5 py-1.5 text-left text-[9px] uppercase leading-relaxed tracking-[0.12em] text-[var(--color-cream)]/55">
-                {temperature}
-              </span>
+            {(temperature || reserveTemperatureSpace) && (
+              <div className="mb-3 h-[27px]">
+                {temperature && (
+                  <span className="inline-block max-w-full rounded-xl border border-[var(--color-cream)]/15 px-2.5 py-1.5 text-left text-[9px] uppercase leading-relaxed tracking-[0.12em] text-[var(--color-cream)]/55">
+                    {temperature}
+                  </span>
+                )}
+              </div>
             )}
             <div className="flex items-start justify-between gap-3 sm:gap-4">
               <h3 className="display min-w-0 flex-1 text-[22px] leading-snug text-[var(--color-cream)] sm:text-[26px]">

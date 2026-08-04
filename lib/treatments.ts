@@ -177,7 +177,7 @@ export const visoGroups: TreatmentGroup[] = [
         id: "trattamento-personalizzato",
         name: { it: "Trattamento personalizzato", en: "Tailored treatment" },
         duration: DUR_60,
-        price: eurFrom(63),
+        price: eur(63),
         description: {
           it: "Un trattamento viso costruito su misura, studiato sui bisogni specifici della tua pelle nel momento presente.",
           en: "A made-to-measure facial treatment, designed around the specific needs of your skin in the present moment.",
@@ -440,6 +440,7 @@ export const massaggiGroups: TreatmentGroup[] = [
             it: "Un gesto delicato pensato per due, mamma e piccolo insieme, nello stesso spazio e nello stesso tempo. Una coccola condivisa, dolce e rassicurante.",
             en: "A gentle gesture for two — mother and little one together, in the same space and the same time. A shared cuddle, soft and reassuring.",
           },
+        duration: { it: "1h", en: "1h" },
         price: eur(100),
       },
       {
@@ -450,6 +451,7 @@ export const massaggiGroups: TreatmentGroup[] = [
           it: "Un massaggio leggero e giocoso, pensato per i più piccoli fino ai 12 anni. Un momento di calma e di coccole, tutto per loro.",
           en: "A light, playful massage for little ones up to 12 years old. A moment of calm and comfort, just for them.",
         },
+        duration: { it: "1h", en: "1h" },
         price: eurFrom(45),
       },
     ],
@@ -604,6 +606,19 @@ export const sopraccigliaGroups: TreatmentGroup[] = [
     id: "sguardo",
     title: { it: "Sguardo", en: "Eyes" },
     treatments: [
+      {
+        id: "trattamento-eubiotico-occhi",
+        name: {
+          it: "Trattamento Eubiotico Occhi",
+          en: "Eubiotic Eye Treatment",
+        },
+        duration: DUR_30,
+        price: eur(40),
+        description: {
+          it: "Drenante, schiarente, idratante, antirughe e calmante, per uno sguardo che rinasce.",
+          en: "Draining, brightening, hydrating, anti-wrinkle and soothing care for refreshed, revitalised eyes.",
+        },
+      },
       { id: "colorazione-modellamento", name: { it: "Colorazione e modellamento sopracciglia", en: "Brow tint & shaping" }, price: eur(30) },
       { id: "laminazione", name: { it: "Laminazione ciglia o sopracciglia con cheratina", en: "Lash or brow lamination with keratin" }, price: eur(60) },
     ],
@@ -688,8 +703,8 @@ export const ritualiCategory: SpaCategory = {
         {
           id: "hammam-cuoio",
           name: {
-            it: "Hammam e Cuoio Capelluto",
-            en: "Hammam and Scalp Treatment",
+            it: "Hammam e Cuoio Capelluto (Viso)",
+            en: "Hammam and Scalp Treatment (Face)",
           },
           duration: { it: "1h e 30min", en: "1h 30min" },
           price: eur(130),
@@ -728,7 +743,7 @@ export const ritualiCategory: SpaCategory = {
             en: "Deep relaxation for new skin, as soft as a child's.",
           },
           description: {
-            it: "Rituale di rilassamento profondo dove, avvolti da delizione e morbide fragranze, si può provare la sensazione di avere la pelle di un bambino e sentirsi meravigliosi. Per eliminare le cellule morte, purificare i pori della pelle e prevenirne l'invecchiamento, rilassare, nutrire e idratare.",
+            it: "Rituale di rilassamento profondo dove, avvolti da deliziose e morbide fragranze, si può provare la sensazione di avere la pelle di un bambino e sentirsi meravigliosi. Per eliminare le cellule morte, purificare i pori della pelle e prevenirne l'invecchiamento, rilassare, nutrire e idratare.",
             en: "A deep relaxation ritual where, wrapped in delight and soft fragrances, you can feel as if your skin were a child's again and feel wonderful. To remove dead cells, purify skin pores and prevent ageing, relax, nourish and hydrate.",
           },
           tags: ["relax", "nutriente"],
@@ -736,8 +751,8 @@ export const ritualiCategory: SpaCategory = {
         {
           id: "mille-e-una-notte",
           name: {
-            it: "Rito delle Mille e Una Notte",
-            en: "The Ritual of One Thousand and One Nights",
+            it: "Rito delle Mille e Una Notte (Viso)",
+            en: "The Ritual of One Thousand and One Nights (Face)",
           },
           duration: { it: "1h e 50min", en: "1h 50min" },
           price: eur(190),
@@ -782,8 +797,8 @@ export const ritualiCategory: SpaCategory = {
         {
           id: "prezioso-ambra",
           name: {
-            it: "Rito Prezioso all'Ambra (Corpo)",
-            en: "Precious Amber Rite (Body)",
+            it: "Rito Prezioso all'Ambra (Corpo e Viso)",
+            en: "Precious Amber Rite (Body and Face)",
           },
           duration: { it: "1h e 40min", en: "1h 40min" },
           price: eur(200),
@@ -998,7 +1013,7 @@ export const coppiaCategory: SpaCategory = {
       it: "Massaggio di Coppia Aromatico Morjana",
       en: "Morjana Aromatic Couple Massage",
     },
-    duration: { it: "55min", en: "55 min" },
+    duration: { it: "1h", en: "1h" },
     price: eur(160),
     short: {
       it: "Condividi il piacere di un massaggio con chi ami.",
@@ -1025,14 +1040,15 @@ export const coppiaCategory: SpaCategory = {
             it: "Percorso Hammam per due con Massaggio Plantare",
             en: "Hammam journey for two with Foot Reflexology",
           },
+          duration: { it: "1h e 30min", en: "1h 30min" },
           price: eur(200),
           short: {
             it: "Purificazione ai vapori e massaggio plantare, insieme.",
             en: "Vapour purification and foot reflexology, together.",
           },
           description: {
-            it: "Antico rituale di purificazione condiviso a 43°: i vapori liberano il corpo, seguiti da un massaggio plantare.",
-            en: "An ancient shared purification ritual at 43°C: the vapours release the body, followed by a foot reflexology massage.",
+            it: "Antico rituale di purificazione condiviso: i vapori liberano il corpo, seguiti da un massaggio plantare.",
+            en: "An ancient shared purification ritual: the vapours release the body, followed by a foot reflexology massage.",
           },
           tags: ["coppia", "purificante", "relax"],
         },
@@ -1042,6 +1058,7 @@ export const coppiaCategory: SpaCategory = {
             it: "Percorso Termale Romano con Massaggio Aromatico Morjana",
             en: "Roman Thermal Journey with Morjana Aromatic Massage",
           },
+          duration: { it: "2h e 30min", en: "2h 30min" },
           short: {
             it: "Pacchetto coppia: percorso termale e massaggio aromatico Morjana.",
             en: "Couple package: thermal journey and Morjana aromatic massage.",
@@ -1162,7 +1179,6 @@ export const percorsiCategory: SpaCategory = {
           id: "hammam-purificazione",
           name: { it: "Hammam \"Purificazione\"", en: "Purifying Hammam" },
           duration: { it: "30min", en: "30 min" },
-          temperature: { it: "43°", en: "43°C" },
           price: eur(110),
           priceTiers: [
             { label: TIER_SINGLE, price: eur(110) },

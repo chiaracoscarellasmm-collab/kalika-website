@@ -71,6 +71,9 @@ export function SpaCategorySections({
                     dict={dict}
                     hideCardPricing={hideCardPricing}
                     giftDesign={giftDesign}
+                    reserveTemperatureSpace={group.treatments.some(
+                      (item) => item.temperature,
+                    )}
                     className={
                       isLoneLast
                         ? "lg:col-span-2 lg:w-[calc(50%-0.75rem)]"
