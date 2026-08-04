@@ -703,8 +703,8 @@ export const ritualiCategory: SpaCategory = {
         {
           id: "hammam-cuoio",
           name: {
-            it: "Hammam e Cuoio Capelluto (Viso)",
-            en: "Hammam and Scalp Treatment (Face)",
+            it: "Hammam e Cuoio Capelluto (Corpo e Viso)",
+            en: "Hammam and Scalp Treatment (Body and Face)",
           },
           duration: { it: "1h e 30min", en: "1h 30min" },
           price: eur(130),
@@ -751,8 +751,8 @@ export const ritualiCategory: SpaCategory = {
         {
           id: "mille-e-una-notte",
           name: {
-            it: "Rito delle Mille e Una Notte (Viso)",
-            en: "The Ritual of One Thousand and One Nights (Face)",
+            it: "Rito delle Mille e Una Notte (Corpo e Viso)",
+            en: "The Ritual of One Thousand and One Nights (Body and Face)",
           },
           duration: { it: "1h e 50min", en: "1h 50min" },
           price: eur(190),
@@ -779,8 +779,8 @@ export const ritualiCategory: SpaCategory = {
         {
           id: "prezioso-oud",
           name: {
-            it: "Rituale Prezioso all'Oud (Corpo e Viso)",
-            en: "Precious Oud Ritual (Body and Face)",
+            it: "Rituale Prezioso all'Oud (Viso)",
+            en: "Precious Oud Ritual (Face)",
           },
           duration: { it: "1h e 40min", en: "1h 40min" },
           price: eur(200),
@@ -1067,7 +1067,7 @@ export const coppiaCategory: SpaCategory = {
             it: "L'esperienza completa: il percorso termale romano seguito dal massaggio aromatico Morjana, tra fragranze avvolgenti e suggestioni d'Oriente, per un momento di benessere assoluto da vivere in due.",
             en: "The complete experience: the Roman thermal journey followed by the Morjana aromatic massage, with enveloping fragrances and echoes of the Orient, for a moment of absolute wellbeing to share.",
           },
-          price: eur(295),
+          price: eur(280),
           tags: ["coppia", "relax", "sensoriale"],
         },
       ],
@@ -1217,7 +1217,6 @@ export const percorsiCategory: SpaCategory = {
           ],
           priceTiers: [
             { label: TIER_SINGLE, price: eur(60) },
-            { label: TIER_DETOX_BIO, price: eur(155) },
             { label: TIER_2_4, price: eurPerson(50) },
             { label: TIER_5_6, price: eurPerson(45) },
           ],
@@ -1244,7 +1243,7 @@ export const percorsiCategory: SpaCategory = {
             },
             {
               label: { it: "Da soli", en: "Alone" },
-              duration: { it: "40 min", en: "40 min" },
+              duration: { it: "30 min", en: "30 min" },
               note: {
                 it: "Trattamento detox potenziato con operatore",
                 en: "Enhanced detox treatment with therapist",

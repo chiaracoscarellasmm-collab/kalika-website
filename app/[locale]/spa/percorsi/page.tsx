@@ -35,7 +35,7 @@ export default async function PercorsiPage({
       ? {
           title: "Crea il tuo percorso su misura",
           description:
-            "Tutti i percorsi termali possono essere abbinati a un trattamento o a un massaggio da svolgere al di fuori della suite Talatepe. Scrivici quale abbinamento desideri: ti aiuteremo a comporre l'esperienza più adatta a te.",
+            "Tutti i percorsi termali possono essere abbinati a un trattamento o a un massaggio da svolgere al di fuori della suite Thalatepee. Scrivici quale abbinamento desideri: ti aiuteremo a comporre l'esperienza più adatta a te.",
           cta: "Scrivici su WhatsApp",
           message:
             "Vorrei abbinare un trattamento o un massaggio al percorso termale. Potete aiutarmi a scegliere?",
@@ -43,7 +43,7 @@ export default async function PercorsiPage({
       : {
           title: "Create your tailored journey",
           description:
-            "Every thermal journey can be paired with a treatment or massage performed outside the Talatepe suite. Tell us which combination you would like and we will help you create the experience that suits you best.",
+            "Every thermal journey can be paired with a treatment or massage performed outside the Thalatepee suite. Tell us which combination you would like and we will help you create the experience that suits you best.",
           cta: "Choose your pairing on WhatsApp",
           message:
             "I would like to pair a treatment or massage with a thermal journey. Can you help me choose?",

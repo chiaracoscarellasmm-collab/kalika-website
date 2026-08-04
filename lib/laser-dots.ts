@@ -19,11 +19,6 @@ export const LASER_DOTS: { c: ZoneColor; x: number; y: number; r: number }[] = [
   { c: "blue", x: 312, y: 188, r: 4 },
   { c: "blue", x: 858, y: 275, r: 7 },
   { c: "blue", x: 1042, y: 274, r: 7 },
-  // Uomo frontale — labbra + guance inferiori + mento
-  { c: "blue", x: 950, y: 136, r: 4 },
-  { c: "blue", x: 926, y: 146, r: 4 },
-  { c: "blue", x: 974, y: 146, r: 4 },
-  { c: "blue", x: 950, y: 154, r: 4 },
   { c: "green", x: 226, y: 350, r: 12 },
   { c: "green", x: 311, y: 402, r: 11 },
   { c: "green", x: 397, y: 350, r: 12 },
@@ -31,7 +26,20 @@ export const LASER_DOTS: { c: ZoneColor; x: number; y: number; r: number }[] = [
   { c: "green", x: 625, y: 499, r: 11 },
   { c: "green", x: 946, y: 262, r: 12 },
   { c: "green", x: 947, y: 386, r: 12 },
-  { c: "green", x: 1250, y: 257, r: 13 },
+  // Schiena uomo — scapole e zona lombare
+  { c: "green", x: 1205, y: 265, r: 13 },
+  { c: "green", x: 1295, y: 265, r: 13 },
+  { c: "green", x: 1250, y: 390, r: 13 },
+  // Cosce — donna frontale e posteriore
+  { c: "red", x: 278, y: 620, r: 20 },
+  { c: "red", x: 344, y: 620, r: 20 },
+  { c: "red", x: 544, y: 620, r: 20 },
+  { c: "red", x: 610, y: 620, r: 20 },
+  // Cosce — uomo frontale e posteriore
+  { c: "red", x: 895, y: 620, r: 20 },
+  { c: "red", x: 1001, y: 620, r: 20 },
+  { c: "red", x: 1200, y: 620, r: 20 },
+  { c: "red", x: 1300, y: 620, r: 20 },
   { c: "red", x: 272, y: 752, r: 20 },
   { c: "red", x: 310, y: 504, r: 14 },
   { c: "red", x: 348, y: 751, r: 20 },
