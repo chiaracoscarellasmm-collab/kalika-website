@@ -3,8 +3,8 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev --webpack",
-    "build": "npm run generate:listino && next build --webpack",
+    "dev": "next dev",
+    "build": "npm run generate:listino && next build",
     "generate:listino": "npx tsx scripts/generate-estetica-listino.ts",
     "optimize:images": "npx tsx scripts/optimize-images.ts",
     "start": "next start",

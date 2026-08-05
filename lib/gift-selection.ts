@@ -1,10 +1,11 @@
 import type { Locale } from "./i18n";
-import type { GiftCardDesign } from "./giftcard";
+import { MIN_TREATMENT_GIFT_AMOUNT, type GiftCardDesign } from "./giftcard";
 import {
   type Bilingual,
   type Treatment,
   findTreatmentById,
   getTreatmentGiftAmount,
+  isOpenEndedPrice,
   parseEuroAmount,
   pick,
 } from "./treatments";
@@ -19,6 +20,18 @@ export type GiftPersonOption = {
   amount: number;
   isSingle: boolean;
 };
+
+/**
+ * A treatment can be gifted unless it is flagged as an add-on, or its price is
+ * open-ended: selling "Gambe, da € 45" as a fixed amount would promise the
+ * recipient a treatment the card may not actually cover.
+ */
+export function canGiftTreatment(treatment: Treatment, locale: Locale): boolean {
+  if (treatment.giftable === false) return false;
+  if (treatment.requiresProtocol) return false;
+  if (treatment.price && isOpenEndedPrice(pick(treatment.price, locale))) return false;
+  return true;
+}
 
 function isDetoxTier(label: Bilingual): boolean {
   const text = `${label.it} ${label.en}`.toLowerCase();
@@ -50,13 +63,14 @@ export function getGiftPersonOptions(
         isSingle: isSinglePersonTier(tier.label),
       };
     })
-    .filter((option) => option.amount >= 20);
+    .filter((option) => option.amount >= MIN_TREATMENT_GIFT_AMOUNT);
 }
 
 export function treatmentNeedsGiftConfigure(
   treatment: Treatment,
   locale: Locale,
 ): boolean {
+  if (!canGiftTreatment(treatment, locale)) return false;
   const personOptions = getGiftPersonOptions(treatment, locale);
   if (personOptions.length > 1) return true;
   if (
@@ -102,7 +116,7 @@ export function resolveGiftSelection(
       const amount = detoxTier
         ? parseEuroAmount(pick(detoxTier.price, locale))
         : parseEuroAmount(pick(personTier.price, locale));
-      if (amount === null || amount < 20) return null;
+      if (amount === null || amount < MIN_TREATMENT_GIFT_AMOUNT) return null;
 
       const mode = treatment.sessionModes?.find((m) =>
         pick(m.label, locale).toLowerCase().includes(locale === "it" ? "soli" : "alone"),
@@ -119,7 +133,7 @@ export function resolveGiftSelection(
     }
 
     const amount = parseEuroAmount(pick(personTier.price, locale));
-    if (amount === null || amount < 20) return null;
+    if (amount === null || amount < MIN_TREATMENT_GIFT_AMOUNT) return null;
     const operatorLabel = locale === "it" ? "Senza operatore" : "Without therapist";
 
     return {
@@ -129,7 +143,7 @@ export function resolveGiftSelection(
   }
 
   const amount = parseEuroAmount(pick(personTier.price, locale));
-  if (amount === null || amount < 20) return null;
+  if (amount === null || amount < MIN_TREATMENT_GIFT_AMOUNT) return null;
 
   return {
     amount,
@@ -149,6 +163,7 @@ export function validateGiftCardParams(
 ): { amount: number; giftLabel: string } | null {
   const treatment = findTreatmentById(treatmentId);
   if (!treatment) return null;
+  if (!canGiftTreatment(treatment, locale)) return null;
 
   if (params.giftPerson) {
     const operator =
@@ -169,7 +184,7 @@ export function validateGiftCardParams(
       (o) => parseEuroAmount(pick(o.price, locale)) === requested,
     );
     if (option) {
-      if (!Number.isFinite(requested) || requested < 20) return null;
+      if (!Number.isFinite(requested) || requested < MIN_TREATMENT_GIFT_AMOUNT) return null;
       const giftLabel =
         params.giftLabel ??
         `${pick(treatment.name, locale)} · ${pick(option.duration, locale)}`;
@@ -178,7 +193,7 @@ export function validateGiftCardParams(
   }
 
   const amount = getTreatmentGiftAmount(treatment, locale);
-  if (amount === null || amount < 20) return null;
+  if (amount === null || amount < MIN_TREATMENT_GIFT_AMOUNT) return null;
   if (params.amount && Number(params.amount) !== amount) return null;
 
   return {
@@ -211,8 +226,10 @@ export function buildSimpleGiftCardHref(
   treatment: Treatment,
   design: GiftCardDesign,
 ): string | null {
+  if (!canGiftTreatment(treatment, locale)) return null;
+
   const amount = getTreatmentGiftAmount(treatment, locale);
-  if (amount === null || amount < 20) return null;
+  if (amount === null || amount < MIN_TREATMENT_GIFT_AMOUNT) return null;
 
   const params = new URLSearchParams({
     treatment: treatment.id,

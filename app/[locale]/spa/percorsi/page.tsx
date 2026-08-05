@@ -1,5 +1,6 @@
 import { isLocale, type Locale } from "@/lib/i18n";
 import { getDictionary } from "@/lib/dictionaries";
+import { pageMetadata } from "@/lib/page-metadata";
 import { PageHero } from "@/components/PageHero";
 import { Reveal } from "@/components/Reveal";
 import { SpaCategorySections } from "@/components/SpaCategorySections";
@@ -17,10 +18,10 @@ export async function generateMetadata({
   const { locale: raw } = await params;
   if (!isLocale(raw)) return {};
   const dict = await getDictionary(raw as Locale);
-  return {
+  return pageMetadata(raw as Locale, "/spa/percorsi", {
     title: dict.spa.percorsi.title,
     description: dict.spa.percorsi.intro,
-  };
+  });
 }
 
 export default async function PercorsiPage({

@@ -11,7 +11,7 @@ import {
   parseEuroAmount,
   PRICE_PLACEHOLDER,
 } from "@/lib/treatments";
-import { buildSimpleGiftCardHref } from "@/lib/gift-selection";
+import { buildSimpleGiftCardHref, canGiftTreatment } from "@/lib/gift-selection";
 import { whatsappLink, localePath } from "@/lib/site";
 import { formatEmphasis } from "@/lib/format-emphasis";
 
@@ -55,15 +55,17 @@ export function EsteticaTreatmentItem({
   }`;
   const evaluationMessage = `${dict.estetica.evaluationWhatsappPrefix} ${name}`;
 
-  const giftHref = activeOption
-    ? `${localePath(locale, "/gift-card")}?${new URLSearchParams({
-        treatment: treatment.id,
-        design: "estetica",
-        amount: String(parseEuroAmount(pick(activeOption.price, locale)) ?? ""),
-        giftLabel: `${name} · ${pick(activeOption.duration, locale)}`,
-      }).toString()}`
-    : (buildSimpleGiftCardHref(locale, treatment, "estetica") ??
-      localePath(locale, "/gift-card"));
+  const giftHref = !canGiftTreatment(treatment, locale)
+    ? null
+    : activeOption
+      ? `${localePath(locale, "/gift-card")}?${new URLSearchParams({
+          treatment: treatment.id,
+          design: "estetica",
+          amount: String(parseEuroAmount(pick(activeOption.price, locale)) ?? ""),
+          giftLabel: `${name} · ${pick(activeOption.duration, locale)}`,
+        }).toString()}`
+      : (buildSimpleGiftCardHref(locale, treatment, "estetica") ??
+        localePath(locale, "/gift-card"));
 
   const toggleActive = () => setActive((v) => !v);
   const onKeyDown = (e: KeyboardEvent<HTMLDivElement>) => {
@@ -220,13 +222,15 @@ export function EsteticaTreatmentItem({
                   <MessageCircle size={14} strokeWidth={1.8} />
                   {dict.common.book}
                 </a>
-                <Link
-                  href={giftHref}
-                  className="inline-flex w-full items-center justify-center gap-2 rounded-full border border-[var(--color-mauve)]/35 px-5 py-3 text-[11px] uppercase tracking-[0.16em] text-[var(--color-brown)] transition-colors hover:border-[var(--color-mauve)]/60 hover:bg-[var(--color-blush)] sm:flex-1 lg:w-auto lg:flex-none"
-                >
-                  <Gift size={14} strokeWidth={1.75} />
-                  {dict.common.gift}
-                </Link>
+                {giftHref && (
+                  <Link
+                    href={giftHref}
+                    className="inline-flex w-full items-center justify-center gap-2 rounded-full border border-[var(--color-mauve)]/35 px-5 py-3 text-[11px] uppercase tracking-[0.16em] text-[var(--color-brown)] transition-colors hover:border-[var(--color-mauve)]/60 hover:bg-[var(--color-blush)] sm:flex-1 lg:w-auto lg:flex-none"
+                  >
+                    <Gift size={14} strokeWidth={1.75} />
+                    {dict.common.gift}
+                  </Link>
+                )}
               </div>
             </div>
           )}

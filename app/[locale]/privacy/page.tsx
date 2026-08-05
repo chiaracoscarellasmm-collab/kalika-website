@@ -1,13 +1,17 @@
 import { notFound } from "next/navigation";
 import { isLocale, type Locale } from "@/lib/i18n";
 import { getLegalDoc } from "@/lib/legal";
+import { pageMetadata } from "@/lib/page-metadata";
 import { LegalPage } from "@/components/LegalPage";
 
 export async function generateMetadata({ params }: PageProps<"/[locale]/privacy">) {
   const { locale: raw } = await params;
   if (!isLocale(raw)) return {};
   const doc = getLegalDoc(raw as Locale, "privacy");
-  return { title: doc.title, description: doc.subtitle };
+  return pageMetadata(raw as Locale, "/privacy", {
+    title: doc.title,
+    description: doc.subtitle,
+  });
 }
 
 export default async function PrivacyPage({ params }: PageProps<"/[locale]/privacy">) {

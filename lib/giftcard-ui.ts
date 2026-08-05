@@ -1,4 +1,5 @@
 import type { Locale } from "./i18n";
+import { giftCardValidityMonths, MIN_GIFT_CARD_AMOUNT } from "./giftcard";
 
 export type GiftCardUiCopy = {
   heroOverline: string;
@@ -70,7 +71,7 @@ const copy: Record<Locale, GiftCardUiCopy> = {
     summaryPurchaseDate: "Data di acquisto",
     summaryExpiryDate: "Valida fino al",
     validationWarning: "Completa tutti i campi per procedere al pagamento.",
-    customAmountWarning: "L'importo libero deve essere almeno €20.",
+    customAmountWarning: `L'importo libero deve essere almeno €${MIN_GIFT_CARD_AMOUNT}.`,
     frontGiftCardLabel: "Gift Card",
     backPreviewLabel: "Anteprima",
     frontPlaceholderMessage: "Il tuo messaggio personalizzato comparirà qui.",
@@ -93,7 +94,7 @@ const copy: Record<Locale, GiftCardUiCopy> = {
       emailNote:
         "Una copia della Gift Card è stata inviata anche via email a {email}.",
       bookingNote:
-        "Presenta questo codice in centro per prenotare il trattamento. La Gift Card è valida 6 mesi dalla data di acquisto.",
+        `Presenta questo codice in centro per prenotare il trattamento. La Gift Card è valida ${giftCardValidityMonths} mesi dalla data di acquisto.`,
       backHome: "Torna alla home",
       errorTitle: "Qualcosa non è andato come previsto",
       errorBody:
@@ -122,7 +123,7 @@ const copy: Record<Locale, GiftCardUiCopy> = {
     summaryPurchaseDate: "Purchase date",
     summaryExpiryDate: "Valid until",
     validationWarning: "Complete all fields to proceed to payment.",
-    customAmountWarning: "Custom amount must be at least €20.",
+    customAmountWarning: `Custom amount must be at least €${MIN_GIFT_CARD_AMOUNT}.`,
     frontGiftCardLabel: "Gift Card",
     backPreviewLabel: "Preview",
     frontPlaceholderMessage: "Your custom message will appear here.",
@@ -145,7 +146,7 @@ const copy: Record<Locale, GiftCardUiCopy> = {
       emailNote:
         "A copy of the Gift Card has also been sent by email to {email}.",
       bookingNote:
-        "Present this code at the centre to book the treatment. The Gift Card is valid for 6 months from the purchase date.",
+        `Present this code at the centre to book the treatment. The Gift Card is valid for ${giftCardValidityMonths} months from the purchase date.`,
       backHome: "Back to home",
       errorTitle: "Something didn't go as planned",
       errorBody:

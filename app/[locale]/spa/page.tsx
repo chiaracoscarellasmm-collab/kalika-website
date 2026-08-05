@@ -3,6 +3,7 @@ import Image from "next/image";
 import { ArrowRight } from "lucide-react";
 import { isLocale, type Locale } from "@/lib/i18n";
 import { getDictionary } from "@/lib/dictionaries";
+import { pageMetadata } from "@/lib/page-metadata";
 import { localePath } from "@/lib/site";
 import { Reveal } from "@/components/Reveal";
 import { SpaHeroVideo } from "@/components/SpaHeroVideo";
@@ -12,7 +13,10 @@ export async function generateMetadata({ params }: PageProps<"/[locale]/spa">) {
   const { locale: raw } = await params;
   if (!isLocale(raw)) return {};
   const dict = await getDictionary(raw as Locale);
-  return { title: dict.spa.hero, description: dict.spa.heroSubtitle };
+  return pageMetadata(raw as Locale, "/spa", {
+    title: dict.spa.hero,
+    description: dict.spa.heroSubtitle,
+  });
 }
 
 export default async function SpaPage({ params }: PageProps<"/[locale]/spa">) {
@@ -29,11 +33,11 @@ export default async function SpaPage({ params }: PageProps<"/[locale]/spa">) {
         locale === "it"
           ? "Viaggi sensoriali ispirati alle tradizioni del mondo."
           : "Sensory journeys inspired by world traditions.",
-      src: "/images/sala-relax-area-spa-rituali.jpg",
+      src: "/rituali_massaggi_kalika-nuovaestetica_pratadipordenone_pordenone.jpg",
       alt:
         locale === "it"
-          ? "Sala relax con lettini e lampade di sale, usata per i Rituali SPA"
-          : "Relaxation room with loungers and salt lamps for SPA rituals",
+          ? "Rituale con olio caldo versato sulla schiena, tra candele e pareti in marmo"
+          : "Ritual with warm oil poured over the back, among candles and marble walls",
       gradient: "linear-gradient(135deg, #3D1F0F, #6B3A1F)",
     },
     {
@@ -85,7 +89,7 @@ export default async function SpaPage({ params }: PageProps<"/[locale]/spa">) {
       <SpaHeroVideo
         title={dict.spa.hero}
         subtitle={dict.spa.heroSubtitle}
-        videoSrc={`${process.env.NEXT_PUBLIC_R2_URL}/hero-spa.mp4?v=2`}
+        videoSrc={`${process.env.NEXT_PUBLIC_R2_URL}/hero-spa.mp4?v=5`}
         poster="/hero-spa-poster.jpg"
         navItems={[
           { href: "#rituali", label: dict.spa.navRituali },

@@ -252,11 +252,12 @@
     "hero": "Gift Card",
     "heroOverline": "Gift a Kalika moment",
     "heroSubtitle": "A gift that lasts, an experience that cares.",
-    "intro": "Choose the formula, personalize the message, receive the Gift Card by email. Valid for 12 months.",
+    "intro": "Choose the formula, personalize the message, receive the Gift Card by email. Valid for 6 months.",
+    "metaDescription": "Gift Card for beauty treatments, SPA rituals and wellness journeys in Prata di Pordenone, Italy.",
     "selectTitle": "Choose the design",
     "formula": {
       "libero": "Free amount",
-      "liberoText": "Choose the value, from € 50 up.",
+      "liberoText": "Choose the value, from € 30 up.",
       "estetico": "Beauty Treatment",
       "esteticoText": "Face or body, tailored.",
       "spa": "SPA Ritual",
@@ -273,7 +274,7 @@
     "checkout": "Proceed to checkout",
     "howTitle": "How it works",
     "how1": "You'll receive the Gift Card PDF by email right after payment.",
-    "how2": "Valid for 12 months from purchase.",
+    "how2": "Valid for 6 months from purchase.",
     "how3": "To book, just share the unique Gift Card code with us.",
     "secure": "Secure payment with Stripe"
   },

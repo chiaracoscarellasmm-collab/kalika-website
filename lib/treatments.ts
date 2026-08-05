@@ -11,6 +11,8 @@ export type BenefitTag =
   | "purificante"
   | "tonificante";
 
+export type TreatmentArea = "body" | "face";
+
 export const TAG_LABELS: Record<BenefitTag, Bilingual> = {
   relax: { it: "Rilassante", en: "Relaxing" },
   detox: { it: "Detox", en: "Detox" },
@@ -64,12 +66,20 @@ export type Treatment = {
   /** Optional contextual link shown with the expanded description. */
   relatedLink?: TreatmentLink;
   temperature?: Bilingual;
+  /** Treatment areas shown as small badges on SPA cards. */
+  areas?: TreatmentArea[];
   tags?: BenefitTag[];
   /**
    * Advanced eubiotic protocol treatments: no direct book/gift —
    * show an info popup instead.
    */
   requiresProtocol?: boolean;
+  /**
+   * Set to false for services that are never sold on their own, such as the
+   * add-ons applied on top of another treatment. Treatments whose price is
+   * open-ended ("Da € X") are already excluded from gifting automatically.
+   */
+  giftable?: boolean;
 };
 
 export type TreatmentGroup = {
@@ -256,7 +266,7 @@ export const corpoGroups: TreatmentGroup[] = [
           en: "Body cleansing enhanced by a warmed environment, with the stove at 40 degrees.",
         },
       },
-      { id: "talaterm-fango-depurativo", name: { it: "Depurazione con Talaterm Fangogel", en: "Purifying Talaterm Mud-gel" }, duration: DUR_60, price: eurFrom(80), description: {
+      { id: "talaterm-fango-depurativo", name: { it: "Depurazione con Talaterm Fangogel", en: "Purifying Talaterm Mud-gel" }, duration: DUR_60, price: eur(80), description: {
             it: "Un trattamento depurante che riattiva lo scambio dei fluidi nelle pelli spente o disidratate. Minerali e oligoelementi restituiscono alla pelle tono, luminosità ed elasticità.",
             en: "A purifying treatment that reactivates fluid exchange in dull or dehydrated skin. Minerals and trace elements restore tone, radiance and elasticity.",
       } },
@@ -305,6 +315,7 @@ export const corpoGroups: TreatmentGroup[] = [
         name: { it: "Cuoio capelluto in SPA", en: "Scalp treatment in SPA" },
         duration: DUR_60,
         price: eurFrom(65),
+        giftable: false,
         description: {
           it: "Un percorso eubiotico dedicato al cuoio capelluto e ai capelli, per ritrovare equilibrio e vitalità partendo dalla radice.",
           en: "An eubiotic pathway dedicated to the scalp and hair, to restore balance and vitality starting from the root.",
@@ -324,7 +335,7 @@ export const corpoGroups: TreatmentGroup[] = [
         id: "gambe",
         name: { it: "Gambe", en: "Legs" },
         duration: DUR_45,
-        price: eurFrom(45),
+        price: eur(45),
         description: {
           it: "Un trattamento dedicato alle gambe, costruito su misura in base alle esigenze e agli inestetismi da trattare.",
           en: "A treatment dedicated to the legs, tailored to the needs and concerns to be addressed.",
@@ -335,6 +346,7 @@ export const corpoGroups: TreatmentGroup[] = [
         name: { it: "Seno", en: "Bust" },
         duration: DUR_45,
         price: eurFrom(50),
+        giftable: false,
         description: {
           it: "Un trattamento tonificante e rassodante, pensato per migliorare compattezza e aspetto del décolleté.",
           en: "A toning and firming treatment, designed to improve the compactness and appearance of the décolleté.",
@@ -453,6 +465,7 @@ export const massaggiGroups: TreatmentGroup[] = [
         },
         duration: { it: "1h", en: "1h" },
         price: eurFrom(45),
+        giftable: false,
       },
     ],
   },
@@ -546,9 +559,9 @@ export const maniPiediGroups: TreatmentGroup[] = [
       { id: "manicure", name: { it: "Manicure", en: "Manicure" }, price: eur(28) },
       { id: "manicure-semi", name: { it: "Manicure con semipermanente Estrosa", en: "Manicure with gel polish Estrosa" }, price: eur(43) },
       { id: "semipermanente", name: { it: "Semipermanente Estrosa", en: "Gel polish Estrosa" }, price: eur(30) },
-      { id: "french", name: { it: "French", en: "French" }, price: eur(5) },
-      { id: "rimozione-semi", name: { it: "Rimozione singola semipermanente", en: "Gel polish removal" }, price: eur(15) },
-      { id: "ristrutturazione-mani", name: { it: "Ristrutturazione mani", en: "Hand restructuring" }, price: eur(25) },
+      { id: "french", name: { it: "French", en: "French" }, price: eur(5), giftable: false },
+      { id: "rimozione-semi", name: { it: "Rimozione singola semipermanente", en: "Gel polish removal" }, price: eur(15), giftable: false },
+      { id: "ristrutturazione-mani", name: { it: "Ristrutturazione mani", en: "Hand restructuring" }, price: eur(25), giftable: false },
     ],
   },
   {
@@ -559,8 +572,8 @@ export const maniPiediGroups: TreatmentGroup[] = [
       { id: "pedicure-curativo", name: { it: "Pedicure curativo", en: "Curative pedicure" }, price: eur(43) },
       { id: "pedicure-estetico-semi", name: { it: "Pedicure estetico con semipermanente Estrosa", en: "Cosmetic pedicure with gel polish Estrosa" }, price: eur(50) },
       { id: "pedicure-curativo-semi", name: { it: "Pedicure curativo con semipermanente Estrosa", en: "Curative pedicure with gel polish Estrosa" }, price: eur(53) },
-      { id: "ristrutturazione-piedi", name: { it: "Ristrutturazione piedi", en: "Foot restructuring" }, price: eur(25) },
-      { id: "ristrutturazione-abbinata", name: { it: "Ristrutturazione abbinata a manicure/pedicure", en: "Restructuring combined with manicure/pedicure" }, price: eur(20) },
+      { id: "ristrutturazione-piedi", name: { it: "Ristrutturazione piedi", en: "Foot restructuring" }, price: eur(25), giftable: false },
+      { id: "ristrutturazione-abbinata", name: { it: "Ristrutturazione abbinata a manicure/pedicure", en: "Restructuring combined with manicure/pedicure" }, price: eur(20), giftable: false },
     ],
   },
 ];
@@ -571,12 +584,12 @@ export const epilazioneGroups: TreatmentGroup[] = [
     title: { it: "Epilazione tradizionale", en: "Traditional waxing" },
     subtitle: { it: "Uomo e donna, viso e corpo.", en: "Men and women, face and body." },
     treatments: [
-      { id: "trad-viso", name: { it: "Viso", en: "Face" }, short: { it: "Sopracciglia, baffetti, sopracciglia + baffetti", en: "Brows, upper lip, brows + upper lip" }, price: eurFrom(8) },
-      { id: "trad-ascelle", name: { it: "Ascelle", en: "Underarms" }, price: eur(13) },
-      { id: "trad-braccia", name: { it: "Braccia", en: "Arms" }, price: eur(21) },
-      { id: "trad-inguine", name: { it: "Inguine", en: "Bikini" }, short: { it: "Classico, sgambato o totale", en: "Classic, high-cut or full" }, price: eurFrom(13) },
-      { id: "trad-gambe", name: { it: "Gambe", en: "Legs" }, short: { it: "Mezza o intera, anche con inguine", en: "Half or full, also with bikini" }, price: eurFrom(21) },
-      { id: "trad-busto", name: { it: "Petto, addome e schiena", en: "Chest, abdomen & back" }, price: eurFrom(28) },
+      { id: "trad-viso", name: { it: "Viso", en: "Face" }, short: { it: "Sopracciglia, baffetti, sopracciglia + baffetti", en: "Brows, upper lip, brows + upper lip" }, price: eurFrom(8), giftable: false },
+      { id: "trad-ascelle", name: { it: "Ascelle", en: "Underarms" }, price: eur(13), giftable: false },
+      { id: "trad-braccia", name: { it: "Braccia", en: "Arms" }, price: eur(21), giftable: false },
+      { id: "trad-inguine", name: { it: "Inguine", en: "Bikini" }, short: { it: "Classico, sgambato o totale", en: "Classic, high-cut or full" }, price: eurFrom(13), giftable: false },
+      { id: "trad-gambe", name: { it: "Gambe", en: "Legs" }, short: { it: "Mezza o intera, anche con inguine", en: "Half or full, also with bikini" }, price: eurFrom(21), giftable: false },
+      { id: "trad-busto", name: { it: "Petto, addome e schiena", en: "Chest, abdomen & back" }, price: eurFrom(28), giftable: false },
     ],
   },
   {
@@ -584,8 +597,8 @@ export const epilazioneGroups: TreatmentGroup[] = [
     title: { it: "Coco Cera", en: "Coco Cera" },
     subtitle: { it: "Originale cera brasiliana.", en: "Original Brazilian wax." },
     treatments: [
-      { id: "coco-donna", name: { it: "Donna · viso e corpo", en: "Women · face & body" }, price: eurFrom(7) },
-      { id: "coco-uomo", name: { it: "Uomo · viso e corpo", en: "Men · face & body" }, price: eurFrom(8) },
+      { id: "coco-donna", name: { it: "Donna · viso e corpo", en: "Women · face & body" }, price: eurFrom(7), giftable: false },
+      { id: "coco-uomo", name: { it: "Uomo · viso e corpo", en: "Men · face & body" }, price: eurFrom(8), giftable: false },
     ],
   },
 ];
@@ -612,7 +625,6 @@ export const sopraccigliaGroups: TreatmentGroup[] = [
           it: "Trattamento Eubiotico Occhi",
           en: "Eubiotic Eye Treatment",
         },
-        duration: DUR_30,
         price: eur(40),
         description: {
           it: "Drenante, schiarente, idratante, antirughe e calmante, per uno sguardo che rinasce.",
@@ -627,8 +639,8 @@ export const sopraccigliaGroups: TreatmentGroup[] = [
     id: "make-up",
     title: { it: "Make Up", en: "Make-up" },
     treatments: [
-      { id: "trucco", name: { it: "Trucco", en: "Make-up" }, price: eurFrom(35) },
-      { id: "trucco-sposa", name: { it: "Trucco sposa con prove", en: "Bridal make-up with trials" }, price: eurFrom(130) },
+      { id: "trucco", name: { it: "Trucco", en: "Make-up" }, price: eurFrom(35), giftable: false },
+      { id: "trucco-sposa", name: { it: "Trucco sposa con prove", en: "Bridal make-up with trials" }, price: eurFrom(130), giftable: false },
     ],
   },
 ];
@@ -670,6 +682,7 @@ export const ritualiCategory: SpaCategory = {
         {
           id: "savonage",
           name: { it: "Rituale Savonage Profumato", en: "Scented Savonage Ritual" },
+          areas: ["body"],
           duration: { it: "1h", en: "1h" },
           price: eur(100),
           short: {
@@ -688,6 +701,7 @@ export const ritualiCategory: SpaCategory = {
             it: "Hammam \"Il Rito della Purificazione\"",
             en: "Hammam \"The Ritual of Purification\"",
           },
+          areas: ["body", "face"],
           duration: { it: "1h", en: "1h" },
           price: eur(100),
           short: {
@@ -703,9 +717,10 @@ export const ritualiCategory: SpaCategory = {
         {
           id: "hammam-cuoio",
           name: {
-            it: "Hammam e Cuoio Capelluto (Corpo e Viso)",
-            en: "Hammam and Scalp Treatment (Body and Face)",
+            it: "Hammam e Cuoio Capelluto",
+            en: "Hammam and Scalp Treatment",
           },
+          areas: ["body", "face"],
           duration: { it: "1h e 30min", en: "1h 30min" },
           price: eur(130),
           short: {
@@ -721,6 +736,7 @@ export const ritualiCategory: SpaCategory = {
         {
           id: "via-della-verbena",
           name: { it: "La Via della Verbena", en: "The Path of Verbena" },
+          areas: ["body"],
           duration: { it: "1h e 40min", en: "1h 40min" },
           price: eur(170),
           short: {
@@ -736,6 +752,7 @@ export const ritualiCategory: SpaCategory = {
         {
           id: "delizia-oriente",
           name: { it: "Delizia d'Oriente", en: "Delight of the Orient" },
+          areas: ["body"],
           duration: { it: "1h e 40min", en: "1h 40min" },
           price: eur(180),
           short: {
@@ -751,9 +768,10 @@ export const ritualiCategory: SpaCategory = {
         {
           id: "mille-e-una-notte",
           name: {
-            it: "Rito delle Mille e Una Notte (Corpo e Viso)",
-            en: "The Ritual of One Thousand and One Nights (Body and Face)",
+            it: "Rito delle Mille e Una Notte",
+            en: "The Ritual of One Thousand and One Nights",
           },
+          areas: ["body", "face"],
           duration: { it: "1h e 50min", en: "1h 50min" },
           price: eur(190),
           short: {
@@ -779,9 +797,10 @@ export const ritualiCategory: SpaCategory = {
         {
           id: "prezioso-oud",
           name: {
-            it: "Rituale Prezioso all'Oud (Viso)",
-            en: "Precious Oud Ritual (Face)",
+            it: "Rituale Prezioso all'Oud",
+            en: "Precious Oud Ritual",
           },
+          areas: ["body", "face"],
           duration: { it: "1h e 40min", en: "1h 40min" },
           price: eur(200),
           short: {
@@ -797,9 +816,10 @@ export const ritualiCategory: SpaCategory = {
         {
           id: "prezioso-ambra",
           name: {
-            it: "Rito Prezioso all'Ambra (Corpo e Viso)",
-            en: "Precious Amber Rite (Body and Face)",
+            it: "Rito Prezioso all'Ambra",
+            en: "Precious Amber Rite",
           },
+          areas: ["body", "face"],
           duration: { it: "1h e 40min", en: "1h 40min" },
           price: eur(200),
           short: {
@@ -815,9 +835,10 @@ export const ritualiCategory: SpaCategory = {
         {
           id: "arancia-miele",
           name: {
-            it: "Rituale Dolce all'Arancia e Miele (Corpo e Viso)",
-            en: "Sweet Orange and Honey Ritual (Body and Face)",
+            it: "Rituale Dolce all'Arancia e Miele",
+            en: "Sweet Orange and Honey Ritual",
           },
+          areas: ["body", "face"],
           duration: { it: "1h e 40min", en: "1h 40min" },
           price: eur(200),
           short: {
@@ -833,9 +854,10 @@ export const ritualiCategory: SpaCategory = {
         {
           id: "oud-ambra",
           name: {
-            it: "Rituale Oud & Ambra (Corpo e Viso)",
-            en: "Oud & Amber Ritual (Body and Face)",
+            it: "Rituale Oud & Ambra",
+            en: "Oud & Amber Ritual",
           },
+          areas: ["body", "face"],
           duration: { it: "1h e 40min", en: "1h 40min" },
           price: eur(225),
           short: {
@@ -861,6 +883,7 @@ export const ritualiCategory: SpaCategory = {
         {
           id: "dolcezza-orientale",
           name: { it: "Rituale Dolcezza Orientale", en: "Oriental Sweetness Ritual" },
+          areas: ["body"],
           duration: { it: "30min", en: "30 min" },
           price: eur(70),
           short: {
@@ -876,6 +899,7 @@ export const ritualiCategory: SpaCategory = {
         {
           id: "seta-sahara",
           name: { it: "La Seta del Sahara", en: "The Silk of the Sahara" },
+          areas: ["body"],
           duration: { it: "1h", en: "1h" },
           price: eur(110),
           short: {
@@ -890,7 +914,8 @@ export const ritualiCategory: SpaCategory = {
         },
         {
           id: "oud",
-          name: { it: "Rituale Oud (Corpo)", en: "Oud Ritual (Body)" },
+          name: { it: "Rituale Oud", en: "Oud Ritual" },
+          areas: ["body"],
           duration: { it: "1h", en: "1h" },
           price: eur(110),
           short: {
@@ -1028,10 +1053,13 @@ export const coppiaCategory: SpaCategory = {
   groups: [
     {
       id: "coppia-percorsi",
-      title: { it: "Percorsi per due", en: "Journeys for two" },
+      title: {
+        it: "Percorsi per due nella Thalatepee",
+        en: "Journeys for two in the Thalatepee",
+      },
       subtitle: {
-        it: "Purificazione e calore condivisi, seguiti da un massaggio dedicato.",
-        en: "Shared purification and warmth, followed by a dedicated massage.",
+        it: "Purificazione, calore e rituali condivisi, tutti vissuti all'interno della Thalatepee.",
+        en: "Shared purification, warmth and rituals, all enjoyed inside the Thalatepee.",
       },
       treatments: [
         {
@@ -1070,16 +1098,6 @@ export const coppiaCategory: SpaCategory = {
           price: eur(280),
           tags: ["coppia", "relax", "sensoriale"],
         },
-      ],
-    },
-    {
-      id: "coppia-massaggi",
-      title: { it: "Rituali e massaggi per due", en: "Rituals & massages for two" },
-      subtitle: {
-        it: "Fianco a fianco, nello stesso profumo e nello stesso tempo.",
-        en: "Side by side, in the same scent and the same time.",
-      },
-      treatments: [
         {
           id: "dolcezza-coppia",
           name: {
@@ -1098,6 +1116,16 @@ export const coppiaCategory: SpaCategory = {
           },
           tags: ["coppia", "sensoriale", "nutriente"],
         },
+      ],
+    },
+    {
+      id: "coppia-massaggi",
+      title: { it: "Massaggi per due", en: "Massages for two" },
+      subtitle: {
+        it: "Fianco a fianco, nello stesso profumo e nello stesso tempo.",
+        en: "Side by side, in the same scent and the same time.",
+      },
+      treatments: [
         {
           id: "candle-coppia",
           name: { it: "Candle Massage per due", en: "Candle Massage for two" },
@@ -1179,6 +1207,7 @@ export const percorsiCategory: SpaCategory = {
           id: "hammam-purificazione",
           name: { it: "Hammam \"Purificazione\"", en: "Purifying Hammam" },
           duration: { it: "30min", en: "30 min" },
+          temperature: { it: "43° max", en: "43°C max" },
           price: eur(110),
           priceTiers: [
             { label: TIER_SINGLE, price: eur(110) },
@@ -1208,11 +1237,7 @@ export const percorsiCategory: SpaCategory = {
             },
             {
               label: { it: "Da soli", en: "Alone" },
-              duration: { it: "40 min", en: "40 min" },
-              note: {
-                it: "Con operatore · potenziamento detox",
-                en: "With therapist · detox enhancement",
-              },
+              duration: { it: "15 min", en: "15 min" },
             },
           ],
           priceTiers: [
@@ -1225,8 +1250,8 @@ export const percorsiCategory: SpaCategory = {
             en: "Deep sweating and muscle relaxation in dry heat.",
           },
           description: {
-            it: "Favorisce un'abbondante sudorazione con evidenti risultati di rilassamento sulla muscolatura. In caso si effettui la sauna da soli verrà abbinato un potenziamento detox.",
-            en: "Promotes abundant sweating with evident muscle relaxation results. When taken alone, a detox enhancement is included.",
+            it: "Favorisce un'abbondante sudorazione con evidenti risultati di rilassamento sulla muscolatura.",
+            en: "Promotes abundant sweating with evident muscle relaxation results.",
           },
           tags: ["detox", "relax"],
         },
@@ -1238,7 +1263,7 @@ export const percorsiCategory: SpaCategory = {
           sessionModes: [
             {
               label: { it: "In gruppo", en: "In a group" },
-              duration: { it: "15 min", en: "15 min" },
+              duration: { it: "30 min", en: "30 min" },
               note: { it: "Senza operatore", en: "Without therapist" },
             },
             {
@@ -1281,12 +1306,12 @@ export const percorsiCategory: SpaCategory = {
           sessionModes: [
             {
               label: { it: "In gruppo", en: "In a group" },
-              duration: { it: "20 min", en: "20 min" },
+              duration: { it: "30 min", en: "30 min" },
               note: { it: "Senza operatore", en: "Without therapist" },
             },
             {
               label: { it: "Da soli", en: "Alone" },
-              duration: { it: "55 min", en: "55 min" },
+              duration: { it: "30 min", en: "30 min" },
               note: {
                 it: "Trattamento detox potenziato con operatore",
                 en: "Enhanced detox treatment with therapist",
@@ -1320,7 +1345,7 @@ export const percorsiCategory: SpaCategory = {
           id: "banja-russa",
           name: { it: "Banja russa", en: "Russian Banja" },
           duration: { it: "30min", en: "30 min" },
-          temperature: { it: "70° max", en: "70°C max" },
+          temperature: { it: "65° max", en: "65°C max" },
           price: eur(60),
           priceTiers: [
             { label: TIER_SINGLE, price: eur(60) },
@@ -1384,6 +1409,11 @@ export const esteticaGroups: TreatmentGroup[] = [
   ...epilazioneGroups,
   ...sopraccigliaGroups,
 ];
+
+/** True for "starting from" prices, whose final amount depends on the choices made in salon. */
+export function isOpenEndedPrice(value: string): boolean {
+  return /^(da|from)\s/i.test(value.trim());
+}
 
 /** Parses formatted euro strings such as "€ 58,00", "Da € 63,00" or "€58.00". */
 export function parseEuroAmount(value: string): number | null {

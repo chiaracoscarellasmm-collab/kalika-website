@@ -3,6 +3,7 @@ import Link from "next/link";
 import { ArrowRight, Download } from "lucide-react";
 import { isLocale, type Locale } from "@/lib/i18n";
 import { getDictionary } from "@/lib/dictionaries";
+import { pageMetadata } from "@/lib/page-metadata";
 import { localePath } from "@/lib/site";
 import { SpaHeroVideo } from "@/components/SpaHeroVideo";
 import { Reveal } from "@/components/Reveal";
@@ -20,7 +21,10 @@ export async function generateMetadata({ params }: PageProps<"/[locale]/estetica
   const { locale: raw } = await params;
   if (!isLocale(raw)) return {};
   const dict = await getDictionary(raw as Locale);
-  return { title: dict.estetica.hero, description: dict.estetica.heroSubtitle };
+  return pageMetadata(raw as Locale, "/estetica", {
+    title: dict.estetica.hero,
+    description: dict.estetica.heroSubtitle,
+  });
 }
 
 export default async function EsteticaPage({ params }: PageProps<"/[locale]/estetica">) {
@@ -126,7 +130,8 @@ export default async function EsteticaPage({ params }: PageProps<"/[locale]/este
         subtitle={dict.estetica.heroSubtitle}
         subtitleVariant="text"
         scrollHref="#categorie"
-        videoSrc={`${process.env.NEXT_PUBLIC_R2_URL}/flower.mp4`}
+        videoSrc={`${process.env.NEXT_PUBLIC_R2_URL}/flower.mp4?v=5`}
+        poster="/flower-poster.jpg"
         navAriaLabel={locale === "it" ? "Sezioni estetica" : "Beauty sections"}
         navItems={categories.map((c) => ({
           href: `#${c.key}`,

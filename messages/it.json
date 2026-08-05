@@ -252,11 +252,12 @@
     "hero": "Gift Card",
     "heroOverline": "Regala un momento Kalika",
     "heroSubtitle": "Un dono che resta, un'esperienza che cura.",
-    "intro": "Scegli la formula, personalizza il messaggio, ricevi la Gift Card via email. Validità 12 mesi.",
+    "intro": "Scegli la formula, personalizza il messaggio, ricevi la Gift Card via email. Validità 6 mesi.",
+    "metaDescription": "Gift Card per trattamenti estetici, rituali SPA e percorsi benessere a Prata di Pordenone.",
     "selectTitle": "Scegli il design",
     "formula": {
       "libero": "Importo libero",
-      "liberoText": "Scegli tu il valore, da € 50 in su.",
+      "liberoText": "Scegli tu il valore, da € 30 in su.",
       "estetico": "Trattamento Estetico",
       "esteticoText": "Viso o corpo, su misura.",
       "spa": "Rituale SPA",
@@ -273,7 +274,7 @@
     "checkout": "Procedi al pagamento",
     "howTitle": "Come funziona",
     "how1": "Ricevi via email la Gift Card in PDF subito dopo il pagamento.",
-    "how2": "Validità 12 mesi dalla data di acquisto.",
+    "how2": "Validità 6 mesi dalla data di acquisto.",
     "how3": "Per prenotare basterà comunicarci il codice univoco della Gift Card.",
     "secure": "Pagamento sicuro con Stripe"
   },

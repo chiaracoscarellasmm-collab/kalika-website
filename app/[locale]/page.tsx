@@ -40,7 +40,7 @@ export default async function HomePage({ params }: PageProps<"/[locale]">) {
           aria-hidden
         >
           <source
-            src={`${process.env.NEXT_PUBLIC_R2_URL}/hero-home.mp4?v=2`}
+            src={`${process.env.NEXT_PUBLIC_R2_URL}/hero-home.mp4?v=5`}
             type="video/mp4"
           />
         </video>

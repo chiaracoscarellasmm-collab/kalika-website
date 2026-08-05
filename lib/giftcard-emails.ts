@@ -1,4 +1,5 @@
 import type { GiftCardRecord } from "./giftcard";
+import { giftCardValidityMonths } from "./giftcard";
 import { getGiftCardUi } from "./giftcard-ui";
 
 function escapeHtml(value: string) {
@@ -84,8 +85,8 @@ export function buyerGiftCardEmailHtml(record: GiftCardRecord): string {
   const codeLabel = locale === "it" ? "Codice gift card" : "Gift card code";
   const booking =
     locale === "it"
-      ? "Presenta questo codice in centro per prenotare il trattamento. La Gift Card è valida 6 mesi dalla data di acquisto."
-      : "Present this code at the centre to book the treatment. The Gift Card is valid for 6 months from the purchase date.";
+      ? `Presenta questo codice in centro per prenotare il trattamento. La Gift Card è valida ${giftCardValidityMonths} mesi dalla data di acquisto.`
+      : `Present this code at the centre to book the treatment. The Gift Card is valid for ${giftCardValidityMonths} months from the purchase date.`;
   const attachmentNote =
     locale === "it"
       ? "In allegato trovi il PDF della Gift Card da stampare o inoltrare."

@@ -14,6 +14,14 @@ export const schedule: ScheduleEntry[] = [
   { day: "sun", hours: null },
 ];
 
+/**
+ * Drives canonical URLs, hreflang and the sitemap. kalikanuovaestetica.it still
+ * serves the previous WordPress site, so until the DNS points here the live
+ * Vercel domain is used instead of advertising URLs that answer 404.
+ * Set NEXT_PUBLIC_SITE_URL to switch over without touching the code.
+ */
+const baseUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://kalika-website.vercel.app";
+
 export const site = {
   name: "Kalika Nuovaestetica",
   tagline: {
@@ -25,6 +33,10 @@ export const site = {
     street: "Via C. Battisti, 26",
     city: "33080 Prata di Pordenone (PN), Italia",
     mapsQuery: "Kalika Nuovaestetica, Via C. Battisti 26, Prata di Pordenone",
+    postalCode: "33080",
+    locality: "Prata di Pordenone",
+    region: "PN",
+    country: "IT",
   },
   schedule,
   whatsapp: {
@@ -37,7 +49,7 @@ export const site = {
     facebook: "https://www.facebook.com/profile.php?id=100058297756455",
     google: "https://share.google/KuT8sOCgnnhYOabPF",
   },
-  baseUrl: "https://kalikanuovaestetica.it",
+  baseUrl,
 } as const;
 
 export function whatsappLink(message?: string): string {

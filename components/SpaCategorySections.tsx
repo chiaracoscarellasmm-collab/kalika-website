@@ -52,7 +52,11 @@ export function SpaCategorySections({
                 {pick(group.title, locale)}
               </h2>
               {group.subtitle && (
-                <p className="max-w-xl text-[16px] leading-7 text-[var(--color-cream)]/65">
+                <p
+                  className={`text-[16px] leading-7 text-[var(--color-cream)]/65 ${
+                    group.id === "coppia-percorsi" ? "max-w-4xl" : "max-w-xl"
+                  }`}
+                >
                   {pick(group.subtitle, locale)}
                 </p>
               )}

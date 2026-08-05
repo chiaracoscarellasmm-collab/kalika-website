@@ -1,5 +1,6 @@
 import { isLocale, type Locale } from "@/lib/i18n";
 import { getDictionary } from "@/lib/dictionaries";
+import { pageMetadata } from "@/lib/page-metadata";
 import { Reveal } from "@/components/Reveal";
 import { GiftCardForm } from "@/components/GiftCardForm";
 import { getGiftCardUi } from "@/lib/giftcard-ui";
@@ -11,11 +12,10 @@ export async function generateMetadata({
   const { locale: raw } = await params;
   if (!isLocale(raw)) return {};
   const dict = await getDictionary(raw as Locale);
-  return {
+  return pageMetadata(raw as Locale, "/gift-card", {
     title: dict.giftcard.hero,
-    description:
-      "Gift Card per trattamenti estetici, rituali SPA e percorsi benessere a Prata di Pordenone.",
-  };
+    description: dict.giftcard.metaDescription,
+  });
 }
 
 export default async function GiftCardPage({

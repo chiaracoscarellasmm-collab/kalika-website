@@ -40,3 +40,7 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# Video ricompressi in attesa di caricamento su Cloudflare R2
+video-ottimizzati/
+video-nuovi/

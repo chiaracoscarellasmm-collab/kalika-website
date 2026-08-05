@@ -4,6 +4,7 @@ import "../globals.css";
 import { isLocale, locales, type Locale } from "@/lib/i18n";
 import { getDictionary } from "@/lib/dictionaries";
 import { site } from "@/lib/site";
+import { localBusinessSchema } from "@/lib/structured-data";
 import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
 import { WhatsappButton } from "@/components/WhatsappButton";
@@ -63,6 +64,14 @@ export default async function LocaleLayout({
       className="h-full antialiased"
     >
       <body className="min-h-full flex flex-col bg-[var(--color-cream)] text-[var(--color-espresso)]">
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify(
+              localBusinessSchema(locale, dict.home.introBody),
+            ),
+          }}
+        />
         <a
           href="#main"
           className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-50 focus:rounded focus:bg-[var(--color-brown)] focus:px-3 focus:py-2 focus:text-[var(--color-cream)]"

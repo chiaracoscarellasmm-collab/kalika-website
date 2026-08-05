@@ -24,7 +24,7 @@ export function SpaHeroVideo({
   title,
   subtitle,
   navItems,
-  videoSrc = `${process.env.NEXT_PUBLIC_R2_URL}/flower.mp4`,
+  videoSrc = `${process.env.NEXT_PUBLIC_R2_URL}/flower.mp4?v=5`,
   poster,
   streamEmbedHtml,
   scrollHref = "#rituali",

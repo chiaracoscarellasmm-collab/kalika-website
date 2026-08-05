@@ -1,5 +1,6 @@
 import { isLocale, type Locale } from "@/lib/i18n";
 import { getDictionary } from "@/lib/dictionaries";
+import { pageMetadata } from "@/lib/page-metadata";
 import { PageHero } from "@/components/PageHero";
 import { Reveal } from "@/components/Reveal";
 import { TreatmentList } from "@/components/TreatmentList";
@@ -14,10 +15,10 @@ export async function generateMetadata({
   const { locale: raw } = await params;
   if (!isLocale(raw)) return {};
   const dict = await getDictionary(raw as Locale);
-  return {
+  return pageMetadata(raw as Locale, "/estetica/epilazione", {
     title: dict.estetica.epilazione.title,
     description: dict.estetica.epilazione.intro,
-  };
+  });
 }
 
 export default async function EpilazionePage({

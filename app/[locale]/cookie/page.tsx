@@ -1,13 +1,17 @@
 import { notFound } from "next/navigation";
 import { isLocale, type Locale } from "@/lib/i18n";
 import { getLegalDoc } from "@/lib/legal";
+import { pageMetadata } from "@/lib/page-metadata";
 import { LegalPage } from "@/components/LegalPage";
 
 export async function generateMetadata({ params }: PageProps<"/[locale]/cookie">) {
   const { locale: raw } = await params;
   if (!isLocale(raw)) return {};
   const doc = getLegalDoc(raw as Locale, "cookie");
-  return { title: doc.title, description: doc.subtitle };
+  return pageMetadata(raw as Locale, "/cookie", {
+    title: doc.title,
+    description: doc.subtitle,
+  });
 }
 
 export default async function CookiePage({ params }: PageProps<"/[locale]/cookie">) {

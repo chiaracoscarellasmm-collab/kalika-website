@@ -3,6 +3,20 @@ import type { Locale } from "./i18n";
 export type GiftCardDesign = "estetica" | "spa" | "coppia";
 export type GiftCardAmountChoice = "50" | "100" | "150" | "custom";
 
+/** Minimum value for a gift card bought as a free amount. */
+export const MIN_GIFT_CARD_AMOUNT = 30;
+
+/**
+ * A gift card tied to a specific treatment is always sold at that treatment's
+ * own price, so cheaper treatments stay giftable below MIN_GIFT_CARD_AMOUNT.
+ * This floor only rules out prices that are missing or unparsable.
+ */
+export const MIN_TREATMENT_GIFT_AMOUNT = 1;
+
+export function minGiftCardAmount(isTreatmentLinked: boolean): number {
+  return isTreatmentLinked ? MIN_TREATMENT_GIFT_AMOUNT : MIN_GIFT_CARD_AMOUNT;
+}
+
 export type GiftCardRequest = {
   locale: Locale;
   design: GiftCardDesign;
@@ -101,9 +115,10 @@ export function isValidGiftCardRequest(
       req.amountChoice === "100" ||
       req.amountChoice === "150" ||
       req.amountChoice === "custom") &&
+    (req.treatmentName === undefined || typeof req.treatmentName === "string") &&
     typeof req.amount === "number" &&
     Number.isFinite(req.amount) &&
-    req.amount >= 20 &&
+    req.amount >= minGiftCardAmount(Boolean(req.treatmentName?.trim())) &&
     typeof req.fromFirstName === "string" &&
     req.fromFirstName.trim().length > 1 &&
     typeof req.fromLastName === "string" &&

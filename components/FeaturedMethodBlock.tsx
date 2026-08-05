@@ -12,7 +12,7 @@ import {
   parseEuroAmount,
   PRICE_PLACEHOLDER,
 } from "@/lib/treatments";
-import { buildSimpleGiftCardHref } from "@/lib/gift-selection";
+import { buildSimpleGiftCardHref, canGiftTreatment } from "@/lib/gift-selection";
 import { whatsappLink, localePath } from "@/lib/site";
 import { formatEmphasis } from "@/lib/format-emphasis";
 import { Reveal } from "./Reveal";
@@ -55,15 +55,17 @@ export function FeaturedMethodBlock({
   const bookMessage = `${dict.common.watsapMessage} ${name}${
     duration ? ` (${duration})` : ""
   }`;
-  const giftHref = activeOption
-    ? `${localePath(locale, "/gift-card")}?${new URLSearchParams({
-        treatment: treatment.id,
-        design: "estetica",
-        amount: String(parseEuroAmount(pick(activeOption.price, locale)) ?? ""),
-        giftLabel: `${name} · ${pick(activeOption.duration, locale)}`,
-      }).toString()}`
-    : (buildSimpleGiftCardHref(locale, treatment, "estetica") ??
-      localePath(locale, "/gift-card"));
+  const giftHref = !canGiftTreatment(treatment, locale)
+    ? null
+    : activeOption
+      ? `${localePath(locale, "/gift-card")}?${new URLSearchParams({
+          treatment: treatment.id,
+          design: "estetica",
+          amount: String(parseEuroAmount(pick(activeOption.price, locale)) ?? ""),
+          giftLabel: `${name} · ${pick(activeOption.duration, locale)}`,
+        }).toString()}`
+      : (buildSimpleGiftCardHref(locale, treatment, "estetica") ??
+        localePath(locale, "/gift-card"));
 
   return (
     <Reveal className="h-full">
@@ -151,14 +153,16 @@ export function FeaturedMethodBlock({
             >
               <MessageCircle className="h-5 w-5" aria-hidden />
             </a>
-            <Link
-              href={giftHref}
-              aria-label={dict.common.gift}
-              title={dict.common.gift}
-              className="inline-flex h-11 w-11 items-center justify-center rounded-full border border-[#C97BB2]/50 bg-[var(--color-cream)] text-[var(--color-brown)] transition-[transform,border-color] duration-300 delay-75 hover:border-[#C97BB2] motion-safe:group-hover:-translate-y-0.5"
-            >
-              <Gift className="h-5 w-5" aria-hidden />
-            </Link>
+            {giftHref && (
+              <Link
+                href={giftHref}
+                aria-label={dict.common.gift}
+                title={dict.common.gift}
+                className="inline-flex h-11 w-11 items-center justify-center rounded-full border border-[#C97BB2]/50 bg-[var(--color-cream)] text-[var(--color-brown)] transition-[transform,border-color] duration-300 delay-75 hover:border-[#C97BB2] motion-safe:group-hover:-translate-y-0.5"
+              >
+                <Gift className="h-5 w-5" aria-hidden />
+              </Link>
+            )}
           </div>
         </div>
       </article>

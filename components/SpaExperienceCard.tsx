@@ -10,6 +10,7 @@ import { type Treatment, pick } from "@/lib/treatments";
 import { type GiftCardDesign } from "@/lib/giftcard";
 import {
   buildSimpleGiftCardHref,
+  canGiftTreatment,
   treatmentNeedsGiftConfigure,
 } from "@/lib/gift-selection";
 import { whatsappLink, localePath } from "@/lib/site";
@@ -60,12 +61,30 @@ export function SpaExperienceCard({
   const hasDetails = Boolean(description);
   const needsGiftConfigure = treatmentNeedsGiftConfigure(treatment, locale);
   const simpleGiftHref = buildSimpleGiftCardHref(locale, treatment, giftDesign);
+  const areaBadges = treatment.areas?.length ? (
+    <div className="mt-3 flex flex-wrap gap-2">
+      {treatment.areas.map((area) => (
+        <span
+          key={area}
+          className="rounded-full border border-[var(--color-wisteria)]/35 bg-[var(--color-wisteria)]/10 px-2.5 py-1 text-[9px] uppercase tracking-[0.16em] text-[var(--color-cream)]/65"
+        >
+          {area === "body"
+            ? locale === "it"
+              ? "Corpo"
+              : "Body"
+            : locale === "it"
+              ? "Viso"
+              : "Face"}
+        </span>
+      ))}
+    </div>
+  ) : null;
 
   const giftButtonClass = featured
     ? "inline-flex flex-1 items-center justify-center gap-2 rounded-full border border-[var(--color-gold)]/35 px-6 py-3 text-xs uppercase tracking-[0.18em] text-[var(--color-gold)]/90 transition-colors hover:border-[var(--color-gold)]/55 hover:bg-[var(--color-gold)]/10 sm:flex-none"
     : "inline-flex items-center gap-1 text-[10px] uppercase tracking-[0.16em] text-[var(--color-cream)]/50 transition-colors hover:text-[var(--color-gold)]";
 
-  const giftButton = needsGiftConfigure ? (
+  const giftButton = !canGiftTreatment(treatment, locale) ? null : needsGiftConfigure ? (
     <button
       type="button"
       onClick={() => setGiftModalOpen(true)}
@@ -277,6 +296,7 @@ export function SpaExperienceCard({
                 <h3 className="display text-4xl leading-tight text-[var(--color-cream)] sm:text-5xl">
                   {name}
                 </h3>
+                {areaBadges}
                 {teaser ? (
                   <div className="mt-5 flex items-end justify-between gap-4">
                     <p className="max-w-xl text-[18px] leading-8 text-[var(--color-cream)]/80">
@@ -374,6 +394,7 @@ export function SpaExperienceCard({
                 {chevron}
               </div>
             </div>
+            {areaBadges}
 
             {teaser && (
               <div className="mt-4">

@@ -635,7 +635,7 @@ const termsIt: LegalDoc = {
       blocks: [
         {
           kind: "p",
-          text: "Il prezzo della Gift Card corrisponde al valore selezionato dal Cliente (importo libero o predefinito) oppure al prezzo del trattamento scelto. Tutti i prezzi sono espressi in Euro e comprensivi di IVA ove applicabile. Non sono previsti costi aggiuntivi di consegna, trattandosi di prodotto digitale. L'importo minimo acquistabile è di 20 €.",
+          text: "Il prezzo della Gift Card corrisponde al valore selezionato dal Cliente (importo libero o predefinito) oppure al prezzo del trattamento scelto. Tutti i prezzi sono espressi in Euro e comprensivi di IVA ove applicabile. Non sono previsti costi aggiuntivi di consegna, trattandosi di prodotto digitale. L'importo minimo acquistabile è di 30 €, salvo le Gift Card abbinate a uno specifico trattamento, il cui valore corrisponde al prezzo del trattamento scelto.",
         },
       ],
     },
@@ -787,7 +787,7 @@ const termsEn: LegalDoc = {
       blocks: [
         {
           kind: "p",
-          text: "The price of the Gift Card corresponds to the value chosen by the Customer (custom or preset amount) or to the price of the selected treatment. All prices are in Euro and include VAT where applicable. No delivery charges apply, as this is a digital product. The minimum purchase amount is €20.",
+          text: "The price of the Gift Card corresponds to the value chosen by the Customer (custom or preset amount) or to the price of the selected treatment. All prices are in Euro and include VAT where applicable. No delivery charges apply, as this is a digital product. The minimum purchase amount is €30, except for Gift Cards linked to a specific treatment, whose value matches the price of the selected treatment.",
         },
       ],
     },

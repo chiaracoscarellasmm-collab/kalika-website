@@ -1,5 +1,6 @@
 import { isLocale, type Locale } from "@/lib/i18n";
 import { getDictionary } from "@/lib/dictionaries";
+import { pageMetadata } from "@/lib/page-metadata";
 import { PageHero } from "@/components/PageHero";
 import { TreatmentList } from "@/components/TreatmentList";
 import { SectionWhatsapp } from "@/components/SectionWhatsapp";
@@ -12,10 +13,10 @@ export async function generateMetadata({
   const { locale: raw } = await params;
   if (!isLocale(raw)) return {};
   const dict = await getDictionary(raw as Locale);
-  return {
+  return pageMetadata(raw as Locale, "/estetica/mani-piedi", {
     title: dict.estetica.maniPiedi.title,
     description: dict.estetica.maniPiedi.intro,
-  };
+  });
 }
 
 export default async function ManiPiediPage({
