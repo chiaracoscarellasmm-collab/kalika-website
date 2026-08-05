@@ -11,6 +11,7 @@ import {
   amountChoices,
   giftCardDesigns,
   isGiftCardDesign,
+  MIN_GIFT_CARD_AMOUNT,
   resolveGiftAmountChoice,
   type GiftCardAmountChoice,
   type GiftCardDesign,
@@ -199,6 +200,9 @@ export function GiftCardForm({ locale, dict }: Props) {
   const [buyerEmail, setBuyerEmail] = useState("");
   const [treatmentName, setTreatmentName] = useState("");
   const [treatmentLocked, setTreatmentLocked] = useState(false);
+  const [treatmentId, setTreatmentId] = useState<string | null>(null);
+  const [giftPerson, setGiftPerson] = useState<string | null>(null);
+  const [giftOperator, setGiftOperator] = useState<string | null>(null);
   const [pending, setPending] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
@@ -219,8 +223,9 @@ export function GiftCardForm({ locale, dict }: Props) {
     !toFirstName.trim() && "recipient first name",
     !toLastName.trim() && "recipient last name",
     !buyerEmail.trim() && "buyer email",
-    amountChoice === "custom" &&
-      (customAmount === "" || customAmount < 20) &&
+    !treatmentLocked &&
+      amountChoice === "custom" &&
+      (customAmount === "" || customAmount < MIN_GIFT_CARD_AMOUNT) &&
       "minimum custom amount",
   ].filter(Boolean) as string[];
   const canProceed = missingFields.length === 0 && !pending;
@@ -248,6 +253,12 @@ export function GiftCardForm({ locale, dict }: Props) {
     setCustomAmount(resolved.customAmount);
     setTreatmentLocked(true);
     setTreatmentName(validated.giftLabel);
+    // Kept only so the server can independently re-derive the real price
+    // from the treatment catalogue — the client-computed amount above is
+    // never trusted as-is by the API.
+    setTreatmentId(treatmentId);
+    setGiftPerson(params.get("giftPerson"));
+    setGiftOperator(params.get("giftOperator"));
   }, [locale]);
 
   async function onSubmit(e: React.FormEvent<HTMLFormElement>) {
@@ -277,6 +288,9 @@ export function GiftCardForm({ locale, dict }: Props) {
           message,
           buyerEmail,
           treatmentName: treatmentName || undefined,
+          treatmentId: treatmentId || undefined,
+          giftPerson: giftPerson || undefined,
+          giftOperator: giftOperator || undefined,
         }),
       });
       data = await response.json();
@@ -411,11 +425,13 @@ export function GiftCardForm({ locale, dict }: Props) {
           {!treatmentLocked && amountChoice === "custom" && (
             <label className="mt-5 block max-w-xs">
               <span className={labelClass}>
-                {locale === "it" ? "Importo libero, minimo €20" : "Custom amount, minimum €20"}
+                {locale === "it"
+                  ? `Importo libero, minimo €${MIN_GIFT_CARD_AMOUNT}`
+                  : `Custom amount, minimum €${MIN_GIFT_CARD_AMOUNT}`}
               </span>
               <input
                 type="number"
-                min={20}
+                min={MIN_GIFT_CARD_AMOUNT}
                 inputMode="numeric"
                 value={customAmount}
                 onChange={(e) => {
@@ -430,7 +446,7 @@ export function GiftCardForm({ locale, dict }: Props) {
                 className={inputClass}
                 required
               />
-              {(customAmount === "" || customAmount < 20) && (
+              {(customAmount === "" || customAmount < MIN_GIFT_CARD_AMOUNT) && (
                 <span className="mt-2 block text-xs text-[var(--color-mauve)]">
                   {ui.customAmountWarning}
                 </span>
