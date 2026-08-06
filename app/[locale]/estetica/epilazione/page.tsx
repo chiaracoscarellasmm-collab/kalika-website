@@ -1,6 +1,7 @@
 import { isLocale, type Locale } from "@/lib/i18n";
 import { getDictionary } from "@/lib/dictionaries";
 import { pageMetadata } from "@/lib/page-metadata";
+import { BreadcrumbJsonLd } from "@/components/BreadcrumbJsonLd";
 import { PageHero } from "@/components/PageHero";
 import { Reveal } from "@/components/Reveal";
 import { TreatmentList } from "@/components/TreatmentList";
@@ -31,6 +32,14 @@ export default async function EpilazionePage({
 
   return (
     <>
+      <BreadcrumbJsonLd
+        locale={locale}
+        items={[
+          { name: dict.nav.home, path: "" },
+          { name: dict.nav.estetica, path: "/estetica" },
+          { name: dict.estetica.epilazione.title, path: "/estetica/epilazione" },
+        ]}
+      />
       <PageHero
         title={dict.estetica.epilazione.title}
         subtitle={dict.estetica.epilazione.intro}

@@ -1,6 +1,7 @@
 import { isLocale, type Locale } from "@/lib/i18n";
 import { getDictionary } from "@/lib/dictionaries";
 import { pageMetadata } from "@/lib/page-metadata";
+import { BreadcrumbJsonLd } from "@/components/BreadcrumbJsonLd";
 import { Reveal } from "@/components/Reveal";
 import { GiftCardForm } from "@/components/GiftCardForm";
 import { getGiftCardUi } from "@/lib/giftcard-ui";
@@ -29,6 +30,13 @@ export default async function GiftCardPage({
 
   return (
     <>
+      <BreadcrumbJsonLd
+        locale={locale}
+        items={[
+          { name: dict.nav.home, path: "" },
+          { name: dict.nav.giftCard, path: "/gift-card" },
+        ]}
+      />
       <section className="bg-[var(--color-cream)] pb-16 pt-28 sm:pb-20 sm:pt-32">
         <div className="mx-auto max-w-4xl px-6 text-center">
           <Reveal>

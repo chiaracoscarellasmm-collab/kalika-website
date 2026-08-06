@@ -1,6 +1,7 @@
 import { isLocale, type Locale } from "@/lib/i18n";
 import { getDictionary } from "@/lib/dictionaries";
 import { pageMetadata } from "@/lib/page-metadata";
+import { BreadcrumbJsonLd } from "@/components/BreadcrumbJsonLd";
 import { PageHero } from "@/components/PageHero";
 import { TreatmentList } from "@/components/TreatmentList";
 import { SiceHomeCareSection } from "@/components/SiceHomeCareSection";
@@ -32,6 +33,14 @@ export default async function CorpoPage({
 
   return (
     <>
+      <BreadcrumbJsonLd
+        locale={locale}
+        items={[
+          { name: dict.nav.home, path: "" },
+          { name: dict.nav.estetica, path: "/estetica" },
+          { name: dict.estetica.corpo.title, path: "/estetica/corpo" },
+        ]}
+      />
       <PageHero
         title={dict.estetica.corpo.title}
         subtitle={dict.estetica.corpo.intro}

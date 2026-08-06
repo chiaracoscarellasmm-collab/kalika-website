@@ -5,6 +5,7 @@ import { isLocale, type Locale } from "@/lib/i18n";
 import { getDictionary } from "@/lib/dictionaries";
 import { pageMetadata } from "@/lib/page-metadata";
 import { localePath } from "@/lib/site";
+import { BreadcrumbJsonLd } from "@/components/BreadcrumbJsonLd";
 import { SpaHeroVideo } from "@/components/SpaHeroVideo";
 import { Reveal } from "@/components/Reveal";
 import { ImagePlaceholder } from "@/components/ImagePlaceholder";
@@ -125,6 +126,13 @@ export default async function EsteticaPage({ params }: PageProps<"/[locale]/este
 
   return (
     <>
+      <BreadcrumbJsonLd
+        locale={locale}
+        items={[
+          { name: dict.nav.home, path: "" },
+          { name: dict.nav.estetica, path: "/estetica" },
+        ]}
+      />
       <SpaHeroVideo
         title={dict.estetica.hero}
         subtitle={dict.estetica.heroSubtitle}

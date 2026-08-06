@@ -4,6 +4,7 @@ import { ArrowRight } from "lucide-react";
 import { isLocale, type Locale } from "@/lib/i18n";
 import { getDictionary } from "@/lib/dictionaries";
 import { pageMetadata } from "@/lib/page-metadata";
+import { BreadcrumbJsonLd } from "@/components/BreadcrumbJsonLd";
 import { localePath } from "@/lib/site";
 import { Reveal } from "@/components/Reveal";
 import { SpaHeroVideo } from "@/components/SpaHeroVideo";
@@ -15,7 +16,7 @@ export async function generateMetadata({ params }: PageProps<"/[locale]/spa">) {
   const dict = await getDictionary(raw as Locale);
   return pageMetadata(raw as Locale, "/spa", {
     title: dict.spa.hero,
-    description: dict.spa.heroSubtitle,
+    description: dict.spa.intro,
   });
 }
 
@@ -86,6 +87,13 @@ export default async function SpaPage({ params }: PageProps<"/[locale]/spa">) {
 
   return (
     <>
+      <BreadcrumbJsonLd
+        locale={locale}
+        items={[
+          { name: dict.nav.home, path: "" },
+          { name: dict.nav.spa, path: "/spa" },
+        ]}
+      />
       <SpaHeroVideo
         title={dict.spa.hero}
         subtitle={dict.spa.heroSubtitle}

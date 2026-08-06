@@ -73,3 +73,28 @@ export function localBusinessSchema(locale: Locale, description: string) {
     sameAs: [site.social.instagram, site.social.facebook, site.social.google],
   };
 }
+
+export type BreadcrumbItem = {
+  /** Label shown in place of the raw URL in search results. */
+  name: string;
+  /** Locale-less path, e.g. "/estetica/viso". Omit or use "" for the homepage. */
+  path?: string;
+};
+
+/**
+ * Describes a page's position in the site hierarchy, so search results can
+ * show "Kalika Nuovaestetica › Estetica › Trattamenti viso" instead of the
+ * raw /it/estetica/viso URL. Always starts from the homepage.
+ */
+export function breadcrumbSchema(locale: Locale, items: BreadcrumbItem[]) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: items.map((item, index) => ({
+      "@type": "ListItem",
+      position: index + 1,
+      name: item.name,
+      item: `${site.baseUrl}${localePath(locale, item.path)}`,
+    })),
+  };
+}

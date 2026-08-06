@@ -1,6 +1,7 @@
 import { isLocale, type Locale } from "@/lib/i18n";
 import { getDictionary } from "@/lib/dictionaries";
 import { pageMetadata } from "@/lib/page-metadata";
+import { BreadcrumbJsonLd } from "@/components/BreadcrumbJsonLd";
 import { PageHero } from "@/components/PageHero";
 import { SpaCategorySections } from "@/components/SpaCategorySections";
 import { SpaIncludesNote } from "@/components/SpaIncludesNote";
@@ -30,6 +31,14 @@ export default async function MassaggiSuitePage({
 
   return (
     <>
+      <BreadcrumbJsonLd
+        locale={locale}
+        items={[
+          { name: dict.nav.home, path: "" },
+          { name: dict.nav.spa, path: "/spa" },
+          { name: dict.spa.suite.title, path: "/spa/massaggi-suite" },
+        ]}
+      />
       <PageHero
         overline={dict.spa.heroOverline}
         title={dict.spa.suite.title}

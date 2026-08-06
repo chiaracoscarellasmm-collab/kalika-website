@@ -21,8 +21,8 @@ export async function generateMetadata({
   if (!isLocale(raw)) return {};
   const locale = raw as Locale;
   const dict = await getDictionary(locale);
-  const title = `${dict.common.brand} · ${dict.home.heroSubtitle}`;
-  const description = dict.home.introBody;
+  const title = `${dict.common.brand} · ${dict.home.metaTitle}`;
+  const description = dict.home.metaDescription;
   return {
     metadataBase: new URL(site.baseUrl),
     title: {

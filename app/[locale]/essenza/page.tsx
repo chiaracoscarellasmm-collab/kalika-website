@@ -2,6 +2,7 @@ import Image from "next/image";
 import { isLocale, type Locale } from "@/lib/i18n";
 import { getDictionary } from "@/lib/dictionaries";
 import { pageMetadata } from "@/lib/page-metadata";
+import { BreadcrumbJsonLd } from "@/components/BreadcrumbJsonLd";
 import ImageDotsSlider from "@/components/ImageDotsSlider";
 import { PageHero } from "@/components/PageHero";
 import { Reveal } from "@/components/Reveal";
@@ -81,6 +82,13 @@ export default async function EssenzaPage({
 
   return (
     <>
+      <BreadcrumbJsonLd
+        locale={locale}
+        items={[
+          { name: dict.nav.home, path: "" },
+          { name: dict.nav.essenza, path: "/essenza" },
+        ]}
+      />
       <PageHero
         overline={dict.essenza.heroOverline}
         title={dict.essenza.hero}

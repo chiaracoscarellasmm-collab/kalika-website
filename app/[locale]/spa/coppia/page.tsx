@@ -3,6 +3,7 @@ import { Gift } from "lucide-react";
 import { isLocale, type Locale } from "@/lib/i18n";
 import { getDictionary } from "@/lib/dictionaries";
 import { pageMetadata } from "@/lib/page-metadata";
+import { BreadcrumbJsonLd } from "@/components/BreadcrumbJsonLd";
 import { PageHero } from "@/components/PageHero";
 import { Reveal } from "@/components/Reveal";
 import { SpaCategorySections } from "@/components/SpaCategorySections";
@@ -33,6 +34,14 @@ export default async function CoppiaPage({
 
   return (
     <>
+      <BreadcrumbJsonLd
+        locale={locale}
+        items={[
+          { name: dict.nav.home, path: "" },
+          { name: dict.nav.spa, path: "/spa" },
+          { name: dict.spa.coppia.title, path: "/spa/coppia" },
+        ]}
+      />
       <PageHero
         overline={dict.spa.heroOverline}
         title={dict.spa.coppia.title}
