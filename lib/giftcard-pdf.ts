@@ -41,6 +41,31 @@ function formatDate(value: string, locale: GiftCardRecord["locale"]) {
   }).format(new Date(value));
 }
 
+/**
+ * Standard PDF fonts only support the WinAnsi character set. Emoji and most
+ * non-Latin characters make pdf-lib's drawText throw an encoding error
+ * (e.g. "WinAnsi cannot encode '😜' (0x1f61c)") instead of just failing to
+ * render, so free-text fields typed by a customer at checkout — message,
+ * names, treatment name — need filtering before they reach the page. Stripe
+ * metadata and the Resend email are untouched by this: it only ever runs on
+ * the copy that lands in the PDF.
+ *
+ * Checked against the embedded font's real character set rather than a
+ * guessed Unicode range: a range like \x20–\xFF looks plausible but is
+ * wrong — "€" is U+20AC, outside that range, yet WinAnsi encodes it fine.
+ * A naive range filter would silently drop the currency sign from every
+ * gift amount.
+ */
+function sanitizeForPdf(text: string, font: PDFFont): string {
+  const encodable = new Set(font.getCharacterSet());
+  return [...text]
+    .filter((ch) => {
+      const codePoint = ch.codePointAt(0);
+      return codePoint !== undefined && encodable.has(codePoint);
+    })
+    .join("");
+}
+
 /** Standard PDF fonts only support WinAnsi — normalize common Unicode. */
 function toWinAnsiSafe(text: string) {
   return text
@@ -229,19 +254,26 @@ export async function generateGiftCardPdf(record: GiftCardRecord) {
 
   // —— Right column: details ——
   const from = toWinAnsiSafe(
-    `${record.fromFirstName} ${record.fromLastName}`.trim(),
+    sanitizeForPdf(
+      `${record.fromFirstName} ${record.fromLastName}`.trim(),
+      fontSans,
+    ),
   );
   const to = toWinAnsiSafe(
-    `${record.toFirstName} ${record.toLastName}`.trim(),
+    sanitizeForPdf(`${record.toFirstName} ${record.toLastName}`.trim(), fontSans),
   );
   const valueLabel = record.treatmentName
     ? ui.summaryTreatment
     : ui.summaryValue;
   const valueText = toWinAnsiSafe(
-    record.treatmentName ? record.treatmentName : `${record.amount} €`,
+    record.treatmentName
+      ? sanitizeForPdf(record.treatmentName, fontSans)
+      : `${record.amount} €`,
   );
   const messageText = toWinAnsiSafe(
-    record.message?.trim() || ui.frontPlaceholderMessage,
+    record.message?.trim()
+      ? sanitizeForPdf(record.message.trim(), fontSans)
+      : ui.frontPlaceholderMessage,
   );
   const messageLabel = record.locale === "it" ? "Messaggio" : "Message";
 
