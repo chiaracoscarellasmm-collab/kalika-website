@@ -11,7 +11,10 @@ export async function GET(request: Request) {
     return Response.json({ error: "MISSING_SESSION_ID" }, { status: 400 });
   }
 
-  const record = await resolveGiftCardFromCheckoutSession(sessionId);
+  const record = await resolveGiftCardFromCheckoutSession(
+    sessionId,
+    "Download Gift Card",
+  );
   if (!record) {
     return Response.json({ error: "GIFT_CARD_NOT_FOUND" }, { status: 404 });
   }

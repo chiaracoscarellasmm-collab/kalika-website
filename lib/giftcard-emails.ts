@@ -192,3 +192,93 @@ export function buyerGiftCardEmailSubject(record: GiftCardRecord): string {
 export function ownerGiftCardEmailSubject(record: GiftCardRecord): string {
   return `Nuova gift card venduta — ${record.serial}`;
 }
+
+export type GiftCardAlertSource =
+  | "Stripe webhook"
+  | "Pagina di ringraziamento"
+  | "Download Gift Card";
+
+export type GiftCardErrorNotification = {
+  source: GiftCardAlertSource;
+  sessionId: string;
+  /** Only present for alerts raised from the Stripe webhook. */
+  eventId?: string;
+  amountLabel: string;
+  buyerEmail: string;
+  recipientName: string;
+  /** Only shown if present — a free-amount gift card has no treatment. */
+  treatmentName?: string;
+  errorMessage: string;
+  errorStack: string;
+  occurredAt: Date;
+};
+
+function formatErrorTimestamp(date: Date): string {
+  const formatted = new Intl.DateTimeFormat("it-IT", {
+    timeZone: "Europe/Rome",
+    day: "2-digit",
+    month: "2-digit",
+    year: "numeric",
+    hour: "2-digit",
+    minute: "2-digit",
+    second: "2-digit",
+  }).format(date);
+  return `${formatted} (Europe/Rome)`;
+}
+
+export function giftCardErrorNotificationSubject(): string {
+  return "⚠️ Errore gift card Kalika";
+}
+
+/**
+ * Internal technical alert sent when checkout.session.completed fails to
+ * fulfil (PDF generation, Stripe metadata, etc.) — not the customer-facing
+ * templates above. Deliberately not run through sanitizeForPdf: this is an
+ * email, not a PDF, and the raw error text (including any emoji or unusual
+ * characters in it) is exactly what is needed to diagnose the failure.
+ */
+export function giftCardErrorNotificationHtml(
+  ctx: GiftCardErrorNotification,
+): string {
+  const rows = [
+    rowHtml("Rilevato da", escapeHtml(ctx.source)),
+    rowHtml("Sessione Stripe", `<code>${escapeHtml(ctx.sessionId)}</code>`),
+    ctx.eventId
+      ? rowHtml("Evento Stripe", `<code>${escapeHtml(ctx.eventId)}</code>`)
+      : "",
+    rowHtml("Importo", escapeHtml(ctx.amountLabel)),
+    rowHtml("Email acquirente", escapeHtml(ctx.buyerEmail)),
+    rowHtml("Destinatario", escapeHtml(ctx.recipientName)),
+    ctx.treatmentName
+      ? rowHtml("Trattamento", escapeHtml(ctx.treatmentName))
+      : "",
+    rowHtml("Data e ora", escapeHtml(formatErrorTimestamp(ctx.occurredAt))),
+  ].join("");
+
+  return emailShell(`
+    <p style="margin:0 0 6px;font-size:13px;letter-spacing:3px;text-transform:uppercase;color:#c0392b;">
+      Allerta tecnica
+    </p>
+    <h1 style="margin:0 0 12px;font-family:Georgia,serif;font-size:24px;font-weight:400;color:#c0392b;line-height:1.3;">
+      ⚠️ Errore nella generazione di una Gift Card
+    </h1>
+    <p style="margin:0 0 20px;font-size:15px;line-height:1.65;color:rgba(44,24,16,0.8);">
+      Il pagamento su Stripe risulta completato, ma la generazione della Gift Card è fallita:
+      il cliente potrebbe non aver ricevuto il PDF né l'email di conferma.
+      Usa l'ID sessione qui sotto per ritrovare l'ordine su Stripe e procedere manualmente.
+    </p>
+    <table style="width:100%;border-collapse:collapse;border:1px solid rgba(201,123,178,0.25);background:#fff;">
+      <tbody>${rows}</tbody>
+    </table>
+    <p style="margin:20px 0 6px;font-size:11px;letter-spacing:1.6px;text-transform:uppercase;color:#c97bb2;">
+      Messaggio di errore
+    </p>
+    <p style="margin:0 0 16px;padding:12px 14px;background:#fff;border:1px solid rgba(201,123,178,0.25);font-size:14px;color:#2c1810;">
+      ${escapeHtml(ctx.errorMessage)}
+    </p>
+    <p style="margin:0 0 6px;font-size:11px;letter-spacing:1.6px;text-transform:uppercase;color:#c97bb2;">
+      Stack trace
+    </p>
+    <pre style="margin:0;padding:12px 14px;background:#2c1810;color:#f5e9e2;font-size:12px;line-height:1.5;overflow-x:auto;white-space:pre-wrap;word-break:break-word;">${escapeHtml(ctx.errorStack)}</pre>
+  `);
+}

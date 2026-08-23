@@ -1,5 +1,6 @@
 import Stripe from "stripe";
 import { fulfillGiftCardFromSession } from "@/lib/giftcard-fulfillment";
+import { sendGiftCardErrorNotification } from "@/lib/giftcard-alerts";
 
 export const runtime = "nodejs";
 
@@ -29,7 +30,18 @@ export async function POST(request: Request) {
 
   if (event.type === "checkout.session.completed") {
     const session = event.data.object as Stripe.Checkout.Session;
-    await fulfillGiftCardFromSession(session);
+    try {
+      await fulfillGiftCardFromSession(session);
+    } catch (error) {
+      console.error("[giftcard-webhook] Fulfillment failed:", error);
+      await sendGiftCardErrorNotification({
+        session,
+        eventId: event.id,
+        error,
+        source: "Stripe webhook",
+      });
+      return Response.json({ error: "FULFILLMENT_FAILED" }, { status: 500 });
+    }
   }
 
   return Response.json({ received: true });

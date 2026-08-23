@@ -52,7 +52,10 @@ export default async function GiftCardThanksPage({
 
   const ui = getGiftCardUi(locale);
   const record = sessionId
-    ? await resolveGiftCardFromCheckoutSession(sessionId)
+    ? await resolveGiftCardFromCheckoutSession(
+        sessionId,
+        "Pagina di ringraziamento",
+      )
     : null;
 
   return (
