@@ -1,4 +1,8 @@
+import Link from "next/link";
+import Image from "next/image";
+import { ArrowRight } from "lucide-react";
 import { isLocale, type Locale } from "@/lib/i18n";
+import { localePath } from "@/lib/site";
 import { getDictionary } from "@/lib/dictionaries";
 import { pageMetadata } from "@/lib/page-metadata";
 import { BreadcrumbJsonLd } from "@/components/BreadcrumbJsonLd";
@@ -60,6 +64,44 @@ export default async function CorpoPage({
             priceLabel={dict.common.price}
             dict={dict}
           />
+          <Reveal>
+            <Link
+              href={localePath(locale, "/spa/rituali-dal-mondo")}
+              className="group mt-16 grid overflow-hidden rounded-[18px] border border-[var(--color-line)] bg-white/60 transition-colors hover:border-[var(--color-mauve)]/40 sm:grid-cols-[220px_1fr]"
+            >
+              <div className="relative aspect-[16/9] sm:aspect-auto">
+                <Image
+                  src="/images/rituali-dal-mondo/bora-bora.jpg"
+                  alt={
+                    locale === "it"
+                      ? "Prodotti del Rituale Bora Bora con conchiglie"
+                      : "Bora Bora Ritual products with seashells"
+                  }
+                  fill
+                  sizes="(max-width: 640px) 100vw, 220px"
+                  quality={75}
+                  className="object-cover object-center"
+                />
+              </div>
+              <div className="p-6 sm:p-8">
+                <p className="text-[11px] uppercase tracking-[0.18em] text-[var(--color-mauve)]">
+                  {locale === "it" ? "Anche in cabina" : "Also in the cabin"}
+                </p>
+                <h2 className="display mt-2 text-[28px] leading-tight text-[var(--color-brown)]">
+                  {dict.spa.ritualiMondo.title}
+                </h2>
+                <p className="mt-3 text-[16px] leading-7 text-[var(--color-espresso)]/75">
+                  {locale === "it"
+                    ? "Bora Bora, India, Kyoto, Amazzonia e Himalaya: rituali completi con scrub, impacco e massaggio, da vivere in cabina o in SPA."
+                    : "Bora Bora, India, Kyoto, Amazonia and Himalaya: complete rituals with scrub, wrap and massage, in the cabin or in the SPA."}
+                </p>
+                <span className="mt-4 inline-flex items-center gap-2 text-[11px] uppercase tracking-[0.18em] text-[var(--color-mauve)] transition-colors group-hover:text-[var(--color-brown)]">
+                  {dict.common.discover}
+                  <ArrowRight size={14} />
+                </span>
+              </div>
+            </Link>
+          </Reveal>
           <SiceHomeCareSection
             dict={dict}
             imageSrc="/linea-prodotti-sice.jpg"

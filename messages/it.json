@@ -215,6 +215,8 @@
     "navSuiteText": "Massaggi speciali nella nostra suite privata.",
     "navCoppiaText": "Per due. Intimo, sospeso, prezioso.",
     "navPercorsiText": "Sauna, biosauna, hammam, banja: il percorso termale.",
+    "navRitualiMondo": "Rituali dal Mondo",
+    "navRitualiMondoText": "Bora Bora, India, Kyoto, Amazzonia, Himalaya: in cabina o in SPA.",
     "giftConfigure": {
       "overline": "Regala un'esperienza",
       "persons": "Quante persone?",
@@ -228,6 +230,10 @@
     "rituali": {
       "title": "Rituali SPA",
       "intro": "Ogni rituale è un viaggio: profumi, tessuti, gesti che raccontano un luogo lontano."
+    },
+    "ritualiMondo": {
+      "title": "Rituali dal Mondo",
+      "metaDescription": "Rituali dal Mondo a Prata di Pordenone: Bora Bora, India, Kyoto, Amazzonia e Himalaya. Scrub, impacco e massaggio, in cabina o in SPA con biosauna."
     },
     "suite": {
       "title": "Massaggi speciali in Suite",

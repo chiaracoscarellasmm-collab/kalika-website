@@ -42,6 +42,17 @@ export default async function SpaPage({ params }: PageProps<"/[locale]/spa">) {
       gradient: "linear-gradient(135deg, #3D1F0F, #6B3A1F)",
     },
     {
+      key: "rituali-dal-mondo",
+      label: dict.spa.navRitualiMondo,
+      text: dict.spa.navRitualiMondoText,
+      src: "/images/rituali-dal-mondo/bora-bora.jpg",
+      alt:
+        locale === "it"
+          ? "Conchiglie e prodotti del Rituale Bora Bora, uno dei Rituali dal Mondo"
+          : "Seashells and Bora Bora Ritual products, one of our rituals from around the world",
+      gradient: "linear-gradient(135deg, #2C1810, #6B3A1F)",
+    },
+    {
       key: "massaggi-suite",
       label: locale === "it" ? "Massaggi in Suite" : "Suite Massages",
       text:
@@ -101,6 +112,7 @@ export default async function SpaPage({ params }: PageProps<"/[locale]/spa">) {
         poster="/hero-spa-poster.jpg"
         navItems={[
           { href: "#rituali", label: dict.spa.navRituali },
+          { href: "#rituali-dal-mondo", label: dict.spa.navRitualiMondo },
           { href: "#massaggi-suite", label: dict.spa.navSuite },
           { href: "#coppia", label: dict.spa.navCoppia },
           { href: "#percorsi", label: dict.spa.navPercorsi },
@@ -131,7 +143,15 @@ export default async function SpaPage({ params }: PageProps<"/[locale]/spa">) {
         <div className="mx-auto max-w-7xl px-6 lg:px-10">
           <div className="grid gap-6 sm:grid-cols-2">
             {cards.map((c, i) => (
-              <Reveal key={c.key} delay={i * 0.07}>
+              <Reveal
+                key={c.key}
+                delay={i * 0.07}
+                className={
+                  cards.length % 2 === 1 && i === cards.length - 1
+                    ? "sm:col-span-2"
+                    : undefined
+                }
+              >
                 <Link
                   href={localePath(locale, `/spa/${c.key}`)}
                   id={c.key}
@@ -145,7 +165,11 @@ export default async function SpaPage({ params }: PageProps<"/[locale]/spa">) {
                       src={c.src}
                       alt={c.alt}
                       fill
-                      sizes="(max-width: 640px) 100vw, 50vw"
+                      sizes={
+                        cards.length % 2 === 1 && i === cards.length - 1
+                          ? "100vw"
+                          : "(max-width: 640px) 100vw, 50vw"
+                      }
                       quality={75}
                       className="object-cover object-center transition-transform duration-[600ms] group-hover:scale-[1.05]"
                     />

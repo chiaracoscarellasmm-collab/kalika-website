@@ -64,6 +64,7 @@ export function Footer({ locale, dict }: Props) {
       title: dict.footer.spa,
       items: [
         { href: localePath(locale, "/spa/rituali"), label: dict.spa.navRituali },
+        { href: localePath(locale, "/spa/rituali-dal-mondo"), label: dict.spa.navRitualiMondo },
         { href: localePath(locale, "/spa/massaggi-suite"), label: dict.spa.navSuite },
         { href: localePath(locale, "/spa/coppia"), label: dict.spa.navCoppia },
         { href: localePath(locale, "/spa/percorsi"), label: dict.spa.navPercorsi },

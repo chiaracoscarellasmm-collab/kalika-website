@@ -10,6 +10,7 @@ import {
   pick,
 } from "./treatments";
 import { localePath } from "./site";
+import { findRitualGiftTreatment } from "./rituali-dal-mondo";
 
 export type GiftOperatorChoice = "with" | "without";
 
@@ -151,6 +152,10 @@ export function resolveGiftSelection(
   };
 }
 
+function findGiftTreatmentById(id: string): Treatment | null {
+  return findTreatmentById(id) ?? findRitualGiftTreatment(id);
+}
+
 /**
  * Resolves which duration variant is being gifted. The server is never sent
  * an amount, so the variant index is the only thing that identifies a longer
@@ -189,7 +194,7 @@ export function validateGiftCardParams(
     giftVariant?: string | null;
   },
 ): { amount: number; giftLabel: string; giftVariant?: string } | null {
-  const treatment = findTreatmentById(treatmentId);
+  const treatment = findGiftTreatmentById(treatmentId);
   if (!treatment) return null;
   if (!canGiftTreatment(treatment, locale)) return null;
 

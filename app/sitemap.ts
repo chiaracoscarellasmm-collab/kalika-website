@@ -14,6 +14,7 @@ const paths = [
   "/estetica/sopracciglia",
   "/spa",
   "/spa/rituali",
+  "/spa/rituali-dal-mondo",
   "/spa/massaggi-suite",
   "/spa/coppia",
   "/spa/percorsi",
