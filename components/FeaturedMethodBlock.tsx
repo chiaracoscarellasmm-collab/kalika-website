@@ -9,10 +9,13 @@ import type { Dictionary } from "@/lib/dictionaries";
 import {
   type Treatment,
   pick,
-  parseEuroAmount,
   PRICE_PLACEHOLDER,
 } from "@/lib/treatments";
-import { buildSimpleGiftCardHref, canGiftTreatment } from "@/lib/gift-selection";
+import {
+  buildDurationGiftCardHref,
+  buildSimpleGiftCardHref,
+  canGiftTreatment,
+} from "@/lib/gift-selection";
 import { whatsappLink, localePath } from "@/lib/site";
 import { formatEmphasis } from "@/lib/format-emphasis";
 import { Reveal } from "./Reveal";
@@ -57,15 +60,10 @@ export function FeaturedMethodBlock({
   }`;
   const giftHref = !canGiftTreatment(treatment, locale)
     ? null
-    : activeOption
-      ? `${localePath(locale, "/gift-card")}?${new URLSearchParams({
-          treatment: treatment.id,
-          design: "estetica",
-          amount: String(parseEuroAmount(pick(activeOption.price, locale)) ?? ""),
-          giftLabel: `${name} · ${pick(activeOption.duration, locale)}`,
-        }).toString()}`
-      : (buildSimpleGiftCardHref(locale, treatment, "estetica") ??
-        localePath(locale, "/gift-card"));
+    : ((activeOption
+        ? buildDurationGiftCardHref(locale, treatment, "estetica", durationIndex)
+        : buildSimpleGiftCardHref(locale, treatment, "estetica")) ??
+      localePath(locale, "/gift-card"));
 
   return (
     <Reveal className="h-full">

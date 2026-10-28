@@ -151,6 +151,33 @@ export function resolveGiftSelection(
   };
 }
 
+/**
+ * Resolves which duration variant is being gifted. The server is never sent
+ * an amount, so the variant index is the only thing that identifies a longer
+ * (and pricier) option; an amount is accepted only to recognise links shared
+ * before the index existed.
+ */
+function resolveDurationVariant(
+  treatment: Treatment,
+  locale: Locale,
+  giftVariant: string | null | undefined,
+  amount: string | null | undefined,
+): number | null {
+  const options = treatment.durationOptions ?? [];
+  if (giftVariant != null && giftVariant !== "") {
+    const index = Number(giftVariant);
+    return Number.isInteger(index) && index >= 0 && index < options.length ? index : null;
+  }
+  if (amount) {
+    const requested = Number(amount);
+    const index = options.findIndex(
+      (option) => parseEuroAmount(pick(option.price, locale)) === requested,
+    );
+    return index === -1 ? null : index;
+  }
+  return options.length === 1 ? 0 : null;
+}
+
 export function validateGiftCardParams(
   treatmentId: string,
   locale: Locale,
@@ -159,8 +186,9 @@ export function validateGiftCardParams(
     giftLabel?: string | null;
     giftPerson?: string | null;
     giftOperator?: string | null;
+    giftVariant?: string | null;
   },
-): { amount: number; giftLabel: string } | null {
+): { amount: number; giftLabel: string; giftVariant?: string } | null {
   const treatment = findTreatmentById(treatmentId);
   if (!treatment) return null;
   if (!canGiftTreatment(treatment, locale)) return null;
@@ -177,19 +205,23 @@ export function validateGiftCardParams(
     return resolved;
   }
 
-  // Treatments with selectable durations: accept any variant's price.
-  if (treatment.durationOptions?.length && params.amount) {
-    const requested = Number(params.amount);
-    const option = treatment.durationOptions.find(
-      (o) => parseEuroAmount(pick(o.price, locale)) === requested,
+  if (treatment.durationOptions?.length) {
+    const index = resolveDurationVariant(
+      treatment,
+      locale,
+      params.giftVariant,
+      params.amount,
     );
-    if (option) {
-      if (!Number.isFinite(requested) || requested < MIN_TREATMENT_GIFT_AMOUNT) return null;
-      const giftLabel =
-        params.giftLabel ??
-        `${pick(treatment.name, locale)} · ${pick(option.duration, locale)}`;
-      return { amount: requested, giftLabel };
-    }
+    if (index === null) return null;
+    const option = treatment.durationOptions[index];
+    const amount = parseEuroAmount(pick(option.price, locale));
+    if (amount === null || amount < MIN_TREATMENT_GIFT_AMOUNT) return null;
+    if (params.amount && Number(params.amount) !== amount) return null;
+    return {
+      amount,
+      giftLabel: `${pick(treatment.name, locale)} · ${pick(option.duration, locale)}`,
+      giftVariant: String(index),
+    };
   }
 
   const amount = getTreatmentGiftAmount(treatment, locale);
@@ -218,6 +250,28 @@ export function buildConfiguredGiftCardHref(
     giftPerson: personOptionId,
   });
   if (operator) params.set("giftOperator", operator);
+  return `${localePath(locale, "/gift-card")}?${params.toString()}`;
+}
+
+export function buildDurationGiftCardHref(
+  locale: Locale,
+  treatment: Treatment,
+  design: GiftCardDesign,
+  variantIndex: number,
+): string | null {
+  if (!canGiftTreatment(treatment, locale)) return null;
+  const option = treatment.durationOptions?.[variantIndex];
+  if (!option) return null;
+  const amount = parseEuroAmount(pick(option.price, locale));
+  if (amount === null || amount < MIN_TREATMENT_GIFT_AMOUNT) return null;
+
+  const params = new URLSearchParams({
+    treatment: treatment.id,
+    design,
+    amount: String(amount),
+    giftLabel: `${pick(treatment.name, locale)} · ${pick(option.duration, locale)}`,
+    giftVariant: String(variantIndex),
+  });
   return `${localePath(locale, "/gift-card")}?${params.toString()}`;
 }
 

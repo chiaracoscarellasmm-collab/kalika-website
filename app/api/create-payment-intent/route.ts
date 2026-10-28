@@ -30,6 +30,7 @@ export async function POST(request: Request) {
       giftLabel: null,
       giftPerson: typeof body.giftPerson === "string" ? body.giftPerson : null,
       giftOperator: typeof body.giftOperator === "string" ? body.giftOperator : null,
+      giftVariant: typeof body.giftVariant === "string" ? body.giftVariant : null,
     });
     if (!resolved) {
       return Response.json({ error: "INVALID_TREATMENT" }, { status: 400 });

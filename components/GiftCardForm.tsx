@@ -203,6 +203,7 @@ export function GiftCardForm({ locale, dict }: Props) {
   const [treatmentId, setTreatmentId] = useState<string | null>(null);
   const [giftPerson, setGiftPerson] = useState<string | null>(null);
   const [giftOperator, setGiftOperator] = useState<string | null>(null);
+  const [giftVariant, setGiftVariant] = useState<string | null>(null);
   const [pending, setPending] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
@@ -240,6 +241,7 @@ export function GiftCardForm({ locale, dict }: Props) {
       giftLabel: params.get("giftLabel"),
       giftPerson: params.get("giftPerson"),
       giftOperator: params.get("giftOperator"),
+      giftVariant: params.get("giftVariant"),
     });
     if (!validated) return;
 
@@ -259,6 +261,7 @@ export function GiftCardForm({ locale, dict }: Props) {
     setTreatmentId(treatmentId);
     setGiftPerson(params.get("giftPerson"));
     setGiftOperator(params.get("giftOperator"));
+    setGiftVariant(validated.giftVariant ?? null);
   }, [locale]);
 
   async function onSubmit(e: React.FormEvent<HTMLFormElement>) {
@@ -291,6 +294,7 @@ export function GiftCardForm({ locale, dict }: Props) {
           treatmentId: treatmentId || undefined,
           giftPerson: giftPerson || undefined,
           giftOperator: giftOperator || undefined,
+          giftVariant: giftVariant ?? undefined,
         }),
       });
       data = await response.json();
